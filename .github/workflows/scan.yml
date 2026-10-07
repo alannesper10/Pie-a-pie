@@ -20,6 +20,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 12
     steps:
+      - name: Marcar inicio de la corrida
+        run: echo "RUN_STARTED=$(date -u +%Y-%m-%dT%H:%M:%S+00:00)" >> "$GITHUB_ENV"
+
       - uses: actions/checkout@v5
 
       - uses: actions/setup-python@v6
@@ -31,12 +34,15 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Tests
+        id: tests
         run: python -m pytest -q
 
       - name: Escanear (un ciclo, paper only)
+        id: scan
         run: python scanner.py --max-events 250 --interval-min 15
 
       - name: Commitear data/ si cambió
+        id: commit
         # También si el escaneo falló: el ciclo fallido queda en cycles.csv.
         if: success() || failure()
         run: |
@@ -50,3 +56,16 @@ jobs:
           git commit -m "data: ciclo $(date -u +%Y-%m-%dT%H:%MZ)"
           git pull --rebase
           git push
+
+      - name: Notificar (ntfy, solo ejecutables, paper o fallas)
+        # Sin el secret NTFY_TOPIC no notifica y no falla.
+        if: always()
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          JOB_STATUS: ${{ job.status }}
+          STEP_OUTCOMES: >-
+            tests=${{ steps.tests.outcome }}
+            scan=${{ steps.scan.outcome }}
+            commit=${{ steps.commit.outcome }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: python -m src.notify cycle --since "$RUN_STARTED"
