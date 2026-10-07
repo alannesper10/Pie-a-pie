@@ -22,6 +22,9 @@ class PaperPosition:
     expected_close: Optional[str]
     closed_at: Optional[str] = None
     payout: Optional[float] = None
+    # Lado comprado por pata ("yes"/"no"). None = todas YES (kalshi_current);
+    # así el state.json existente se sigue cargando igual.
+    sides: Optional[List[str]] = None
 
     @property
     def outlay(self):
@@ -52,6 +55,13 @@ def leg_payout(market):
         except (TypeError, ValueError):
             return None
     return None
+
+
+def _pos_dict(pos):
+    d = asdict(pos)
+    if d.get("sides") is None:
+        d.pop("sides", None)  # formato idéntico al de kalshi_current
+    return d
 
 
 @dataclass
@@ -87,6 +97,7 @@ class PaperBook:
             expected_net=opp.net_profit,
             opened_at=now,
             expected_close=expected_close,
+            sides=(list(opp.sides) if getattr(opp, "sides", None) else None),
         )
         if pos.outlay > self.cash:
             return None, "INSUFFICIENT_CASH"
@@ -97,12 +108,13 @@ class PaperBook:
     def try_settle(self, pos, markets_by_ticker: Dict[str, dict], now):
         """Liquida si todas las patas resolvieron. Devuelve True si cerró."""
         per_contract = 0.0
-        for ticker in pos.legs:
+        sides = pos.sides or ["yes"] * len(pos.legs)
+        for ticker, side in zip(pos.legs, sides):
             m = markets_by_ticker.get(ticker)
             value = leg_payout(m) if m else None
             if value is None:
                 return False
-            per_contract += value
+            per_contract += value if side == "yes" else 1.0 - value
         pos.payout = per_contract * pos.contracts
         pos.closed_at = now
         self.cash += pos.payout
@@ -112,8 +124,8 @@ class PaperBook:
 
     def to_dict(self):
         return {"cash": self.cash,
-                "open": [asdict(p) for p in self.open],
-                "closed": [asdict(p) for p in self.closed]}
+                "open": [_pos_dict(p) for p in self.open],
+                "closed": [_pos_dict(p) for p in self.closed]}
 
     @classmethod
     def from_dict(cls, d, starting_cash):

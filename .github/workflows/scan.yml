@@ -5,11 +5,11 @@ name: scan
 
 on:
   schedule:
-    - cron: "*/15 * * * *"   # GitHub puede demorarlo; los huecos quedan como GAP
+    - cron: "*/15 * * * *"   # en la práctica corre cada ~23 min; los huecos largos quedan como GAP
   workflow_dispatch:
 
 permissions:
-  contents: write            # solo para commitear data/ con el GITHUB_TOKEN
+  contents: write            # solo para commitear data/ y reports/ con el GITHUB_TOKEN
 
 concurrency:
   group: scanner             # nunca dos ciclos a la vez escribiendo data/
@@ -18,7 +18,7 @@ concurrency:
 jobs:
   scan:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 15
     steps:
       - name: Marcar inicio de la corrida
         run: echo "RUN_STARTED=$(date -u +%Y-%m-%dT%H:%M:%S+00:00)" >> "$GITHUB_ENV"
@@ -37,20 +37,37 @@ jobs:
         id: tests
         run: python -m pytest -q
 
-      - name: Escanear (un ciclo, paper only)
+      # kalshi_current: misma estrategia y mismos datos de siempre. Único cambio:
+      # --interval-min 25 (el cron real ronda los 23 min; con 15 el corte GAP de
+      # 22.5 min cortaba cualquier racha de más de un ciclo).
+      - name: Escanear kalshi_current (un ciclo, paper only)
         id: scan
-        run: python scanner.py --max-events 250 --interval-min 15
+        run: python scanner.py --max-events 250 --interval-min 25
 
-      - name: Commitear data/ si cambió
+      # Estrategias experimentales: aisladas. Si fallan, kalshi_current igual se
+      # commitea y el job no se marca como fallido (se avisa por ntfy).
+      - name: Estrategias experimentales (buy_all_no, strike_inconsistency)
+        id: strategies
+        if: (success() || failure()) && steps.tests.outcome == 'success'
+        continue-on-error: true
+        timeout-minutes: 6
+        run: python kalshi_strategies.py --interval-min 25
+
+      - name: Reporte comparativo
+        if: (success() || failure()) && steps.tests.outcome == 'success'
+        continue-on-error: true
+        run: python -m src.compare --write
+
+      - name: Commitear data/ y reports/ si cambiaron
         id: commit
         # También si el escaneo falló: el ciclo fallido queda en cycles.csv.
         if: success() || failure()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/
+          git add data/ reports/
           if git diff --cached --quiet; then
-            echo "Sin cambios en data/"
+            echo "Sin cambios en data/ ni reports/"
             exit 0
           fi
           git commit -m "data: ciclo $(date -u +%Y-%m-%dT%H:%MZ)"
@@ -66,6 +83,7 @@ jobs:
           STEP_OUTCOMES: >-
             tests=${{ steps.tests.outcome }}
             scan=${{ steps.scan.outcome }}
+            strategies=${{ steps.strategies.outcome }}
             commit=${{ steps.commit.outcome }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: python -m src.notify cycle --since "$RUN_STARTED"

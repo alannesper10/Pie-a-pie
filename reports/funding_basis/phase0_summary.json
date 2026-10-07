@@ -1,0 +1,1729 @@
+{
+ "generated_at": "2026-10-07T22:40:06+00:00",
+ "strategy": "funding_basis",
+ "phase": 0,
+ "paper_only": true,
+ "history_days": 90,
+ "rule": {
+  "horizon_days": 7.0,
+  "trailing_periods": 3,
+  "max_hold_days": 30.0,
+  "leverage": 1.0,
+  "capital_usd": 100.0,
+  "allocation": 0.9
+ },
+ "totals": {
+  "pairs": 9,
+  "pairs_ok": 9,
+  "decisions": 2412,
+  "ex_ante_positive": 0,
+  "trades": 0,
+  "net_positive_trades": 0,
+  "executable_trades_100usd": 0,
+  "net_usd_total_all_pairs": 0,
+  "feasible_pairs_100usd": 7
+ },
+ "pairs": [
+  {
+   "exchange": "binance",
+   "asset": "BTC",
+   "status": "OK",
+   "errors": [],
+   "coverage_days": {
+    "funding": 89.7,
+    "spot": 90.0,
+    "perp": 90.0,
+    "mark": 90.0
+   },
+   "rows": {
+    "funding": 270,
+    "spot": 2160,
+    "perp": 2160,
+    "mark": 2160
+   },
+   "funding_interval_h": {
+    "inferred_from_history": 8,
+    "metadata": null,
+    "now_endpoint": null,
+    "status": "VERIFIED"
+   },
+   "funding_stats": {
+    "n": 270,
+    "interval_hours": 8,
+    "mean": 5.557192592592593e-05,
+    "median": 5.8425e-05,
+    "min": -3.657e-05,
+    "max": 0.0001,
+    "pct_positive": 0.9555555555555556,
+    "annualized_mean": 0.0608512588888889
+   },
+   "basis_stats": {
+    "n": 2160,
+    "mean_pct": -0.00043202239544332533,
+    "std_pct": 0.0001120801345672524,
+    "min_pct": -0.0007211621636097328,
+    "max_pct": 0.00035572455723369454
+   },
+   "round_trip_cost_pct": 0.003801321076816597,
+   "leg_fail_expected_cost_pct": 6e-05,
+   "breakeven_periods_at_mean_rate": 69.48330496883459,
+   "costs": {
+    "fee_spot_entrada": {
+     "value": 0.001,
+     "status": "ASSUMED",
+     "source": "máx(config 0.1000%, ccxt 0.1000%); no verificada por cuenta"
+    },
+    "fee_spot_salida": {
+     "value": 0.001,
+     "status": "ASSUMED",
+     "source": "máx(config 0.1000%, ccxt 0.1000%); no verificada por cuenta"
+    },
+    "fee_perp_entrada": {
+     "value": 0.0005,
+     "status": "ASSUMED",
+     "source": "máx(config 0.0500%, ccxt 0.0500%); no verificada por cuenta"
+    },
+    "fee_perp_salida": {
+     "value": 0.0005,
+     "status": "ASSUMED",
+     "source": "máx(config 0.0500%, ccxt 0.0500%); no verificada por cuenta"
+    },
+    "spread_spot": {
+     "value": 1.2006243978419288e-07,
+     "status": "VERIFIED",
+     "source": "libro actual (entrada + salida)"
+    },
+    "slippage_profundidad_spot": {
+     "value": 0.0,
+     "status": "VERIFIED",
+     "source": "barrido del libro actual para el tamaño"
+    },
+    "spread_perp": {
+     "value": 1.201014376812505e-06,
+     "status": "VERIFIED",
+     "source": "libro actual (entrada + salida)"
+    },
+    "slippage_profundidad_perp": {
+     "value": 0.0,
+     "status": "VERIFIED",
+     "source": "barrido del libro actual para el tamaño"
+    },
+    "slippage_extra": {
+     "value": 0.0008,
+     "status": "ASSUMED",
+     "source": "slippage extra por pata y por operación"
+    },
+    "transferencias": {
+     "value": 0.0,
+     "status": "ASSUMED",
+     "source": "mismo exchange: sin transferencias"
+    }
+   },
+   "book_now": {
+    "spot_mid": 83289.995,
+    "perp_mid": 83262.95,
+    "spot_half_spread": 6.003121989209644e-08,
+    "perp_half_spread": 6.005071884062525e-07,
+    "spot_depth_usd_top20": 195234.5583382,
+    "perp_depth_usd_top20": 339628.5358
+   },
+   "feasibility_100usd": {
+    "notional_per_leg_usd": 45.0,
+    "qty": 0.0005402809460919679,
+    "spot_min_qty": 1e-05,
+    "spot_min_cost": 5.0,
+    "perp_min_qty": 0.001,
+    "perp_min_cost": 50.0,
+    "feasible": false,
+    "min_notional_per_leg_usd": 83.29,
+    "min_capital_usd": 185.09
+   },
+   "backtest": {
+    "decisions": 268,
+    "ex_ante_positive": 0,
+    "ex_ante_positive_pct": 0.0,
+    "ex_ante_runs": 0,
+    "ex_ante_run_mean_periods": 0.0,
+    "trades": 0,
+    "net_positive_trades": 0,
+    "net_usd_total": 0,
+    "net_pct_of_notional": 0.0,
+    "funding_usd_total": 0,
+    "basis_pnl_usd_total": 0,
+    "costs_usd_total": 0,
+    "rebalances": 0,
+    "liquidations": 0,
+    "mean_hold_hours": 0.0,
+    "min_liq_distance": null,
+    "skipped_no_price": 0,
+    "executable_trades_100usd": 0
+   },
+   "sensitivity_by_horizon_days": {
+    "7": {
+     "decisions": 268,
+     "ex_ante_positive": 0,
+     "trades": 0,
+     "net_positive_trades": 0,
+     "net_usd_total": 0,
+     "funding_usd_total": 0,
+     "basis_pnl_usd_total": 0,
+     "costs_usd_total": 0,
+     "mean_hold_hours": 0.0,
+     "rebalances": 0,
+     "liquidations": 0
+    },
+    "14": {
+     "decisions": 268,
+     "ex_ante_positive": 19,
+     "trades": 2,
+     "net_positive_trades": 1,
+     "net_usd_total": -0.06446450535305041,
+     "funding_usd_total": 0.2755873985512389,
+     "basis_pnl_usd_total": 0.00746699300920443,
+     "costs_usd_total": 0.34751889691349375,
+     "mean_hold_hours": 728.0,
+     "rebalances": 0,
+     "liquidations": 0
+    },
+    "30": {
+     "decisions": 268,
+     "ex_ante_positive": 190,
+     "trades": 2,
+     "net_positive_trades": 1,
+     "net_usd_total": 0.033743392161550326,
+     "funding_usd_total": 0.37198209502271173,
+     "basis_pnl_usd_total": 0.009280194052332356,
+     "costs_usd_total": 0.34751889691349375,
+     "mean_hold_hours": 1040.0,
+     "rebalances": 0,
+     "liquidations": 0
+    },
+    "60": {
+     "decisions": 268,
+     "ex_ante_positive": 239,
+     "trades": 1,
+     "net_positive_trades": 1,
+     "net_usd_total": 0.22446376722729602,
+     "funding_usd_total": 0.3918541919161976,
+     "basis_pnl_usd_total": 0.006369023767845338,
+     "costs_usd_total": 0.17375944845674687,
+     "mean_hold_hours": 2096.0,
+     "rebalances": 0,
+     "liquidations": 0
+    }
+   }
+  },
+  {
+   "exchange": "binance",
+   "asset": "ETH",
+   "status": "OK",
+   "errors": [],
+   "coverage_days": {
+    "funding": 89.7,
+    "spot": 90.0,
+    "perp": 90.0,
+    "mark": 90.0
+   },
+   "rows": {
+    "funding": 270,
+    "spot": 2160,
+    "perp": 2160,
+    "mark": 2160
+   },
+   "funding_interval_h": {
+    "inferred_from_history": 8,
+    "metadata": null,
+    "now_endpoint": null,
+    "status": "VERIFIED"
+   },
+   "funding_stats": {
+    "n": 270,
+    "interval_hours": 8,
+    "mean": 4.287133333333334e-05,
+    "median": 4.3025e-05,
+    "min": -0.0001081,
+    "max": 0.0001,
+    "pct_positive": 0.9111111111111111,
+    "annualized_mean": 0.046944110000000004
+   },
+   "basis_stats": {
+    "n": 2160,
+    "mean_pct": -0.00045359258878206824,
+    "std_pct": 9.032226543927818e-05,
+    "min_pct": -0.0007662864608676662,
+    "max_pct": 0.0002823009573684865
+   },
+   "round_trip_cost_pct": 0.0038077838279048535,
+   "leg_fail_expected_cost_pct": 6e-05,
+   "breakeven_periods_at_mean_rate": 90.21841699748519,
+   "costs": {
+    "fee_spot_entrada": {
+     "value": 0.001,
+     "status": "ASSUMED",
+     "source": "máx(config 0.1000%, ccxt 0.1000%); no verificada por cuenta"
+    },
+    "fee_spot_salida": {
+     "value": 0.001,
+     "status": "ASSUMED",
+     "source": "máx(config 0.1000%, ccxt 0.1000%); no verificada por cuenta"
+    },
+    "fee_perp_entrada": {
+     "value": 0.0005,
+     "status": "ASSUMED",
+     "source": "máx(config 0.0500%, ccxt 0.0500%); no verificada por cuenta"
+    },
+    "fee_perp_salida": {
+     "value": 0.0005,
+     "status": "ASSUMED",
+     "source": "máx(config 0.0500%, ccxt 0.0500%); no verificada por cuenta"
+    },
+    "spread_spot": {
+     "value": 3.891073294287041e-06,
+     "status": "VERIFIED",
+     "source": "libro actual (entrada + salida)"
+    },
+    "slippage_profundidad_spot": {
+     "value": 0.0,
+     "status": "VERIFIED",
+     "source": "barrido del libro actual para el tamaño"
+    },
+    "spread_perp": {
+     "value": 3.892754610566212e-06,
+     "status": "VERIFIED",
+     "source": "libro actual (entrada + salida)"
+    },
+    "slippage_profundidad_perp": {
+     "value": 0.0,
+     "status": "VERIFIED",
+     "source": "barrido del libro actual para el tamaño"
+    },
+    "slippage_extra": {
+     "value": 0.0008,
+     "status": "ASSUMED",
+     "source": "slippage extra por pata y por operación"
+    },
+    "transferencias": {
+     "value": 0.0,
+     "status": "ASSUMED",
+     "source": "mismo exchange: sin transferencias"
+    }
+   },
+   "book_now": {
+    "spot_mid": 2569.9849999999997,
+    "perp_mid": 2568.875,
+    "spot_half_spread": 1.9455366471435203e-06,
+    "perp_half_spread": 1.946377305283106e-06,
+    "spot_depth_usd_top20": 137220.59803599998,
+    "perp_depth_usd_top20": 132521.12471
+   },
+   "feasibility_100usd": {
+    "notional_per_leg_usd": 45.0,
+    "qty": 0.017509863889991362,
+    "spot_min_qty": 0.0001,
+    "spot_min_cost": 5.0,
+    "perp_min_qty": 0.001,
+    "perp_min_cost": 20.0,
+    "feasible": true,
+    "min_notional_per_leg_usd": 20.0,
+    "min_capital_usd": 44.44
+   },
+   "backtest": {
+    "decisions": 268,
+    "ex_ante_positive": 0,
+    "ex_ante_positive_pct": 0.0,
+    "ex_ante_runs": 0,
+    "ex_ante_run_mean_periods": 0.0,
+    "trades": 0,
+    "net_positive_trades": 0,
+    "net_usd_total": 0,
+    "net_pct_of_notional": 0.0,
+    "funding_usd_total": 0,
+    "basis_pnl_usd_total": 0,
+    "costs_usd_total": 0,
+    "rebalances": 0,
+    "liquidations": 0,
+    "mean_hold_hours": 0.0,
+    "min_liq_distance": null,
+    "skipped_no_price": 0,
+    "executable_trades_100usd": 0
+   },
+   "sensitivity_by_horizon_days": {
+    "7": {
+     "decisions": 268,
+     "ex_ante_positive": 0,
+     "trades": 0,
+     "net_positive_trades": 0,
+     "net_usd_total": 0,
+     "funding_usd_total": 0,
+     "basis_pnl_usd_total": 0,
+     "costs_usd_total": 0,
+     "mean_hold_hours": 0.0,
+     "rebalances": 0,
+     "liquidations": 0
+    },
+    "14": {
+     "decisions": 268,
+     "ex_ante_positive": 17,
+     "trades": 2,
+     "net_positive_trades": 0,
+     "net_usd_total": -0.17338286317956395,
+     "funding_usd_total": 0.1502217251847468,
+     "basis_pnl_usd_total": 0.024495956147126102,
+     "costs_usd_total": 0.34810054451143685,
+     "mean_hold_hours": 480.0,
+     "rebalances": 0,
+     "liquidations": 0
+    },
+    "30": {
+     "decisions": 268,
+     "ex_ante_positive": 127,
+     "trades": 5,
+     "net_positive_trades": 1,
+     "net_usd_total": -0.5943355916745731,
+     "funding_usd_total": 0.26474777089161305,
+     "basis_pnl_usd_total": 0.011167998712406013,
+     "costs_usd_total": 0.8702513612785922,
+     "mean_hold_hours": 372.8,
+     "rebalances": 0,
+     "liquidations": 0
+    },
+    "60": {
+     "decisions": 268,
+     "ex_ante_positive": 214,
+     "trades": 5,
+     "net_positive_trades": 1,
+     "net_usd_total": -0.5690279017593513,
+     "funding_usd_total": 0.2833029572847168,
+     "basis_pnl_usd_total": 0.01792050223452397,
+     "costs_usd_total": 0.8702513612785922,
+     "mean_hold_hours": 395.2,
+     "rebalances": 0,
+     "liquidations": 0
+    }
+   }
+  },
+  {
+   "exchange": "binance",
+   "asset": "SOL",
+   "status": "OK",
+   "errors": [],
+   "coverage_days": {
+    "funding": 89.7,
+    "spot": 90.0,
+    "perp": 90.0,
+    "mark": 90.0
+   },
+   "rows": {
+    "funding": 270,
+    "spot": 2160,
+    "perp": 2160,
+    "mark": 2160
+   },
+   "funding_interval_h": {
+    "inferred_from_history": 8,
+    "metadata": null,
+    "now_endpoint": null,
+    "status": "VERIFIED"
+   },
+   "funding_stats": {
+    "n": 270,
+    "interval_hours": 8,
+    "mean": 3.011133333333333e-05,
+    "median": 3.269e-05,
+    "min": -0.00013562,
+    "max": 0.0001,
+    "pct_positive": 0.6925925925925925,
+    "annualized_mean": 0.03297191
+   },
+   "basis_stats": {
+    "n": 2160,
+    "mean_pct": -0.0004814954893297074,
+    "std_pct": 0.00019296145528746242,
+    "min_pct": -0.0010493179433368088,
+    "max_pct": 0.0004287245444802385
+   },
+   "round_trip_cost_pct": 0.003972421236586468,
+   "leg_fail_expected_cost_pct": 6e-05,
+   "breakeven_periods_at_mean_rate": 133.91706012973415,
+   "costs": {
+    "fee_spot_entrada": {
+     "value": 0.001,
+     "status": "ASSUMED",
+     "source": "máx(config 0.1000%, ccxt 0.1000%); no verificada por cuenta"
+    },
+    "fee_spot_salida": {
+     "value": 0.001,
+     "status": "ASSUMED",
+     "source": "máx(config 0.1000%, ccxt 0.1000%); no verificada por cuenta"
+    },
+    "fee_perp_entrada": {
+     "value": 0.0005,
+     "status": "ASSUMED",
+     "source": "máx(config 0.0500%, ccxt 0.0500%); no verificada por cuenta"
+    },
+    "fee_perp_salida": {
+     "value": 0.0005,
+     "status": "ASSUMED",
+     "source": "máx(config 0.0500%, ccxt 0.0500%); no verificada por cuenta"
+    },
+    "spread_spot": {
+     "value": 8.618832148236073e-05,
+     "status": "VERIFIED",
+     "source": "libro actual (entrada + salida)"
+    },
+    "slippage_profundidad_spot": {
+     "value": 0.0,
+     "status": "VERIFIED",
+     "source": "barrido del libro actual para el tamaño"
+    },
+    "spread_perp": {
+     "value": 8.623291510361665e-05,
+     "status": "VERIFIED",
+     "source": "libro actual (entrada + salida)"
+    },
+    "slippage_profundidad_perp": {
+     "value": 4.901813547078526e-16,
+     "status": "VERIFIED",
+     "source": "barrido del libro actual para el tamaño"
+    },
+    "slippage_extra": {
+     "value": 0.0008,
+     "status": "ASSUMED",
+     "source": "slippage extra por pata y por operación"
+    },
+    "transferencias": {
+     "value": 0.0,
+     "status": "ASSUMED",
+     "source": "mismo exchange: sin transferencias"
+    }
+   },
+   "book_now": {
+    "spot_mid": 116.025,
+    "perp_mid": 115.965,
+    "spot_half_spread": 4.309416074118037e-05,
+    "perp_half_spread": 4.311645755180832e-05,
+    "spot_depth_usd_top20": 2442185.2343,
+    "perp_depth_usd_top20": 4459915.2166
+   },
+   "feasibility_100usd": {
+    "notional_per_leg_usd": 45.0,
+    "qty": 0.3878307334310092,
+    "spot_min_qty": 0.001,
+    "spot_min_cost": 5.0,
+    "perp_min_qty": 0.01,
+    "perp_min_cost": 5.0,
+    "feasible": true,
+    "min_notional_per_leg_usd": 5.0,
+    "min_capital_usd": 11.11
+   },
+   "backtest": {
+    "decisions": 268,
+    "ex_ante_positive": 0,
+    "ex_ante_positive_pct": 0.0,
+    "ex_ante_runs": 0,
+    "ex_ante_run_mean_periods": 0.0,
+    "trades": 0,
+    "net_positive_trades": 0,
+    "net_usd_total": 0,
+    "net_pct_of_notional": 0.0,
+    "funding_usd_total": 0,
+    "basis_pnl_usd_total": 0,
+    "costs_usd_total": 0,
+    "rebalances": 0,
+    "liquidations": 0,
+    "mean_hold_hours": 0.0,
+    "min_liq_distance": null,
+    "skipped_no_price": 0,
+    "executable_trades_100usd": 0
+   },
+   "sensitivity_by_horizon_days": {
+    "7": {
+     "decisions": 268,
+     "ex_ante_positive": 0,
+     "trades": 0,
+     "net_positive_trades": 0,
+     "net_usd_total": 0,
+     "funding_usd_total": 0,
+     "basis_pnl_usd_total": 0,
+     "costs_usd_total": 0,
+     "mean_hold_hours": 0.0,
+     "rebalances": 0,
+     "liquidations": 0
+    },
+    "14": {
+     "decisions": 268,
+     "ex_ante_positive": 40,
+     "trades": 4,
+     "net_positive_trades": 0,
+     "net_usd_total": -0.5772658706985129,
+     "funding_usd_total": 0.10304223900043545,
+     "basis_pnl_usd_total": 0.045527712886615876,
+     "costs_usd_total": 0.7258358225855642,
+     "mean_hold_hours": 124.0,
+     "rebalances": 0,
+     "liquidations": 0
+    },
+    "30": {
+     "decisions": 268,
+     "ex_ante_positive": 95,
+     "trades": 12,
+     "net_positive_trades": 0,
+     "net_usd_total": -1.9370248003998378,
+     "funding_usd_total": 0.1418642482725066,
+     "basis_pnl_usd_total": 0.09861841908434825,
+     "costs_usd_total": 2.177507467756693,
+     "mean_hold_hours": 84.66666666666667,
+     "rebalances": 0,
+     "liquidations": 0
+    },
+    "60": {
+     "decisions": 268,
+     "ex_ante_positive": 145,
+     "trades": 17,
+     "net_positive_trades": 0,
+     "net_usd_total": -2.7686259042762784,
+     "funding_usd_total": 0.185154240582545,
+     "basis_pnl_usd_total": 0.13102210112982438,
+     "costs_usd_total": 3.084802245988648,
+     "mean_hold_hours": 76.70588235294117,
+     "rebalances": 0,
+     "liquidations": 0
+    }
+   }
+  },
+  {
+   "exchange": "bybit",
+   "asset": "BTC",
+   "status": "OK",
+   "errors": [],
+   "coverage_days": {
+    "funding": 89.7,
+    "spot": 90.0,
+    "perp": 90.0,
+    "mark": 90.0
+   },
+   "rows": {
+    "funding": 270,
+    "spot": 2160,
+    "perp": 2160,
+    "mark": 2160
+   },
+   "funding_interval_h": {
+    "inferred_from_history": 8,
+    "metadata": 8.0,
+    "now_endpoint": 8.0,
+    "status": "VERIFIED"
+   },
+   "funding_stats": {
+    "n": 270,
+    "interval_hours": 8,
+    "mean": 4.178807407407408e-05,
+    "median": 3.943e-05,
+    "min": -4.668e-05,
+    "max": 0.0001,
+    "pct_positive": 0.8888888888888888,
+    "annualized_mean": 0.04575794111111112
+   },
+   "basis_stats": {
+    "n": 2160,
+    "mean_pct": -0.00044465711415038396,
+    "std_pct": 9.429117319415507e-05,
+    "min_pct": -0.0007380073800738699,
+    "max_pct": 0.0001657811846248644
+   },
+   "round_trip_cost_pct": 0.004002401795288232,
+   "leg_fail_expected_cost_pct": 6e-05,
+   "breakeven_periods_at_mean_rate": 97.21438198102086,
+   "costs": {
+    "fee_spot_entrada": {
+     "value": 0.001,
+     "status": "ASSUMED",
+     "source": "máx(config 0.1000%, ccxt 0.1000%); no verificada por cuenta"
+    },
+    "fee_spot_salida": {
+     "value": 0.001,
+     "status": "ASSUMED",
+     "source": "máx(config 0.1000%, ccxt 0.1000%); no verificada por cuenta"
+    },
+    "fee_perp_entrada": {
+     "value": 0.0006,
+     "status": "ASSUMED",
+     "source": "máx(config 0.0550%, ccxt 0.0600%); no verificada por cuenta"
+    },
+    "fee_perp_salida": {
+     "value": 0.0006,
+     "status": "ASSUMED",
+     "source": "máx(config 0.0550%, ccxt 0.0600%); no verificada por cuenta"
+    },
+    "spread_spot": {
+     "value": 1.200563064146934e-06,
+     "status": "VERIFIED",
+     "source": "libro actual (entrada + salida)"
+    },
+    "slippage_profundidad_spot": {
+     "value": 0.0,
+     "status": "VERIFIED",
+     "source": "barrido del libro actual para el tamaño"
+    },
+    "spread_perp": {
+     "value": 1.2012322237357111e-06,
+     "status": "VERIFIED",
+     "source": "libro actual (entrada + salida)"
+    },
+    "slippage_profundidad_perp": {
+     "value": 3.4960459040797674e-16,
+     "status": "VERIFIED",
+     "source": "barrido del libro actual para el tamaño"
+    },
+    "slippage_extra": {
+     "value": 0.0008,
+     "status": "ASSUMED",
+     "source": "slippage extra por pata y por operación"
+    },
+    "transferencias": {
+     "value": 0.0,
+     "status": "ASSUMED",
+     "source": "mismo exchange: sin transferencias"
+    }
+   },
+   "book_now": {
+    "spot_mid": 83294.25,
+    "perp_mid": 83247.85,
+    "spot_half_spread": 6.00281532073467e-07,
+    "perp_half_spread": 6.006161118678556e-07,
+    "spot_depth_usd_top20": 247828.8881361,
+    "perp_depth_usd_top20": 445699.27170000004
+   },
+   "feasibility_100usd": {
+    "notional_per_leg_usd": 45.0,
+    "qty": 0.0005402426770105132,
+    "spot_min_qty": 1e-06,
+    "spot_min_cost": 5.0,
+    "perp_min_qty": 0.001,
+    "perp_min_cost": 5.0,
+    "feasible": false,
+    "min_notional_per_leg_usd": 83.3,
+    "min_capital_usd": 185.1
+   },
+   "backtest": {
+    "decisions": 268,
+    "ex_ante_positive": 0,
+    "ex_ante_positive_pct": 0.0,
+    "ex_ante_runs": 0,
+    "ex_ante_run_mean_periods": 0.0,
+    "trades": 0,
+    "net_positive_trades": 0,
+    "net_usd_total": 0,
+    "net_pct_of_notional": 0.0,
+    "funding_usd_total": 0,
+    "basis_pnl_usd_total": 0,
+    "costs_usd_total": 0,
+    "rebalances": 0,
+    "liquidations": 0,
+    "mean_hold_hours": 0.0,
+    "min_liq_distance": null,
+    "skipped_no_price": 0,
+    "executable_trades_100usd": 0
+   },
+   "sensitivity_by_horizon_days": {
+    "7": {
+     "decisions": 268,
+     "ex_ante_positive": 0,
+     "trades": 0,
+     "net_positive_trades": 0,
+     "net_usd_total": 0,
+     "funding_usd_total": 0,
+     "basis_pnl_usd_total": 0,
+     "costs_usd_total": 0,
+     "mean_hold_hours": 0.0,
+     "rebalances": 0,
+     "liquidations": 0
+    },
+    "14": {
+     "decisions": 268,
+     "ex_ante_positive": 11,
+     "trades": 2,
+     "net_positive_trades": 0,
+     "net_usd_total": -0.1780343669669035,
+     "funding_usd_total": 0.17967873879458396,
+     "basis_pnl_usd_total": 0.00790305581445342,
+     "costs_usd_total": 0.3656161615759409,
+     "mean_hold_hours": 320.0,
+     "rebalances": 0,
+     "liquidations": 0
+    },
+    "30": {
+     "decisions": 268,
+     "ex_ante_positive": 116,
+     "trades": 6,
+     "net_positive_trades": 1,
+     "net_usd_total": -0.591768513922177,
+     "funding_usd_total": 0.4759868187130669,
+     "basis_pnl_usd_total": 0.029093152092578817,
+     "costs_usd_total": 1.0968484847278228,
+     "mean_hold_hours": 302.6666666666667,
+     "rebalances": 0,
+     "liquidations": 0
+    },
+    "60": {
+     "decisions": 268,
+     "ex_ante_positive": 201,
+     "trades": 7,
+     "net_positive_trades": 1,
+     "net_usd_total": -0.7476795829571263,
+     "funding_usd_total": 0.5050508932964551,
+     "basis_pnl_usd_total": 0.026926089262211628,
+     "costs_usd_total": 1.2796565655157932,
+     "mean_hold_hours": 281.14285714285717,
+     "rebalances": 0,
+     "liquidations": 0
+    }
+   }
+  },
+  {
+   "exchange": "bybit",
+   "asset": "ETH",
+   "status": "OK",
+   "errors": [],
+   "coverage_days": {
+    "funding": 89.7,
+    "spot": 90.0,
+    "perp": 90.0,
+    "mark": 90.0
+   },
+   "rows": {
+    "funding": 270,
+    "spot": 2160,
+    "perp": 2160,
+    "mark": 2160
+   },
+   "funding_interval_h": {
+    "inferred_from_history": 8,
+    "metadata": 8.0,
+    "now_endpoint": 8.0,
+    "status": "VERIFIED"
+   },
+   "funding_stats": {
+    "n": 270,
+    "interval_hours": 8,
+    "mean": 3.965040740740741e-05,
+    "median": 3.9785e-05,
+    "min": -8.769e-05,
+    "max": 0.0001,
+    "pct_positive": 0.8666666666666667,
+    "annualized_mean": 0.04341719611111112
+   },
+   "basis_stats": {
+    "n": 2160,
+    "mean_pct": -0.0004595139595036002,
+    "std_pct": 9.60280896074263e-05,
+    "min_pct": -0.0008080347943036308,
+    "max_pct": 0.0
+   },
+   "round_trip_cost_pct": 0.00400778447927327,
+   "leg_fail_expected_cost_pct": 6e-05,
+   "breakeven_periods_at_mean_rate": 102.59124042476634,
+   "costs": {
+    "fee_spot_entrada": {
+     "value": 0.001,
+     "status": "ASSUMED",
+     "source": "máx(config 0.1000%, ccxt 0.1000%); no verificada por cuenta"
+    },
+    "fee_spot_salida": {
+     "value": 0.001,
+     "status": "ASSUMED",
+     "source": "máx(config 0.1000%, ccxt 0.1000%); no verificada por cuenta"
+    },
+    "fee_perp_entrada": {
+     "value": 0.0006,
+     "status": "ASSUMED",
+     "source": "máx(config 0.0550%, ccxt 0.0600%); no verificada por cuenta"
+    },
+    "fee_perp_salida": {
+     "value": 0.0006,
+     "status": "ASSUMED",
+     "source": "máx(config 0.0550%, ccxt 0.0600%); no verificada por cuenta"
+    },
+    "spread_spot": {
+     "value": 3.891406412379647e-06,
+     "status": "VERIFIED",
+     "source": "libro actual (entrada + salida)"
+    },
+    "slippage_profundidad_spot": {
+     "value": 0.0,
+     "status": "VERIFIED",
+     "source": "barrido del libro actual para el tamaño"
+    },
+    "spread_perp": {
+     "value": 3.893072860890104e-06,
+     "status": "VERIFIED",
+     "source": "libro actual (entrada + salida)"
+    },
+    "slippage_profundidad_perp": {
+     "value": 0.0,
+     "status": "VERIFIED",
+     "source": "barrido del libro actual para el tamaño"
+    },
+    "slippage_extra": {
+     "value": 0.0008,
+     "status": "ASSUMED",
+     "source": "slippage extra por pata y por operación"
+    },
+    "transferencias": {
+     "value": 0.0,
+     "status": "ASSUMED",
+     "source": "mismo exchange: sin transferencias"
+    }
+   },
+   "book_now": {
+    "spot_mid": 2569.7650000000003,
+    "perp_mid": 2568.665,
+    "spot_half_spread": 1.9457032061898233e-06,
+    "perp_half_spread": 1.946536430445052e-06,
+    "spot_depth_usd_top20": 71770.1509012,
+    "perp_depth_usd_top20": 540252.7167
+   },
+   "feasibility_100usd": {
+    "notional_per_leg_usd": 45.0,
+    "qty": 0.01751006828926633,
+    "spot_min_qty": 1e-05,
+    "spot_min_cost": 5.0,
+    "perp_min_qty": 0.01,
+    "perp_min_cost": 5.0,
+    "feasible": true,
+    "min_notional_per_leg_usd": 25.7,
+    "min_capital_usd": 57.11
+   },
+   "backtest": {
+    "decisions": 268,
+    "ex_ante_positive": 0,
+    "ex_ante_positive_pct": 0.0,
+    "ex_ante_runs": 0,
+    "ex_ante_run_mean_periods": 0.0,
+    "trades": 0,
+    "net_positive_trades": 0,
+    "net_usd_total": 0,
+    "net_pct_of_notional": 0.0,
+    "funding_usd_total": 0,
+    "basis_pnl_usd_total": 0,
+    "costs_usd_total": 0,
+    "rebalances": 0,
+    "liquidations": 0,
+    "mean_hold_hours": 0.0,
+    "min_liq_distance": null,
+    "skipped_no_price": 0,
+    "executable_trades_100usd": 0
+   },
+   "sensitivity_by_horizon_days": {
+    "7": {
+     "decisions": 268,
+     "ex_ante_positive": 0,
+     "trades": 0,
+     "net_positive_trades": 0,
+     "net_usd_total": 0,
+     "funding_usd_total": 0,
+     "basis_pnl_usd_total": 0,
+     "costs_usd_total": 0,
+     "mean_hold_hours": 0.0,
+     "rebalances": 0,
+     "liquidations": 0
+    },
+    "14": {
+     "decisions": 268,
+     "ex_ante_positive": 14,
+     "trades": 2,
+     "net_positive_trades": 0,
+     "net_usd_total": -0.14654826698604984,
+     "funding_usd_total": 0.21047833750828712,
+     "basis_pnl_usd_total": 0.009073998640257347,
+     "costs_usd_total": 0.3661006031345943,
+     "mean_hold_hours": 368.0,
+     "rebalances": 0,
+     "liquidations": 0
+    },
+    "30": {
+     "decisions": 268,
+     "ex_ante_positive": 106,
+     "trades": 8,
+     "net_positive_trades": 1,
+     "net_usd_total": -0.9967954359153544,
+     "funding_usd_total": 0.44127438279964526,
+     "basis_pnl_usd_total": 0.026332593823377614,
+     "costs_usd_total": 1.4644024125383772,
+     "mean_hold_hours": 210.0,
+     "rebalances": 0,
+     "liquidations": 0
+    },
+    "60": {
+     "decisions": 268,
+     "ex_ante_positive": 198,
+     "trades": 8,
+     "net_positive_trades": 1,
+     "net_usd_total": -0.9623085998459983,
+     "funding_usd_total": 0.5010864281086805,
+     "basis_pnl_usd_total": 0.0010073845836984835,
+     "costs_usd_total": 1.4644024125383772,
+     "mean_hold_hours": 243.0,
+     "rebalances": 0,
+     "liquidations": 0
+    }
+   }
+  },
+  {
+   "exchange": "bybit",
+   "asset": "SOL",
+   "status": "OK",
+   "errors": [],
+   "coverage_days": {
+    "funding": 89.7,
+    "spot": 90.0,
+    "perp": 90.0,
+    "mark": 90.0
+   },
+   "rows": {
+    "funding": 270,
+    "spot": 2160,
+    "perp": 2160,
+    "mark": 2160
+   },
+   "funding_interval_h": {
+    "inferred_from_history": 8,
+    "metadata": 8.0,
+    "now_endpoint": 8.0,
+    "status": "VERIFIED"
+   },
+   "funding_stats": {
+    "n": 270,
+    "interval_hours": 8,
+    "mean": 2.1492e-05,
+    "median": 2.7079999999999998e-05,
+    "min": -0.0001785,
+    "max": 0.0001,
+    "pct_positive": 0.6370370370370371,
+    "annualized_mean": 0.02353374
+   },
+   "basis_stats": {
+    "n": 2160,
+    "mean_pct": -0.00048727150965302866,
+    "std_pct": 0.00018415120998048894,
+    "min_pct": -0.001308044473512211,
+    "max_pct": 0.00032229473853844377
+   },
+   "round_trip_cost_pct": 0.004172473282356367,
+   "leg_fail_expected_cost_pct": 6e-05,
+   "breakeven_periods_at_mean_rate": 196.93249964434986,
+   "costs": {
+    "fee_spot_entrada": {
+     "value": 0.001,
+     "status": "ASSUMED",
+     "source": "máx(config 0.1000%, ccxt 0.1000%); no verificada por cuenta"
+    },
+    "fee_spot_salida": {
+     "value": 0.001,
+     "status": "ASSUMED",
+     "source": "máx(config 0.1000%, ccxt 0.1000%); no verificada por cuenta"
+    },
+    "fee_perp_entrada": {
+     "value": 0.0006,
+     "status": "ASSUMED",
+     "source": "máx(config 0.0550%, ccxt 0.0600%); no verificada por cuenta"
+    },
+    "fee_perp_salida": {
+     "value": 0.0006,
+     "status": "ASSUMED",
+     "source": "máx(config 0.0550%, ccxt 0.0600%); no verificada por cuenta"
+    },
+    "spread_spot": {
+     "value": 8.621061252632358e-05,
+     "status": "VERIFIED",
+     "source": "libro actual (entrada + salida)"
+    },
+    "slippage_profundidad_spot": {
+     "value": 2.45029690981724e-16,
+     "status": "VERIFIED",
+     "source": "barrido del libro actual para el tamaño"
+    },
+    "spread_perp": {
+     "value": 8.626266982955277e-05,
+     "status": "VERIFIED",
+     "source": "libro actual (entrada + salida)"
+    },
+    "slippage_profundidad_perp": {
+     "value": 2.451652162532847e-16,
+     "status": "VERIFIED",
+     "source": "barrido del libro actual para el tamaño"
+    },
+    "slippage_extra": {
+     "value": 0.0008,
+     "status": "ASSUMED",
+     "source": "slippage extra por pata y por operación"
+    },
+    "transferencias": {
+     "value": 0.0,
+     "status": "ASSUMED",
+     "source": "mismo exchange: sin transferencias"
+    }
+   },
+   "book_now": {
+    "spot_mid": 115.995,
+    "perp_mid": 115.92500000000001,
+    "spot_half_spread": 4.310530626316179e-05,
+    "perp_half_spread": 4.3131334914776384e-05,
+    "spot_depth_usd_top20": 635381.797323,
+    "perp_depth_usd_top20": 6710654.544
+   },
+   "feasibility_100usd": {
+    "notional_per_leg_usd": 45.0,
+    "qty": 0.3879310344827586,
+    "spot_min_qty": 0.0001,
+    "spot_min_cost": 5.0,
+    "perp_min_qty": 0.1,
+    "perp_min_cost": 5.0,
+    "feasible": true,
+    "min_notional_per_leg_usd": 11.6,
+    "min_capital_usd": 25.78
+   },
+   "backtest": {
+    "decisions": 268,
+    "ex_ante_positive": 0,
+    "ex_ante_positive_pct": 0.0,
+    "ex_ante_runs": 0,
+    "ex_ante_run_mean_periods": 0.0,
+    "trades": 0,
+    "net_positive_trades": 0,
+    "net_usd_total": 0,
+    "net_pct_of_notional": 0.0,
+    "funding_usd_total": 0,
+    "basis_pnl_usd_total": 0,
+    "costs_usd_total": 0,
+    "rebalances": 0,
+    "liquidations": 0,
+    "mean_hold_hours": 0.0,
+    "min_liq_distance": null,
+    "skipped_no_price": 0,
+    "executable_trades_100usd": 0
+   },
+   "sensitivity_by_horizon_days": {
+    "7": {
+     "decisions": 268,
+     "ex_ante_positive": 0,
+     "trades": 0,
+     "net_positive_trades": 0,
+     "net_usd_total": 0,
+     "funding_usd_total": 0,
+     "basis_pnl_usd_total": 0,
+     "costs_usd_total": 0,
+     "mean_hold_hours": 0.0,
+     "rebalances": 0,
+     "liquidations": 0
+    },
+    "14": {
+     "decisions": 268,
+     "ex_ante_positive": 0,
+     "trades": 0,
+     "net_positive_trades": 0,
+     "net_usd_total": 0,
+     "funding_usd_total": 0,
+     "basis_pnl_usd_total": 0,
+     "costs_usd_total": 0,
+     "mean_hold_hours": 0.0,
+     "rebalances": 0,
+     "liquidations": 0
+    },
+    "30": {
+     "decisions": 268,
+     "ex_ante_positive": 88,
+     "trades": 13,
+     "net_positive_trades": 0,
+     "net_usd_total": -2.232642016887157,
+     "funding_usd_total": 0.2657983681523517,
+     "basis_pnl_usd_total": -0.022443514861034006,
+     "costs_usd_total": 2.4759968701784745,
+     "mean_hold_hours": 82.46153846153847,
+     "rebalances": 0,
+     "liquidations": 0
+    },
+    "60": {
+     "decisions": 268,
+     "ex_ante_positive": 135,
+     "trades": 18,
+     "net_positive_trades": 0,
+     "net_usd_total": -3.0656988518226136,
+     "funding_usd_total": 0.27753739503764396,
+     "basis_pnl_usd_total": 0.08506711184839943,
+     "costs_usd_total": 3.428303358708657,
+     "mean_hold_hours": 69.77777777777777,
+     "rebalances": 0,
+     "liquidations": 0
+    }
+   }
+  },
+  {
+   "exchange": "okx",
+   "asset": "BTC",
+   "status": "OK",
+   "errors": [],
+   "coverage_days": {
+    "funding": 89.7,
+    "spot": 90.0,
+    "perp": 90.0,
+    "mark": 90.0
+   },
+   "rows": {
+    "funding": 270,
+    "spot": 2160,
+    "perp": 2160,
+    "mark": 2160
+   },
+   "funding_interval_h": {
+    "inferred_from_history": 8,
+    "metadata": null,
+    "now_endpoint": 8.0,
+    "status": "VERIFIED"
+   },
+   "funding_stats": {
+    "n": 270,
+    "interval_hours": 8,
+    "mean": 5.030393447229259e-05,
+    "median": 5.1316376733250005e-05,
+    "min": -3.86532726688e-05,
+    "max": 0.0001,
+    "pct_positive": 0.9111111111111111,
+    "annualized_mean": 0.055082808247160386
+   },
+   "basis_stats": {
+    "n": 2160,
+    "mean_pct": -0.00044404636168037036,
+    "std_pct": 0.00011376936506707314,
+    "min_pct": -0.0007943147081128445,
+    "max_pct": 0.00044080977413433515
+   },
+   "round_trip_cost_pct": 0.004802402145719716,
+   "leg_fail_expected_cost_pct": 8e-05,
+   "breakeven_periods_at_mean_rate": 97.05805712690213,
+   "costs": {
+    "fee_spot_entrada": {
+     "value": 0.0015,
+     "status": "ASSUMED",
+     "source": "máx(config 0.1000%, ccxt 0.1500%); no verificada por cuenta"
+    },
+    "fee_spot_salida": {
+     "value": 0.0015,
+     "status": "ASSUMED",
+     "source": "máx(config 0.1000%, ccxt 0.1500%); no verificada por cuenta"
+    },
+    "fee_perp_entrada": {
+     "value": 0.0005,
+     "status": "ASSUMED",
+     "source": "máx(config 0.0500%, ccxt 0.0500%); no verificada por cuenta"
+    },
+    "fee_perp_salida": {
+     "value": 0.0005,
+     "status": "ASSUMED",
+     "source": "máx(config 0.0500%, ccxt 0.0500%); no verificada por cuenta"
+    },
+    "spread_spot": {
+     "value": 1.2008009342930226e-06,
+     "status": "VERIFIED",
+     "source": "libro actual (entrada + salida)"
+    },
+    "slippage_profundidad_spot": {
+     "value": 0.0,
+     "status": "VERIFIED",
+     "source": "barrido del libro actual para el tamaño"
+    },
+    "spread_perp": {
+     "value": 1.2013447854226512e-06,
+     "status": "VERIFIED",
+     "source": "libro actual (entrada + salida)"
+    },
+    "slippage_profundidad_perp": {
+     "value": 0.0,
+     "status": "VERIFIED",
+     "source": "barrido del libro actual para el tamaño"
+    },
+    "slippage_extra": {
+     "value": 0.0008,
+     "status": "ASSUMED",
+     "source": "slippage extra por pata y por operación"
+    },
+    "transferencias": {
+     "value": 0.0,
+     "status": "ASSUMED",
+     "source": "mismo exchange: sin transferencias"
+    }
+   },
+   "book_now": {
+    "spot_mid": 83277.75,
+    "perp_mid": 83240.05,
+    "spot_half_spread": 6.004004671465113e-07,
+    "perp_half_spread": 6.006723927113256e-07,
+    "spot_depth_usd_top20": 207198.96967524,
+    "perp_depth_usd_top20": 137187.7403
+   },
+   "feasibility_100usd": {
+    "notional_per_leg_usd": 45.0,
+    "qty": 0.0005402264629332617,
+    "spot_min_qty": 1e-05,
+    "spot_min_cost": 0.0,
+    "perp_min_qty": 0.0001,
+    "perp_min_cost": 0.0,
+    "feasible": true,
+    "min_notional_per_leg_usd": 8.33,
+    "min_capital_usd": 18.51
+   },
+   "backtest": {
+    "decisions": 268,
+    "ex_ante_positive": 0,
+    "ex_ante_positive_pct": 0.0,
+    "ex_ante_runs": 0,
+    "ex_ante_run_mean_periods": 0.0,
+    "trades": 0,
+    "net_positive_trades": 0,
+    "net_usd_total": 0,
+    "net_pct_of_notional": 0.0,
+    "funding_usd_total": 0,
+    "basis_pnl_usd_total": 0,
+    "costs_usd_total": 0,
+    "rebalances": 0,
+    "liquidations": 0,
+    "mean_hold_hours": 0.0,
+    "min_liq_distance": null,
+    "skipped_no_price": 0,
+    "executable_trades_100usd": 0
+   },
+   "sensitivity_by_horizon_days": {
+    "7": {
+     "decisions": 268,
+     "ex_ante_positive": 0,
+     "trades": 0,
+     "net_positive_trades": 0,
+     "net_usd_total": 0,
+     "funding_usd_total": 0,
+     "basis_pnl_usd_total": 0,
+     "costs_usd_total": 0,
+     "mean_hold_hours": 0.0,
+     "rebalances": 0,
+     "liquidations": 0
+    },
+    "14": {
+     "decisions": 268,
+     "ex_ante_positive": 0,
+     "trades": 0,
+     "net_positive_trades": 0,
+     "net_usd_total": 0,
+     "funding_usd_total": 0,
+     "basis_pnl_usd_total": 0,
+     "costs_usd_total": 0,
+     "mean_hold_hours": 0.0,
+     "rebalances": 0,
+     "liquidations": 0
+    },
+    "30": {
+     "decisions": 268,
+     "ex_ante_positive": 117,
+     "trades": 4,
+     "net_positive_trades": 1,
+     "net_usd_total": -0.28126805948365885,
+     "funding_usd_total": 0.5738012189714423,
+     "basis_pnl_usd_total": 0.0237631077744477,
+     "costs_usd_total": 0.8788323862295488,
+     "mean_hold_hours": 448.0,
+     "rebalances": 0,
+     "liquidations": 0
+    },
+    "60": {
+     "decisions": 268,
+     "ex_ante_positive": 211,
+     "trades": 4,
+     "net_positive_trades": 1,
+     "net_usd_total": -0.2564628326195156,
+     "funding_usd_total": 0.6157321155075532,
+     "basis_pnl_usd_total": 0.006637438102479982,
+     "costs_usd_total": 0.8788323862295488,
+     "mean_hold_hours": 498.0,
+     "rebalances": 0,
+     "liquidations": 0
+    }
+   }
+  },
+  {
+   "exchange": "okx",
+   "asset": "ETH",
+   "status": "OK",
+   "errors": [],
+   "coverage_days": {
+    "funding": 89.7,
+    "spot": 90.0,
+    "perp": 90.0,
+    "mark": 90.0
+   },
+   "rows": {
+    "funding": 270,
+    "spot": 2160,
+    "perp": 2160,
+    "mark": 2160
+   },
+   "funding_interval_h": {
+    "inferred_from_history": 8,
+    "metadata": null,
+    "now_endpoint": 8.0,
+    "status": "VERIFIED"
+   },
+   "funding_stats": {
+    "n": 270,
+    "interval_hours": 8,
+    "mean": 3.942192751488926e-05,
+    "median": 3.75516509797e-05,
+    "min": -6.04700439561e-05,
+    "max": 0.0001,
+    "pct_positive": 0.837037037037037,
+    "annualized_mean": 0.043167010628803744
+   },
+   "basis_stats": {
+    "n": 2160,
+    "mean_pct": -0.00045773074719430946,
+    "std_pct": 9.950702752191389e-05,
+    "min_pct": -0.0008275892920382928,
+    "max_pct": 0.00021681148037250671
+   },
+   "round_trip_cost_pct": 0.004807786252290839,
+   "leg_fail_expected_cost_pct": 8e-05,
+   "breakeven_periods_at_mean_rate": 123.98648570506279,
+   "costs": {
+    "fee_spot_entrada": {
+     "value": 0.0015,
+     "status": "ASSUMED",
+     "source": "máx(config 0.1000%, ccxt 0.1500%); no verificada por cuenta"
+    },
+    "fee_spot_salida": {
+     "value": 0.0015,
+     "status": "ASSUMED",
+     "source": "máx(config 0.1000%, ccxt 0.1500%); no verificada por cuenta"
+    },
+    "fee_perp_entrada": {
+     "value": 0.0005,
+     "status": "ASSUMED",
+     "source": "máx(config 0.0500%, ccxt 0.0500%); no verificada por cuenta"
+    },
+    "fee_perp_salida": {
+     "value": 0.0005,
+     "status": "ASSUMED",
+     "source": "máx(config 0.0500%, ccxt 0.0500%); no verificada por cuenta"
+    },
+    "spread_spot": {
+     "value": 3.892163711921029e-06,
+     "status": "VERIFIED",
+     "source": "libro actual (entrada + salida)"
+    },
+    "slippage_profundidad_spot": {
+     "value": 0.0,
+     "status": "VERIFIED",
+     "source": "barrido del libro actual para el tamaño"
+    },
+    "spread_perp": {
+     "value": 3.894088578917903e-06,
+     "status": "VERIFIED",
+     "source": "libro actual (entrada + salida)"
+    },
+    "slippage_profundidad_perp": {
+     "value": 0.0,
+     "status": "VERIFIED",
+     "source": "barrido del libro actual para el tamaño"
+    },
+    "slippage_extra": {
+     "value": 0.0008,
+     "status": "ASSUMED",
+     "source": "slippage extra por pata y por operación"
+    },
+    "transferencias": {
+     "value": 0.0,
+     "status": "ASSUMED",
+     "source": "mismo exchange: sin transferencias"
+    }
+   },
+   "book_now": {
+    "spot_mid": 2569.2650000000003,
+    "perp_mid": 2567.995,
+    "spot_half_spread": 1.9460818559605144e-06,
+    "perp_half_spread": 1.9470442894589515e-06,
+    "spot_depth_usd_top20": 137362.02907178,
+    "perp_depth_usd_top20": 382032.04969
+   },
+   "feasibility_100usd": {
+    "notional_per_leg_usd": 45.0,
+    "qty": 0.01751252145283878,
+    "spot_min_qty": 0.0001,
+    "spot_min_cost": 0.0,
+    "perp_min_qty": 0.001,
+    "perp_min_cost": 0.0,
+    "feasible": true,
+    "min_notional_per_leg_usd": 2.57,
+    "min_capital_usd": 5.71
+   },
+   "backtest": {
+    "decisions": 268,
+    "ex_ante_positive": 0,
+    "ex_ante_positive_pct": 0.0,
+    "ex_ante_runs": 0,
+    "ex_ante_run_mean_periods": 0.0,
+    "trades": 0,
+    "net_positive_trades": 0,
+    "net_usd_total": 0,
+    "net_pct_of_notional": 0.0,
+    "funding_usd_total": 0,
+    "basis_pnl_usd_total": 0,
+    "costs_usd_total": 0,
+    "rebalances": 0,
+    "liquidations": 0,
+    "mean_hold_hours": 0.0,
+    "min_liq_distance": null,
+    "skipped_no_price": 0,
+    "executable_trades_100usd": 0
+   },
+   "sensitivity_by_horizon_days": {
+    "7": {
+     "decisions": 268,
+     "ex_ante_positive": 0,
+     "trades": 0,
+     "net_positive_trades": 0,
+     "net_usd_total": 0,
+     "funding_usd_total": 0,
+     "basis_pnl_usd_total": 0,
+     "costs_usd_total": 0,
+     "mean_hold_hours": 0.0,
+     "rebalances": 0,
+     "liquidations": 0
+    },
+    "14": {
+     "decisions": 268,
+     "ex_ante_positive": 0,
+     "trades": 0,
+     "net_positive_trades": 0,
+     "net_usd_total": 0,
+     "funding_usd_total": 0,
+     "basis_pnl_usd_total": 0,
+     "costs_usd_total": 0,
+     "mean_hold_hours": 0.0,
+     "rebalances": 0,
+     "liquidations": 0
+    },
+    "30": {
+     "decisions": 268,
+     "ex_ante_positive": 87,
+     "trades": 4,
+     "net_positive_trades": 1,
+     "net_usd_total": -0.4098996214026097,
+     "funding_usd_total": 0.46498171992445586,
+     "basis_pnl_usd_total": 0.004920184085285403,
+     "costs_usd_total": 0.879801525412351,
+     "mean_hold_hours": 332.0,
+     "rebalances": 0,
+     "liquidations": 0
+    },
+    "60": {
+     "decisions": 268,
+     "ex_ante_positive": 173,
+     "trades": 7,
+     "net_positive_trades": 1,
+     "net_usd_total": -1.019933945674336,
+     "funding_usd_total": 0.5115353291993314,
+     "basis_pnl_usd_total": 0.008183394597946961,
+     "costs_usd_total": 1.5396526694716144,
+     "mean_hold_hours": 234.28571428571428,
+     "rebalances": 0,
+     "liquidations": 0
+    }
+   }
+  },
+  {
+   "exchange": "okx",
+   "asset": "SOL",
+   "status": "OK",
+   "errors": [],
+   "coverage_days": {
+    "funding": 89.7,
+    "spot": 90.0,
+    "perp": 90.0,
+    "mark": 90.0
+   },
+   "rows": {
+    "funding": 270,
+    "spot": 2160,
+    "perp": 2160,
+    "mark": 2160
+   },
+   "funding_interval_h": {
+    "inferred_from_history": 8,
+    "metadata": null,
+    "now_endpoint": 8.0,
+    "status": "VERIFIED"
+   },
+   "funding_stats": {
+    "n": 270,
+    "interval_hours": 8,
+    "mean": 2.8230438532997407e-05,
+    "median": 2.74924666262e-05,
+    "min": -0.0001154589978001,
+    "max": 0.0001,
+    "pct_positive": 0.7,
+    "annualized_mean": 0.03091233019363216
+   },
+   "basis_stats": {
+    "n": 2160,
+    "mean_pct": -0.0005738542859876067,
+    "std_pct": 0.00016939255768260938,
+    "min_pct": -0.0012010809728754913,
+    "max_pct": 0.00042422314137227743
+   },
+   "round_trip_cost_pct": 0.0049725402349971495,
+   "leg_fail_expected_cost_pct": 8e-05,
+   "breakeven_periods_at_mean_rate": 178.97491139188085,
+   "costs": {
+    "fee_spot_entrada": {
+     "value": 0.0015,
+     "status": "ASSUMED",
+     "source": "máx(config 0.1000%, ccxt 0.1500%); no verificada por cuenta"
+    },
+    "fee_spot_salida": {
+     "value": 0.0015,
+     "status": "ASSUMED",
+     "source": "máx(config 0.1000%, ccxt 0.1500%); no verificada por cuenta"
+    },
+    "fee_perp_entrada": {
+     "value": 0.0005,
+     "status": "ASSUMED",
+     "source": "máx(config 0.0500%, ccxt 0.0500%); no verificada por cuenta"
+    },
+    "fee_perp_salida": {
+     "value": 0.0005,
+     "status": "ASSUMED",
+     "source": "máx(config 0.0500%, ccxt 0.0500%); no verificada por cuenta"
+    },
+    "spread_spot": {
+     "value": 8.62477899005505e-05,
+     "status": "VERIFIED",
+     "source": "libro actual (entrada + salida)"
+    },
+    "slippage_profundidad_spot": {
+     "value": 0.0,
+     "status": "VERIFIED",
+     "source": "barrido del libro actual para el tamaño"
+    },
+    "spread_perp": {
+     "value": 8.62924450965986e-05,
+     "status": "VERIFIED",
+     "source": "libro actual (entrada + salida)"
+    },
+    "slippage_profundidad_perp": {
+     "value": 0.0,
+     "status": "VERIFIED",
+     "source": "barrido del libro actual para el tamaño"
+    },
+    "slippage_extra": {
+     "value": 0.0008,
+     "status": "ASSUMED",
+     "source": "slippage extra por pata y por operación"
+    },
+    "transferencias": {
+     "value": 0.0,
+     "status": "ASSUMED",
+     "source": "mismo exchange: sin transferencias"
+    }
+   },
+   "book_now": {
+    "spot_mid": 115.945,
+    "perp_mid": 115.88499999999999,
+    "spot_half_spread": 4.312389495027525e-05,
+    "perp_half_spread": 4.31462225482993e-05,
+    "spot_depth_usd_top20": 884391.2390059,
+    "perp_depth_usd_top20": 4045770.5734
+   },
+   "feasibility_100usd": {
+    "notional_per_leg_usd": 45.0,
+    "qty": 0.38809831824062097,
+    "spot_min_qty": 0.01,
+    "spot_min_cost": 0.0,
+    "perp_min_qty": 0.01,
+    "perp_min_cost": 0.0,
+    "feasible": true,
+    "min_notional_per_leg_usd": 1.16,
+    "min_capital_usd": 2.58
+   },
+   "backtest": {
+    "decisions": 268,
+    "ex_ante_positive": 0,
+    "ex_ante_positive_pct": 0.0,
+    "ex_ante_runs": 0,
+    "ex_ante_run_mean_periods": 0.0,
+    "trades": 0,
+    "net_positive_trades": 0,
+    "net_usd_total": 0,
+    "net_pct_of_notional": 0.0,
+    "funding_usd_total": 0,
+    "basis_pnl_usd_total": 0,
+    "costs_usd_total": 0,
+    "rebalances": 0,
+    "liquidations": 0,
+    "mean_hold_hours": 0.0,
+    "min_liq_distance": null,
+    "skipped_no_price": 0,
+    "executable_trades_100usd": 0
+   },
+   "sensitivity_by_horizon_days": {
+    "7": {
+     "decisions": 268,
+     "ex_ante_positive": 0,
+     "trades": 0,
+     "net_positive_trades": 0,
+     "net_usd_total": 0,
+     "funding_usd_total": 0,
+     "basis_pnl_usd_total": 0,
+     "costs_usd_total": 0,
+     "mean_hold_hours": 0.0,
+     "rebalances": 0,
+     "liquidations": 0
+    },
+    "14": {
+     "decisions": 268,
+     "ex_ante_positive": 0,
+     "trades": 0,
+     "net_positive_trades": 0,
+     "net_usd_total": 0,
+     "funding_usd_total": 0,
+     "basis_pnl_usd_total": 0,
+     "costs_usd_total": 0,
+     "mean_hold_hours": 0.0,
+     "rebalances": 0,
+     "liquidations": 0
+    },
+    "30": {
+     "decisions": 268,
+     "ex_ante_positive": 63,
+     "trades": 8,
+     "net_positive_trades": 0,
+     "net_usd_total": -1.5065144514609774,
+     "funding_usd_total": 0.2736156220294897,
+     "basis_pnl_usd_total": 0.03878441110850687,
+     "costs_usd_total": 1.818914484598974,
+     "mean_hold_hours": 109.0,
+     "rebalances": 0,
+     "liquidations": 0
+    },
+    "60": {
+     "decisions": 268,
+     "ex_ante_positive": 124,
+     "trades": 15,
+     "net_positive_trades": 0,
+     "net_usd_total": -3.0637659681514204,
+     "funding_usd_total": 0.34256931655891565,
+     "basis_pnl_usd_total": 0.004129373912740089,
+     "costs_usd_total": 3.4104646586230762,
+     "mean_hold_hours": 90.13333333333334,
+     "rebalances": 0,
+     "liquidations": 0
+    }
+   }
+  }
+ ]
+}

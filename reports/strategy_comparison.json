@@ -1,0 +1,199 @@
+{
+ "kalshi_current": {
+  "strategy": "kalshi_current",
+  "source": "data",
+  "cycles": 14,
+  "cycles_ok": 14,
+  "opportunities": 1728,
+  "net_positive": 0,
+  "executable": 0,
+  "discarded": 1728,
+  "discard_reasons": {
+   "NO_POSITIVE_MARGINAL_EDGE": 1728
+  },
+  "discard_note": "los descartes del prefiltro de kalshi_current no se registran (no se modificó su código); solo se cuentan los evaluados",
+  "duration_cycles": {
+   "n": 0,
+   "mean": null,
+   "median": null,
+   "max": null
+  },
+  "duration_minutes": {
+   "n": 0,
+   "mean": null,
+   "median": null,
+   "max": null
+  },
+  "capital_per_bundle": {
+   "n": 1728,
+   "mean": 1.0145920138888889,
+   "median": 1.02,
+   "max": 1.02
+  },
+  "fees_per_opportunity": {
+   "n": 1728,
+   "mean": 0.05534143518518519,
+   "median": 0.06,
+   "max": 0.17
+  },
+  "size_available": {
+   "n": 1728,
+   "mean": 0.0,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "opportunities_per_cycle": 123.42857142857143,
+  "cash": 100.0,
+  "locked": 0,
+  "open_positions": 0,
+  "closed_positions": 0,
+  "pnl_realized": 0,
+  "paper_fees": 0,
+  "paper_slippage": 0
+ },
+ "buy_all_no": {
+  "strategy": "buy_all_no",
+  "source": "data\\strategies\\buy_all_no",
+  "cycles": 0,
+  "cycles_ok": 0,
+  "opportunities": 0,
+  "net_positive": 0,
+  "executable": 0,
+  "discarded": 0,
+  "discard_reasons": {},
+  "duration_cycles": {
+   "n": 0,
+   "mean": null,
+   "median": null,
+   "max": null
+  },
+  "duration_minutes": {
+   "n": 0,
+   "mean": null,
+   "median": null,
+   "max": null
+  },
+  "capital_per_bundle": {
+   "n": 0,
+   "mean": null,
+   "median": null,
+   "max": null
+  },
+  "fees_per_opportunity": {
+   "n": 0,
+   "mean": null,
+   "median": null,
+   "max": null
+  },
+  "size_available": {
+   "n": 0,
+   "mean": null,
+   "median": null,
+   "max": null
+  },
+  "opportunities_per_cycle": 0.0,
+  "cash": 100.0,
+  "locked": 0,
+  "open_positions": 0,
+  "closed_positions": 0,
+  "pnl_realized": 0,
+  "paper_fees": 0,
+  "paper_slippage": 0
+ },
+ "strike_inconsistency": {
+  "strategy": "strike_inconsistency",
+  "source": "data\\strategies\\strike_inconsistency",
+  "cycles": 0,
+  "cycles_ok": 0,
+  "opportunities": 0,
+  "net_positive": 0,
+  "executable": 0,
+  "discarded": 0,
+  "discard_reasons": {},
+  "duration_cycles": {
+   "n": 0,
+   "mean": null,
+   "median": null,
+   "max": null
+  },
+  "duration_minutes": {
+   "n": 0,
+   "mean": null,
+   "median": null,
+   "max": null
+  },
+  "capital_per_bundle": {
+   "n": 0,
+   "mean": null,
+   "median": null,
+   "max": null
+  },
+  "fees_per_opportunity": {
+   "n": 0,
+   "mean": null,
+   "median": null,
+   "max": null
+  },
+  "size_available": {
+   "n": 0,
+   "mean": null,
+   "median": null,
+   "max": null
+  },
+  "opportunities_per_cycle": 0.0,
+  "cash": 100.0,
+  "locked": 0,
+  "open_positions": 0,
+  "closed_positions": 0,
+  "pnl_realized": 0,
+  "paper_fees": 0,
+  "paper_slippage": 0
+ },
+ "funding_basis": {
+  "strategy": "funding_basis",
+  "source": "reports\\funding_basis",
+  "phase0_generated_at": "2026-10-07T22:40:06+00:00",
+  "phase0_pairs_ok": 9,
+  "phase0_decisions": 2412,
+  "cycles": 45,
+  "cycles_note": "snapshots en vivo (par x tick)",
+  "opportunities": 0,
+  "net_positive": 0,
+  "executable": 0,
+  "discarded": 2412,
+  "discard_reasons": {
+   "COSTO_IDA_Y_VUELTA_SUPERA_FUNDING_ESPERADO": 2412,
+   "INFEASIBLE_MIN_SIZE_100USD_PAIRS": 2
+  },
+  "duration_minutes": {
+   "mean": null,
+   "median": null,
+   "n_closed": 0
+  },
+  "capital_per_bundle": {
+   "n": 9,
+   "mean": 59.492222222222225,
+   "median": 25.78,
+   "max": 185.1
+  },
+  "fees_per_opportunity": {
+   "n": 9,
+   "mean": 0.004260768259025944,
+   "median": 0.00400778447927327,
+   "max": 0.0049725402349971495
+  },
+  "fees_note": "costo ida+vuelta como fracción del nocional",
+  "size_available": {
+   "n": null
+  },
+  "cash": 100.0,
+  "locked": 0,
+  "open_positions": 0,
+  "closed_positions": 0,
+  "pnl_realized": 0.0,
+  "paper_fees": 0,
+  "paper_slippage": null,
+  "phase0_net_usd_total": 0,
+  "live_errors": 0
+ }
+}
