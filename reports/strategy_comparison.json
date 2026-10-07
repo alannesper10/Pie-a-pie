@@ -2,14 +2,14 @@
  "kalshi_current": {
   "strategy": "kalshi_current",
   "source": "data",
-  "cycles": 14,
-  "cycles_ok": 14,
-  "opportunities": 1728,
+  "cycles": 17,
+  "cycles_ok": 17,
+  "opportunities": 2100,
   "net_positive": 0,
   "executable": 0,
-  "discarded": 1728,
+  "discarded": 2100,
   "discard_reasons": {
-   "NO_POSITIVE_MARGINAL_EDGE": 1728
+   "NO_POSITIVE_MARGINAL_EDGE": 2100
   },
   "discard_note": "los descartes del prefiltro de kalshi_current no se registran (no se modificó su código); solo se cuentan los evaluados",
   "duration_cycles": {
@@ -25,24 +25,24 @@
    "max": null
   },
   "capital_per_bundle": {
-   "n": 1728,
-   "mean": 1.0145920138888889,
+   "n": 2100,
+   "mean": 1.014654761904762,
    "median": 1.02,
    "max": 1.02
   },
   "fees_per_opportunity": {
-   "n": 1728,
-   "mean": 0.05534143518518519,
+   "n": 2100,
+   "mean": 0.05531904761904762,
    "median": 0.06,
    "max": 0.17
   },
   "size_available": {
-   "n": 1728,
+   "n": 2100,
    "mean": 0.0,
    "median": 0.0,
    "max": 0.0
   },
-  "opportunities_per_cycle": 123.42857142857143,
+  "opportunities_per_cycle": 123.52941176470588,
   "cash": 100.0,
   "locked": 0,
   "open_positions": 0,
@@ -53,14 +53,22 @@
  },
  "buy_all_no": {
   "strategy": "buy_all_no",
-  "source": "data\\strategies\\buy_all_no",
-  "cycles": 0,
-  "cycles_ok": 0,
-  "opportunities": 0,
+  "source": "data/strategies/buy_all_no",
+  "cycles": 1,
+  "cycles_ok": 1,
+  "opportunities": 149,
   "net_positive": 0,
   "executable": 0,
-  "discarded": 0,
-  "discard_reasons": {},
+  "discarded": 13723,
+  "discard_reasons": {
+   "NOT_MUTUALLY_EXCLUSIVE": 8449,
+   "LOW_VOLUME": 3802,
+   "PRELIM_GROSS_TOO_LOW": 729,
+   "OVER_CANDIDATE_CAP": 460,
+   "NO_POSITIVE_MARGINAL_EDGE": 150,
+   "LESS_THAN_2_LEGS_WITH_BID": 120,
+   "LESS_THAN_2_OPEN_LEGS": 13
+  },
   "duration_cycles": {
    "n": 0,
    "mean": null,
@@ -74,24 +82,24 @@
    "max": null
   },
   "capital_per_bundle": {
-   "n": 0,
-   "mean": null,
-   "median": null,
-   "max": null
+   "n": 149,
+   "mean": 2.5733825503355705,
+   "median": 1.042,
+   "max": 15.176
   },
   "fees_per_opportunity": {
-   "n": 0,
-   "mean": null,
-   "median": null,
-   "max": null
+   "n": 149,
+   "mean": 0.04912751677852349,
+   "median": 0.04,
+   "max": 0.17
   },
   "size_available": {
-   "n": 0,
-   "mean": null,
-   "median": null,
-   "max": null
+   "n": 149,
+   "mean": 0.0,
+   "median": 0.0,
+   "max": 0.0
   },
-  "opportunities_per_cycle": 0.0,
+  "opportunities_per_cycle": 149.0,
   "cash": 100.0,
   "locked": 0,
   "open_positions": 0,
@@ -102,14 +110,24 @@
  },
  "strike_inconsistency": {
   "strategy": "strike_inconsistency",
-  "source": "data\\strategies\\strike_inconsistency",
-  "cycles": 0,
-  "cycles_ok": 0,
-  "opportunities": 0,
+  "source": "data/strategies/strike_inconsistency",
+  "cycles": 1,
+  "cycles_ok": 1,
+  "opportunities": 150,
   "net_positive": 0,
   "executable": 0,
-  "discarded": 0,
-  "discard_reasons": {},
+  "discarded": 1090740,
+  "discard_reasons": {
+   "NO_QUOTE": 848904,
+   "LOW_VOLUME": 204993,
+   "PRELIM_GROSS_TOO_LOW": 30265,
+   "LEG_NOT_TRADABLE": 5755,
+   "OVER_CANDIDATE_CAP": 338,
+   "GROUPING_MISMATCH": 333,
+   "NO_POSITIVE_MARGINAL_EDGE": 149,
+   "AMBIGUOUS_GROUP": 2,
+   "INSUFFICIENT_DEPTH": 1
+  },
   "duration_cycles": {
    "n": 0,
    "mean": null,
@@ -123,24 +141,24 @@
    "max": null
   },
   "capital_per_bundle": {
-   "n": 0,
-   "mean": null,
-   "median": null,
-   "max": null
+   "n": 150,
+   "mean": 1.0313866666666667,
+   "median": 1.032,
+   "max": 1.052
   },
   "fees_per_opportunity": {
-   "n": 0,
-   "mean": null,
-   "median": null,
-   "max": null
+   "n": 150,
+   "mean": 0.021333333333333333,
+   "median": 0.02,
+   "max": 0.04
   },
   "size_available": {
-   "n": 0,
-   "mean": null,
-   "median": null,
-   "max": null
+   "n": 150,
+   "mean": 0.0008666666666666667,
+   "median": 0.0,
+   "max": 0.13
   },
-  "opportunities_per_cycle": 0.0,
+  "opportunities_per_cycle": 150.0,
   "cash": 100.0,
   "locked": 0,
   "open_positions": 0,
@@ -151,7 +169,7 @@
  },
  "funding_basis": {
   "strategy": "funding_basis",
-  "source": "reports\\funding_basis",
+  "source": "reports/funding_basis",
   "phase0_generated_at": "2026-10-07T22:40:06+00:00",
   "phase0_pairs_ok": 9,
   "phase0_decisions": 2412,
