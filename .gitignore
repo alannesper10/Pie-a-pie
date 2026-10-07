@@ -1,0 +1,8 @@
+__pycache__/
+.pytest_cache/
+.venv/
+.env
+.env.*
+*.pyc
+# data/*.csv y data/*.json se versionan: son el estado del modo paper.
+data/*.tmp
