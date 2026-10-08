@@ -2,16 +2,16 @@
 
 | Métrica | kalshi_current | buy_all_no | strike_inconsistency | funding_basis |
 |---|---|---|---|---|
-| Ciclos (ok) | 54 (54) | 38 (38) | 38 (38) | 45 |
-| Oportunidades | 5974 | 5692 | 5632 | 0 |
+| Ciclos (ok) | 55 (55) | 39 (39) | 39 (39) | 45 |
+| Oportunidades | 6094 | 5841 | 5780 | 0 |
 | Net-positive | 0 | 0 | 0 | 0 |
 | Ejecutables | 0 | 0 | 0 | 0 |
-| Descartadas | 5974 | 532602 | 38514973 | 2412 |
+| Descartadas | 6094 | 546725 | 39570341 | 2412 |
 | Duración media (min) | n/d | n/d | n/d | n/d |
-| Capital por paquete (media) | 1.015 | 2.373 | 1.034 | 59.49 |
-| Fees por oportunidad (media) | 0.05437 | 0.04713 | 0.02247 | 0.004261 |
+| Capital por paquete (media) | 1.015 | 2.362 | 1.034 | 59.49 |
+| Fees por oportunidad (media) | 0.05435 | 0.04702 | 0.02247 | 0.004261 |
 | Tamaño disponible (máx) | 0 | 0 | 1 | n/d |
-| Oport. por ciclo | 110.6 | 149.8 | 148.2 | n/d |
+| Oport. por ciclo | 110.8 | 149.8 | 148.2 | n/d |
 | Caja paper US$ | 100 | 100 | 100 | 100 |
 | Capital bloqueado US$ | 0 | 0 | 0 | 0 |
 | Fees paper US$ | 0 | 0 | 0 | 0 |
@@ -19,8 +19,8 @@
 | P&L realizado US$ | 0 | 0 | 0 | 0 |
 
 Motivos de descarte (top 5 por estrategia):
-- kalshi_current: NO_POSITIVE_MARGINAL_EDGE=5974
-- buy_all_no: NOT_MUTUALLY_EXCLUSIVE=323406, LOW_VOLUME=151299, PRELIM_GROSS_TOO_LOW=30092, OVER_CANDIDATE_CAP=16503, NO_POSITIVE_MARGINAL_EDGE=5698
-- strike_inconsistency: NO_QUOTE=29776403, LOW_VOLUME=7317673, PRELIM_GROSS_TOO_LOW=1122032, LEG_NOT_TRADABLE=269455, GROUPING_MISMATCH=12470
+- kalshi_current: NO_POSITIVE_MARGINAL_EDGE=6094
+- buy_all_no: NOT_MUTUALLY_EXCLUSIVE=332107, LOW_VOLUME=155240, PRELIM_GROSS_TOO_LOW=30851, OVER_CANDIDATE_CAP=16955, NO_POSITIVE_MARGINAL_EDGE=5847
+- strike_inconsistency: NO_QUOTE=30604280, LOW_VOLUME=7508225, PRELIM_GROSS_TOO_LOW=1152568, LEG_NOT_TRADABLE=275136, GROUPING_MISMATCH=12795
 - funding_basis: COSTO_IDA_Y_VUELTA_SUPERA_FUNDING_ESPERADO=2412, INFEASIBLE_MIN_SIZE_100USD_PAIRS=2
 - nota kalshi_current: los descartes del prefiltro de kalshi_current no se registran (no se modificó su código); solo se cuentan los evaluados
