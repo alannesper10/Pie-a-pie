@@ -2,16 +2,16 @@
 
 | Métrica | kalshi_current | buy_all_no | strike_inconsistency | funding_basis |
 |---|---|---|---|---|
-| Ciclos (ok) | 31 (31) | 15 (15) | 15 (15) | 45 |
-| Oportunidades | 3782 | 2246 | 2215 | 0 |
+| Ciclos (ok) | 32 (32) | 16 (16) | 16 (16) | 45 |
+| Oportunidades | 3895 | 2395 | 2364 | 0 |
 | Net-positive | 0 | 0 | 0 | 0 |
 | Ejecutables | 0 | 0 | 0 | 0 |
-| Descartadas | 3782 | 209750 | 16359813 | 2412 |
+| Descartadas | 3895 | 223789 | 17398481 | 2412 |
 | Duración media (min) | n/d | n/d | n/d | n/d |
-| Capital por paquete (media) | 1.015 | 2.578 | 1.032 | 59.49 |
-| Fees por oportunidad (media) | 0.05466 | 0.04938 | 0.02155 | 0.004261 |
+| Capital por paquete (media) | 1.015 | 2.574 | 1.032 | 59.49 |
+| Fees por oportunidad (media) | 0.05464 | 0.04934 | 0.02166 | 0.004261 |
 | Tamaño disponible (máx) | 0 | 0 | 1 | n/d |
-| Oport. por ciclo | 122 | 149.7 | 147.7 | n/d |
+| Oport. por ciclo | 121.7 | 149.7 | 147.8 | n/d |
 | Caja paper US$ | 100 | 100 | 100 | 100 |
 | Capital bloqueado US$ | 0 | 0 | 0 | 0 |
 | Fees paper US$ | 0 | 0 | 0 | 0 |
@@ -19,8 +19,8 @@
 | P&L realizado US$ | 0 | 0 | 0 | 0 |
 
 Motivos de descarte (top 5 por estrategia):
-- kalshi_current: NO_POSITIVE_MARGINAL_EDGE=3782
-- buy_all_no: NOT_MUTUALLY_EXCLUSIVE=127878, LOW_VOLUME=58998, PRELIM_GROSS_TOO_LOW=11099, OVER_CANDIDATE_CAP=7180, NO_POSITIVE_MARGINAL_EDGE=2250
-- strike_inconsistency: NO_QUOTE=12739764, LOW_VOLUME=3053937, PRELIM_GROSS_TOO_LOW=459106, LEG_NOT_TRADABLE=93889, OVER_CANDIDATE_CAP=5842
+- kalshi_current: NO_POSITIVE_MARGINAL_EDGE=3895
+- buy_all_no: NOT_MUTUALLY_EXCLUSIVE=136329, LOW_VOLUME=63043, PRELIM_GROSS_TOO_LOW=11849, OVER_CANDIDATE_CAP=7653, NO_POSITIVE_MARGINAL_EDGE=2399
+- strike_inconsistency: NO_QUOTE=13543391, LOW_VOLUME=3253286, PRELIM_GROSS_TOO_LOW=488511, LEG_NOT_TRADABLE=99415, OVER_CANDIDATE_CAP=6126
 - funding_basis: COSTO_IDA_Y_VUELTA_SUPERA_FUNDING_ESPERADO=2412, INFEASIBLE_MIN_SIZE_100USD_PAIRS=2
 - nota kalshi_current: los descartes del prefiltro de kalshi_current no se registran (no se modificó su código); solo se cuentan los evaluados
