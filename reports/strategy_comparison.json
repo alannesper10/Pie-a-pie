@@ -2,14 +2,14 @@
  "kalshi_current": {
   "strategy": "kalshi_current",
   "source": "data",
-  "cycles": 116,
-  "cycles_ok": 116,
-  "opportunities": 15623,
+  "cycles": 117,
+  "cycles_ok": 117,
+  "opportunities": 15816,
   "net_positive": 0,
   "executable": 0,
-  "discarded": 15623,
+  "discarded": 15816,
   "discard_reasons": {
-   "NO_POSITIVE_MARGINAL_EDGE": 15623
+   "NO_POSITIVE_MARGINAL_EDGE": 15816
   },
   "discard_note": "los descartes del prefiltro de kalshi_current no se registran (no se modificó su código); solo se cuentan los evaluados",
   "duration_cycles": {
@@ -25,24 +25,24 @@
    "max": null
   },
   "capital_per_bundle": {
-   "n": 15623,
-   "mean": 1.0142559047558088,
+   "n": 15816,
+   "mean": 1.0142371648963076,
    "median": 1.02,
    "max": 1.025
   },
   "fees_per_opportunity": {
-   "n": 15623,
-   "mean": 0.05413492927094668,
+   "n": 15816,
+   "mean": 0.05414516944865958,
    "median": 0.06,
    "max": 0.18
   },
   "size_available": {
-   "n": 15623,
+   "n": 15816,
    "mean": 0.0,
    "median": 0.0,
    "max": 0.0
   },
-  "opportunities_per_cycle": 134.68103448275863,
+  "opportunities_per_cycle": 135.17948717948718,
   "cash": 100.0,
   "locked": 0,
   "open_positions": 0,
@@ -54,20 +54,20 @@
  "buy_all_no": {
   "strategy": "buy_all_no",
   "source": "data/strategies/buy_all_no",
-  "cycles": 100,
-  "cycles_ok": 100,
-  "opportunities": 14974,
+  "cycles": 101,
+  "cycles_ok": 101,
+  "opportunities": 15122,
   "net_positive": 0,
   "executable": 0,
-  "discarded": 1470683,
+  "discarded": 1486258,
   "discard_reasons": {
-   "NOT_MUTUALLY_EXCLUSIVE": 906637,
-   "LOW_VOLUME": 406406,
-   "PRELIM_GROSS_TOO_LOW": 79612,
-   "OVER_CANDIDATE_CAP": 48195,
-   "NO_POSITIVE_MARGINAL_EDGE": 14995,
-   "LESS_THAN_2_LEGS_WITH_BID": 13448,
-   "LESS_THAN_2_OPEN_LEGS": 1362,
+   "NOT_MUTUALLY_EXCLUSIVE": 916455,
+   "LOW_VOLUME": 410534,
+   "PRELIM_GROSS_TOO_LOW": 80443,
+   "OVER_CANDIDATE_CAP": 48713,
+   "NO_POSITIVE_MARGINAL_EDGE": 15145,
+   "LESS_THAN_2_LEGS_WITH_BID": 13565,
+   "LESS_THAN_2_OPEN_LEGS": 1375,
    "ALREADY_DETERMINED": 23,
    "LESS_THAN_2_LEGS_IN_BOOK": 4,
    "TIMEOUT": 1
@@ -85,24 +85,24 @@
    "max": null
   },
   "capital_per_bundle": {
-   "n": 14974,
-   "mean": 2.1881475223721116,
+   "n": 15122,
+   "mean": 2.1881704139664064,
    "median": 1.042,
    "max": 16.147
   },
   "fees_per_opportunity": {
-   "n": 14974,
-   "mean": 0.045277147054895155,
+   "n": 15122,
+   "mean": 0.045285015209628354,
    "median": 0.04,
    "max": 0.18
   },
   "size_available": {
-   "n": 14974,
+   "n": 15122,
    "mean": 0.0,
    "median": 0.0,
    "max": 0.0
   },
-  "opportunities_per_cycle": 149.74,
+  "opportunities_per_cycle": 149.72277227722773,
   "cash": 100.0,
   "locked": 0,
   "open_positions": 0,
@@ -114,22 +114,22 @@
  "strike_inconsistency": {
   "strategy": "strike_inconsistency",
   "source": "data/strategies/strike_inconsistency",
-  "cycles": 100,
-  "cycles_ok": 100,
-  "opportunities": 14804,
+  "cycles": 101,
+  "cycles_ok": 101,
+  "opportunities": 14950,
   "net_positive": 0,
   "executable": 0,
-  "discarded": 98668720,
+  "discarded": 99650254,
   "discard_reasons": {
-   "NO_QUOTE": 74535331,
-   "LOW_VOLUME": 19844075,
-   "PRELIM_GROSS_TOO_LOW": 3035503,
-   "LEG_NOT_TRADABLE": 1173996,
-   "GROUPING_MISMATCH": 32871,
-   "OVER_CANDIDATE_CAP": 31744,
-   "NO_POSITIVE_MARGINAL_EDGE": 14922,
-   "AMBIGUOUS_GROUP": 200,
-   "EMPTY_BOOK_ON_SOME_LEG": 58,
+   "NO_QUOTE": 75285547,
+   "LOW_VOLUME": 20034883,
+   "PRELIM_GROSS_TOO_LOW": 3067512,
+   "LEG_NOT_TRADABLE": 1181730,
+   "GROUPING_MISMATCH": 33196,
+   "OVER_CANDIDATE_CAP": 32034,
+   "NO_POSITIVE_MARGINAL_EDGE": 15068,
+   "AMBIGUOUS_GROUP": 202,
+   "EMPTY_BOOK_ON_SOME_LEG": 62,
    "INSUFFICIENT_DEPTH": 17,
    "INSUFFICIENT_NET_EDGE": 3
   },
@@ -146,24 +146,24 @@
    "max": null
   },
   "capital_per_bundle": {
-   "n": 14804,
-   "mean": 1.0326533369359632,
+   "n": 14950,
+   "mean": 1.0326529765886288,
    "median": 1.032,
    "max": 1.062
   },
   "fees_per_opportunity": {
-   "n": 14804,
-   "mean": 0.02189070521480681,
+   "n": 14950,
+   "mean": 0.021891638795986622,
    "median": 0.02,
    "max": 0.04
   },
   "size_available": {
-   "n": 14804,
-   "mean": 0.0003357200756552283,
+   "n": 14950,
+   "mean": 0.00033244147157190636,
    "median": 0.0,
    "max": 1.0
   },
-  "opportunities_per_cycle": 148.04,
+  "opportunities_per_cycle": 148.01980198019803,
   "cash": 100.0,
   "locked": 0,
   "open_positions": 0,

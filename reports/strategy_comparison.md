@@ -2,16 +2,16 @@
 
 | Métrica | kalshi_current | buy_all_no | strike_inconsistency | funding_basis |
 |---|---|---|---|---|
-| Ciclos (ok) | 116 (116) | 100 (100) | 100 (100) | 45 |
-| Oportunidades | 15623 | 14974 | 14804 | 0 |
+| Ciclos (ok) | 117 (117) | 101 (101) | 101 (101) | 45 |
+| Oportunidades | 15816 | 15122 | 14950 | 0 |
 | Net-positive | 0 | 0 | 0 | 0 |
 | Ejecutables | 0 | 0 | 0 | 0 |
-| Descartadas | 15623 | 1470683 | 98668720 | 2412 |
+| Descartadas | 15816 | 1486258 | 99650254 | 2412 |
 | Duración media (min) | n/d | n/d | n/d | n/d |
 | Capital por paquete (media) | 1.014 | 2.188 | 1.033 | 59.49 |
-| Fees por oportunidad (media) | 0.05413 | 0.04528 | 0.02189 | 0.004261 |
+| Fees por oportunidad (media) | 0.05415 | 0.04529 | 0.02189 | 0.004261 |
 | Tamaño disponible (máx) | 0 | 0 | 1 | n/d |
-| Oport. por ciclo | 134.7 | 149.7 | 148 | n/d |
+| Oport. por ciclo | 135.2 | 149.7 | 148 | n/d |
 | Caja paper US$ | 100 | 100 | 100 | 100 |
 | Capital bloqueado US$ | 0 | 0 | 0 | 0 |
 | Fees paper US$ | 0 | 0 | 0 | 0 |
@@ -19,8 +19,8 @@
 | P&L realizado US$ | 0 | 0 | 0 | 0 |
 
 Motivos de descarte (top 5 por estrategia):
-- kalshi_current: NO_POSITIVE_MARGINAL_EDGE=15623
-- buy_all_no: NOT_MUTUALLY_EXCLUSIVE=906637, LOW_VOLUME=406406, PRELIM_GROSS_TOO_LOW=79612, OVER_CANDIDATE_CAP=48195, NO_POSITIVE_MARGINAL_EDGE=14995
-- strike_inconsistency: NO_QUOTE=74535331, LOW_VOLUME=19844075, PRELIM_GROSS_TOO_LOW=3035503, LEG_NOT_TRADABLE=1173996, GROUPING_MISMATCH=32871
+- kalshi_current: NO_POSITIVE_MARGINAL_EDGE=15816
+- buy_all_no: NOT_MUTUALLY_EXCLUSIVE=916455, LOW_VOLUME=410534, PRELIM_GROSS_TOO_LOW=80443, OVER_CANDIDATE_CAP=48713, NO_POSITIVE_MARGINAL_EDGE=15145
+- strike_inconsistency: NO_QUOTE=75285547, LOW_VOLUME=20034883, PRELIM_GROSS_TOO_LOW=3067512, LEG_NOT_TRADABLE=1181730, GROUPING_MISMATCH=33196
 - funding_basis: COSTO_IDA_Y_VUELTA_SUPERA_FUNDING_ESPERADO=2412, INFEASIBLE_MIN_SIZE_100USD_PAIRS=2
 - nota kalshi_current: los descartes del prefiltro de kalshi_current no se registran (no se modificó su código); solo se cuentan los evaluados
