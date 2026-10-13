@@ -1,8 +1,10 @@
 """Arbitraje spot entre exchanges: comprar en A (ask) y vender en B (bid).
 
 Supuesto de inventario: hay USDT en A y el activo en B de antemano (no se
-transfiere por operación). El rebalanceo se cobra amortizado (ASSUMED). El
-capital comprometido es 2x el nocional (quote en A + activo en B).
+transfiere por operación). Cada par de exchanges lleva su inventario: cada
+operación consume nocional del inventario prepuesto (capital / 2 por lado) y
+la transferencia de rebalanceo (ASSUMED) se cobra SOLO en la operación que lo
+agota, no prorrateada en todas. El capital comprometido es 2x el nocional.
 """
 
 from datetime import datetime
@@ -10,7 +12,7 @@ from datetime import datetime
 from ..core import (
     ACCEPTED, ASSUMED, REJECTED, VERIFIED, Cost, Opportunity, make_rng, walk,
 )
-from ..fees import fee_cost, taker_fee, transfer_cost
+from ..fees import fee_cost, rebalance_cost, taker_fee
 from .base import Module
 
 SYMBOLS = ("BTC/USDT", "ETH/USDT", "SOL/USDT")
@@ -37,6 +39,11 @@ class CrossExchange(Module):
     def __init__(self, symbols=SYMBOLS):
         self.symbols = symbols
         self.checked = 0
+        self.inventory_used = {}     # (símbolo, A, B) -> nocional ya usado desde el último rebalanceo
+        self.rebalances = 0
+
+    def _needs_rebalance(self, key, notional, capacity):
+        return self.inventory_used.get(key, 0.0) + notional > capacity + 1e-9
 
     def evaluate(self, snap, ctx):
         out = []
@@ -70,7 +77,8 @@ class CrossExchange(Module):
                       "fetched_a": ba.get("fetched_at"), "fetched_b": bb.get("fetched_at"),
                       "fetch_ms": [ba.get("fetch_ms"), bb.get("fetch_ms")]},
             assumptions=["inventario ubicado de antemano en ambos exchanges",
-                         "rebalanceo amortizado", "comisiones taker de nivel base"])
+                         "rebalanceo solo cuando el inventario se agota",
+                         "comisiones taker de nivel base"])
 
         skew = _ms_between(ba.get("fetched_at"), bb.get("fetched_at"))
         o.observed["book_skew_ms"] = skew
@@ -114,8 +122,7 @@ class CrossExchange(Module):
             o.size, o.capital_usd = q, 2 * q * asks[0][0]
             o.gross_usd = q * (bids[0][0] - asks[0][0])
             o.costs = {"fee_compra_" + a: fee_cost(q * asks[0][0], a, ma.get("taker_ref")),
-                       "fee_venta_" + b: fee_cost(q * bids[0][0], b, mb.get("taker_ref")),
-                       "rebalanceo": transfer_cost(base)}
+                       "fee_venta_" + b: fee_cost(q * bids[0][0], b, mb.get("taker_ref"))}
             return o
         _, cost_buy, fills_a = walk(asks, qty)
         _, rev_sell, fills_b = walk(bids, qty)
@@ -124,8 +131,12 @@ class CrossExchange(Module):
         o.capital_usd = 2 * cost_buy
         o.costs = {"fee_compra_" + a: fee_cost(cost_buy, a, ma.get("taker_ref")),
                    "fee_venta_" + b: fee_cost(rev_sell, b, mb.get("taker_ref")),
-                   "rebalanceo": transfer_cost(base),
                    "profundidad": Cost(0.0, VERIFIED, "incluida: precio promedio barrido")}
+        inv_key = (sym, a, b)
+        if self._needs_rebalance(inv_key, cost_buy, cap_notional):
+            o.costs["rebalanceo"] = rebalance_cost(base)
+        o.observed["inventory_used_before"] = self.inventory_used.get(inv_key, 0.0)
+        o.observed["inventory_capacity"] = cap_notional
         o.observed["limit_buy"] = fills_a[-1][0]
         o.observed["limit_sell"] = fills_b[-1][0]
         for m, v in ((ma, a), (mb, b)):
@@ -175,8 +186,15 @@ class CrossExchange(Module):
         avg_b = cb / qb if qb else 0.0
         avg_s = rs / qs if qs else 0.0
         fees = cb * fa + rs * fb
-        net = matched * (avg_s - avg_b) - fees - unwind - (
-            transfer_cost(sym.split("/")[0]).usd if matched > 0 else 0.0)
+        inv_key, rebal = (sym, a, b), 0.0
+        if matched > 0:
+            notional = matched * avg_b
+            if self._needs_rebalance(inv_key, notional, o.observed["inventory_capacity"]):
+                rebal = rebalance_cost(sym.split("/")[0]).usd
+                self.inventory_used[inv_key] = 0.0
+                self.rebalances += 1
+            self.inventory_used[inv_key] = self.inventory_used.get(inv_key, 0.0) + notional
+        net = matched * (avg_s - avg_b) - fees - unwind - rebal
         ctx.ledger.commit(o.capital_usd)
         ctx.ledger.release(o.capital_usd, net, {"key": o.key, "tick": snap.tick})
         status = ("DISAPPEARED" if qb == 0 and qs == 0 else
@@ -184,7 +202,7 @@ class CrossExchange(Module):
                   "PARTIAL" if matched < o.size - 1e-12 else "FILLED")
         o.stage = "SIMULATED"
         o.sim = {"status": status, "filled_buy": qb, "filled_sell": qs, "matched": matched,
-                 "fees_usd": fees, "unwind_usd": unwind, "net_usd": net,
+                 "fees_usd": fees, "unwind_usd": unwind, "rebalance_usd": rebal, "net_usd": net,
                  "net_pct_capital": net / o.capital_usd if o.capital_usd else 0.0,
                  "latency_ms": snap.latency_ms}
         o.decision = ACCEPTED if matched > 0 else REJECTED

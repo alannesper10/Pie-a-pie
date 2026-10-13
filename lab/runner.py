@@ -14,8 +14,9 @@ from .sources import CRYPTO_SYMBOLS, MM_MARKETS, Snapshot, now_iso
 
 log = logging.getLogger("lab")
 
-EXEC_ORDER = ("cross_exchange", "triangular", "polymarket_buy_all_no",
-              "prediction_cross_venue", "liquidity_provision", "basis_funding")
+EXEC_ORDER = ("cross_exchange", "triangular", "cex_dex", "cash_and_carry", "calendar_spread",
+              "polymarket_buy_all_no", "prediction_cross_venue", "liquidity_provision",
+              "basis_funding")
 
 
 def fetch_kalshi_quotes(client, tickers):
@@ -36,7 +37,7 @@ def fetch_kalshi_quotes(client, tickers):
 
 def build_snapshot(tick, crypto=None, polymarket=None, latency_ms=500.0, need_trades=True,
                    need_polymarket=True, sleep=time.sleep, markets_cache=None,
-                   pairs=None, kalshi_client=None):
+                   pairs=None, kalshi_client=None, dex=None, futures=None):
     snap = Snapshot(tick=tick, ts=now_iso(), latency_ms=latency_ms)
     if crypto is not None:
         snap.errors.extend(crypto.init_errors)
@@ -66,8 +67,31 @@ def build_snapshot(tick, crypto=None, polymarket=None, latency_ms=500.0, need_tr
     if pairs and kalshi_client is not None:
         snap.kalshi, errs = fetch_kalshi_quotes(kalshi_client, [p["kalshi_ticker"] for p in pairs])
         snap.errors.extend(errs)
+    sol_usd = None
+    if dex is not None:
+        ref = snap.books.get("binance|SOL/USDC") or snap.books.get("okx|SOL/USDC")
+        if ref and ref.get("bids") and ref.get("asks"):
+            sol_usd = (ref["bids"][0][0] + ref["asks"][0][0]) / 2
+            snap.dex["sol_usd"] = sol_usd
+            snap.dex["quotes"], errs = dex.quotes_for(sol_usd)
+            snap.errors.extend(errs)
+            try:
+                snap.dex["priority_fee"] = dex.priority_fee()
+            except Exception as e:  # noqa: BLE001
+                snap.errors.append({"venue": "solana_rpc", "what": "priority_fee", "error": str(e)[:120]})
+        else:
+            snap.errors.append({"venue": "jupiter", "what": "sol_usd", "error": "NO_DATA: sin libro SOL/USDC"})
+    if futures is not None:
+        snap.futures["books"], snap.futures["meta"], errs = futures.fetch()
+        snap.errors.extend(errs)
     # Latencia: los libros de ejecución se piden DESPUÉS de esperar.
     sleep(latency_ms / 1000)
+    if dex is not None and sol_usd:
+        snap.dex["quotes_after"], errs = dex.quotes_for(sol_usd)
+        snap.errors.extend({**e, "phase": "after_latency"} for e in errs)
+    if futures is not None:
+        snap.futures["books_after"], _, errs = futures.fetch(meta_only=False, refresh_meta=False)
+        snap.errors.extend({**e, "phase": "after_latency"} for e in errs)
     if crypto is not None:
         snap.books_after, errs = crypto.fetch_books(CRYPTO_SYMBOLS)
         snap.errors.extend({**e, "phase": "after_latency"} for e in errs)

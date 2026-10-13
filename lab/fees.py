@@ -47,6 +47,27 @@ def transfer_cost(asset):
                 f"amortizado en {TRADES_PER_REBALANCE} operaciones")
 
 
+# Futuros con vencimiento (ASSUMED, tarifas públicas de nivel base; la de
+# liquidación/entrega se toma conservadora para todos los venues).
+FUTURES_TAKER = {"binance": 0.0005, "bybit": 0.00055, "deribit": 0.0005, "okx": 0.0005}
+SETTLEMENT_FEE = 0.0005
+
+
+def futures_taker_fee(venue, ccxt_ref=None):
+    base = FUTURES_TAKER.get(venue, 0.001)
+    rate = max(base, float(ccxt_ref)) if ccxt_ref is not None else base
+    return rate, f"máx(tarifa base {base:.4%}, ccxt {ccxt_ref}); no verificada por cuenta"
+
+
+def rebalance_cost(asset, quote="USDT"):
+    """Costo de UN rebalanceo de inventario entre dos exchanges: retirar el
+    activo de A hacia B y el quote de B hacia A (ASSUMED: las APIs de fees de
+    retiro piden claves). Se cobra solo cuando el inventario lo exige."""
+    usd = WITHDRAW_USD.get(asset, 5.0) + WITHDRAW_USD.get(quote, 1.0)
+    return Cost(usd, ASSUMED, f"retiro {asset} ~US${WITHDRAW_USD.get(asset, 5.0)} + "
+                f"{quote} ~US${WITHDRAW_USD.get(quote, 1.0)} (un rebalanceo)")
+
+
 def polymarket_fee(shares, price, fee_schedule):
     """fee = C x rate x p x (1-p) (centro de ayuda de Polymarket, 10/07/2026).
 

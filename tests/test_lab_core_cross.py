@@ -56,6 +56,7 @@ def test_rng_is_reproducible_per_seed():
 def no_rebalance(monkeypatch):
     """Aísla la mecánica de ejecución del costo de rebalanceo supuesto."""
     monkeypatch.setitem(lab.fees.WITHDRAW_USD, "BTC", 0.0)
+    monkeypatch.setitem(lab.fees.WITHDRAW_USD, "USDT", 0.0)
 
 def books(ask_a=100.0, bid_b=101.0, size=1.0, ts_b=TS2, extra=None):
     b = {"binance|BTC/USDT": book([(99.9, 5)], [(ask_a, size)]),
@@ -91,17 +92,28 @@ def test_estimated_positive_counts_all_costs(no_rebalance):
     _, _, _, (o,) = evaluate(books(100.0, 101.0, size=0.2))
     assert o.reason == "ESTIMATED_POSITIVE"
     assert o.size == pytest.approx(0.2) and o.capital_usd == pytest.approx(40)
-    assert set(o.costs) >= {"fee_compra_binance", "fee_venta_okx", "rebalanceo"}
-    assert o.costs["rebalanceo"].status == ASSUMED
+    assert set(o.costs) >= {"fee_compra_binance", "fee_venta_okx"}
+    assert "rebalanceo" not in o.costs           # inventario prepuesto alcanza
     assert o.net_estimated_usd == pytest.approx(0.2 * 1.0 - 0.02 - 0.0202)
 
 
-def test_rebalance_cost_kills_small_capital():
-    # Con US$100 (~US$50 por operación) el retiro de BTC amortizado (US$1 por
-    # operación) supera un 1% de diferencia: no hay neto positivo.
+def test_rebalance_charged_only_when_inventory_runs_out():
+    # Inventario por lado = 25 USD (50% del capital / 2). Cada operación usa 20.
+    m = CrossExchange(symbols=("BTC/USDT",))
+    c = ctx("cross_exchange")
+    b = books(100.0, 101.0, size=0.2)
+    (o1,) = [x for x in m.evaluate(snap(b, tick=0), c) if x.venues == ["binance", "okx"]]
+    m.execute(o1, snap(b, tick=0), c)
+    assert o1.sim["rebalance_usd"] == 0.0        # 1a: entra en el inventario prepuesto
+    (o2,) = [x for x in m.evaluate(snap(b, tick=1), c) if x.venues == ["binance", "okx"]]
+    # 2a: agotaría el inventario -> retiro BTC (10) + USDT (1); con US$100 no compensa
+    assert o2.costs["rebalanceo"].usd == pytest.approx(11.0)
+    assert o2.reason == "NET_NEGATIVE_AFTER_COSTS"
+
+
+def test_first_trade_has_no_transfer_cost():
     _, _, _, (o,) = evaluate(books(100.0, 101.0, size=0.2))
-    assert o.costs["rebalanceo"].usd == pytest.approx(1.0)
-    assert o.reason == "NET_NEGATIVE_AFTER_COSTS"
+    assert "rebalanceo" not in o.costs
 
 
 def test_implausible_spread_is_suspicious():
@@ -159,8 +171,9 @@ def test_liquidity_used_by_one_opportunity_is_not_reused(no_rebalance):
     (o1,) = [x for x in m.evaluate(snap(b), c1) if x.venues == ["binance", "okx"]]
     m.execute(o1, snap(b), c1)
     c2 = ctx("otra", registry=reg)
-    (o2,) = [x for x in m.evaluate(snap(b), c2) if x.venues == ["binance", "okx"]]
-    m.execute(o2, snap(b), c2)
+    m2 = CrossExchange(symbols=("BTC/USDT",))              # otra estrategia, otro inventario
+    (o2,) = [x for x in m2.evaluate(snap(b), c2) if x.venues == ["binance", "okx"]]
+    m2.execute(o2, snap(b), c2)
     assert o1.sim["matched"] == pytest.approx(0.2)
     assert o2.reason == "DISAPPEARED"                     # ya no había liquidez
 

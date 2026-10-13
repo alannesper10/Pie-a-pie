@@ -9,7 +9,10 @@ from ..core import ACCEPTED, ASSUMED, REJECTED, VERIFIED, Cost, Opportunity, mak
 from ..fees import taker_fee
 from .base import Module
 
-ASSETS = ("BTC", "ETH", "SOL")
+from itertools import permutations
+
+ASSETS = ("BTC", "ETH", "SOL", "XRP", "BNB")
+MAX_INTERMEDIATE = 3          # ciclos de 3 patas (2 intermedios) y 4 patas (3 intermedios)
 START = "USDT"
 SIZES = (10.0, 25.0, 50.0)     # USDT de entrada a probar
 
@@ -37,17 +40,16 @@ def convert(amount, side, book, fee, levels=None):
 class Triangular(Module):
     name = "triangular"
     needs_crypto_books = True
+    unvalued_leftovers = 0     # remanentes sin ninguna ruta a USDT (se valúan 0 y se cuentan)
 
     def evaluate(self, snap, ctx):
         out = []
         venues = sorted({k.split("|")[0] for k in snap.books})
         for v in venues:
-            for x in ASSETS:
-                for y in ASSETS:
-                    if x == y:
-                        continue
-                    path = [START, x, y, START]
-                    legs = [_market(snap, v, path[i], path[i + 1]) for i in range(3)]
+            for k in range(2, MAX_INTERMEDIATE + 1):
+                for mids in permutations(ASSETS, k):
+                    path = [START, *mids, START]
+                    legs = [_market(snap, v, path[i], path[i + 1]) for i in range(len(path) - 1)]
                     if any(l is None for l in legs):
                         continue
                     o = self._evaluate_path(snap, ctx, v, path, legs)
@@ -74,7 +76,8 @@ class Triangular(Module):
             venues=[v], instruments=[s for s, _, _ in legs],
             observed={"top_rate": raw, "raw_gross_pct": raw - 1,
                       "fetched": [b.get("fetched_at") for _, _, b in legs]},
-            assumptions=["3 órdenes taker secuenciales", "comisión de nivel base en cada pata"],
+            assumptions=[f"{len(legs)} órdenes taker secuenciales",
+                         "comisión de nivel base en cada pata"],
             stage="ESTIMATED")
         best = None
         cap = ctx.ledger.capital * ctx.max_trade_fraction
@@ -97,26 +100,42 @@ class Triangular(Module):
         size, net, final = best
         o.size = o.capital_usd = size
         # Separación bruto / costos: fees en USD aproximadas por pata (fracción del monto).
-        fee_pct_total = 1 - (1 - fees[0]) * (1 - fees[1]) * (1 - fees[2])
-        fee_usd = size * fee_pct_total * raw
+        keep = 1.0
+        for f in fees:
+            keep *= (1 - f)
+        fee_usd = size * (1 - keep) * raw
         o.gross_usd = net + fee_usd
-        o.costs = {"fees_3_patas": Cost(fee_usd, ASSUMED, "comisiones taker de nivel base x3"),
+        o.costs = {f"fees_{len(legs)}_patas": Cost(fee_usd, ASSUMED,
+                                                   f"comisiones taker de nivel base x{len(legs)}"),
                    "profundidad": Cost(0.0, VERIFIED, "incluida: precios promedio barridos")}
         o.observed["final_usdt_estimated"] = final
         o.reason = "ESTIMATED_POSITIVE" if o.net_estimated_usd > 0 else "NET_NEGATIVE_AFTER_COSTS"
         return o
 
-    @staticmethod
-    def _to_usdt(snap, v, asset, qty, ctx):
+    def _to_usdt(self, snap, v, asset, qty, ctx):
         """Valúa un remanente en USDT vendiéndolo al bid tras la latencia, con
         comisión y penalidad de deshacer (conservador)."""
         if qty <= 0:
             return 0.0
         if asset == START:
             return qty
-        b = snap.book(v, f"{asset}/USDT", after=True) or snap.book(v, f"{asset}/USDT")
-        px = b["bids"][0][0] if b and b.get("bids") else 0.0
-        return qty * px * (1 - taker_fee(v)[0] - ctx.exec_cfg.unwind_penalty)
+        keep = 1 - taker_fee(v)[0] - ctx.exec_cfg.unwind_penalty
+
+        def bid(sym):
+            b = snap.book(v, sym, after=True) or snap.book(v, sym)
+            return b["bids"][0][0] if b and b.get("bids") else None
+
+        direct = bid(f"{asset}/USDT")
+        if direct:
+            return qty * direct * keep
+        # Sin par directo: ruta de 2 saltos (ej. ETH -> BTC -> USDT), cada salto
+        # con comisión y penalidad. Antes se valuaba en 0 (subvaluación).
+        for via in ("BTC", "ETH", "BNB"):
+            p1, p2 = bid(f"{asset}/{via}"), bid(f"{via}/USDT")
+            if p1 and p2:
+                return qty * p1 * keep * p2 * keep
+        self.unvalued_leftovers += 1
+        return 0.0
 
     def execute(self, o, snap, ctx):
         if o.reason != "ESTIMATED_POSITIVE":
@@ -130,7 +149,7 @@ class Triangular(Module):
         amt, holding = o.size, path[0]
         leftovers = []                      # (activo, cantidad) no convertida
         fees_total, status = 0.0, "FILLED"
-        for i in range(3):
+        for i in range(len(path) - 1):
             m = _market(snap, v, path[i], path[i + 1], after=True)
             if m is None:
                 status = "NO_BOOK_AFTER_LATENCY"

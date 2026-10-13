@@ -129,3 +129,39 @@ def test_missing_trades_are_reported_not_invented():
     m.evaluate(snap(b), c)
     out = m.evaluate(snap(b, tick=1, trades={}), c)
     assert out and all(o.reason == "NO_TRADES_DATA" for o in out)
+
+
+def test_four_leg_cycle_is_evaluated_and_executed_end_to_end():
+    # USDT -> BTC -> ETH -> SOL -> USDT con +1.2% bruto en el top of book.
+    b = {"binance|BTC/USDT": book([(49990, 10)], [(50000, 10)]),
+         "binance|ETH/BTC": book([(0.0399, 500)], [(0.04, 500)]),
+         "binance|SOL/ETH": book([(0.0499, 5000)], [(0.05, 5000)]),
+         "binance|SOL/USDT": book([(101.2, 5000)], [(101.3, 5000)])}
+    m, c, s, opps = tri_eval(b)
+    o = opps["binance|USDT->BTC->ETH->SOL->USDT"]
+    assert o.observed["raw_gross_pct"] == pytest.approx(0.012)
+    assert "fees_4_patas" in o.costs and o.reason == "ESTIMATED_POSITIVE"
+    m.execute(o, s, c)
+    assert o.reason == "FILLED"
+    assert o.sim["net_usd"] == pytest.approx(o.sim["final_usdt"] - o.size)
+
+
+def test_four_leg_partial_keeps_every_leftover_in_the_accounting():
+    b = {"binance|BTC/USDT": book([(49990, 10)], [(50000, 10)]),
+         "binance|ETH/BTC": book([(0.0399, 500)], [(0.04, 500)]),
+         "binance|SOL/ETH": book([(0.0499, 5000)], [(0.05, 5000)]),
+         "binance|SOL/USDT": book([(101.2, 5000)], [(101.3, 5000)])}
+    after = {**b, "binance|SOL/ETH": book([(0.0499, 5000)], [(0.05, 0.05)])}   # 3a pata sin profundidad
+    m, c, s, opps = tri_eval(b, after)
+    o = opps["binance|USDT->BTC->ETH->SOL->USDT"]
+    m.execute(o, s, c)
+    assert o.reason == "PARTIAL"
+    # El ETH no convertido se valúa a USDT (no desaparece de la cuenta):
+    assert o.sim["final_usdt"] > o.size * 0.9
+
+
+def test_regression_leftover_without_any_route_is_counted_not_crashing():
+    m, c = Triangular(), ctx("triangular")
+    s = snap({"binance|XRP/BNB": book([(0.01, 1)], [(0.011, 1)])})
+    assert m._to_usdt(s, "binance", "XRP", 5.0, c) == 0.0
+    assert m.unvalued_leftovers == 1

@@ -27,7 +27,11 @@ def test_verified_costs_are_not_stressed():
 
 def test_partial_or_failed_leg_is_not_executable():
     assert classify_lab(opp(0.5, status="PARTIAL", reason="PARTIAL"), "arbitrage")[0] == NOT_EXECUTABLE
-    assert classify_lab(opp(-0.3, status="LEG_FAILED", reason="LEG_FAILED"), "arbitrage")[0] == NO_EDGE
+    # edge estimado (+0.8) pero la pata falló con pérdida: no ejecutable (la
+    # pérdida -0.3 queda en el neto simulado de su categoría)
+    assert classify_lab(opp(-0.3, status="LEG_FAILED", reason="LEG_FAILED"), "arbitrage")[0] == NOT_EXECUTABLE
+    no_edge = opp(-0.3, status="LEG_FAILED", gross=0.1, reason="LEG_FAILED")
+    assert classify_lab(no_edge, "arbitrage")[0] == NO_EDGE
 
 
 def test_gross_positive_net_negative_is_no_edge():
@@ -56,3 +60,12 @@ def test_statistical_nature_is_never_guaranteed():
     assert classify_lab(opp(5.0), "speculative")[0] == STATISTICAL      # alias histórico
     assert classify_lab(opp(-1.0), "statistical")[0] == NO_EDGE
     assert classify_lab(opp(5.0), "unverifiable")[0] == UNVERIFIABLE
+
+
+def test_regression_disappeared_positive_estimate_is_not_executable_not_no_edge():
+    # Bug: una oportunidad estimada positiva que desaparecía (neto simulado 0)
+    # quedaba como SIN_EDGE. Ahora es NO_EJECUTABLE.
+    o = opp(0.0, status="DISAPPEARED", gross=1.0, reason="DISAPPEARED")
+    assert classify_lab(o, "arbitrage")[0] == NOT_EXECUTABLE
+    o = opp(0.0, status="DISAPPEARED", gross=0.1, reason="DISAPPEARED")   # estimado <= 0
+    assert classify_lab(o, "arbitrage")[0] == NO_EDGE

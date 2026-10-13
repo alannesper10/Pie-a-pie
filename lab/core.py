@@ -208,7 +208,7 @@ class StrategyLedger:
 COST_STRESS = 1.5
 # Datos faltantes o sospechosos: no se puede verificar, haya o no neto estimado.
 UNVERIFIABLE_REASONS = ("STALE", "SUSPICIOUS", "NO_BOOK", "MISSING", "NO_TRADES", "NO_QUOTES",
-                        "ERROR", "NO_DATA", "UNAVAILABLE")
+                        "ERROR", "NO_DATA", "UNAVAILABLE", "NO_MODEL")
 # Hay datos y edge estimado, pero no se puede ejecutar con nuestro capital/libro.
 NOT_EXECUTABLE_REASONS = ("MIN_SIZE", "BUDGET", "NO_CAPITAL", "INSUFFICIENT_DEPTH", "INFEASIBLE")
 
@@ -224,7 +224,12 @@ def classify_lab(o, nature):
     )
     sim = o.sim or {}
     net = sim.get("net_usd")
-    positive = (net if net is not None else o.net_estimated_usd) > 0
+    filled = sim.get("status") == "FILLED"
+    # Si la ejecución no se completó (desapareció, parcial, pata fallida), la
+    # ventaja se juzga por el neto ESTIMADO: una oportunidad estimada positiva
+    # que desaparece es NO_EJECUTABLE, no SIN_EDGE.
+    positive = ((net if (net is not None and (filled or not sim)) else o.net_estimated_usd)
+                > 0) if sim else (o.net_estimated_usd > 0 if net is None else net > 0)
     reason = o.reason or ""
     if nature in ("statistical", "speculative"):
         if any(k in reason for k in UNVERIFIABLE_REASONS):

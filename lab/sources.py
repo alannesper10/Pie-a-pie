@@ -20,7 +20,9 @@ import requests
 from . import PAPER_ONLY
 
 CRYPTO_VENUES = ("binance", "bybit", "okx", "kraken", "coinbase")
-CRYPTO_SYMBOLS = ("BTC/USDT", "ETH/USDT", "SOL/USDT", "ETH/BTC", "SOL/BTC", "SOL/ETH")
+CRYPTO_SYMBOLS = ("BTC/USDT", "ETH/USDT", "SOL/USDT", "ETH/BTC", "SOL/BTC", "SOL/ETH",
+                  "XRP/USDT", "XRP/BTC", "XRP/ETH", "BNB/USDT", "BNB/BTC", "BNB/ETH",
+                  "SOL/BNB", "XRP/BNB", "SOL/USDC", "USDC/USDT")
 MM_MARKETS = (("binance", "BTC/USDT"), ("okx", "ETH/USDT"), ("bybit", "SOL/USDT"))
 
 GAMMA = "https://gamma-api.polymarket.com"
@@ -41,6 +43,8 @@ class Snapshot:
     markets: Dict[str, dict] = field(default_factory=dict)      # metadatos (mínimos, fees ref)
     polymarket: dict = field(default_factory=dict)
     kalshi: dict = field(default_factory=dict)
+    dex: dict = field(default_factory=dict)            # Jupiter: quotes T0/T1 + fee de prioridad
+    futures: dict = field(default_factory=dict)        # futuros con vencimiento: libros T0/T1
     errors: List[dict] = field(default_factory=list)
     latency_ms: float = 0.0
 
@@ -54,7 +58,7 @@ class Snapshot:
     def to_json(self):
         return json.dumps({k: getattr(self, k) for k in (
             "tick", "ts", "books", "books_after", "trades", "markets", "polymarket",
-            "kalshi", "errors", "latency_ms")}, default=str)
+            "kalshi", "dex", "futures", "errors", "latency_ms")}, default=str)
 
     @classmethod
     def from_json(cls, s):
@@ -199,6 +203,154 @@ class PolymarketSource:
                 if e:
                     errs.append(e)
         return books, errs
+
+
+FUTURES_VENUES = {
+    # venue: (opciones ccxt, quote del spot y de los futuros lineales)
+    "binance": ({"options": {"defaultType": "future"}}, "USDT"),
+    "bybit": ({}, "USDT"),
+    "deribit": ({}, "USDC"),
+}
+FUTURES_ASSETS = ("BTC", "ETH")
+# ¿El libro de futuros LINEALES viene en contratos? Verificado contra la API
+# cruda: Deribit lineal ya viene en BTC aunque contractSize=0.0001 (multiplicar
+# achicaba la profundidad 10.000x); OKX sí cotiza en contratos.
+BOOK_IN_CONTRACTS = {"okx": True, "binance": False, "bybit": False, "deribit": False}
+MAX_EXPIRIES = 4
+
+
+class FuturesSource:
+    """Futuros LINEALES con vencimiento + el spot del mismo exchange.
+
+    Cantidades del libro SIEMPRE en unidades del activo (se multiplica por
+    contractSize: Deribit/OKX cotizan en contratos)."""
+
+    def __init__(self, venues=FUTURES_VENUES, exchanges=None, now_ms=None):
+        self.venues, self.ex, self.meta, self.init_errors = venues, {}, {}, []
+        self.now_ms = now_ms
+        if exchanges is not None:
+            self.ex = exchanges
+        else:
+            import ccxt
+            for v, (opts, _) in venues.items():
+                try:
+                    e = getattr(ccxt, v)({"enableRateLimit": True, "timeout": 20000, **opts})
+                    e.load_markets()
+                    self.ex[v] = e
+                except Exception as err:  # noqa: BLE001
+                    self.init_errors.append({"venue": v, "what": "futures_markets",
+                                             "error": f"{type(err).__name__}: {str(err)[:150]}"})
+        for e in self.ex.values():
+            assert not getattr(e, "apiKey", None), "no se admiten claves"
+
+    def _select(self):
+        import time as _t
+        now = self.now_ms or int(_t.time() * 1000)
+        meta = {}
+        for v, e in self.ex.items():
+            quote = self.venues.get(v, ({}, "USDT"))[1]
+            for asset in FUTURES_ASSETS:
+                spot = f"{asset}/{quote}"
+                if spot not in e.markets:
+                    continue
+                futs = sorted((m for m in e.markets.values()
+                               if m.get("future") and m.get("linear") and m.get("base") == asset
+                               and m.get("settle") == quote and m.get("expiry")
+                               and m["expiry"] > now + 86_400_000 and m.get("active", True)),
+                              key=lambda m: m["expiry"])[:MAX_EXPIRIES]
+                for m in futs:
+                    lim = m.get("limits") or {}
+                    meta[Snapshot.k(v, m["symbol"])] = {
+                        "venue": v, "asset": asset, "symbol": m["symbol"], "spot": spot,
+                        "expiry": m["expiry"], "expiry_iso": m.get("expiryDatetime"),
+                        "contract_size": float(m.get("contractSize") or 1.0),
+                        "min_amount": (lim.get("amount") or {}).get("min"),
+                        "min_cost": (lim.get("cost") or {}).get("min"),
+                        "taker_ref": m.get("taker"),
+                        "spot_min_amount": ((e.markets[spot].get("limits") or {}).get("amount") or {}).get("min"),
+                        "spot_taker_ref": e.markets[spot].get("taker")}
+        return meta
+
+    def fetch(self, meta_only=False, refresh_meta=True, depth=20):
+        """-> (libros {venue|símbolo}, meta, errores). Incluye el spot de cada venue."""
+        errs = list(self.init_errors)
+        if refresh_meta or not self.meta:
+            try:
+                self.meta = self._select()
+            except Exception as e:  # noqa: BLE001
+                errs.append({"venue": "futures", "what": "select", "error": str(e)[:150]})
+        books = {}
+        wanted = {(m["venue"], m["symbol"],
+                   m["contract_size"] if BOOK_IN_CONTRACTS.get(m["venue"], False) else 1.0)
+                  for m in self.meta.values()}
+        wanted |= {(m["venue"], m["spot"], 1.0) for m in self.meta.values()}
+        for v, sym, csize in sorted(wanted):
+            try:
+                ob = self.ex[v].fetch_order_book(sym, depth)
+                books[Snapshot.k(v, sym)] = {
+                    "bids": [[float(p), float(q) * csize] for p, q, *_ in ob["bids"][:depth]],
+                    "asks": [[float(p), float(q) * csize] for p, q, *_ in ob["asks"][:depth]],
+                    "fetched_at": now_iso()}
+            except Exception as e:  # noqa: BLE001
+                errs.append({"venue": v, "symbol": sym, "what": "futures_book",
+                             "error": f"{type(e).__name__}: {str(e)[:120]}"})
+        return books, self.meta, errs
+
+
+SOL_MINT = "So11111111111111111111111111111111111111112"
+USDC_MINT = "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
+JUP_QUOTE = "https://lite-api.jup.ag/swap/v1/quote"
+SOLANA_RPC = "https://api.mainnet-beta.solana.com"
+DEX_SIZES_USD = (10.0, 25.0, 45.0)
+
+
+class JupiterSource:
+    """Cotizaciones de Jupiter (agregador DEX de Solana), públicas y POR TAMAÑO.
+
+    Una cotización no es una ejecución: el swap puede salir peor (hasta
+    otherAmountThreshold, que fija el slippage tolerado) o fallar on-chain.
+    """
+
+    def __init__(self, session=None, slippage_bps=50):
+        self.s = session or requests.Session()
+        self.slippage_bps = slippage_bps
+
+    def quote(self, input_mint, output_mint, amount_raw):
+        r = self.s.get(JUP_QUOTE, params={"inputMint": input_mint, "outputMint": output_mint,
+                                          "amount": str(int(amount_raw)),
+                                          "slippageBps": self.slippage_bps}, timeout=15)
+        r.raise_for_status()
+        d = r.json()
+        return {"in": int(d["inAmount"]), "out": int(d["outAmount"]),
+                "min_out": int(d["otherAmountThreshold"]),
+                "price_impact_pct": float(d.get("priceImpactPct") or 0),
+                "route": [x.get("swapInfo", {}).get("label") for x in d.get("routePlan", [])],
+                "slot": d.get("contextSlot"), "fetched_at": now_iso()}
+
+    def priority_fee(self):
+        """Mediana de fees de prioridad recientes (micro-lamports por CU)."""
+        r = self.s.post(SOLANA_RPC, json={"jsonrpc": "2.0", "id": 1,
+                                          "method": "getRecentPrioritizationFees", "params": []},
+                        timeout=15)
+        fees = sorted(x["prioritizationFee"] for x in r.json().get("result", []))
+        return {"median_micro_lamports_per_cu": fees[len(fees) // 2] if fees else None,
+                "p90": fees[int(len(fees) * 0.9)] if fees else None, "n": len(fees),
+                "fetched_at": now_iso()}
+
+    def quotes_for(self, sol_usd):
+        """SOL->USDC y USDC->SOL para cada tamaño en USD. Errores se registran."""
+        out, errs = {}, []
+        for usd in DEX_SIZES_USD:
+            for direction, (i, o, amt) in {
+                "SOL->USDC": (SOL_MINT, USDC_MINT, usd / sol_usd * 1e9),
+                "USDC->SOL": (USDC_MINT, SOL_MINT, usd * 1e6)}.items():
+                k = f"{direction}|{usd:g}"
+                try:
+                    out[k] = self.quote(i, o, amt)
+                except Exception as e:  # noqa: BLE001
+                    errs.append({"venue": "jupiter", "what": k,
+                                 "error": f"{type(e).__name__}: {str(e)[:120]}"})
+        return out, errs
 
 
 assert PAPER_ONLY

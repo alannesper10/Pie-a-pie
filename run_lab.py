@@ -25,8 +25,9 @@ from lab.sources import now_iso
 from lab.store import LabStore
 
 DB = Path("lab_data") / "lab.sqlite"
-ALL = ("cross_exchange", "triangular", "basis_funding", "polymarket_buy_all_no",
-       "prediction_cross_venue", "liquidity_provision")
+ALL = ("cross_exchange", "triangular", "cex_dex", "cash_and_carry", "calendar_spread",
+       "basis_funding", "polymarket_buy_all_no", "prediction_cross_venue",
+       "liquidity_provision")
 log = logging.getLogger("lab")
 
 
@@ -35,9 +36,17 @@ def make_modules(names, run_id, seed, live=True):
     from lab.modules.liquidity import LiquidityProvision
     from lab.modules.prediction import CrossVenuePrediction, PolymarketBuyAllNo
     from lab.modules.triangular import Triangular
+    from lab.modules.cex_dex import CexDex
+    from lab.modules.term_structure import CalendarSpread, TermStructure
     out = []
     for n in names:
-        if n == "cross_exchange":
+        if n == "cex_dex":
+            out.append(CexDex())
+        elif n == "cash_and_carry":
+            out.append(TermStructure())
+        elif n == "calendar_spread":
+            out.append(CalendarSpread())
+        elif n == "cross_exchange":
             out.append(CrossExchange())
         elif n == "triangular":
             out.append(Triangular())
@@ -88,11 +97,13 @@ def cmd_collect(args):
         store.start_run(run_id, now_iso(), "collect", args.seed, args=vars(args))
     pairs = load_verified_pairs()
     crypto, pm, kalshi = _sources((True, True, pairs))
+    from lab.sources import FuturesSource, JupiterSource
+    dex, futures = JupiterSource(), FuturesSource()
     guard, markets = _guard(args), {}
     for t in range(start, start + args.ticks):
         t0 = time.monotonic()
         snap = build_snapshot(t, crypto, pm, args.latency_ms, markets_cache=markets,
-                              pairs=pairs, kalshi_client=kalshi)
+                              pairs=pairs, kalshi_client=kalshi, dex=dex, futures=futures)
         store.save_snapshot(run_id, snap)
         ok, why = guard.check()
         log.info("collect %s tick %d | errores %d | %.1fs | memoria pico %.0f MB",
@@ -120,6 +131,9 @@ def cmd_run(args):
         any(m.name == "prediction_cross_venue" for m in mods)
     crypto = CryptoSource() if need_crypto else None
     pm = PolymarketSource() if need_pm else None
+    from lab.sources import FuturesSource, JupiterSource
+    dex = JupiterSource() if any(getattr(m, "needs_dex", False) for m in mods) else None
+    futures = FuturesSource() if any(getattr(m, "needs_futures", False) for m in mods) else None
     markets = {}
     pairs = next((m.pairs for m in mods if m.name == "prediction_cross_venue"), [])
     kalshi = None
@@ -133,7 +147,7 @@ def cmd_run(args):
         for t in range(args.ticks):
             t0 = time.monotonic()
             snap = build_snapshot(t, crypto, pm, args.latency_ms, markets_cache=markets,
-                                  pairs=pairs, kalshi_client=kalshi)
+                                  pairs=pairs, kalshi_client=kalshi, dex=dex, futures=futures)
             store.save_snapshot(run_id, snap)
             counts = lab.run_tick(snap)
             log.info("tick %d: %s | errores de fuentes %d | %.1fs", t, counts, len(snap.errors),
