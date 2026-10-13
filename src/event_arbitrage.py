@@ -69,13 +69,17 @@ def strikes_cover_real_line(markets, gap_tol=0.0):
 
 
 def check_exhaustive(event, gap_tol=0.0) -> Tuple[bool, str]:
-    """Kalshi no expone un flag de exhaustividad; se confirma por estructura."""
-    markets = event.get("markets") or []
-    if is_catch_all_present(markets):
-        return True, "CATCH_ALL_MARKET"
-    if strikes_cover_real_line(markets, gap_tol):
-        return True, "STRIKES_COVER_RANGE"
-    return False, "EXHAUSTIVENESS_UNCONFIRMED"
+    """Exhaustividad con PRUEBA POSITIVA (src/guarantee.py).
+
+    Antes bastaba una pata llamada "Tie"/"None" (is_catch_all): eso aceptó
+    KXCRITICSCOM-27, un premio con lista abierta donde una película no listada
+    deja todas las patas en 0. Ahora solo cuentan: partición completa de
+    strikes de una misma variable, partido "A vs B" con empate, o verificación
+    manual en config/exhaustive_events.json. `gap_tol` ya no se usa (siempre 0).
+    """
+    from .guarantee import kalshi_yes_coverage
+    cov = kalshi_yes_coverage(event)
+    return (True, cov.method) if cov.proven else (False, "EXHAUSTIVENESS_UNCONFIRMED")
 
 
 def is_catch_all_present(markets):
@@ -91,6 +95,7 @@ class Prefiltered:
     volume_24h: float
     exhaustive_reason: str
     fee_multiplier: Optional[float]
+    coverage: Optional[dict] = None     # src.guarantee.Coverage (método, residuales, evidencia)
 
 
 LEG_FIELDS = ("ticker", "yes_sub_title", "status", "close_time",
@@ -130,9 +135,11 @@ def prefilter_event(event, *, min_volume_24h=0.0, min_leg_ask_size=0.0,
     if len(legs) < 2:
         return None, "LESS_THAN_2_OPEN_LEGS"
 
-    ok, reason = check_exhaustive(event, gap_tol)
-    if not ok:
-        return None, reason
+    from .guarantee import kalshi_yes_coverage
+    cov = kalshi_yes_coverage(event)
+    if not cov.proven:
+        return None, "EXHAUSTIVENESS_UNCONFIRMED"
+    reason = cov.method
 
     volume = sum(_num(m.get("volume_24h_fp")) for m in legs)
     if volume < min_volume_24h:
@@ -162,6 +169,7 @@ def prefilter_event(event, *, min_volume_24h=0.0, min_leg_ask_size=0.0,
         volume_24h=volume,
         exhaustive_reason=reason,
         fee_multiplier=_num(mult, None) if mult is not None else None,
+        coverage=cov.to_dict(),
     ), "OK"
 
 

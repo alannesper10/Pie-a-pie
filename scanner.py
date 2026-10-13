@@ -27,7 +27,9 @@ from src.event_arbitrage import (
     prefilter_event,
     yes_asks_from_orderbook,
 )
+from src.execution_check import AUDIT_FIELDS
 from src.kalshi_public import KalshiPublicClient
+from src.strategies.kalshi_common import parse_book
 from src.paper_trader import PaperBook
 from src.report import build_report
 from src.tracking import (
@@ -51,6 +53,10 @@ def now_iso():
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
 
 
+def now_iso_ms():
+    return datetime.now(timezone.utc).isoformat(timespec="milliseconds")
+
+
 def parse_ts(value):
     try:
         return datetime.fromisoformat(value.replace("Z", "+00:00"))
@@ -59,9 +65,13 @@ def parse_ts(value):
 
 
 def fetch_ladders(client, pre, timeout_s, request_timeout_s):
-    """Pide el orderbook de cada pata respetando un deadline por evento."""
+    """Pide el orderbook de cada pata respetando un deadline por evento.
+
+    Devuelve (ladders YES ask, libros T0 crudos con la hora de cada consulta):
+    los libros se guardan como evidencia si la oportunidad se audita.
+    """
     deadline = time.monotonic() + timeout_s
-    ladders = []
+    ladders, books = [], {}
     for m in pre.legs:
         remaining = deadline - time.monotonic()
         if remaining <= 0:
@@ -69,10 +79,11 @@ def fetch_ladders(client, pre, timeout_s, request_timeout_s):
         data = client.get_orderbook(
             m["ticker"], timeout=min(request_timeout_s, remaining)
         )
+        books[m["ticker"]] = {"raw": data, "book": parse_book(data), "fetched_at": now_iso_ms()}
         ladders.append(yes_asks_from_orderbook(data))
     if time.monotonic() > deadline:
         raise EventTimeout(pre.event_ticker)
-    return ladders
+    return ladders, books
 
 
 # ---------------------------------------------------------------- caché ---
@@ -89,7 +100,9 @@ def load_cache(args):
 
 
 def cache_params(args):
-    return {"min_volume": args.min_volume, "gap_tol": args.gap_tol}
+    # coverage_rule=2: exhaustividad con prueba positiva (src/guarantee.py). La
+    # caché armada con la regla vieja ("Tie" como comodín) queda invalidada.
+    return {"min_volume": args.min_volume, "gap_tol": args.gap_tol, "coverage_rule": 2}
 
 
 def refresh_cache(client, args, scfg):
@@ -108,6 +121,8 @@ def refresh_cache(client, args, scfg):
         reasons[reason] += 1
         if pre:
             kept.append(pre)
+        elif reason == "EXHAUSTIVENESS_UNCONFIRMED":
+            log_speculative(ev)
     save_json(CACHE_FILE, {"refreshed_at": now_iso(), "params": cache_params(args),
                            "events": [asdict(p) for p in kept]})
     log.info("Caché: %d eventos listados -> %d estructuralmente válidos en %.2fs",
@@ -115,6 +130,31 @@ def refresh_cache(client, args, scfg):
     for reason, count in reasons.most_common():
         log.info("    %-28s %d", reason, count)
     return kept
+
+
+def log_speculative(ev):
+    """Evento excluyente SIN cobertura probada cuya suma de YES ask es < 1:
+    parece arbitraje, pero un resultado no listado haría perder todo. Se
+    registra como ESPECULATIVA (top of book del listado; no se piden libros)."""
+    from src.guarantee import SPECULATIVE, kalshi_yes_coverage
+    legs = [m for m in ev.get("markets") or []
+            if m.get("status") in ("active", "open") and not m.get("result")]
+    asks = [float(m.get("yes_ask_dollars") or 0) for m in legs]
+    if len(legs) < 2 or not all(0 < a < 1 for a in asks) or sum(asks) >= 1:
+        return
+    cov = kalshi_yes_coverage(ev)
+    append_csv(DATA / "opportunity_audit.csv", AUDIT_FIELDS, {
+        "timestamp": now_iso(), "strategy": "kalshi_current",
+        "event_ticker": ev.get("event_ticker"), "key": ev.get("event_ticker"),
+        "classification": SPECULATIVE,
+        "reason": "cobertura no probada: " + "; ".join(cov.reasons[-1:]),
+        "coverage_method": cov.method, "n_legs": len(legs),
+        "net_expected": round(1 - sum(asks), 4), "net_min": -round(sum(asks), 4),
+        "max_loss": round(sum(asks), 4),
+        "exec_status": "NO_EVALUADA",
+        "exec_reason": "no se piden libros de eventos sin cobertura probada",
+        "fees_status": "no calculadas (1 paquete, top of book del listado)",
+    })
 
 
 def get_candidates(client, args, scfg):
@@ -174,6 +214,40 @@ def settle_positions(client, book, ts):
     return settled
 
 
+def audit_and_gate(client, pre, o, t0_books, bot, ts):
+    """Re-verifica una oportunidad con neto > 0 y la deja ejecutable SOLO si es
+    ARBITRAJE_GARANTIZADO (con los costos de T1). Todo queda registrado en
+    data/opportunity_audit.csv y la evidencia en evidence/kalshi/."""
+    from dataclasses import replace
+    from src.execution_check import audit_opportunity, audit_row
+    from src.guarantee import Coverage, yes_all_outcomes
+    cov = pre.coverage or {"proven": False, "method": "SIN_DATOS"}
+    covobj = Coverage(**cov)
+    tickers = [t for t, _, _ in o.legs]
+    try:
+        a = audit_opportunity(
+            client=client, strategy="kalshi_current", event_ticker=o.event_ticker,
+            key=o.event_ticker, tickers=tickers, sides=["yes"] * len(tickers),
+            contracts=o.contracts, t0_books=t0_books,
+            outcomes_fn=lambda c: yes_all_outcomes(c, covobj),
+            net_expected=o.net_profit, fee_coef=bot.taker_fee_coefficient,
+            slippage_per_contract=bot.estimated_slippage, coverage=cov, ts=ts)
+    except Exception as e:  # noqa: BLE001 - sin auditoría no hay posición
+        log.warning("    auditoría de %s falló: %s", o.event_ticker, e)
+        return replace(o, executable=False, reason="NO_VERIFICABLE_AUDITORIA_FALLIDA")
+    append_csv(DATA / "opportunity_audit.csv", AUDIT_FIELDS,
+               audit_row(ts, "kalshi_current", o.event_ticker, o.event_ticker, a))
+    log.info("    AUDITORIA %s: %s (%s) | ejecución %s | neto mín %s",
+             o.event_ticker, a["classification"], a["reason"], a["exec_status"], a["net_min"])
+    if not a["guaranteed"]:
+        return replace(o, executable=False, reason=a["classification"])
+    ex = a["exec"]
+    slip = o.contracts * o.n_legs * bot.estimated_slippage
+    return replace(o, pair_cost=ex["cost"] / o.contracts, estimated_fees=ex["fees"],
+                   estimated_slippage=slip, net_profit=a["net_min"],
+                   net_profit_per_contract=a["net_min"] / o.contracts)
+
+
 def run_cycle(client, args, bot, scfg, book, tracker):
     t_cycle = time.perf_counter()
     ts = now_iso()
@@ -205,7 +279,7 @@ def run_cycle(client, args, bot, scfg, book, tracker):
         for fut in as_completed(futures):
             pre = futures[fut]
             try:
-                ladders = fut.result()
+                ladders, t0_books = fut.result()
             except EventTimeout:
                 timeouts += 1
                 log.warning("    %s: timeout (> %.1fs)", pre.event_ticker,
@@ -222,11 +296,21 @@ def run_cycle(client, args, bot, scfg, book, tracker):
                 min_net_edge=bot.min_net_edge,
                 budget_usd=budget,
                 min_sane_ask_sum=scfg.min_sane_ask_sum,
-            )))
+            ), t0_books))
     row.update(evaluated=len(results), timeouts=timeouts, errors=errors,
                t_books_s=round(time.perf_counter() - t0, 2))
 
-    # 5) Casi-aciertos, rachas y paper.
+    # 5) Auditoría: toda oportunidad con neto estimado > 0 se re-verifica
+    #    (libros tras la latencia, escenarios, estrés). Solo la clasificada
+    #    ARBITRAJE_GARANTIZADO puede abrir posición paper.
+    audited = []
+    for pre, o, t0_books in results:
+        if o.executable:
+            o = audit_and_gate(client, pre, o, t0_books, bot, ts)
+        audited.append((pre, o))
+    results = audited
+
+    # 6) Casi-aciertos, rachas y paper.
     near = executable = opened = 0
     for pre, o in results:
         if not o.best_ask_sum < NEAR_MISS_MAX_SUM:

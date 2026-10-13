@@ -7,6 +7,7 @@ Solo lectura y paper trading: nada acá envía órdenes.
 
 import math
 import time
+from datetime import datetime, timezone
 from dataclasses import dataclass, field, replace
 from pathlib import Path
 from typing import Optional, Tuple
@@ -53,8 +54,12 @@ def fetch_books(client, tickers, timeout_s, request_timeout_s=10.0):
         remaining = deadline - time.monotonic()
         if remaining <= 0:
             raise TimeoutError(t)
-        books[t] = parse_book(client.get_orderbook(
-            t, timeout=min(request_timeout_s, remaining)))
+        raw = client.get_orderbook(t, timeout=min(request_timeout_s, remaining))
+        b = parse_book(raw)
+        # Evidencia T0: libro crudo y hora exacta de la consulta.
+        b["_raw"] = raw
+        b["_fetched_at"] = datetime.now(timezone.utc).isoformat(timespec="milliseconds")
+        books[t] = b
     return books
 
 

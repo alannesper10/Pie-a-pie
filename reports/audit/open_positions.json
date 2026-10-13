@@ -1,0 +1,700 @@
+{
+ "generated_at": "2026-10-13T17:22:46+00:00",
+ "ledger_cash": 81.23599999999999,
+ "ledger_locked": 18.764,
+ "ledger_check": 0.0,
+ "positions": [
+  {
+   "event_ticker": "KXCRITICSPROD-27",
+   "opened_at": "2026-10-13T01:58:13+00:00",
+   "contracts": 10,
+   "cost": 9.1,
+   "fees": 0.5800000000000001,
+   "slippage": 0.16,
+   "outlay": 9.84,
+   "expected_net_recorded": 0.16000000000000028,
+   "legs": [
+    "KXCRITICSPROD-27-ODY",
+    "KXCRITICSPROD-27-PRO",
+    "KXCRITICSPROD-27-DUN",
+    "KXCRITICSPROD-27-LAB",
+    "KXCRITICSPROD-27-WER",
+    "KXCRITICSPROD-27-FUR",
+    "KXCRITICSPROD-27-WUT",
+    "KXCRITICSPROD-27-SEN",
+    "KXCRITICSPROD-27-WIL",
+    "KXCRITICSPROD-27-BAC",
+    "KXCRITICSPROD-27-FAT",
+    "KXCRITICSPROD-27-WILD",
+    "KXCRITICSPROD-27-INK",
+    "KXCRITICSPROD-27-DEV",
+    "KXCRITICSPROD-27-DIG",
+    "KXCRITICSPROD-27-TIE"
+   ],
+   "expected_close": "2027-01-03T15:00:00+00:00",
+   "opening_commit": "f0e01abace0734555c921445c01e96a5261a6746",
+   "cache_refreshed_at": "2026-10-13T01:58:28+00:00",
+   "cycle_row": "2026-10-13T01:58:13+00:00,1,,1,214,214,0,0,116,1,1,0,15.39,49.87,65.28",
+   "legs_at_open": [
+    {
+     "ticker": "KXCRITICSPROD-27-ODY",
+     "name": "The Odyssey",
+     "yes_ask": 0.42,
+     "ask_size": "25.00",
+     "fee_c": 0.18
+    },
+    {
+     "ticker": "KXCRITICSPROD-27-PRO",
+     "name": "Project Hail Mary",
+     "yes_ask": 0.04,
+     "ask_size": "52.00",
+     "fee_c": 0.03
+    },
+    {
+     "ticker": "KXCRITICSPROD-27-DUN",
+     "name": "Dune: Part Three",
+     "yes_ask": 0.19,
+     "ask_size": "55.00",
+     "fee_c": 0.11
+    },
+    {
+     "ticker": "KXCRITICSPROD-27-LAB",
+     "name": "La Bola Negra",
+     "yes_ask": 0.02,
+     "ask_size": "53.00",
+     "fee_c": 0.02
+    },
+    {
+     "ticker": "KXCRITICSPROD-27-WER",
+     "name": "Werwulf",
+     "yes_ask": 0.02,
+     "ask_size": "53.00",
+     "fee_c": 0.02
+    },
+    {
+     "ticker": "KXCRITICSPROD-27-FUR",
+     "name": "The Further Mis-Adventures of Cliff Booth",
+     "yes_ask": 0.02,
+     "ask_size": "53.00",
+     "fee_c": 0.02
+    },
+    {
+     "ticker": "KXCRITICSPROD-27-WUT",
+     "name": "Wuthering Heights",
+     "yes_ask": 0.02,
+     "ask_size": "53.00",
+     "fee_c": 0.02
+    },
+    {
+     "ticker": "KXCRITICSPROD-27-SEN",
+     "name": "Sense and Sensibility",
+     "yes_ask": 0.02,
+     "ask_size": "53.00",
+     "fee_c": 0.02
+    },
+    {
+     "ticker": "KXCRITICSPROD-27-WIL",
+     "name": "Wildwood",
+     "yes_ask": 0.03,
+     "ask_size": "2482.77",
+     "fee_c": 0.03
+    },
+    {
+     "ticker": "KXCRITICSPROD-27-BAC",
+     "name": "Backrooms",
+     "yes_ask": 0.02,
+     "ask_size": "54.00",
+     "fee_c": 0.02
+    },
+    {
+     "ticker": "KXCRITICSPROD-27-FAT",
+     "name": "Fatherland",
+     "yes_ask": 0.02,
+     "ask_size": "53.00",
+     "fee_c": 0.02
+    },
+    {
+     "ticker": "KXCRITICSPROD-27-WILD",
+     "name": "Wild Horse Nine",
+     "yes_ask": 0.02,
+     "ask_size": "53.00",
+     "fee_c": 0.02
+    },
+    {
+     "ticker": "KXCRITICSPROD-27-INK",
+     "name": "Ink",
+     "yes_ask": 0.02,
+     "ask_size": "53.00",
+     "fee_c": 0.02
+    },
+    {
+     "ticker": "KXCRITICSPROD-27-DEV",
+     "name": "The Devil Wears Prada 2",
+     "yes_ask": 0.02,
+     "ask_size": "53.00",
+     "fee_c": 0.02
+    },
+    {
+     "ticker": "KXCRITICSPROD-27-DIG",
+     "name": "Digger",
+     "yes_ask": 0.02,
+     "ask_size": "53.00",
+     "fee_c": 0.02
+    },
+    {
+     "ticker": "KXCRITICSPROD-27-TIE",
+     "name": "Tie",
+     "yes_ask": 0.02,
+     "ask_size": "53.00",
+     "fee_c": 0.02
+    }
+   ],
+   "coverage_at_open": "CATCH_ALL_MARKET",
+   "title": "Critics Choice Awards: Best Production Design",
+   "coverage_now": {
+    "proven": false,
+    "method": "NOT_PROVEN",
+    "reasons": [
+     "strikes: no todas las patas son strikes",
+     "enfrentamiento: el título no es un enfrentamiento 'A vs B'",
+     "lista de opciones abierta o no demostrada: un resultado no listado haría que todas las patas YES paguen 0"
+    ],
+    "residuals": [],
+    "open_list_evidence": [
+     "KXCRITICSPROD-27-ODY: The market will close and expire early following nominations being released (if The Odyssey is not nominated) or the awards show.",
+     "KXCRITICSPROD-27-PRO: The market will close and expire early following nominations being released (if Project Hail Mary is not nominated) or the awards show.",
+     "KXCRITICSPROD-27-DUN: The market will close and expire early following nominations being released (if Dune: Part Three is not nominated) or the awards show.",
+     "KXCRITICSPROD-27-LAB: The market will close and expire early following nominations being released (if La Bola Negra is not nominated) or the awards show.",
+     "KXCRITICSPROD-27-WER: The market will close and expire early following nominations being released (if Werwulf is not nominated) or the awards show.",
+     "KXCRITICSPROD-27-FUR: The market will close and expire early following nominations being released (if The Further Mis-Adventures of Cliff Booth is not nominated) or the awards show.",
+     "KXCRITICSPROD-27-WUT: The market will close and expire early following nominations being released (if Wuthering Heights is not nominated) or the awards show.",
+     "KXCRITICSPROD-27-SEN: The market will close and expire early following nominations being released (if Sense and Sensibility is not nominated) or the awards show.",
+     "KXCRITICSPROD-27-WIL: The market will close and expire early following nominations being released (if Wildwood is not nominated) or the awards show.",
+     "KXCRITICSPROD-27-BAC: The market will close and expire early following nominations being released (if Backrooms is not nominated) or the awards show.",
+     "KXCRITICSPROD-27-FAT: The market will close and expire early following nominations being released (if Fatherland is not nominated) or the awards show.",
+     "KXCRITICSPROD-27-WILD: The market will close and expire early following nominations being released (if Wild Horse Nine is not nominated) or the awards show.",
+     "KXCRITICSPROD-27-INK: The market will close and expire early following nominations being released (if Ink is not nominated) or the awards show.",
+     "KXCRITICSPROD-27-DEV: The market will close and expire early following nominations being released (if The Devil Wears Prada 2 is not nominated) or the awards show.",
+     "KXCRITICSPROD-27-DIG: The market will close and expire early following nominations being released (if Digger is not nominated) or the awards show.",
+     "KXCRITICSPROD-27-TIE: The market will close and expire early following nominations being released (if TIE is not nominated) or the awards show."
+    ]
+   },
+   "scenarios": {
+    "outlay": 9.84,
+    "scenarios": [
+     {
+      "scenario": "gana una de las patas listadas",
+      "payout": 10.0,
+      "net": 0.16000000000000014
+     },
+     {
+      "scenario": "gana una opción no listada / ninguna listada",
+      "payout": 0.0,
+      "net": -9.84
+     }
+    ],
+    "net_min": -9.84,
+    "net_max": 0.16000000000000014,
+    "max_loss": 9.84,
+    "undetermined": [],
+    "net_min_pct": -1.0
+   },
+   "legs_now": [
+    {
+     "ticker": "KXCRITICSPROD-27-ODY",
+     "status": "active",
+     "result": "",
+     "best_yes_bid": 0.21,
+     "sellable": 10.0,
+     "proceeds": 2.09,
+     "fee": 0.12
+    },
+    {
+     "ticker": "KXCRITICSPROD-27-PRO",
+     "status": "active",
+     "result": "",
+     "best_yes_bid": 0.03,
+     "sellable": 10.0,
+     "proceeds": 0.3,
+     "fee": 0.03
+    },
+    {
+     "ticker": "KXCRITICSPROD-27-DUN",
+     "status": "active",
+     "result": "",
+     "best_yes_bid": 0.15,
+     "sellable": 10.0,
+     "proceeds": 1.395,
+     "fee": 0.09
+    },
+    {
+     "ticker": "KXCRITICSPROD-27-LAB",
+     "status": "active",
+     "result": "",
+     "best_yes_bid": 0.01,
+     "sellable": 10.0,
+     "proceeds": 0.1,
+     "fee": 0.01
+    },
+    {
+     "ticker": "KXCRITICSPROD-27-WER",
+     "status": "active",
+     "result": "",
+     "best_yes_bid": 0.01,
+     "sellable": 10.0,
+     "proceeds": 0.1,
+     "fee": 0.01
+    },
+    {
+     "ticker": "KXCRITICSPROD-27-FUR",
+     "status": "active",
+     "result": "",
+     "best_yes_bid": 0.01,
+     "sellable": 10.0,
+     "proceeds": 0.1,
+     "fee": 0.01
+    },
+    {
+     "ticker": "KXCRITICSPROD-27-WUT",
+     "status": "active",
+     "result": "",
+     "best_yes_bid": 0.01,
+     "sellable": 10.0,
+     "proceeds": 0.1,
+     "fee": 0.01
+    },
+    {
+     "ticker": "KXCRITICSPROD-27-SEN",
+     "status": "active",
+     "result": "",
+     "best_yes_bid": 0.01,
+     "sellable": 10.0,
+     "proceeds": 0.1,
+     "fee": 0.01
+    },
+    {
+     "ticker": "KXCRITICSPROD-27-WIL",
+     "status": "active",
+     "result": "",
+     "best_yes_bid": 0.01,
+     "sellable": 10.0,
+     "proceeds": 0.1,
+     "fee": 0.01
+    },
+    {
+     "ticker": "KXCRITICSPROD-27-BAC",
+     "status": "active",
+     "result": "",
+     "best_yes_bid": 0.01,
+     "sellable": 10.0,
+     "proceeds": 0.1,
+     "fee": 0.01
+    },
+    {
+     "ticker": "KXCRITICSPROD-27-FAT",
+     "status": "active",
+     "result": "",
+     "best_yes_bid": 0.01,
+     "sellable": 10.0,
+     "proceeds": 0.1,
+     "fee": 0.01
+    },
+    {
+     "ticker": "KXCRITICSPROD-27-WILD",
+     "status": "active",
+     "result": "",
+     "best_yes_bid": 0.01,
+     "sellable": 10.0,
+     "proceeds": 0.1,
+     "fee": 0.01
+    },
+    {
+     "ticker": "KXCRITICSPROD-27-INK",
+     "status": "active",
+     "result": "",
+     "best_yes_bid": 0.01,
+     "sellable": 10.0,
+     "proceeds": 0.1,
+     "fee": 0.01
+    },
+    {
+     "ticker": "KXCRITICSPROD-27-DEV",
+     "status": "active",
+     "result": "",
+     "best_yes_bid": 0.01,
+     "sellable": 10.0,
+     "proceeds": 0.1,
+     "fee": 0.01
+    },
+    {
+     "ticker": "KXCRITICSPROD-27-DIG",
+     "status": "active",
+     "result": "",
+     "best_yes_bid": 0.01,
+     "sellable": 10.0,
+     "proceeds": 0.1,
+     "fee": 0.01
+    },
+    {
+     "ticker": "KXCRITICSPROD-27-TIE",
+     "status": "active",
+     "result": "",
+     "best_yes_bid": 0.01,
+     "sellable": 10.0,
+     "proceeds": 0.1,
+     "fee": 0.01
+    }
+   ],
+   "exit_value_now": 4.715,
+   "mark_to_market_pnl": -5.125,
+   "fully_sellable_now": true,
+   "recommendation": "Reclasificar como ESPECULATIVA (cobertura NOT_PROVEN): gana +0.160 si gana una película listada y pierde 9.840 si gana una no listada. NO cerrar automáticamente: cerrarla hoy en paper realizaría -5.125 USD (vender las 16 patas al bid, todas vendibles). Opción recomendada: mantenerla abierta SIN tocar el ledger, marcada en reports/audit como posición especulativa abierta por error y EXCLUIDA de las métricas de arbitraje; registrar su resultado real al liquidarse como evidencia del riesgo. Cerrarla (y cómo registrarlo) requiere tu decisión explícita."
+  },
+  {
+   "event_ticker": "KXCRITICSCOM-27",
+   "opened_at": "2026-10-13T08:41:54+00:00",
+   "contracts": 9,
+   "cost": 8.18,
+   "fees": 0.6,
+   "slippage": 0.14400000000000002,
+   "outlay": 8.924,
+   "expected_net_recorded": 0.07600000000000029,
+   "legs": [
+    "KXCRITICSCOM-27-DEB",
+    "KXCRITICSCOM-27-WIL",
+    "KXCRITICSCOM-27-INV",
+    "KXCRITICSCOM-27-CLU",
+    "KXCRITICSCOM-27-FUR",
+    "KXCRITICSCOM-27-DIG",
+    "KXCRITICSCOM-27-ILO",
+    "KXCRITICSCOM-27-DEV",
+    "KXCRITICSCOM-27-COY",
+    "KXCRITICSCOM-27-DRA",
+    "KXCRITICSCOM-27-SHE",
+    "KXCRITICSCOM-27-GAL",
+    "KXCRITICSCOM-27-FOC",
+    "KXCRITICSCOM-27-TEE",
+    "KXCRITICSCOM-27-PRO",
+    "KXCRITICSCOM-27-TIE"
+   ],
+   "expected_close": "2027-01-03T15:00:00+00:00",
+   "opening_commit": "9059fdc1003d7f20eb386460fc03bc9774f2b47a",
+   "cache_refreshed_at": "2026-10-13T08:42:09+00:00",
+   "cycle_row": "2026-10-13T08:41:54+00:00,1,,1,227,227,0,0,123,1,1,0,15.46,54.16,69.69",
+   "legs_at_open": [
+    {
+     "ticker": "KXCRITICSCOM-27-DEB",
+     "name": "The Debut",
+     "yes_ask": 0.19,
+     "ask_size": "132.45",
+     "fee_c": 0.1
+    },
+    {
+     "ticker": "KXCRITICSCOM-27-WIL",
+     "name": "Wild Horse Nine",
+     "yes_ask": 0.06,
+     "ask_size": "828.89",
+     "fee_c": 0.04
+    },
+    {
+     "ticker": "KXCRITICSCOM-27-INV",
+     "name": "The Invite",
+     "yes_ask": 0.2,
+     "ask_size": "15.00",
+     "fee_c": 0.11
+    },
+    {
+     "ticker": "KXCRITICSCOM-27-CLU",
+     "name": "Club Kid",
+     "yes_ask": 0.15,
+     "ask_size": "1.00",
+     "fee_c": 0.09
+    },
+    {
+     "ticker": "KXCRITICSCOM-27-FUR",
+     "name": "The Further Mis-Adventures of Cliff Booth",
+     "yes_ask": 0.02,
+     "ask_size": "1437.45",
+     "fee_c": 0.02
+    },
+    {
+     "ticker": "KXCRITICSCOM-27-DIG",
+     "name": "Digger",
+     "yes_ask": 0.02,
+     "ask_size": "3436.45",
+     "fee_c": 0.02
+    },
+    {
+     "ticker": "KXCRITICSCOM-27-ILO",
+     "name": "I Love Boosters",
+     "yes_ask": 0.02,
+     "ask_size": "38.45",
+     "fee_c": 0.02
+    },
+    {
+     "ticker": "KXCRITICSCOM-27-DEV",
+     "name": "The Devil Wears Prada 2",
+     "yes_ask": 0.02,
+     "ask_size": "882.45",
+     "fee_c": 0.02
+    },
+    {
+     "ticker": "KXCRITICSCOM-27-COY",
+     "name": "Coyote vs. Acme",
+     "yes_ask": 0.09,
+     "ask_size": "18.79",
+     "fee_c": 0.06
+    },
+    {
+     "ticker": "KXCRITICSCOM-27-DRA",
+     "name": "The Drama",
+     "yes_ask": 0.02,
+     "ask_size": "49.45",
+     "fee_c": 0.02
+    },
+    {
+     "ticker": "KXCRITICSCOM-27-SHE",
+     "name": "The Sheep Detectives",
+     "yes_ask": 0.03,
+     "ask_size": "33.03",
+     "fee_c": 0.02
+    },
+    {
+     "ticker": "KXCRITICSCOM-27-GAL",
+     "name": "The Gallerist",
+     "yes_ask": 0.01,
+     "ask_size": "2424.87",
+     "fee_c": 0.01
+    },
+    {
+     "ticker": "KXCRITICSCOM-27-FOC",
+     "name": "Focker-in-Law",
+     "yes_ask": 0.01,
+     "ask_size": "3530.99",
+     "fee_c": 0.01
+    },
+    {
+     "ticker": "KXCRITICSCOM-27-TEE",
+     "name": "Teenage Sex and Death at Camp Miasma",
+     "yes_ask": 0.02,
+     "ask_size": "1596.45",
+     "fee_c": 0.02
+    },
+    {
+     "ticker": "KXCRITICSCOM-27-PRO",
+     "name": "Project Hail Mary",
+     "yes_ask": 0.02,
+     "ask_size": "49.45",
+     "fee_c": 0.02
+    },
+    {
+     "ticker": "KXCRITICSCOM-27-TIE",
+     "name": "Tie",
+     "yes_ask": 0.02,
+     "ask_size": "109.77",
+     "fee_c": 0.02
+    }
+   ],
+   "coverage_at_open": "CATCH_ALL_MARKET",
+   "title": "Critics Choice Awards: Best Comedy",
+   "coverage_now": {
+    "proven": false,
+    "method": "NOT_PROVEN",
+    "reasons": [
+     "strikes: no todas las patas son strikes",
+     "enfrentamiento: el título no es un enfrentamiento 'A vs B'",
+     "lista de opciones abierta o no demostrada: un resultado no listado haría que todas las patas YES paguen 0"
+    ],
+    "residuals": [],
+    "open_list_evidence": [
+     "KXCRITICSCOM-27-DEB: The market will close and expire early following nominations being released (if The Debut is not nominated) or the awards show.",
+     "KXCRITICSCOM-27-WIL: The market will close and expire early following nominations being released (if Wild Horse Nine is not nominated) or the awards show.",
+     "KXCRITICSCOM-27-INV: The market will close and expire early following nominations being released (if The Invite is not nominated) or the awards show.",
+     "KXCRITICSCOM-27-CLU: The market will close and expire early following nominations being released (if Club Kid is not nominated) or the awards show.",
+     "KXCRITICSCOM-27-FUR: The market will close and expire early following nominations being released (if The Further Mis-Adventures of Cliff Booth is not nominated) or the awards show.",
+     "KXCRITICSCOM-27-DIG: The market will close and expire early following nominations being released (if Digger is not nominated) or the awards show.",
+     "KXCRITICSCOM-27-ILO: The market will close and expire early following nominations being released (if I Love Boosters is not nominated) or the awards show.",
+     "KXCRITICSCOM-27-DEV: The market will close and expire early following nominations being released (if The Devil Wears Prada 2 is not nominated) or the awards show.",
+     "KXCRITICSCOM-27-COY: The market will close and expire early following nominations being released (if Coyote vs. Acme is not nominated) or the awards show.",
+     "KXCRITICSCOM-27-DRA: The market will close and expire early following nominations being released (if The Drama is not nominated) or the awards show.",
+     "KXCRITICSCOM-27-SHE: The market will close and expire early following nominations being released (if The Sheep Detectives is not nominated) or the awards show.",
+     "KXCRITICSCOM-27-GAL: The market will close and expire early following nominations being released (if The Gallerist is not nominated) or the awards show.",
+     "KXCRITICSCOM-27-FOC: The market will close and expire early following nominations being released (if Focker-in-Law is not nominated) or the awards show.",
+     "KXCRITICSCOM-27-TEE: The market will close and expire early following nominations being released (if Teenage Sex and Death at Camp Miasma is not nominated) or the awards show.",
+     "KXCRITICSCOM-27-PRO: The market will close and expire early following nominations being released (if Project Hail Mary is not nominated) or the awards show.",
+     "KXCRITICSCOM-27-TIE: The market will close and expire early following nominations being released (if Tie is not nominated) or the awards show."
+    ]
+   },
+   "scenarios": {
+    "outlay": 8.924,
+    "scenarios": [
+     {
+      "scenario": "gana una de las patas listadas",
+      "payout": 9.0,
+      "net": 0.07600000000000051
+     },
+     {
+      "scenario": "gana una opción no listada / ninguna listada",
+      "payout": 0.0,
+      "net": -8.924
+     }
+    ],
+    "net_min": -8.924,
+    "net_max": 0.07600000000000051,
+    "max_loss": 8.924,
+    "undetermined": [],
+    "net_min_pct": -1.0
+   },
+   "legs_now": [
+    {
+     "ticker": "KXCRITICSCOM-27-DEB",
+     "status": "active",
+     "result": "",
+     "best_yes_bid": 0.14,
+     "sellable": 9.0,
+     "proceeds": 1.26,
+     "fee": 0.08
+    },
+    {
+     "ticker": "KXCRITICSCOM-27-WIL",
+     "status": "active",
+     "result": "",
+     "best_yes_bid": 0.05,
+     "sellable": 9.0,
+     "proceeds": 0.45,
+     "fee": 0.03
+    },
+    {
+     "ticker": "KXCRITICSCOM-27-INV",
+     "status": "active",
+     "result": "",
+     "best_yes_bid": 0.16,
+     "sellable": 9.0,
+     "proceeds": 1.44,
+     "fee": 0.09
+    },
+    {
+     "ticker": "KXCRITICSCOM-27-CLU",
+     "status": "active",
+     "result": "",
+     "best_yes_bid": 0.13,
+     "sellable": 9.0,
+     "proceeds": 1.17,
+     "fee": 0.08
+    },
+    {
+     "ticker": "KXCRITICSCOM-27-FUR",
+     "status": "active",
+     "result": "",
+     "best_yes_bid": 0.01,
+     "sellable": 9.0,
+     "proceeds": 0.09,
+     "fee": 0.01
+    },
+    {
+     "ticker": "KXCRITICSCOM-27-DIG",
+     "status": "active",
+     "result": "",
+     "best_yes_bid": 0.01,
+     "sellable": 9.0,
+     "proceeds": 0.09,
+     "fee": 0.01
+    },
+    {
+     "ticker": "KXCRITICSCOM-27-ILO",
+     "status": "active",
+     "result": "",
+     "best_yes_bid": 0.01,
+     "sellable": 9.0,
+     "proceeds": 0.09,
+     "fee": 0.01
+    },
+    {
+     "ticker": "KXCRITICSCOM-27-DEV",
+     "status": "active",
+     "result": "",
+     "best_yes_bid": 0.01,
+     "sellable": 9.0,
+     "proceeds": 0.09,
+     "fee": 0.01
+    },
+    {
+     "ticker": "KXCRITICSCOM-27-COY",
+     "status": "active",
+     "result": "",
+     "best_yes_bid": 0.02,
+     "sellable": 9.0,
+     "proceeds": 0.18,
+     "fee": 0.02
+    },
+    {
+     "ticker": "KXCRITICSCOM-27-DRA",
+     "status": "active",
+     "result": "",
+     "best_yes_bid": 0.01,
+     "sellable": 9.0,
+     "proceeds": 0.09,
+     "fee": 0.01
+    },
+    {
+     "ticker": "KXCRITICSCOM-27-SHE",
+     "status": "active",
+     "result": "",
+     "best_yes_bid": 0.01,
+     "sellable": 9.0,
+     "proceeds": 0.09,
+     "fee": 0.01
+    },
+    {
+     "ticker": "KXCRITICSCOM-27-GAL",
+     "status": "active",
+     "result": "",
+     "best_yes_bid": null,
+     "sellable": 0.0,
+     "proceeds": 0.0,
+     "fee": 0.0
+    },
+    {
+     "ticker": "KXCRITICSCOM-27-FOC",
+     "status": "active",
+     "result": "",
+     "best_yes_bid": null,
+     "sellable": 0.0,
+     "proceeds": 0.0,
+     "fee": 0.0
+    },
+    {
+     "ticker": "KXCRITICSCOM-27-TEE",
+     "status": "active",
+     "result": "",
+     "best_yes_bid": 0.01,
+     "sellable": 9.0,
+     "proceeds": 0.09,
+     "fee": 0.01
+    },
+    {
+     "ticker": "KXCRITICSCOM-27-PRO",
+     "status": "active",
+     "result": "",
+     "best_yes_bid": 0.01,
+     "sellable": 9.0,
+     "proceeds": 0.09,
+     "fee": 0.01
+    },
+    {
+     "ticker": "KXCRITICSCOM-27-TIE",
+     "status": "active",
+     "result": "",
+     "best_yes_bid": 0.01,
+     "sellable": 9.0,
+     "proceeds": 0.09,
+     "fee": 0.01
+    }
+   ],
+   "exit_value_now": 4.92,
+   "mark_to_market_pnl": -4.004,
+   "fully_sellable_now": false,
+   "recommendation": "Reclasificar como ESPECULATIVA (cobertura NOT_PROVEN): gana +0.076 si gana una película listada y pierde 8.924 si gana una no listada. NO cerrar automáticamente: cerrarla hoy en paper realizaría -4.004 USD (vender las 16 patas al bid, NO todas vendibles por profundidad). Opción recomendada: mantenerla abierta SIN tocar el ledger, marcada en reports/audit como posición especulativa abierta por error y EXCLUIDA de las métricas de arbitraje; registrar su resultado real al liquidarse como evidencia del riesgo. Cerrarla (y cómo registrarlo) requiere tu decisión explícita."
+  }
+ ]
+}

@@ -68,6 +68,46 @@ def evaluate(strategy, cand, books, budget, bot, args):
     return strike_inconsistency.evaluate(cand, books, **kw)
 
 
+def audit_and_gate(strategy, client, cand, r, books, bot, args, ts, store):
+    """Re-verifica con libros tras la latencia + escenarios + estrés. Solo un
+    ARBITRAJE_GARANTIZADO queda ejecutable (y con los costos de T1)."""
+    from dataclasses import replace
+    from src.execution_check import AUDIT_FIELDS, audit_opportunity, audit_row
+    from src.guarantee import no_subset_outcomes, strike_pair_outcomes
+    tickers = [t for t, _, _ in r.legs]
+    if strategy == buy_all_no.STRATEGY:
+        k = len(tickers)
+        outcomes = lambda c: no_subset_outcomes(c, k)  # noqa: E731
+        cov = {"proven": True, "method": "MUTUALLY_EXCLUSIVE_NO_SUBSET",
+               "reasons": ["a lo sumo una pata YES (mutually_exclusive de la API); "
+                           "no requiere exhaustividad"]}
+    else:
+        outcomes = strike_pair_outcomes
+        cov = {"proven": True, "method": "SAME_VARIABLE_STRIKE_PAIR",
+               "reasons": ["misma regla normalizada y misma raíz de ticker"]}
+    t0 = {t: {"book": books[t], "raw": books[t].get("_raw"),
+              "fetched_at": books[t].get("_fetched_at")} for t in tickers}
+    try:
+        a = audit_opportunity(
+            client=client, strategy=strategy, event_ticker=r.event_ticker, key=r.key,
+            tickers=tickers, sides=list(r.sides), contracts=r.contracts, t0_books=t0,
+            outcomes_fn=outcomes, net_expected=r.net_profit,
+            fee_coef=cand.get("coef", 0.07), slippage_per_contract=args.slippage,
+            coverage=cov, ts=ts)
+    except Exception as e:  # noqa: BLE001 - sin auditoría no hay posición
+        log.warning("    [%s] auditoría de %s falló: %s", strategy, r.key, e)
+        return replace(r, executable=False, reason="NO_VERIFICABLE_AUDITORIA_FALLIDA")
+    store.log("audit.csv", AUDIT_FIELDS, audit_row(ts, strategy, r.event_ticker, r.key, a))
+    log.info("    [%s] AUDITORIA %s: %s | ejecución %s | neto mín %s",
+             strategy, r.key, a["classification"], a["exec_status"], a["net_min"])
+    if not a["guaranteed"]:
+        return replace(r, executable=False, reason=a["classification"])
+    ex = a["exec"]
+    return replace(r, cost=ex["cost"], pair_cost=ex["cost"] / r.contracts,
+                   estimated_fees=ex["fees"], net_profit=a["net_min"],
+                   net_profit_per_contract=a["net_min"] / r.contracts)
+
+
 def run_strategy(strategy, client, events, args, bot, ts):
     t0 = time.perf_counter()
     store = StrategyStore(ROOT, strategy, bot.starting_capital_usd,
@@ -97,7 +137,10 @@ def run_strategy(strategy, client, events, args, bot, ts):
                 reasons["BOOK_ERROR"] += 1
                 log.warning("    [%s] error de libro: %s", strategy, e)
                 continue
-            results.append((c, evaluate(strategy, c, books, budget, bot, args)))
+            r = evaluate(strategy, c, books, budget, bot, args)
+            if r.executable:
+                r = audit_and_gate(strategy, client, c, r, books, bot, args, ts, store)
+            results.append((c, r))
     row.update(evaluated=len(results), timeouts=timeouts, errors=errors,
                t_books_s=round(time.perf_counter() - t_books, 2))
 

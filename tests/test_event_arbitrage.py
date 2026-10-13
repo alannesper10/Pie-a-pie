@@ -10,16 +10,26 @@ from src.event_arbitrage import (
 
 
 def mk(ticker, ask, sub="", vol="500", size="100", status="active", **kw):
-    return {
+    rules = ("If the game PSG vs Le Mans ends in a tie, then the market resolves to Yes."
+             if sub.lower() == "tie" else f"If {sub} wins the PSG vs Le Mans game, then Yes.")
+    m = {
         "ticker": ticker, "market_type": "binary", "status": status,
         "result": "", "yes_ask_dollars": str(ask), "yes_ask_size_fp": size,
-        "volume_24h_fp": vol, "yes_sub_title": sub, **kw,
+        "volume_24h_fp": vol, "yes_sub_title": sub, "rules_primary": rules,
     }
+    m.update(kw)
+    return m
 
 
-def event(markets, me=True):
-    return {"event_ticker": "EV", "title": "t", "mutually_exclusive": me,
+def event(markets, me=True, title="PSG vs Le Mans"):
+    """Por defecto un partido 'A vs B' (cobertura demostrable con la pata de empate)."""
+    return {"event_ticker": "EV", "title": title, "mutually_exclusive": me,
             "markets": markets}
+
+
+def game(asks=(0.3, 0.3, 0.3), **kw):
+    return [mk("A", asks[0], "PSG", **kw), mk("B", asks[1], "Le Mans", **kw),
+            mk("T", asks[2], "Tie", **kw)]
 
 
 def test_orderbook_bids_become_yes_asks():
@@ -33,50 +43,62 @@ def test_old_cents_orderbook_format():
     assert yes_asks_from_orderbook(data) == [(0.40, 10.0)]
 
 
-def test_null_outcome_market_confirms_exhaustive():
-    ev = event([mk("A", 0.3, "PSG"), mk("B", 0.3, "Le Mans"), mk("T", 0.3, "Tie")])
-    assert check_exhaustive(ev) == (True, "CATCH_ALL_MARKET")
+def test_head_to_head_with_tie_is_proven():
+    assert check_exhaustive(event(game())) == (True, "HEAD_TO_HEAD_WITH_TIE")
+
+
+def test_regression_tie_is_not_a_catch_all_for_open_lists():
+    # KXCRITICSCOM-27: premio con lista abierta + "Tie". Antes era exhaustivo.
+    ms = [mk(f"F{i}", 0.05, f"Film {i}") for i in range(15)] + [mk("TIE", 0.02, "Tie")]
+    ev = event(ms, title="Critics Choice Awards: Best Comedy")
+    assert check_exhaustive(ev) == (False, "EXHAUSTIVENESS_UNCONFIRMED")
 
 
 def test_other_does_not_cover_nobody_before_deadline():
-    ev = event([mk("A", 0.3, "Claude"), mk("O", 0.1, "Other")])
+    ev = event([mk("A", 0.3, "Claude"), mk("O", 0.1, "Other")], title="First AI to 1550")
     assert check_exhaustive(ev)[0] is False
 
 
 def test_named_outcomes_without_catch_all_are_unconfirmed():
-    ev = event([mk("A", 0.3, "Alice"), mk("B", 0.3, "Bob")])
+    ev = event([mk("A", 0.3, "Alice"), mk("B", 0.3, "Bob")], title="Who will win?")
     assert check_exhaustive(ev)[0] is False
+
+
+def _strike(t, ask, st, **kw):
+    return mk(t, ask, rules_primary="If the high temperature is above # degrees, then Yes.",
+              strike_type=st, **kw)
 
 
 def test_strike_ranges_covering_line():
     ev = event([
-        mk("L", 0.2, strike_type="less", cap_strike=60),
-        mk("M", 0.5, strike_type="between", floor_strike=60, cap_strike=70),
-        mk("H", 0.2, strike_type="greater", floor_strike=70),
-    ])
-    assert check_exhaustive(ev) == (True, "STRIKES_COVER_RANGE")
+        _strike("L", 0.2, "less", cap_strike=60),
+        _strike("M", 0.5, "between", floor_strike=60, cap_strike=70),
+        _strike("H", 0.2, "greater", floor_strike=70),
+    ], title="High temp")
+    assert check_exhaustive(ev) == (True, "STRIKES_PARTITION")
 
 
-def test_strike_ranges_with_gap_are_rejected_unless_tolerated():
+def test_strike_ranges_with_gap_are_rejected_without_tolerance():
     ev = event([
-        mk("L", 0.2, strike_type="less", cap_strike=60),
-        mk("H", 0.2, strike_type="greater", floor_strike=61),
-    ])
+        _strike("L", 0.2, "less", cap_strike=60),
+        _strike("H", 0.2, "greater", floor_strike=61),
+    ], title="High temp")
     assert check_exhaustive(ev)[0] is False
-    assert check_exhaustive(ev, gap_tol=1)[0] is True
+    assert check_exhaustive(ev, gap_tol=1)[0] is False      # gap_tol ya no relaja
 
 
 def test_prefilter_rejects_non_exclusive_and_low_volume():
-    ms = [mk("A", 0.3, "Alice"), mk("O", 0.1, "Tie")]
+    ms = game()
     assert prefilter_event(event(ms, me=False))[1] == "NOT_MUTUALLY_EXCLUSIVE"
     assert prefilter_event(event(ms), min_volume_24h=10_000)[1] == "LOW_VOLUME"
 
 
 def test_prefilter_skips_settled_no_legs_and_rejects_determined_events():
-    ms = [mk("A", 0.4, "Alice"), mk("O", 0.5, "Tie"),
-          mk("B", 0.0, "Bob", status="finalized", result="no")]
+    ms = [mk("A", 0.4, "PSG"), mk("O", 0.5, "Tie"),
+          mk("B", 0.0, "Le Mans", status="finalized", result="no")]
     pre, reason = prefilter_event(event(ms))
-    assert reason == "OK"
+    assert reason == "OK" and pre.exhaustive_reason == "HEAD_TO_HEAD_WITH_TIE"
+    assert pre.coverage["proven"] is True
     assert [m["ticker"] for m in pre.legs] == ["A", "O"]
     assert math.isclose(pre.prelim_sum, 0.9)
 
@@ -85,10 +107,10 @@ def test_prefilter_skips_settled_no_legs_and_rejects_determined_events():
 
 
 def test_prefilter_requires_open_legs_with_asks():
-    ms = [mk("A", 0.4, "Alice", status="closed"), mk("O", 0.5, "Tie")]
+    ms = game()
+    ms[0]["status"] = "closed"
     assert prefilter_event(event(ms))[1] == "LEG_NOT_TRADABLE"
-    ms = [mk("A", 1.0, "Alice"), mk("O", 0.5, "Tie")]
-    assert prefilter_event(event(ms))[1] == "LEG_WITHOUT_ASK"
+    assert prefilter_event(event(game((1.0, 0.5, 0.3))))[1] == "LEG_WITHOUT_ASK"
 
 
 def test_taker_fee_rounds_up_to_cent():
@@ -96,9 +118,8 @@ def test_taker_fee_rounds_up_to_cent():
     assert taker_fee([(0.5, 100)], 0.07) == 1.75
 
 
-def _pre(n=3):
-    ms = [mk(f"M{i}", 0.3, f"x{i}") for i in range(n - 1)] + [mk("O", 0.3, "Tie")]
-    return prefilter_event(event(ms), max_prelim_sum=10)[0]
+def _pre():
+    return prefilter_event(event(game()), max_prelim_sum=10)[0]
 
 
 def test_bundle_with_real_edge_is_executable():

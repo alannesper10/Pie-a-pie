@@ -7,13 +7,16 @@ from src.tracking import (
 
 
 def mk(ticker, ask, sub, **kw):
+    rules = ("If the a vs b game ends in a tie, then Yes." if sub == "Tie"
+             else f"If {sub} wins the a vs b game, then Yes.")
     return {"ticker": ticker, "market_type": "binary", "status": "active",
             "result": "", "yes_ask_dollars": str(ask), "yes_ask_size_fp": "100",
-            "volume_24h_fp": "500", "yes_sub_title": sub, **kw}
+            "volume_24h_fp": "500", "yes_sub_title": sub, "rules_primary": rules, **kw}
 
 
 def event(markets):
-    return {"event_ticker": "EV", "title": "t", "mutually_exclusive": True,
+    # Partido "a vs b" + empate: cobertura demostrable (ver src/guarantee.py).
+    return {"event_ticker": "EV", "title": "a vs b", "mutually_exclusive": True,
             "markets": markets}
 
 

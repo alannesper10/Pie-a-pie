@@ -30,7 +30,11 @@ class ScannerConfig:
     min_event_volume_24h: float = 100.0   # contratos, sumando todas las patas
     min_leg_ask_size: float = 1.0         # cada pata necesita ask con tamaño
     max_prelim_sum: float = 1.05          # suma de YES ask (top of book) a considerar
-    min_sane_ask_sum: float = 0.90        # por debajo: sospechoso, revisar reglas
+    # Plausibilidad unificada con las demás estrategias: ganancia bruta > 10%
+    # SOBRE EL COSTO es sospechosa. (1 - s) / s > 0.10  <=>  s < 1 / 1.10.
+    # Antes era s < 0.90 (10% sobre el pago): una suma de 0.90 exacta (11.1%
+    # sobre el costo) pasaba el control (auditoría KXCRITICSCOM-27).
+    min_sane_ask_sum: float = 1 / 1.10
 
     # Límites por corrida.
     max_events_per_run: int = 50
