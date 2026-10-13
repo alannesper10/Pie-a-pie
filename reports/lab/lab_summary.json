@@ -1,0 +1,476 @@
+{
+ "run": {
+  "run_id": "replay-live-20261013T142551-s7-143357",
+  "started": "2026-10-13T17:33:57.635+00:00",
+  "mode": "replay",
+  "seed": 7,
+  "source_run": "live-20261013T142551",
+  "args": "{\"cmd\": \"replay\", \"ticks\": 10, \"interval_sec\": 30, \"latency_ms\": 500, \"seed\": 7, \"modules\": null, \"run\": \"live-20261013T142551\", \"notify\": false, \"top\": 50, \"max_events\": 300, \"kalshi_pages\": 20}"
+ },
+ "ticks": [
+  [
+   "cross_exchange",
+   10,
+   0.0004533099999207479,
+   0
+  ],
+  [
+   "liquidity_provision",
+   10,
+   0.0003638400000909314,
+   0
+  ],
+  [
+   "polymarket_buy_all_no",
+   10,
+   0.005944810000119105,
+   0
+  ],
+  [
+   "prediction_cross_venue",
+   10,
+   8.009999964997405e-06,
+   0
+  ],
+  [
+   "triangular",
+   10,
+   0.0004248399999141839,
+   0
+  ]
+ ],
+ "strategies": {
+  "cross_exchange": {
+   "strategy": "cross_exchange",
+   "evidence": {
+    "observed": 147,
+    "estimated_positive": 0,
+    "simulated_executed": 0,
+    "simulated_profitable": 0,
+    "realized_trades": 0,
+    "not_realized_trades": 0
+   },
+   "reasons": {
+    "NO_EDGE_AFTER_FEES": 147
+   },
+   "classification": {
+    "SIN_EDGE": 147
+   },
+   "nature": "arbitrage",
+   "accepted_not_guaranteed": 0,
+   "net_simulated_usd": 0,
+   "capital_committed_usd": 0,
+   "return_on_committed": null,
+   "losses": {
+    "n": 0,
+    "usd": 0
+   },
+   "distribution_net_pct": null,
+   "duration_ticks": null,
+   "periods": {
+    "n": 0,
+    "positive_share": null,
+    "std": null
+   },
+   "stress": {
+    "1.5": {
+     "estimated_positive": 0,
+     "simulated_net": 0
+    },
+    "2.0": {
+     "estimated_positive": 0,
+     "simulated_net": 0
+    }
+   },
+   "out_of_sample": {
+    "split_tick": 5,
+    "threshold": 0.0,
+    "in_sample_trades": 0,
+    "in_sample_net": 0,
+    "out_of_sample_trades": 0,
+    "out_of_sample_net": 0
+   },
+   "ledger": {
+    "strategy": "cross_exchange",
+    "capital": 100.0,
+    "cash": 100.0,
+    "locked": 0.0,
+    "peak_locked": 0.0,
+    "realized": 0.0,
+    "trades": 0,
+    "return_on_capital": 0.0
+   },
+   "verdict": {
+    "label": "SIN EVIDENCIA SUFICIENTE",
+    "why": "0 ejecuciones simuladas (mín 30), 0 períodos (mín 6)"
+   }
+  },
+  "liquidity_provision": {
+   "strategy": "liquidity_provision",
+   "evidence": {
+    "observed": 33,
+    "estimated_positive": 0,
+    "simulated_executed": 33,
+    "simulated_profitable": 0,
+    "realized_trades": 33,
+    "not_realized_trades": 0
+   },
+   "reasons": {
+    "FILL": 33
+   },
+   "classification": {
+    "SIN_EDGE": 33
+   },
+   "nature": "speculative",
+   "accepted_not_guaranteed": 0,
+   "net_simulated_usd": -0.4113054752914267,
+   "capital_committed_usd": 660.0,
+   "return_on_committed": -0.0006231901140779192,
+   "losses": {
+    "n": 33,
+    "usd": -0.4113054752914267
+   },
+   "distribution_net_pct": {
+    "p5": -0.0009501561603670891,
+    "p25": -0.0007432245999752389,
+    "p50": -0.0005908608952723068,
+    "p75": -0.0004980053854592166,
+    "p95": -0.0003560118045091636,
+    "mean": -0.0006231901140779192,
+    "std": 0.0001981473190228588,
+    "n": 33
+   },
+   "duration_ticks": null,
+   "periods": {
+    "n": 2,
+    "positive_share": 0.0,
+    "std": 0.03599874657407738
+   },
+   "stress": {
+    "1.5": {
+     "estimated_positive": 0,
+     "simulated_net": -0.5763054752914267
+    },
+    "2.0": {
+     "estimated_positive": 0,
+     "simulated_net": -0.7413054752914267
+    }
+   },
+   "out_of_sample": {
+    "split_tick": 5,
+    "threshold": 0.0,
+    "in_sample_trades": 15,
+    "in_sample_net": 0,
+    "out_of_sample_trades": 0,
+    "out_of_sample_net": 0
+   },
+   "ledger": {
+    "strategy": "liquidity_provision",
+    "capital": 100.0,
+    "cash": 99.54462275412706,
+    "locked": 0.0,
+    "peak_locked": 60.0,
+    "realized": -0.4553772458729348,
+    "trades": 1,
+    "return_on_capital": -0.004553772458729348
+   },
+   "verdict": {
+    "label": "ESPECULATIVA (no es arbitraje)",
+    "why": "neto simulado -0.4113 USD; 33 ejecuciones simuladas (mín 30), 2 períodos (mín 6); neto simulado negativo"
+   }
+  },
+  "polymarket_buy_all_no": {
+   "strategy": "polymarket_buy_all_no",
+   "evidence": {
+    "observed": 319,
+    "estimated_positive": 0,
+    "simulated_executed": 0,
+    "simulated_profitable": 0,
+    "realized_trades": 0,
+    "not_realized_trades": 0
+   },
+   "reasons": {
+    "NO_BOOK_FOR_LEG": 149,
+    "NO_EDGE_AFTER_FEES_OR_MIN_SIZE": 110,
+    "BUDGET_TOO_SMALL": 60
+   },
+   "classification": {
+    "SIN_EDGE": 170,
+    "NO_VERIFICABLE": 149
+   },
+   "nature": "arbitrage",
+   "accepted_not_guaranteed": 0,
+   "net_simulated_usd": 0,
+   "capital_committed_usd": 0,
+   "return_on_committed": null,
+   "losses": {
+    "n": 0,
+    "usd": 0
+   },
+   "distribution_net_pct": null,
+   "duration_ticks": null,
+   "periods": {
+    "n": 0,
+    "positive_share": null,
+    "std": null
+   },
+   "stress": {
+    "1.5": {
+     "estimated_positive": 0,
+     "simulated_net": 0
+    },
+    "2.0": {
+     "estimated_positive": 0,
+     "simulated_net": 0
+    }
+   },
+   "out_of_sample": {
+    "split_tick": 5,
+    "threshold": 0.0,
+    "in_sample_trades": 0,
+    "in_sample_net": 0,
+    "out_of_sample_trades": 0,
+    "out_of_sample_net": 0
+   },
+   "ledger": {
+    "strategy": "polymarket_buy_all_no",
+    "capital": 100.0,
+    "cash": 100.0,
+    "locked": 0.0,
+    "peak_locked": 0.0,
+    "realized": 0.0,
+    "trades": 0,
+    "return_on_capital": 0.0
+   },
+   "verdict": {
+    "label": "SIN EVIDENCIA SUFICIENTE",
+    "why": "0 ejecuciones simuladas (mín 30), 0 períodos (mín 6)"
+   }
+  },
+  "prediction_cross_venue": {
+   "strategy": "prediction_cross_venue",
+   "evidence": {
+    "observed": 0,
+    "estimated_positive": 0,
+    "simulated_executed": 0,
+    "simulated_profitable": 0,
+    "realized_trades": 0,
+    "not_realized_trades": 0
+   },
+   "reasons": {},
+   "classification": {},
+   "nature": "unverifiable",
+   "accepted_not_guaranteed": 0,
+   "net_simulated_usd": 0,
+   "capital_committed_usd": 0,
+   "return_on_committed": null,
+   "losses": {
+    "n": 0,
+    "usd": 0
+   },
+   "distribution_net_pct": null,
+   "duration_ticks": null,
+   "periods": {
+    "n": 0,
+    "positive_share": null,
+    "std": null
+   },
+   "stress": {
+    "1.5": {
+     "estimated_positive": 0,
+     "simulated_net": 0
+    },
+    "2.0": {
+     "estimated_positive": 0,
+     "simulated_net": 0
+    }
+   },
+   "out_of_sample": {
+    "status": "INSUFICIENTES_TICKS"
+   },
+   "ledger": {
+    "strategy": "prediction_cross_venue",
+    "capital": 100.0,
+    "cash": 100.0,
+    "locked": 0.0,
+    "peak_locked": 0.0,
+    "realized": 0.0,
+    "trades": 0,
+    "return_on_capital": 0.0
+   },
+   "verdict": {
+    "label": "NO VERIFICABLE",
+    "why": "sin pares verificados a mano"
+   }
+  },
+  "triangular": {
+   "strategy": "triangular",
+   "evidence": {
+    "observed": 41,
+    "estimated_positive": 0,
+    "simulated_executed": 0,
+    "simulated_profitable": 0,
+    "realized_trades": 0,
+    "not_realized_trades": 0
+   },
+   "reasons": {
+    "NET_NEGATIVE_AFTER_COSTS": 41
+   },
+   "classification": {
+    "SIN_EDGE": 41
+   },
+   "nature": "arbitrage",
+   "accepted_not_guaranteed": 0,
+   "net_simulated_usd": 0,
+   "capital_committed_usd": 0,
+   "return_on_committed": null,
+   "losses": {
+    "n": 0,
+    "usd": 0
+   },
+   "distribution_net_pct": null,
+   "duration_ticks": null,
+   "periods": {
+    "n": 0,
+    "positive_share": null,
+    "std": null
+   },
+   "stress": {
+    "1.5": {
+     "estimated_positive": 0,
+     "simulated_net": 0
+    },
+    "2.0": {
+     "estimated_positive": 0,
+     "simulated_net": 0
+    }
+   },
+   "out_of_sample": {
+    "split_tick": 5,
+    "threshold": 0.0,
+    "in_sample_trades": 0,
+    "in_sample_net": 0,
+    "out_of_sample_trades": 0,
+    "out_of_sample_net": 0
+   },
+   "ledger": {
+    "strategy": "triangular",
+    "capital": 100.0,
+    "cash": 100.0,
+    "locked": 0.0,
+    "peak_locked": 0.0,
+    "realized": 0.0,
+    "trades": 0,
+    "return_on_capital": 0.0
+   },
+   "verdict": {
+    "label": "SIN EVIDENCIA SUFICIENTE",
+    "why": "0 ejecuciones simuladas (mín 30), 0 períodos (mín 6)"
+   }
+  }
+ },
+ "consolidated": {
+  "strategies": 5,
+  "capital_total_usd": 500.0,
+  "net_simulated_usd": -0.4113054752914267,
+  "realized_usd": -0.4553772458729348,
+  "executed": 33,
+  "profitable": 0,
+  "note": "suma de estrategias con capital separado; la liquidez se reclamó una sola vez por tick"
+ },
+ "external": {
+  "kalshi_current": {
+   "source": "data/ (GitHub Actions, solo lectura)",
+   "cycles": 384,
+   "opportunities": 62860,
+   "net_positive": 2,
+   "executable": 2,
+   "pnl_realized": 0
+  },
+  "buy_all_no": {
+   "source": "data/ (GitHub Actions, solo lectura)",
+   "cycles": 368,
+   "opportunities": 55082,
+   "net_positive": 0,
+   "executable": 0,
+   "pnl_realized": 0
+  },
+  "strike_inconsistency": {
+   "source": "data/ (GitHub Actions, solo lectura)",
+   "cycles": 368,
+   "opportunities": 54093,
+   "net_positive": 0,
+   "executable": 0,
+   "pnl_realized": 0
+  },
+  "funding_phase0": {
+   "source": "reports\\funding_basis",
+   "strategy": "funding_basis",
+   "phase0_generated_at": "2026-10-07T22:40:06+00:00",
+   "phase0_pairs_ok": 9,
+   "phase0_decisions": 2412,
+   "cycles": 45,
+   "cycles_note": "snapshots en vivo (par x tick)",
+   "opportunities": 0,
+   "net_positive": 0,
+   "executable": 0,
+   "discarded": 2412,
+   "discard_reasons": {
+    "COSTO_IDA_Y_VUELTA_SUPERA_FUNDING_ESPERADO": 2412,
+    "INFEASIBLE_MIN_SIZE_100USD_PAIRS": 2
+   },
+   "duration_minutes": {
+    "mean": null,
+    "median": null,
+    "n_closed": 0
+   },
+   "capital_per_bundle": {
+    "n": 9,
+    "mean": 59.492222222222225,
+    "median": 25.78,
+    "max": 185.1
+   },
+   "fees_per_opportunity": {
+    "n": 9,
+    "mean": 0.004260768259025944,
+    "median": 0.00400778447927327,
+    "max": 0.0049725402349971495
+   },
+   "fees_note": "costo ida+vuelta como fracción del nocional",
+   "size_available": {
+    "n": null
+   },
+   "cash": 100.0,
+   "locked": 0,
+   "open_positions": 0,
+   "closed_positions": 0,
+   "pnl_realized": 0.0,
+   "paper_fees": 0,
+   "paper_slippage": null,
+   "phase0_net_usd_total": 0,
+   "live_errors": 0
+  }
+ },
+ "errors": {
+  "total": 0,
+  "by_source": {}
+ },
+ "categories": {
+  "1. Entre exchanges (cripto)": [
+   "cross_exchange"
+  ],
+  "2. Basis spot-futuros / funding": [
+   "basis_funding"
+  ],
+  "3. Triangular": [
+   "triangular"
+  ],
+  "4. Mercados de predicción": [
+   "polymarket_buy_all_no",
+   "prediction_cross_venue"
+  ],
+  "5. Provisión de liquidez": [
+   "liquidity_provision"
+  ]
+ }
+}

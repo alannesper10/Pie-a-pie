@@ -228,7 +228,26 @@ def compose_daily_message(data_dir, reports_dir="reports/funding_basis", now=Non
         parts.append(f"[{tag}]\n" + "\n".join(_strategy_daily_lines(
             Path(data_dir) / "strategies" / name, since, starting_cash)))
     parts.append("[FUNDING_BASIS]\n" + "\n".join(_funding_daily_lines(reports_dir)))
+    lab = _lab_daily_lines(Path(reports_dir).parent / "lab" / "lab_summary.json")
+    if lab:
+        parts.append("[LAB]\n" + "\n".join(lab))
     return "Pie a pie: resumen diario", "\n\n".join(parts), 2, ["bar_chart"]
+
+
+def _lab_daily_lines(path):
+    """Resumen consolidado del laboratorio (último reporte generado en la PC)."""
+    d = load_json(path, {}) or {}
+    if not d:
+        return []
+    c = d.get("consolidated", {})
+    run = d.get("run", {})
+    lines = [f"Corrida {run.get('run_id', 'n/d')} ({str(run.get('started'))[:16]})"]
+    for name, m in (d.get("strategies") or {}).items():
+        ev = m.get("evidence", {})
+        lines.append(f"{name}: ejec {ev.get('simulated_executed', 0)} | rent "
+                     f"{ev.get('simulated_profitable', 0)} | {m.get('verdict', {}).get('label')}")
+    lines.append(f"Consolidado: neto sim US${c.get('net_simulated_usd', 0):+.2f}")
+    return lines
 
 
 def send(topic, title, body, priority=3, tags=(), click=None, timeout=10):

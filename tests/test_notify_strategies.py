@@ -73,6 +73,21 @@ def test_strategy_step_failure_is_reported_without_blaming_current(tmp_path):
     assert "BUY_ALL_NO" in body and "TimeoutError" in body
 
 
+def test_daily_summary_adds_lab_section_only_when_report_exists(tmp_path):
+    current_ok(tmp_path)
+    rep = tmp_path / "reports" / "funding_basis"
+    _, body, _, _ = notify.compose_daily_message(tmp_path, rep, starting_cash=100.0)
+    assert "[LAB]" not in body
+    save_json(tmp_path / "reports" / "lab" / "lab_summary.json", {
+        "run": {"run_id": "live-1", "started": NOW},
+        "consolidated": {"net_simulated_usd": -0.5},
+        "strategies": {"triangular": {"evidence": {"simulated_executed": 2, "simulated_profitable": 0},
+                                      "verdict": {"label": "SIN EVIDENCIA SUFICIENTE"}}}})
+    _, body, _, _ = notify.compose_daily_message(tmp_path, rep, starting_cash=100.0)
+    assert "[LAB]" in body and "triangular: ejec 2 | rent 0 | SIN EVIDENCIA SUFICIENTE" in body
+    assert "Consolidado: neto sim US$-0.50" in body
+
+
 def test_daily_summary_has_all_four_strategies(tmp_path):
     current_ok(tmp_path)
     strat(tmp_path, "buy_all_no", executable=True)

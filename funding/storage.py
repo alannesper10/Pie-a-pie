@@ -34,7 +34,9 @@ class Storage:
     def __init__(self, path):
         self.path = Path(path)
         self.path.parent.mkdir(parents=True, exist_ok=True)
-        self.db = sqlite3.connect(self.path)
+        # check_same_thread=False: el laboratorio la usa desde un hilo de trabajo
+        # (un solo hilo por vez por módulo).
+        self.db = sqlite3.connect(self.path, check_same_thread=False)
         self.db.executescript(SCHEMA)
 
     def close(self):

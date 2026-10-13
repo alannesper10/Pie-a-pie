@@ -15,6 +15,38 @@ arrancar. No hay órdenes reales, retiros ni claves de API.
 Cada estrategia tiene su propio capital virtual (US$100), posiciones, P&L,
 rachas y registros. Nunca se mezclan.
 
+## Laboratorio paralelo (`run_lab.py`, PC local)
+
+Motor común (`lab/core.py`) + un módulo por estrategia, todos en paralelo sobre
+un snapshot compartido por tick:
+
+| Módulo | Estrategia | Fuentes públicas |
+|---|---|---|
+| `cross_exchange` | Comprar en A, vender en B (inventario prepuesto) | libros spot Binance, Bybit, OKX, Kraken, Coinbase |
+| `triangular` | USDT → X → Y → USDT en un exchange | libros spot (BTC, ETH, SOL) |
+| `basis_funding` | Spot largo + perp corto (reusa `funding/`) | libros spot/perp + funding |
+| `polymarket_buy_all_no` | NO en k opciones de un evento negRisk (paga ≥ k−1) | Gamma + CLOB de Polymarket |
+| `prediction_cross_venue` | Kalshi ↔ Polymarket, **solo pares verificados a mano** | `config/prediction_pairs.json` |
+| `liquidity_provision` | Órdenes límite al mejor precio, modelo de cola | libros + trades públicos |
+
+- Evidencia separada: **OBSERVADO** (datos crudos) → **ESTIMADO** (neto con
+  costos modelados) → **SIMULADO** (latencia real con libro re-pedido, fills
+  parciales, pata fallida, oportunidad desaparecida).
+- Liquidez compartida: lo que una estrategia consume en un tick no está para otra.
+- Cada tick guarda los snapshots crudos: `run_lab.py replay` reproduce exacto.
+- Veredicto "RENTABLE" solo con ≥ 30 ejecuciones simuladas, ≥ 6 períodos,
+  neto > 0, fuera de muestra > 0, estrés de costos x1.5 > 0, ≥ 60% de
+  períodos positivos y P&L realizado (no solo esperado).
+
+```powershell
+python run_lab.py run --ticks 100 --interval-sec 45 --seed 7
+python run_lab.py replay --seed 7          # sobre los snapshots guardados
+python run_lab.py report --notify          # reports/lab/ + resumen [LAB] por ntfy
+python run_lab.py suggest-pairs            # candidatas Kalshi~Polymarket (UNVERIFIED)
+```
+
+`lab_data/` (SQLite) queda fuera de git. El laboratorio no escribe en `data/`.
+
 ## Comandos
 
 ```powershell
@@ -33,6 +65,20 @@ python run_funding.py live --once   # un tick de paper en vivo
 python run_funding.py live          # proceso persistente (Ctrl+C corta); --ws para WebSocket
 python run_funding.py report
 ```
+
+## Clasificación de oportunidades (`src/guarantee.py`)
+
+Cada oportunidad se clasifica como **ARBITRAJE_GARANTIZADO**, **ESPECULATIVA**,
+**NO_VERIFICABLE** o **SIN_EDGE**. Solo una garantizada abre posición paper.
+Garantizada exige: (1) cubrir TODOS los resultados con prueba positiva
+(partición completa de strikes de una variable, partido "A vs B" con empate, o
+verificación manual en `config/exhaustive_events.json`); (2) ejecución
+verificada sobre libros pedidos de nuevo tras la latencia (volumen completo,
+desfase entre patas ≤ 5 s); (3) neto mínimo > 0 con costos supuestos x1.5.
+Una pata "Tie" ya no cubre resultados no listados (auditoría KXCRITICSCOM-27).
+Auditorías: `data/opportunity_audit.csv`, `data/strategies/*/audit.csv`;
+libros T0/T1 de cada oportunidad auditada en `evidence/`. Posiciones abiertas:
+`python audit_positions.py` (solo lectura).
 
 ## Controles contra falsos positivos
 
