@@ -272,3 +272,42 @@ def study_carry(step_hours=24, history=None, session=None):
     (OUT / "research_carry.json").write_text(json.dumps(slim, indent=1, default=str,
                                                        ensure_ascii=False), encoding="utf-8")
     return out
+
+
+def study_ccl(db=Path("lab_data") / "watch.sqlite", runs=None):
+    """Diferenciales MEP/CCL entre emisoras sobre las recolecciones con fuente ccl."""
+    from ..store import LabStore
+    from . import ccl
+    store = LabStore(db)
+    runs = runs or [r for (r,) in store.db.execute(
+        "SELECT run_id FROM runs WHERE mode='collect' AND args LIKE '%ccl%' ORDER BY started")]
+    obs, ratio, ticks = [], {}, 0
+    for run in runs:
+        for snap in store.iter_snapshots(run):
+            if not snap.ccl:
+                continue
+            ticks += 1
+            for o in ccl.analyze_snapshot(snap):
+                o["run"] = run
+                obs.append(o)
+            for k, v in ccl.ratio_check(snap).items():
+                ratio.setdefault(k, {"CONSISTENTE": 0, "NO_CONSISTENTE": 0})[v["status"]] += 1
+    eps = ccl.episodes(obs)
+    out = {"generated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "runs": runs,
+           "ticks_with_ccl": ticks, "summary": ccl.summarize(obs), "ratio_check": ratio,
+           "episodes_potencial": eps,
+           "costs": {"byma_market_fee": ccl.BYMA_MARKET_FEE, "byma_status": "VERIFICADO (BYMA, 5 pb + IVA)",
+                     "broker_ar": ccl.BROKER_AR, "broker_us": ccl.BROKER_US,
+                     "broker_status": "ASSUMED (varía por broker)"},
+           "limitations": ["data912 es una API de terceros: su demora respecto del mercado no está verificada",
+                           "BYMA gratuito tiene ~20 min de demora: cruces con Nasdaq son NO_VERIFICABLE",
+                           "solo mejor punta: sin profundidad",
+                           "normas cambiarias vigentes (plazos mínimos de tenencia, cruces entre monedas) NO verificadas"]}
+    full = Path("lab_data") / "research"
+    full.mkdir(parents=True, exist_ok=True)
+    (full / "research_ccl.json").write_text(json.dumps({**out, "observations": obs}, indent=1,
+                                                       default=str), encoding="utf-8")
+    OUT.mkdir(parents=True, exist_ok=True)
+    (OUT / "research_ccl.json").write_text(json.dumps(out, indent=1, default=str, ensure_ascii=False),
+                                           encoding="utf-8")
+    return out

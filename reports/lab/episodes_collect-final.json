@@ -1,0 +1,295 @@
+{
+ "run_id": "replay-collect-final-s7-fresh-165721",
+ "source_run": "collect-final",
+ "code_version": null,
+ "summary": {
+  "cash_and_carry": {
+   "episodes": 15,
+   "with_executable_tick": 1,
+   "ticks_positive": 309,
+   "duration_s_median": 278.774,
+   "duration_s_max": 3274.735
+  },
+  "polymarket_buy_all_no": {
+   "episodes": 1,
+   "with_executable_tick": 0,
+   "ticks_positive": 1,
+   "duration_s_median": 0.0,
+   "duration_s_max": 0.0
+  }
+ },
+ "episodes": [
+  {
+   "strategy": "cash_and_carry",
+   "key": "binance|BTC/USDT:USDT-261225",
+   "first_tick": 0,
+   "last_tick": 53,
+   "ticks": 54,
+   "first_ts": "2026-10-13T18:21:42.835+00:00",
+   "last_ts": "2026-10-13T19:16:17.570+00:00",
+   "duration_s_min": 3274.735,
+   "duration_s_max": 3274.735,
+   "executable_at_verification": 0,
+   "net_estimated_mean": 0.5899487055555552,
+   "net_simulated_mean": null,
+   "categories": [
+    "NO_EJECUTABLE"
+   ]
+  },
+  {
+   "strategy": "cash_and_carry",
+   "key": "binance|BTC/USDT:USDT-270326",
+   "first_tick": 0,
+   "last_tick": 53,
+   "ticks": 54,
+   "first_ts": "2026-10-13T18:21:42.835+00:00",
+   "last_ts": "2026-10-13T19:16:17.570+00:00",
+   "duration_s_min": 3274.735,
+   "duration_s_max": 3274.735,
+   "executable_at_verification": 0,
+   "net_estimated_mean": 1.6654240055555551,
+   "net_simulated_mean": null,
+   "categories": [
+    "NO_EJECUTABLE"
+   ]
+  },
+  {
+   "strategy": "cash_and_carry",
+   "key": "binance|ETH/USDT:USDT-261225",
+   "first_tick": 0,
+   "last_tick": 53,
+   "ticks": 54,
+   "first_ts": "2026-10-13T18:21:42.835+00:00",
+   "last_ts": "2026-10-13T19:16:17.570+00:00",
+   "duration_s_min": 3274.735,
+   "duration_s_max": 3274.735,
+   "executable_at_verification": 54,
+   "net_estimated_mean": 0.23430667456789145,
+   "net_simulated_mean": 0.23381823664930831,
+   "categories": [
+    "ARBITRAJE_GARANTIZADO"
+   ]
+  },
+  {
+   "strategy": "cash_and_carry",
+   "key": "binance|ETH/USDT:USDT-270326",
+   "first_tick": 0,
+   "last_tick": 53,
+   "ticks": 54,
+   "first_ts": "2026-10-13T18:21:42.835+00:00",
+   "last_ts": "2026-10-13T19:16:17.570+00:00",
+   "duration_s_min": 3274.735,
+   "duration_s_max": 3274.735,
+   "executable_at_verification": 0,
+   "net_estimated_mean": 0.7627865009850733,
+   "net_simulated_mean": null,
+   "categories": [
+    "NO_EJECUTABLE"
+   ]
+  },
+  {
+   "strategy": "cash_and_carry",
+   "key": "bybit|BTC/USDT:USDT-261127",
+   "first_tick": 0,
+   "last_tick": 23,
+   "ticks": 24,
+   "first_ts": "2026-10-13T18:21:42.835+00:00",
+   "last_ts": "2026-10-13T18:46:37.205+00:00",
+   "duration_s_min": 1494.37,
+   "duration_s_max": 1549.461,
+   "executable_at_verification": 0,
+   "net_estimated_mean": 0.14186452958333753,
+   "net_simulated_mean": null,
+   "categories": [
+    "NO_EJECUTABLE"
+   ]
+  },
+  {
+   "strategy": "cash_and_carry",
+   "key": "bybit|ETH/USDT:USDT-261127",
+   "first_tick": 3,
+   "last_tick": 3,
+   "ticks": 1,
+   "first_ts": "2026-10-13T18:24:33.443+00:00",
+   "last_ts": "2026-10-13T18:24:33.443+00:00",
+   "duration_s_min": 0.0,
+   "duration_s_max": 56.189,
+   "executable_at_verification": 0,
+   "net_estimated_mean": 0.0030155969752791723,
+   "net_simulated_mean": null,
+   "categories": [
+    "NO_EJECUTABLE"
+   ]
+  },
+  {
+   "strategy": "cash_and_carry",
+   "key": "bybit|ETH/USDT:USDT-261127",
+   "first_tick": 7,
+   "last_tick": 33,
+   "ticks": 27,
+   "first_ts": "2026-10-13T18:28:18.627+00:00",
+   "last_ts": "2026-10-13T18:56:32.721+00:00",
+   "duration_s_min": 1694.094,
+   "duration_s_max": 1749.273,
+   "executable_at_verification": 0,
+   "net_estimated_mean": 0.007666155248361621,
+   "net_simulated_mean": null,
+   "categories": [
+    "NO_EJECUTABLE"
+   ]
+  },
+  {
+   "strategy": "cash_and_carry",
+   "key": "bybit|BTC/USDT:USDT-261127",
+   "first_tick": 25,
+   "last_tick": 29,
+   "ticks": 5,
+   "first_ts": "2026-10-13T18:48:28.475+00:00",
+   "last_ts": "2026-10-13T18:52:48.456+00:00",
+   "duration_s_min": 259.981,
+   "duration_s_max": 317.021,
+   "executable_at_verification": 0,
+   "net_estimated_mean": 0.18794960600000532,
+   "net_simulated_mean": null,
+   "categories": [
+    "NO_EJECUTABLE"
+   ]
+  },
+  {
+   "strategy": "cash_and_carry",
+   "key": "bybit|BTC/USDT:USDT-261127",
+   "first_tick": 31,
+   "last_tick": 33,
+   "ticks": 3,
+   "first_ts": "2026-10-13T18:54:40.588+00:00",
+   "last_ts": "2026-10-13T18:56:32.721+00:00",
+   "duration_s_min": 112.133,
+   "duration_s_max": 167.312,
+   "executable_at_verification": 0,
+   "net_estimated_mean": 0.18857998666667442,
+   "net_simulated_mean": null,
+   "categories": [
+    "NO_EJECUTABLE"
+   ]
+  },
+  {
+   "strategy": "cash_and_carry",
+   "key": "bybit|BTC/USDT:USDT-261127",
+   "first_tick": 35,
+   "last_tick": 38,
+   "ticks": 4,
+   "first_ts": "2026-10-13T18:58:22.958+00:00",
+   "last_ts": "2026-10-13T19:01:47.097+00:00",
+   "duration_s_min": 204.139,
+   "duration_s_max": 259.34,
+   "executable_at_verification": 0,
+   "net_estimated_mean": 0.14523932999999623,
+   "net_simulated_mean": null,
+   "categories": [
+    "NO_EJECUTABLE"
+   ]
+  },
+  {
+   "strategy": "cash_and_carry",
+   "key": "bybit|ETH/USDT:USDT-261127",
+   "first_tick": 35,
+   "last_tick": 36,
+   "ticks": 2,
+   "first_ts": "2026-10-13T18:58:22.958+00:00",
+   "last_ts": "2026-10-13T18:59:53.854+00:00",
+   "duration_s_min": 90.896,
+   "duration_s_max": 148.489,
+   "executable_at_verification": 0,
+   "net_estimated_mean": 0.004660471095265115,
+   "net_simulated_mean": null,
+   "categories": [
+    "NO_EJECUTABLE"
+   ]
+  },
+  {
+   "strategy": "cash_and_carry",
+   "key": "bybit|ETH/USDT:USDT-261127",
+   "first_tick": 39,
+   "last_tick": 44,
+   "ticks": 6,
+   "first_ts": "2026-10-13T19:02:42.298+00:00",
+   "last_ts": "2026-10-13T19:07:21.072+00:00",
+   "duration_s_min": 278.774,
+   "duration_s_max": 367.698,
+   "executable_at_verification": 0,
+   "net_estimated_mean": 0.00682270821213946,
+   "net_simulated_mean": null,
+   "categories": [
+    "NO_EJECUTABLE"
+   ]
+  },
+  {
+   "strategy": "cash_and_carry",
+   "key": "bybit|BTC/USDT:USDT-261127",
+   "first_tick": 40,
+   "last_tick": 53,
+   "ticks": 14,
+   "first_ts": "2026-10-13T19:03:37.544+00:00",
+   "last_ts": "2026-10-13T19:16:17.570+00:00",
+   "duration_s_min": 760.026,
+   "duration_s_max": 760.026,
+   "executable_at_verification": 0,
+   "net_estimated_mean": 0.17009205857142934,
+   "net_simulated_mean": null,
+   "categories": [
+    "NO_EJECUTABLE"
+   ]
+  },
+  {
+   "strategy": "cash_and_carry",
+   "key": "bybit|ETH/USDT:USDT-261127",
+   "first_tick": 46,
+   "last_tick": 50,
+   "ticks": 5,
+   "first_ts": "2026-10-13T19:09:48.628+00:00",
+   "last_ts": "2026-10-13T19:13:30.570+00:00",
+   "duration_s_min": 221.942,
+   "duration_s_max": 276.988,
+   "executable_at_verification": 0,
+   "net_estimated_mean": 0.005886919759655734,
+   "net_simulated_mean": null,
+   "categories": [
+    "NO_EJECUTABLE"
+   ]
+  },
+  {
+   "strategy": "cash_and_carry",
+   "key": "bybit|ETH/USDT:USDT-261127",
+   "first_tick": 52,
+   "last_tick": 53,
+   "ticks": 2,
+   "first_ts": "2026-10-13T19:15:21.231+00:00",
+   "last_ts": "2026-10-13T19:16:17.570+00:00",
+   "duration_s_min": 56.339,
+   "duration_s_max": 56.339,
+   "executable_at_verification": 0,
+   "net_estimated_mean": 0.005370013177490127,
+   "net_simulated_mean": null,
+   "categories": [
+    "NO_EJECUTABLE"
+   ]
+  },
+  {
+   "strategy": "polymarket_buy_all_no",
+   "key": "polymarket|ucl-rcl-spo-2026-10-13",
+   "first_tick": 13,
+   "last_tick": 13,
+   "ticks": 1,
+   "first_ts": "2026-10-13T18:35:25.653+00:00",
+   "last_ts": "2026-10-13T18:35:25.653+00:00",
+   "duration_s_min": 0.0,
+   "duration_s_max": 55.683,
+   "executable_at_verification": 0,
+   "net_estimated_mean": 5.000000000000089e-05,
+   "net_simulated_mean": null,
+   "categories": [
+    "NO_EJECUTABLE"
+   ]
+  }
+ ]
+}

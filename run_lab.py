@@ -190,14 +190,18 @@ def cmd_replay(args):
     src = args.run or store.latest_run("collect") or store.latest_run("live")
     if not src:
         sys.exit("No hay corridas guardadas para evaluar.")
-    run_id = f"replay-{src}-s{args.seed}-{time.strftime('%H%M%S')}"
+    run_id = (f"replay-{src}-s{args.seed}{'-fresh' if args.fresh_ledger else ''}"
+              f"-{time.strftime('%H%M%S')}")
     store.start_run(run_id, now_iso(), "replay", args.seed, source_run=src, args=vars(args))
     names = args.modules.split(",") if args.modules else ALL
     first = next(store.iter_snapshots(src), None)
     lab = Lab(make_modules(names, run_id, args.seed, live=False), store, run_id,
               ExecConfig(latency_ms=first.latency_ms if first else 500, seed=args.seed))
     guard, n = _guard(args), 0
+    from lab.core import StrategyLedger
     for s in store.iter_snapshots(src):
+        if args.fresh_ledger:      # cada tick como si fuera el primero (episodios)
+            lab.ledgers = {k: StrategyLedger(k, 100.0) for k in lab.ledgers}
         lab.run_tick(s)
         n += 1
         ok, why = guard.check()
@@ -254,7 +258,8 @@ def cmd_research(args):
     """Estudios estadísticos (G etf, H stat_arb, I imbalance, descubrimiento)."""
     from lab.research import runner as rr
     fn = {"stat_arb": rr.study_stat_arb, "etf": rr.study_etf, "imbalance": rr.study_imbalance,
-          "discovery": rr.study_discovery, "carry": rr.study_carry, "all": rr.run_all}[args.study]
+          "discovery": rr.study_discovery, "carry": rr.study_carry, "ccl": rr.study_ccl,
+          "all": rr.run_all}[args.study]
     res = fn()
     print(json.dumps({k: (v.get("funnel") or v.get("bh_rejections") or v.get("error") or "ok")
                       if isinstance(v, dict) else v for k, v in (res if args.study == "all"
@@ -281,6 +286,26 @@ def cmd_pm_gaps(args):
                                            "gamma_positive_indicative")}, indent=1))
 
 
+def cmd_episodes(args):
+    """Episodios (oportunidades persistentes contadas una vez) de una evaluación."""
+    from lab import episodes
+    store = LabStore(DB)
+    run_id = args.run or store.latest_run("replay")
+    src = (store.run_info(run_id) or {}).get("source_run")
+    tick_ts = {}
+    if src:
+        tick_ts = dict(store.db.execute("SELECT tick, ts FROM snapshots WHERE run_id=?", (src,)))
+    eps = episodes.build(store.opportunities(run_id), tick_ts)
+    out = {"run_id": run_id, "source_run": src,
+           "code_version": json.loads((store.run_info(src) or {}).get("args") or "{}").get("code_version")
+           if src else None,
+           "summary": episodes.summarize(eps), "episodes": eps}
+    REPORT_DIR.mkdir(parents=True, exist_ok=True)
+    (REPORT_DIR / f"episodes_{src or run_id}.json").write_text(
+        json.dumps(out, indent=1, ensure_ascii=False, default=str), encoding="utf-8")
+    print(json.dumps(out["summary"], indent=1))
+
+
 def cmd_consolidate(args):
     from lab.consolidated import write
     write()
@@ -293,10 +318,13 @@ def main(argv=None):
     p = argparse.ArgumentParser(description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("cmd", choices=["run", "collect", "evaluate", "replay", "report",
-                                   "suggest-pairs", "research", "consolidate", "pm-gaps"])
+                                   "suggest-pairs", "research", "consolidate", "pm-gaps",
+                                   "episodes"])
     p.add_argument("--study", default="all",
-                   choices=["stat_arb", "etf", "imbalance", "discovery", "carry", "all"])
+                   choices=["stat_arb", "etf", "imbalance", "discovery", "carry", "ccl", "all"])
     p.add_argument("--resume", action="store_true", help="collect: continuar --run desde el último tick")
+    p.add_argument("--fresh-ledger", action="store_true",
+                   help="evaluate: ledger nuevo en cada tick (mide persistencia/episodios)")
     p.add_argument("--max-rss-mb", type=float, default=1500.0)
     p.add_argument("--max-minutes", type=float, default=None)
     p.add_argument("--ticks", type=int, default=10)
@@ -314,7 +342,7 @@ def main(argv=None):
     args = p.parse_args(argv)
     logging.basicConfig(level=logging.INFO, datefmt="%H:%M:%S",
                         format="%(asctime)s %(levelname)s %(message)s")
-    {"pm-gaps": cmd_pm_gaps, "consolidate": cmd_consolidate, "research": cmd_research, "run": cmd_run, "collect": cmd_collect, "evaluate": cmd_replay, "replay": cmd_replay,
+    {"episodes": cmd_episodes, "pm-gaps": cmd_pm_gaps, "consolidate": cmd_consolidate, "research": cmd_research, "run": cmd_run, "collect": cmd_collect, "evaluate": cmd_replay, "replay": cmd_replay,
      "report": cmd_report,
      "suggest-pairs": cmd_suggest_pairs}[args.cmd](args)
 
