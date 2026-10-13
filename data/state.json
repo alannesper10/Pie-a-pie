@@ -1,6 +1,6 @@
 {
  "paper": {
-  "cash": 90.16,
+  "cash": 81.23599999999999,
   "open": [
    {
     "event_ticker": "KXCRITICSPROD-27",
@@ -31,9 +31,45 @@
     "expected_close": "2027-01-03T15:00:00+00:00",
     "closed_at": null,
     "payout": null
+   },
+   {
+    "event_ticker": "KXCRITICSCOM-27",
+    "legs": [
+     "KXCRITICSCOM-27-DEB",
+     "KXCRITICSCOM-27-WIL",
+     "KXCRITICSCOM-27-INV",
+     "KXCRITICSCOM-27-CLU",
+     "KXCRITICSCOM-27-FUR",
+     "KXCRITICSCOM-27-DIG",
+     "KXCRITICSCOM-27-ILO",
+     "KXCRITICSCOM-27-DEV",
+     "KXCRITICSCOM-27-COY",
+     "KXCRITICSCOM-27-DRA",
+     "KXCRITICSCOM-27-SHE",
+     "KXCRITICSCOM-27-GAL",
+     "KXCRITICSCOM-27-FOC",
+     "KXCRITICSCOM-27-TEE",
+     "KXCRITICSCOM-27-PRO",
+     "KXCRITICSCOM-27-TIE"
+    ],
+    "contracts": 9,
+    "cost": 8.18,
+    "fees": 0.6,
+    "slippage": 0.14400000000000002,
+    "expected_net": 0.07600000000000029,
+    "opened_at": "2026-10-13T08:41:54+00:00",
+    "expected_close": "2027-01-03T15:00:00+00:00",
+    "closed_at": null,
+    "payout": null
    }
   ],
   "closed": []
  },
- "streaks": {}
+ "streaks": {
+  "KXCRITICSCOM-27": {
+   "first_seen": "2026-10-13T08:41:54+00:00",
+   "last_seen": "2026-10-13T08:41:54+00:00",
+   "cycles": 1
+  }
+ }
 }
