@@ -2,16 +2,16 @@
 
 | Métrica | kalshi_current | buy_all_no | strike_inconsistency | funding_basis |
 |---|---|---|---|---|
-| Ciclos (ok) | 389 (389) | 373 (373) | 373 (373) | 45 |
-| Oportunidades | 63473 | 55828 | 54833 | 0 |
+| Ciclos (ok) | 390 (390) | 374 (374) | 374 (374) | 45 |
+| Oportunidades | 63591 | 55978 | 54980 | 0 |
 | Net-positive | 2 | 0 | 0 | 0 |
 | Ejecutables | 2 | 0 | 0 | 0 |
-| Descartadas | 63471 | 5341502 | 363972601 | 2412 |
+| Descartadas | 63589 | 5355278 | 364531823 | 2412 |
 | Duración media (min) | 0 | n/d | n/d | n/d |
 | Capital por paquete (media) | 1.013 | 2.035 | 1.032 | 59.49 |
-| Fees por oportunidad (media) | 0.05617 | 0.04339 | 0.02155 | 0.004261 |
+| Fees por oportunidad (media) | 0.05616 | 0.04339 | 0.02155 | 0.004261 |
 | Tamaño disponible (máx) | 58 | 0.1 | 1 | n/d |
-| Oport. por ciclo | 163.2 | 149.7 | 147 | n/d |
+| Oport. por ciclo | 163.1 | 149.7 | 147 | n/d |
 | Caja paper US$ | 81.24 | 100 | 100 | 100 |
 | Capital bloqueado US$ | 18.76 | 0 | 0 | 0 |
 | Fees paper US$ | 1.18 | 0 | 0 | 0 |
@@ -19,8 +19,8 @@
 | P&L realizado US$ | 0 | 0 | 0 | 0 |
 
 Motivos de descarte (top 5 por estrategia):
-- kalshi_current: NO_POSITIVE_MARGINAL_EDGE=63402, SUSPICIOUS_EDGE_CHECK_RULES=69
-- buy_all_no: NOT_MUTUALLY_EXCLUSIVE=3329563, LOW_VOLUME=1418749, PRELIM_GROSS_TOO_LOW=301165, OVER_CANDIDATE_CAP=178765, NO_POSITIVE_MARGINAL_EDGE=55923
-- strike_inconsistency: NO_QUOTE=274212301, LOW_VOLUME=73690947, PRELIM_GROSS_TOO_LOW=11122838, LEG_NOT_TRADABLE=4654553, GROUPING_MISMATCH=121727
+- kalshi_current: NO_POSITIVE_MARGINAL_EDGE=63520, SUSPICIOUS_EDGE_CHECK_RULES=69
+- buy_all_no: NOT_MUTUALLY_EXCLUSIVE=3337952, LOW_VOLUME=1422660, PRELIM_GROSS_TOO_LOW=301931, OVER_CANDIDATE_CAP=179207, NO_POSITIVE_MARGINAL_EDGE=56073
+- strike_inconsistency: NO_QUOTE=274566629, LOW_VOLUME=73861379, PRELIM_GROSS_TOO_LOW=11148859, LEG_NOT_TRADABLE=4662065, GROUPING_MISMATCH=122078
 - funding_basis: COSTO_IDA_Y_VUELTA_SUPERA_FUNDING_ESPERADO=2412, INFEASIBLE_MIN_SIZE_100USD_PAIRS=2
 - nota kalshi_current: los descartes del prefiltro de kalshi_current no se registran (no se modificó su código); solo se cuentan los evaluados
