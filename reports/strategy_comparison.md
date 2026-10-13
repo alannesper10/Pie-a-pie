@@ -2,16 +2,16 @@
 
 | Métrica | kalshi_current | buy_all_no | strike_inconsistency | funding_basis |
 |---|---|---|---|---|
-| Ciclos (ok) | 378 (378) | 362 (362) | 362 (362) | 45 |
-| Oportunidades | 62116 | 54183 | 53205 | 0 |
+| Ciclos (ok) | 379 (379) | 363 (363) | 363 (363) | 45 |
+| Oportunidades | 62239 | 54333 | 53352 | 0 |
 | Net-positive | 2 | 0 | 0 | 0 |
 | Ejecutables | 2 | 0 | 0 | 0 |
-| Descartadas | 62114 | 5192340 | 355638257 | 2412 |
+| Descartadas | 62237 | 5205679 | 356596910 | 2412 |
 | Duración media (min) | 0 | n/d | n/d | n/d |
 | Capital por paquete (media) | 1.013 | 2.04 | 1.032 | 59.49 |
 | Fees por oportunidad (media) | 0.05612 | 0.04346 | 0.02158 | 0.004261 |
 | Tamaño disponible (máx) | 58 | 0.1 | 1 | n/d |
-| Oport. por ciclo | 164.3 | 149.7 | 147 | n/d |
+| Oport. por ciclo | 164.2 | 149.7 | 147 | n/d |
 | Caja paper US$ | 81.24 | 100 | 100 | 100 |
 | Capital bloqueado US$ | 18.76 | 0 | 0 | 0 |
 | Fees paper US$ | 1.18 | 0 | 0 | 0 |
@@ -19,8 +19,8 @@
 | P&L realizado US$ | 0 | 0 | 0 | 0 |
 
 Motivos de descarte (top 5 por estrategia):
-- kalshi_current: NO_POSITIVE_MARGINAL_EDGE=62055, SUSPICIOUS_EDGE_CHECK_RULES=59
-- buy_all_no: NOT_MUTUALLY_EXCLUSIVE=3238703, LOW_VOLUME=1377372, PRELIM_GROSS_TOO_LOW=292507, OVER_CANDIDATE_CAP=173474, NO_POSITIVE_MARGINAL_EDGE=54273
-- strike_inconsistency: NO_QUOTE=268136571, LOW_VOLUME=71806838, PRELIM_GROSS_TOO_LOW=10836975, LEG_NOT_TRADABLE=4575362, GROUPING_MISMATCH=118097
+- kalshi_current: NO_POSITIVE_MARGINAL_EDGE=62177, SUSPICIOUS_EDGE_CHECK_RULES=60
+- buy_all_no: NOT_MUTUALLY_EXCLUSIVE=3246793, LOW_VOLUME=1381073, PRELIM_GROSS_TOO_LOW=293276, OVER_CANDIDATE_CAP=173987, NO_POSITIVE_MARGINAL_EDGE=54423
+- strike_inconsistency: NO_QUOTE=268892812, LOW_VOLUME=71976734, PRELIM_GROSS_TOO_LOW=10861790, LEG_NOT_TRADABLE=4582334, GROUPING_MISMATCH=118412
 - funding_basis: COSTO_IDA_Y_VUELTA_SUPERA_FUNDING_ESPERADO=2412, INFEASIBLE_MIN_SIZE_100USD_PAIRS=2
 - nota kalshi_current: los descartes del prefiltro de kalshi_current no se registran (no se modificó su código); solo se cuentan los evaluados
