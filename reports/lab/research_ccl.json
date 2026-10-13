@@ -1,0 +1,104 @@
+{
+ "generated_at": "2026-10-13T19:58:04Z",
+ "runs": [
+  "watch-20261013",
+  "watch-b-20261013"
+ ],
+ "ticks_with_ccl": 19,
+ "summary": {
+  "MEP|data912": {
+   "observations": 2244,
+   "verdicts": {
+    "SIN_EDGE": 2244
+   },
+   "gross_max": 0.00026190868479880614,
+   "gross_p95": -0.005860431128973387,
+   "gross_median": -0.013986477041135426,
+   "breakeven_cost_per_trade_max": 6.547717119970153e-05
+  },
+  "CCL|data912": {
+   "observations": 1870,
+   "verdicts": {
+    "SIN_EDGE": 1870
+   },
+   "gross_max": 0.005691489361702162,
+   "gross_p95": -0.0011933297694389777,
+   "gross_median": -0.011580000032841653,
+   "breakeven_cost_per_trade_max": 0.0014228723404255406
+  },
+  "CCL|byma_demorado+nasdaq": {
+   "observations": 1128,
+   "verdicts": {
+    "NO_VERIFICABLE": 1128
+   },
+   "gross_max": 0.014660493827160392,
+   "gross_p95": 0.006448563703719046,
+   "gross_median": -0.008265340964991985,
+   "breakeven_cost_per_trade_max": 0.003665123456790098
+  }
+ },
+ "ratio_check": {
+  "GGAL": {
+   "CONSISTENTE": 17,
+   "NO_CONSISTENTE": 0
+  },
+  "BMA": {
+   "CONSISTENTE": 17,
+   "NO_CONSISTENTE": 0
+  },
+  "PAM": {
+   "CONSISTENTE": 17,
+   "NO_CONSISTENTE": 0
+  },
+  "YPF": {
+   "CONSISTENTE": 0,
+   "NO_CONSISTENTE": 17
+  },
+  "CEPU": {
+   "CONSISTENTE": 17,
+   "NO_CONSISTENTE": 0
+  },
+  "TGS": {
+   "CONSISTENTE": 17,
+   "NO_CONSISTENTE": 0
+  },
+  "EDN": {
+   "CONSISTENTE": 17,
+   "NO_CONSISTENTE": 0
+  },
+  "SUPV": {
+   "CONSISTENTE": 17,
+   "NO_CONSISTENTE": 0
+  },
+  "LOMA": {
+   "CONSISTENTE": 17,
+   "NO_CONSISTENTE": 0
+  },
+  "CRESY": {
+   "CONSISTENTE": 17,
+   "NO_CONSISTENTE": 0
+  },
+  "IRS": {
+   "CONSISTENTE": 17,
+   "NO_CONSISTENTE": 0
+  },
+  "TEO": {
+   "CONSISTENTE": 17,
+   "NO_CONSISTENTE": 0
+  }
+ },
+ "episodes_potencial": [],
+ "costs": {
+  "byma_market_fee": 0.000605,
+  "byma_status": "VERIFICADO (BYMA, 5 pb + IVA)",
+  "broker_ar": 0.0025,
+  "broker_us": 0.0005,
+  "broker_status": "ASSUMED (varía por broker)"
+ },
+ "limitations": [
+  "data912 es una API de terceros: su demora respecto del mercado no está verificada",
+  "BYMA gratuito tiene ~20 min de demora: cruces con Nasdaq son NO_VERIFICABLE",
+  "solo mejor punta: sin profundidad",
+  "normas cambiarias vigentes (plazos mínimos de tenencia, cruces entre monedas) NO verificadas"
+ ]
+}

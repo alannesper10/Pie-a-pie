@@ -36,6 +36,8 @@ MMR = 0.005                 # ASSUMED: margen de mantenimiento nivel 1 (no públ
 LEVERAGES = (1, 2, 3)
 FEE_MULT = [1.0]            # sensibilidad: multiplica TODAS las comisiones (ver fee_scale)
 EXIT_FRACTIONS = (0.25, 0.5, 0.75)
+MAX_ABS_BASIS = 0.20        # |base| > 20%: error de datos (p. ej. continuo sin contrato), se excluye
+DATA_EXCLUSIONS = {}        # motivo -> cantidad (se reinicia en cada simulate)
 
 
 # ------------------------------------------------------------------ datos
@@ -196,13 +198,21 @@ class ContractPrices:
             return "NQ"
         return None
 
+    def _traded(self, c, x):
+        """Vela con volumen > 0. Sin operaciones el cierre es un precio viejo
+        (en 2022 el continuo NQ repite 20955.0 durante meses): no es ejecutable."""
+        vols = self.series[c][2] if len(self.series[c]) > 2 else None
+        return vols is None or (vols.get(x) or 0) > 0
+
     def close(self, x, exp):
         c = self.code(x, exp)
-        return self.series[c][0].get(x) if c else None
+        return self.series[c][0].get(x) if c and self._traded(c, x) else None
 
     def high(self, x, exp):
         c = self.code(x, exp)
-        return self.series[c][1].get(x, self.series[c][0].get(x)) if c else None
+        if not c or not self._traded(c, x):
+            return None
+        return self.series[c][1].get(x, self.series[c][0].get(x))
 
 
 def simulate(spot, prices, deliveries, expiries, rates, step_hours=24, contract="CQ",
@@ -214,10 +224,17 @@ def simulate(spot, prices, deliveries, expiries, rates, step_hours=24, contract=
     Entradas cada `step_hours` (horas consecutivas están muy correlacionadas)."""
     index_exit = index_exit or {}
     out, last_entry = [], None
+    DATA_EXCLUSIONS.clear()
     for t in sorted(spot):
         if last_entry is not None and t - last_entry < step_hours * HOUR:
             continue
         i = bisect.bisect_right(expiries, t + HOUR)
+        if i == 0:
+            # antes de la primera entrega conocida no se sabe qué contrato
+            # representa el continuo: no se evalúa
+            k = "antes_de_primera_entrega_conocida"
+            DATA_EXCLUSIONS[k] = DATA_EXCLUSIONS.get(k, 0) + 1
+            continue
         j = i + (1 if contract == "NQ" else 0)
         if j >= len(expiries):
             continue
@@ -226,6 +243,10 @@ def simulate(spot, prices, deliveries, expiries, rates, step_hours=24, contract=
             continue
         f0, s0 = prices.close(t, exp), spot[t]
         if f0 is None:
+            DATA_EXCLUSIONS["futuro_sin_operaciones"] = DATA_EXCLUSIONS.get("futuro_sin_operaciones", 0) + 1
+            continue
+        if abs(f0 / s0 - 1) > MAX_ABS_BASIS:
+            DATA_EXCLUSIONS["base_absurda"] = DATA_EXCLUSIONS.get("base_absurda", 0) + 1
             continue
         spot_exit = index_exit.get(exp) or spot.get(exp)
         if spot_exit is None:

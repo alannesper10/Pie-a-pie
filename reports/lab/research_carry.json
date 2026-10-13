@@ -100,18 +100,18 @@
    "spot_bars": 44729,
    "results": {
     "CQ": {
-     "entries": 1736,
-     "periods": 18,
-     "share_net_pos": 0.6555299539170507,
-     "share_beats_tbill": 0.18433179723502305,
-     "ret_1x_mean": 0.002229870375743719,
-     "excess_1x_mean": -0.002598979467989544,
-     "periods_mean_beats_tbill": 2,
+     "entries": 1537,
+     "periods": 17,
+     "share_net_pos": 0.6662329212752115,
+     "share_beats_tbill": 0.13662979830839297,
+     "ret_1x_mean": 0.0019956550738058705,
+     "excess_1x_mean": -0.00342977937766767,
+     "periods_mean_beats_tbill": 1,
      "index_dev_abs_max_pct": 0.006681233521245821,
      "liquidations": {
       "1x": 7,
-      "2x": 207,
-      "3x": 307
+      "2x": 192,
+      "3x": 266
      },
      "extra_capital_max_pct": {
       "1x": 0.02527150767697262,
@@ -119,34 +119,34 @@
       "3x": 0.5383677144139638
      },
      "early_exit_share_negative": {
-      "early_25": 0.7292626728110599,
-      "early_50": 0.6002304147465438,
-      "early_75": 0.47580645161290325
+      "early_25": 0.7560182173064411,
+      "early_50": 0.6187378009108653,
+      "early_75": 0.48731294729993496
      },
      "early_exit_worst": {
-      "early_25": -0.027206349709363472,
+      "early_25": -0.013170073865461382,
       "early_50": -0.01478721323704465,
       "early_75": -0.019609718396816092
      },
      "rule": {
       "rule": "exceso ex ante sobre la letra > 0 (1x)",
       "all": {
-       "entries": 272,
-       "contracts": 7,
-       "realized_excess_mean": 0.004907417904564916,
+       "entries": 149,
+       "contracts": 6,
+       "realized_excess_mean": 0.0028043395903217957,
        "realized_excess_min": -0.0034350221006545145,
-       "share_realized_beats_tbill": 0.8713235294117647,
-       "ret_1x_mean": 0.00856395536163415,
+       "share_realized_beats_tbill": 0.8523489932885906,
+       "ret_1x_mean": 0.009295950677787726,
        "liq_1x": 0,
        "extra_1x_max_pct": 0.0
       },
       "first_half": {
-       "entries": 180,
-       "contracts": 3,
-       "realized_excess_mean": 0.005739999668344048,
+       "entries": 57,
+       "contracts": 2,
+       "realized_excess_mean": 0.002039102968740683,
        "realized_excess_min": -0.0034350221006545145,
-       "share_realized_beats_tbill": 0.8333333333333334,
-       "ret_1x_mean": 0.007461516524330008,
+       "share_realized_beats_tbill": 0.7017543859649122,
+       "ret_1x_mean": 0.006996031000092701,
        "liq_1x": 0,
        "extra_1x_max_pct": 0.0
       },
@@ -160,24 +160,9 @@
        "liq_1x": 0,
        "extra_1x_max_pct": 0.0
       },
-      "share_of_entries_taken": 0.15668202764976957
+      "share_of_entries_taken": 0.09694209499024073
      },
      "by_period": [
-      {
-       "expiry": "2022-03-25",
-       "entries": 199,
-       "basis_mean_pct": 0.012826744193206892,
-       "ret_1x_mean": 0.00403885991885162,
-       "ret_1x_min": -0.0031027258341093395,
-       "ret_1x_max": 0.02060018779487038,
-       "share_net_pos": 0.5728643216080402,
-       "share_beats_tbill": 0.5527638190954773,
-       "index_dev_pct": -0.0018002543110178775,
-       "liq_1x": 0,
-       "liq_2x": 15,
-       "liq_3x": 41,
-       "max_rise_pct": 0.8108082801538483
-      },
       {
        "expiry": "2022-06-24",
        "entries": 90,
@@ -438,22 +423,22 @@
       "fees_x1.5": {
        "rule": "exceso ex ante sobre la letra > 0 (1x)",
        "all": {
-        "entries": 232,
-        "contracts": 6,
-        "realized_excess_mean": 0.005109074564998418,
+        "entries": 121,
+        "contracts": 5,
+        "realized_excess_mean": 0.0028135007898499693,
         "realized_excess_min": -0.0032847258563836555,
-        "share_realized_beats_tbill": 0.8663793103448276,
-        "ret_1x_mean": 0.008601974489034055,
+        "share_realized_beats_tbill": 0.8429752066115702,
+        "ret_1x_mean": 0.009307585001860946,
         "liq_1x": 0,
         "extra_1x_max_pct": 0.0
        },
        "first_half": {
-        "entries": 163,
-        "contracts": 3,
-        "realized_excess_mean": 0.005751290170688245,
+        "entries": 52,
+        "contracts": 2,
+        "realized_excess_mean": 0.0017805498906614862,
         "realized_excess_min": -0.0032847258563836555,
-        "share_realized_beats_tbill": 0.8159509202453987,
-        "ret_1x_mean": 0.007515773043478735,
+        "share_realized_beats_tbill": 0.6538461538461539,
+        "ret_1x_mean": 0.006839052112621301,
         "liq_1x": 0,
         "extra_1x_max_pct": 0.0
        },
@@ -467,27 +452,27 @@
         "liq_1x": 0,
         "extra_1x_max_pct": 0.0
        },
-       "share_of_entries_taken": 0.1336405529953917
+       "share_of_entries_taken": 0.07872478854912167
       },
       "fees_x2.0": {
        "rule": "exceso ex ante sobre la letra > 0 (1x)",
        "all": {
-        "entries": 206,
-        "contracts": 6,
-        "realized_excess_mean": 0.005037858891629193,
+        "entries": 106,
+        "contracts": 5,
+        "realized_excess_mean": 0.002422599124631388,
         "realized_excess_min": -0.004207292859497064,
-        "share_realized_beats_tbill": 0.8786407766990292,
-        "ret_1x_mean": 0.008515387832311977,
+        "share_realized_beats_tbill": 0.8113207547169812,
+        "ret_1x_mean": 0.008975140401310751,
         "liq_1x": 0,
         "extra_1x_max_pct": 0.0
        },
        "first_half": {
-        "entries": 147,
-        "contracts": 3,
-        "realized_excess_mean": 0.005696291759418461,
+        "entries": 47,
+        "contracts": 2,
+        "realized_excess_mean": 0.0011989673227622783,
         "realized_excess_min": -0.004207292859497064,
-        "share_realized_beats_tbill": 0.8435374149659864,
-        "ret_1x_mean": 0.0075593727816345635,
+        "share_realized_beats_tbill": 0.6170212765957447,
+        "ret_1x_mean": 0.006562186978360708,
         "liq_1x": 0,
         "extra_1x_max_pct": 0.0
        },
@@ -501,23 +486,26 @@
         "liq_1x": 0,
         "extra_1x_max_pct": 0.0
        },
-       "share_of_entries_taken": 0.11866359447004608
+       "share_of_entries_taken": 0.06896551724137931
       }
+     },
+     "data_exclusions": {
+      "antes_de_primera_entrega_conocida": 4804
      }
     },
     "NQ": {
-     "entries": 1357,
-     "periods": 17,
-     "share_net_pos": 0.8165070007369197,
-     "share_beats_tbill": 0.2417096536477524,
-     "ret_1x_mean": -0.002822590998197089,
-     "excess_1x_mean": -0.01708060448358501,
+     "entries": 985,
+     "periods": 16,
+     "share_net_pos": 0.9776649746192894,
+     "share_beats_tbill": 0.2152284263959391,
+     "ret_1x_mean": 0.012652181643811293,
+     "excess_1x_mean": -0.004556069133878561,
      "periods_mean_beats_tbill": 3,
-     "index_dev_abs_max_pct": 0.006681233521245821,
+     "index_dev_abs_max_pct": 0.00592396533208762,
      "liquidations": {
-      "1x": 127,
-      "2x": 391,
-      "3x": 678
+      "1x": 110,
+      "2x": 374,
+      "3x": 465
      },
      "extra_capital_max_pct": {
       "1x": 0.6843214566989017,
@@ -525,74 +513,59 @@
       "3x": 1.541450997859604
      },
      "early_exit_share_negative": {
-      "early_25": 0.4650269023827825,
-      "early_50": 0.35003684598378776,
-      "early_75": 0.3006632277081798
+      "early_25": 0.4166666666666667,
+      "early_50": 0.23857868020304568,
+      "early_75": 0.1766497461928934
      },
      "early_exit_worst": {
-      "early_25": -0.36834438168319544,
-      "early_50": -0.5688417874548239,
-      "early_75": -0.35474516054815797
+      "early_25": -0.04793491756239101,
+      "early_50": -0.03235183122716095,
+      "early_75": -0.008093913716650974
      },
      "rule": {
       "rule": "exceso ex ante sobre la letra > 0 (1x)",
       "all": {
-       "entries": 337,
-       "contracts": 9,
-       "realized_excess_mean": 0.03929799281494184,
+       "entries": 220,
+       "contracts": 6,
+       "realized_excess_mean": 0.007025890832258018,
        "realized_excess_min": -0.003968135727034954,
-       "share_realized_beats_tbill": 0.9614243323442137,
-       "ret_1x_mean": 0.05201814923240487,
+       "share_realized_beats_tbill": 0.95,
+       "ret_1x_mean": 0.02539440288930084,
        "liq_1x": 0,
        "extra_1x_max_pct": 0.0
       },
       "first_half": {
-       "entries": 124,
-       "contracts": 5,
-       "realized_excess_mean": 0.09426704143967707,
+       "entries": 72,
+       "contracts": 3,
+       "realized_excess_mean": 0.007136836906557172,
        "realized_excess_min": -0.003968135727034954,
-       "share_realized_beats_tbill": 0.9435483870967742,
-       "ret_1x_mean": 0.09694412437932075,
+       "share_realized_beats_tbill": 0.8472222222222222,
+       "ret_1x_mean": 0.02603191441951587,
        "liq_1x": 0,
        "extra_1x_max_pct": 0.0
       },
       "second_half": {
-       "entries": 213,
-       "contracts": 4,
-       "realized_excess_mean": 0.007297232113218042,
-       "realized_excess_min": -0.001147206038059824,
-       "share_realized_beats_tbill": 0.971830985915493,
-       "ret_1x_mean": 0.025864060414482016,
+       "entries": 148,
+       "contracts": 3,
+       "realized_excess_mean": 0.006971917066382752,
+       "realized_excess_min": 0.00026130521147174277,
+       "share_realized_beats_tbill": 1.0,
+       "ret_1x_mean": 0.025084262144871906,
        "liq_1x": 0,
        "extra_1x_max_pct": 0.0
       },
-      "share_of_entries_taken": 0.2483419307295505
+      "share_of_entries_taken": 0.2233502538071066
      },
      "by_period": [
       {
-       "expiry": "2022-06-24",
-       "entries": 201,
-       "basis_mean_pct": 0.0043560099212961315,
-       "ret_1x_mean": -0.020653847942360262,
-       "ret_1x_min": -0.3501346667214046,
-       "ret_1x_max": 0.22918010966389632,
-       "share_net_pos": 0.48756218905472637,
-       "share_beats_tbill": 0.48756218905472637,
-       "index_dev_pct": 0.006681233521245821,
-       "liq_1x": 17,
-       "liq_2x": 17,
-       "liq_3x": 110,
-       "max_rise_pct": 1.2931412829095215
-      },
-      {
        "expiry": "2022-09-30",
-       "entries": 29,
-       "basis_mean_pct": -0.01169814368748472,
-       "ret_1x_mean": -0.007111100759347977,
-       "ret_1x_min": -0.05101565977811214,
-       "ret_1x_max": 0.03246702811874101,
-       "share_net_pos": 0.4482758620689655,
-       "share_beats_tbill": 0.3103448275862069,
+       "entries": 6,
+       "basis_mean_pct": 0.0038774818446643176,
+       "ret_1x_mean": 0.0013565894991244443,
+       "ret_1x_min": -0.0034191069428213807,
+       "ret_1x_max": 0.00806840337229946,
+       "share_net_pos": 0.6666666666666666,
+       "share_beats_tbill": 0.16666666666666666,
        "index_dev_pct": 0.0018865531800617635,
        "liq_1x": 0,
        "liq_2x": 5,
@@ -601,32 +574,32 @@
       },
       {
        "expiry": "2022-12-30",
-       "entries": 98,
-       "basis_mean_pct": -0.19957160447133354,
-       "ret_1x_mean": -0.12024429171911209,
-       "ret_1x_min": -0.2743703276215499,
-       "ret_1x_max": 0.04424209132007676,
-       "share_net_pos": 0.09183673469387756,
-       "share_beats_tbill": 0.08163265306122448,
+       "entries": 8,
+       "basis_mean_pct": -0.0009465079472874977,
+       "ret_1x_mean": -0.0025998178736346723,
+       "ret_1x_min": -0.0035924991572571095,
+       "ret_1x_max": -0.0004061004506559068,
+       "share_net_pos": 0.0,
+       "share_beats_tbill": 0.0,
        "index_dev_pct": -0.0015154188476543518,
        "liq_1x": 0,
        "liq_2x": 0,
-       "liq_3x": 90,
-       "max_rise_pct": 0.46812268308036664
+       "liq_3x": 0,
+       "max_rise_pct": 0.3158067953861585
       },
       {
        "expiry": "2023-03-31",
-       "entries": 21,
-       "basis_mean_pct": 0.008617645876928376,
-       "ret_1x_mean": 0.001673806025965522,
-       "ret_1x_min": -0.015648257546127947,
-       "ret_1x_max": 0.01937298848897031,
-       "share_net_pos": 0.42857142857142855,
-       "share_beats_tbill": 0.09523809523809523,
+       "entries": 8,
+       "basis_mean_pct": 0.0001900331414677603,
+       "ret_1x_mean": -0.0025393030162873336,
+       "ret_1x_min": -0.0063753177765939984,
+       "ret_1x_max": -0.0005690533983662914,
+       "share_net_pos": 0.0,
+       "share_beats_tbill": 0.0,
        "index_dev_pct": -0.0010230317111905706,
        "liq_1x": 0,
        "liq_2x": 8,
-       "liq_3x": 21,
+       "liq_3x": 8,
        "max_rise_pct": 0.5640422834401055
       },
       {
@@ -646,27 +619,27 @@
       },
       {
        "expiry": "2023-09-29",
-       "entries": 20,
-       "basis_mean_pct": -0.018247407243070318,
-       "ret_1x_mean": -0.00832653984890833,
-       "ret_1x_min": -0.07162156495420142,
-       "ret_1x_max": 0.013005615027909433,
-       "share_net_pos": 0.45,
+       "entries": 6,
+       "basis_mean_pct": 0.009985960436997546,
+       "ret_1x_mean": 0.006166879223797691,
+       "ret_1x_min": 0.005421401709165695,
+       "ret_1x_max": 0.008144832227778735,
+       "share_net_pos": 1.0,
        "share_beats_tbill": 0.0,
        "index_dev_pct": 0.00592396533208762,
        "liq_1x": 0,
        "liq_2x": 0,
        "liq_3x": 0,
-       "max_rise_pct": 0.12948116192436143
+       "max_rise_pct": 0.10958911514614211
       },
       {
        "expiry": "2023-12-29",
-       "entries": 73,
-       "basis_mean_pct": 0.008782690966134344,
-       "ret_1x_mean": 0.0014723004721582794,
-       "ret_1x_min": -0.02967395331253158,
-       "ret_1x_max": 0.011190144271106338,
-       "share_net_pos": 0.8082191780821918,
+       "entries": 42,
+       "basis_mean_pct": 0.011909745091460896,
+       "ret_1x_mean": 0.0029318613241807725,
+       "ret_1x_min": 0.0009573249307337888,
+       "ret_1x_max": 0.00771049227948975,
+       "share_net_pos": 1.0,
        "share_beats_tbill": 0.0,
        "index_dev_pct": -0.0016090827759553715,
        "liq_1x": 0,
@@ -829,71 +802,75 @@
       "fees_x1.5": {
        "rule": "exceso ex ante sobre la letra > 0 (1x)",
        "all": {
-        "entries": 315,
-        "contracts": 9,
-        "realized_excess_mean": 0.041445420565988225,
+        "entries": 200,
+        "contracts": 6,
+        "realized_excess_mean": 0.007079484927399311,
         "realized_excess_min": -0.00442726064660286,
-        "share_realized_beats_tbill": 0.9714285714285714,
-        "ret_1x_mean": 0.05380280862088895,
+        "share_realized_beats_tbill": 0.965,
+        "ret_1x_mean": 0.02544725521708713,
         "liq_1x": 0,
         "extra_1x_max_pct": 0.0
        },
        "first_half": {
-        "entries": 120,
-        "contracts": 5,
-        "realized_excess_mean": 0.09695042951647088,
+        "entries": 65,
+        "contracts": 3,
+        "realized_excess_mean": 0.007304821202416514,
         "realized_excess_min": -0.00442726064660286,
-        "share_realized_beats_tbill": 0.9583333333333334,
-        "ret_1x_mean": 0.09925943808396123,
+        "share_realized_beats_tbill": 0.8923076923076924,
+        "ret_1x_mean": 0.026010221120309488,
         "liq_1x": 0,
         "extra_1x_max_pct": 0.0
        },
        "second_half": {
-        "entries": 195,
-        "contracts": 4,
-        "realized_excess_mean": 0.007288491981075819,
-        "realized_excess_min": -0.0011133497116942344,
-        "share_realized_beats_tbill": 0.9794871794871794,
-        "ret_1x_mean": 0.025829498182075243,
+        "entries": 135,
+        "contracts": 3,
+        "realized_excess_mean": 0.006970989683872511,
+        "realized_excess_min": 0.0003568549491908858,
+        "share_realized_beats_tbill": 1.0,
+        "ret_1x_mean": 0.02517619755998007,
         "liq_1x": 0,
         "extra_1x_max_pct": 0.0
        },
-       "share_of_entries_taken": 0.23212969786293294
+       "share_of_entries_taken": 0.20304568527918782
       },
       "fees_x2.0": {
        "rule": "exceso ex ante sobre la letra > 0 (1x)",
        "all": {
-        "entries": 305,
-        "contracts": 9,
-        "realized_excess_mean": 0.0421947978214353,
+        "entries": 191,
+        "contracts": 6,
+        "realized_excess_mean": 0.006747031648022553,
         "realized_excess_min": -0.004534952883127771,
-        "share_realized_beats_tbill": 0.9508196721311475,
-        "ret_1x_mean": 0.05436271287894964,
+        "share_realized_beats_tbill": 0.9267015706806283,
+        "ret_1x_mean": 0.025088726500283716,
         "liq_1x": 0,
         "extra_1x_max_pct": 0.0
        },
        "first_half": {
-        "entries": 118,
-        "contracts": 5,
-        "realized_excess_mean": 0.09810549663181355,
+        "entries": 63,
+        "contracts": 3,
+        "realized_excess_mean": 0.006835624327024381,
         "realized_excess_min": -0.004534952883127771,
-        "share_realized_beats_tbill": 0.9661016949152542,
-        "ret_1x_mean": 0.1002399717062359,
+        "share_realized_beats_tbill": 0.7777777777777778,
+        "ret_1x_mean": 0.02552424754359914,
         "liq_1x": 0,
         "extra_1x_max_pct": 0.0
        },
        "second_half": {
-        "entries": 187,
-        "contracts": 4,
-        "realized_excess_mean": 0.006914249909004105,
-        "realized_excess_min": -0.0013055393540763252,
-        "share_realized_beats_tbill": 0.9411764705882353,
-        "ret_1x_mean": 0.025413426560127298,
+        "entries": 128,
+        "contracts": 3,
+        "realized_excess_mean": 0.006703427438826342,
+        "realized_excess_min": 0.0006923116571259172,
+        "share_realized_beats_tbill": 1.0,
+        "ret_1x_mean": 0.024874368486776904,
         "liq_1x": 0,
         "extra_1x_max_pct": 0.0
        },
-       "share_of_entries_taken": 0.2247605011053795
+       "share_of_entries_taken": 0.19390862944162437
       }
+     },
+     "data_exclusions": {
+      "antes_de_primera_entrega_conocida": 4804,
+      "futuro_sin_operaciones": 11477
      }
     }
    }
@@ -998,18 +975,18 @@
    "spot_bars": 44729,
    "results": {
     "CQ": {
-     "entries": 1736,
-     "periods": 18,
-     "share_net_pos": 0.6785714285714286,
-     "share_beats_tbill": 0.15668202764976957,
-     "ret_1x_mean": 0.002544751682408463,
-     "excess_1x_mean": -0.0022840981613247995,
-     "periods_mean_beats_tbill": 1,
+     "entries": 1537,
+     "periods": 17,
+     "share_net_pos": 0.6916070266753416,
+     "share_beats_tbill": 0.10800260247234873,
+     "ret_1x_mean": 0.002381083974209085,
+     "excess_1x_mean": -0.0030443504772644557,
+     "periods_mean_beats_tbill": 0,
      "index_dev_abs_max_pct": 0.004169848494653802,
      "liquidations": {
       "1x": 0,
-      "2x": 144,
-      "3x": 206
+      "2x": 122,
+      "3x": 175
      },
      "extra_capital_max_pct": {
       "1x": 0.0,
@@ -1017,34 +994,34 @@
       "3x": 0.3993710377751866
      },
      "early_exit_share_negative": {
-      "early_25": 0.706221198156682,
-      "early_50": 0.5368663594470046,
-      "early_75": 0.41647465437788017
+      "early_25": 0.730644111906311,
+      "early_50": 0.5491216655823032,
+      "early_75": 0.41899804814573843
      },
      "early_exit_worst": {
-      "early_25": -0.02937338101062599,
+      "early_25": -0.014597591303996238,
       "early_50": -0.015165350197704585,
       "early_75": -0.015852775711432635
      },
      "rule": {
       "rule": "exceso ex ante sobre la letra > 0 (1x)",
       "all": {
-       "entries": 287,
-       "contracts": 7,
-       "realized_excess_mean": 0.0045030790382260995,
+       "entries": 161,
+       "contracts": 6,
+       "realized_excess_mean": 0.0026921051425848074,
        "realized_excess_min": -0.0021335323831585384,
-       "share_realized_beats_tbill": 0.8536585365853658,
-       "ret_1x_mean": 0.00823303547385779,
+       "share_realized_beats_tbill": 0.8633540372670807,
+       "ret_1x_mean": 0.0091667858992609,
        "liq_1x": 0,
        "extra_1x_max_pct": 0.0
       },
       "first_half": {
-       "entries": 183,
-       "contracts": 3,
-       "realized_excess_mean": 0.005379222769995669,
+       "entries": 57,
+       "contracts": 2,
+       "realized_excess_mean": 0.002200754577095981,
        "realized_excess_min": -0.0021335323831585384,
-       "share_realized_beats_tbill": 0.8032786885245902,
-       "ret_1x_mean": 0.007032899254993522,
+       "share_realized_beats_tbill": 0.7192982456140351,
+       "ret_1x_mean": 0.0070174019727655065,
        "liq_1x": 0,
        "extra_1x_max_pct": 0.0
       },
@@ -1058,24 +1035,9 @@
        "liq_1x": 0,
        "extra_1x_max_pct": 0.0
       },
-      "share_of_entries_taken": 0.16532258064516128
+      "share_of_entries_taken": 0.10474951203643461
      },
      "by_period": [
-      {
-       "expiry": "2022-03-25",
-       "entries": 199,
-       "basis_mean_pct": 0.01242899740618916,
-       "ret_1x_mean": 0.003808858554280047,
-       "ret_1x_min": -0.0029456686782876715,
-       "ret_1x_max": 0.018814140426435588,
-       "share_net_pos": 0.5778894472361809,
-       "share_beats_tbill": 0.5326633165829145,
-       "index_dev_pct": -0.0018520502061665615,
-       "liq_1x": 0,
-       "liq_2x": 22,
-       "liq_3x": 31,
-       "max_rise_pct": 0.742152395302287
-      },
       {
        "expiry": "2022-06-24",
        "entries": 90,
@@ -1336,22 +1298,22 @@
       "fees_x1.5": {
        "rule": "exceso ex ante sobre la letra > 0 (1x)",
        "all": {
-        "entries": 246,
-        "contracts": 6,
-        "realized_excess_mean": 0.0045846285927114705,
+        "entries": 135,
+        "contracts": 5,
+        "realized_excess_mean": 0.002517203649078886,
         "realized_excess_min": -0.0026572774461008555,
-        "share_realized_beats_tbill": 0.8658536585365854,
-        "ret_1x_mean": 0.00820304380919331,
+        "share_realized_beats_tbill": 0.8444444444444444,
+        "ret_1x_mean": 0.00892535745001449,
         "liq_1x": 0,
         "extra_1x_max_pct": 0.0
        },
        "first_half": {
-        "entries": 162,
-        "contracts": 3,
-        "realized_excess_mean": 0.005468228666580087,
+        "entries": 51,
+        "contracts": 2,
+        "realized_excess_mean": 0.0019187628000902324,
         "realized_excess_min": -0.0026572774461008555,
-        "share_realized_beats_tbill": 0.8395061728395061,
-        "ret_1x_mean": 0.007111135110039419,
+        "share_realized_beats_tbill": 0.7254901960784313,
+        "ret_1x_mean": 0.006646634637584069,
         "liq_1x": 0,
         "extra_1x_max_pct": 0.0
        },
@@ -1365,27 +1327,27 @@
         "liq_1x": 0,
         "extra_1x_max_pct": 0.0
        },
-       "share_of_entries_taken": 0.14170506912442396
+       "share_of_entries_taken": 0.08783344176968119
       },
       "fees_x2.0": {
        "rule": "exceso ex ante sobre la letra > 0 (1x)",
        "all": {
-        "entries": 206,
-        "contracts": 6,
-        "realized_excess_mean": 0.0048301827166373655,
+        "entries": 105,
+        "contracts": 5,
+        "realized_excess_mean": 0.002568474143218975,
         "realized_excess_min": -0.0026940467487127206,
-        "share_realized_beats_tbill": 0.9077669902912622,
-        "ret_1x_mean": 0.008161529350008571,
+        "share_realized_beats_tbill": 0.8666666666666667,
+        "ret_1x_mean": 0.008892047174539338,
         "liq_1x": 0,
         "extra_1x_max_pct": 0.0
        },
        "first_half": {
-        "entries": 142,
-        "contracts": 3,
-        "realized_excess_mean": 0.005656948449288019,
+        "entries": 41,
+        "contracts": 2,
+        "realized_excess_mean": 0.001901434761209607,
         "realized_excess_min": -0.0026940467487127206,
-        "share_realized_beats_tbill": 0.8802816901408451,
-        "ret_1x_mean": 0.007091393918810521,
+        "share_realized_beats_tbill": 0.7073170731707317,
+        "ret_1x_mean": 0.006326044968194116,
         "liq_1x": 0,
         "extra_1x_max_pct": 0.0
        },
@@ -1399,23 +1361,26 @@
         "liq_1x": 0,
         "extra_1x_max_pct": 0.0
        },
-       "share_of_entries_taken": 0.11866359447004608
+       "share_of_entries_taken": 0.06831489915419649
       }
+     },
+     "data_exclusions": {
+      "antes_de_primera_entrega_conocida": 4804
      }
     },
     "NQ": {
-     "entries": 1357,
-     "periods": 17,
-     "share_net_pos": 0.8607221812822402,
-     "share_beats_tbill": 0.2763448784082535,
-     "ret_1x_mean": 0.0066098274600028374,
-     "excess_1x_mean": -0.007648186025385086,
+     "entries": 985,
+     "periods": 16,
+     "share_net_pos": 0.9888324873096447,
+     "share_beats_tbill": 0.22538071065989848,
+     "ret_1x_mean": 0.01380139968251798,
+     "excess_1x_mean": -0.003406851095171876,
      "periods_mean_beats_tbill": 3,
      "index_dev_abs_max_pct": 0.004169848494653802,
      "liquidations": {
       "1x": 43,
-      "2x": 339,
-      "3x": 432
+      "2x": 322,
+      "3x": 371
      },
      "extra_capital_max_pct": {
       "1x": 0.38249513905658183,
@@ -1423,74 +1388,59 @@
       "3x": 1.0831681545124232
      },
      "early_exit_share_negative": {
-      "early_25": 0.42890084550345886,
-      "early_50": 0.27044952100221076,
-      "early_75": 0.2144436256448047
+      "early_25": 0.38109756097560976,
+      "early_50": 0.17868020304568527,
+      "early_75": 0.10558375634517767
      },
      "early_exit_worst": {
-      "early_25": -0.2392039818348578,
-      "early_50": -0.33127513274691056,
-      "early_75": -0.21572703623444034
+      "early_25": -0.043589322704133474,
+      "early_50": -0.03465966401372395,
+      "early_75": -0.007608473384322278
      },
      "rule": {
       "rule": "exceso ex ante sobre la letra > 0 (1x)",
       "all": {
-       "entries": 386,
-       "contracts": 10,
-       "realized_excess_mean": 0.024903421074425735,
+       "entries": 233,
+       "contracts": 7,
+       "realized_excess_mean": 0.0065661851671005,
        "realized_excess_min": -0.0014110125236559481,
-       "share_realized_beats_tbill": 0.9689119170984456,
-       "ret_1x_mean": 0.03761086875019259,
+       "share_realized_beats_tbill": 0.9484978540772532,
+       "ret_1x_mean": 0.024976135403289752,
        "liq_1x": 0,
        "extra_1x_max_pct": 0.0
       },
       "first_half": {
-       "entries": 162,
-       "contracts": 5,
-       "realized_excess_mean": 0.04992676421488099,
+       "entries": 66,
+       "contracts": 3,
+       "realized_excess_mean": 0.007377711506987494,
        "realized_excess_min": -0.0014110125236559481,
-       "share_realized_beats_tbill": 0.9753086419753086,
-       "ret_1x_mean": 0.05443829046088526,
+       "share_realized_beats_tbill": 0.8787878787878788,
+       "ret_1x_mean": 0.025545222873119167,
        "liq_1x": 0,
        "extra_1x_max_pct": 0.0
       },
       "second_half": {
-       "entries": 224,
-       "contracts": 5,
-       "realized_excess_mean": 0.0068061818389179235,
-       "realized_excess_min": -0.0007482798051930209,
-       "share_realized_beats_tbill": 0.9642857142857143,
-       "ret_1x_mean": 0.025441036977280927,
+       "entries": 167,
+       "contracts": 4,
+       "realized_excess_mean": 0.006245462182474503,
+       "realized_excess_min": -0.0004225852278194747,
+       "share_realized_beats_tbill": 0.9760479041916168,
+       "ret_1x_mean": 0.024751226582878125,
        "liq_1x": 0,
        "extra_1x_max_pct": 0.0
       },
-      "share_of_entries_taken": 0.2844509948415623
+      "share_of_entries_taken": 0.2365482233502538
      },
      "by_period": [
       {
-       "expiry": "2022-06-24",
-       "entries": 201,
-       "basis_mean_pct": -0.019771660266792536,
-       "ret_1x_mean": -0.020865441830408313,
-       "ret_1x_min": -0.21219214847337706,
-       "ret_1x_max": 0.15213275622902572,
-       "share_net_pos": 0.4975124378109453,
-       "share_beats_tbill": 0.4975124378109453,
-       "index_dev_pct": 0.00271355387188444,
-       "liq_1x": 0,
-       "liq_2x": 17,
-       "liq_3x": 17,
-       "max_rise_pct": 0.5639594116682671
-      },
-      {
        "expiry": "2022-09-30",
-       "entries": 29,
-       "basis_mean_pct": 0.018067395575830328,
-       "ret_1x_mean": 0.007551913551166401,
-       "ret_1x_min": -0.03324449193402909,
-       "ret_1x_max": 0.057293102989020094,
-       "share_net_pos": 0.6206896551724138,
-       "share_beats_tbill": 0.41379310344827586,
+       "entries": 6,
+       "basis_mean_pct": 0.007392149956557496,
+       "ret_1x_mean": 0.0032361462633289442,
+       "ret_1x_min": 0.0010712090645046708,
+       "ret_1x_max": 0.006958646420176514,
+       "share_net_pos": 1.0,
+       "share_beats_tbill": 0.16666666666666666,
        "index_dev_pct": 0.002254681264708877,
        "liq_1x": 0,
        "liq_2x": 0,
@@ -1499,13 +1449,13 @@
       },
       {
        "expiry": "2022-12-30",
-       "entries": 98,
-       "basis_mean_pct": -0.013390293445328652,
-       "ret_1x_mean": -0.009885104749654277,
-       "ret_1x_min": -0.08816223682592468,
-       "ret_1x_max": 0.057338627727570736,
-       "share_net_pos": 0.4489795918367347,
-       "share_beats_tbill": 0.35714285714285715,
+       "entries": 8,
+       "basis_mean_pct": 0.0039873593437220745,
+       "ret_1x_mean": 4.338847655928374e-05,
+       "ret_1x_min": -0.0012537035898896316,
+       "ret_1x_max": 0.0008609840899939415,
+       "share_net_pos": 0.625,
+       "share_beats_tbill": 0.0,
        "index_dev_pct": -0.0012467178878142037,
        "liq_1x": 0,
        "liq_2x": 0,
@@ -1514,17 +1464,17 @@
       },
       {
        "expiry": "2023-03-31",
-       "entries": 21,
-       "basis_mean_pct": 0.007699226166309031,
-       "ret_1x_mean": -0.0012810022025525453,
-       "ret_1x_min": -0.02044057962543088,
-       "ret_1x_max": 0.011727765217063724,
-       "share_net_pos": 0.38095238095238093,
+       "entries": 8,
+       "basis_mean_pct": 0.003401715585433132,
+       "ret_1x_mean": -0.0037660811438412194,
+       "ret_1x_min": -0.005871400826439636,
+       "ret_1x_max": -0.0017455103724511804,
+       "share_net_pos": 0.0,
        "share_beats_tbill": 0.0,
        "index_dev_pct": -0.004169848494653802,
        "liq_1x": 0,
        "liq_2x": 8,
-       "liq_3x": 21,
+       "liq_3x": 8,
        "max_rise_pct": 0.7609771405122263
       },
       {
@@ -1544,32 +1494,32 @@
       },
       {
        "expiry": "2023-09-29",
-       "entries": 20,
-       "basis_mean_pct": -0.010251498712352458,
-       "ret_1x_mean": -0.005993694126756208,
-       "ret_1x_min": -0.04339132329168956,
+       "entries": 6,
+       "basis_mean_pct": 0.015608149777296151,
+       "ret_1x_mean": 0.007151891911759235,
+       "ret_1x_min": 0.005817820422571893,
        "ret_1x_max": 0.008382840990478993,
-       "share_net_pos": 0.6,
+       "share_net_pos": 1.0,
        "share_beats_tbill": 0.0,
        "index_dev_pct": 0.0019011425549447832,
        "liq_1x": 0,
        "liq_2x": 0,
        "liq_3x": 0,
-       "max_rise_pct": 0.1528067083266571
+       "max_rise_pct": 0.05770393045341837
       },
       {
        "expiry": "2023-12-29",
-       "entries": 73,
-       "basis_mean_pct": 0.02565687229627842,
-       "ret_1x_mean": 0.009587189997553092,
-       "ret_1x_min": -0.005665364245326705,
-       "ret_1x_max": 0.03271316558117395,
-       "share_net_pos": 0.9726027397260274,
-       "share_beats_tbill": 0.0958904109589041,
+       "entries": 42,
+       "basis_mean_pct": 0.0160387003781897,
+       "ret_1x_mean": 0.004802321356723076,
+       "ret_1x_min": 0.0020678923567738787,
+       "ret_1x_max": 0.00837172617888181,
+       "share_net_pos": 1.0,
+       "share_beats_tbill": 0.0,
        "index_dev_pct": -0.0014751895190461594,
        "liq_1x": 0,
        "liq_2x": 42,
-       "liq_3x": 73,
+       "liq_3x": 42,
        "max_rise_pct": 0.729419534690837
       },
       {
@@ -1727,77 +1677,81 @@
       "fees_x1.5": {
        "rule": "exceso ex ante sobre la letra > 0 (1x)",
        "all": {
-        "entries": 364,
-        "contracts": 10,
-        "realized_excess_mean": 0.025724424528496707,
+        "entries": 211,
+        "contracts": 7,
+        "realized_excess_mean": 0.0064970755553896056,
         "realized_excess_min": -0.002369702372400336,
-        "share_realized_beats_tbill": 0.9587912087912088,
-        "ret_1x_mean": 0.037957662045762584,
+        "share_realized_beats_tbill": 0.9289099526066351,
+        "ret_1x_mean": 0.02468353080880605,
         "liq_1x": 0,
         "extra_1x_max_pct": 0.0
        },
        "first_half": {
-        "entries": 162,
-        "contracts": 5,
-        "realized_excess_mean": 0.04932018478354926,
+        "entries": 63,
+        "contracts": 3,
+        "realized_excess_mean": 0.006968584207954844,
         "realized_excess_min": -0.002369702372400336,
-        "share_realized_beats_tbill": 0.9629629629629629,
-        "ret_1x_mean": 0.05383171102955354,
+        "share_realized_beats_tbill": 0.8412698412698413,
+        "ret_1x_mean": 0.024873185034775987,
         "liq_1x": 0,
         "extra_1x_max_pct": 0.0
        },
        "second_half": {
-        "entries": 202,
-        "contracts": 5,
-        "realized_excess_mean": 0.006801092046721883,
-        "realized_excess_min": -0.0009178025126057032,
-        "share_realized_beats_tbill": 0.9554455445544554,
-        "ret_1x_mean": 0.025226989098365876,
+        "entries": 148,
+        "contracts": 4,
+        "realized_excess_mean": 0.006296365791121971,
+        "realized_excess_min": -0.0005327302460332028,
+        "share_realized_beats_tbill": 0.9662162162162162,
+        "ret_1x_mean": 0.024602799618021552,
         "liq_1x": 0,
         "extra_1x_max_pct": 0.0
        },
-       "share_of_entries_taken": 0.26823876197494473
+       "share_of_entries_taken": 0.21421319796954313
       },
       "fees_x2.0": {
        "rule": "exceso ex ante sobre la letra > 0 (1x)",
        "all": {
-        "entries": 346,
-        "contracts": 10,
-        "realized_excess_mean": 0.026392871031280192,
+        "entries": 194,
+        "contracts": 7,
+        "realized_excess_mean": 0.006334068628377183,
         "realized_excess_min": -0.0027555739057096244,
-        "share_realized_beats_tbill": 0.9682080924855492,
-        "ret_1x_mean": 0.03826234848950078,
+        "share_realized_beats_tbill": 0.9432989690721649,
+        "ret_1x_mean": 0.024379027481059416,
         "liq_1x": 0,
         "extra_1x_max_pct": 0.0
        },
        "first_half": {
-        "entries": 160,
-        "contracts": 5,
-        "realized_excess_mean": 0.04934525462888056,
+        "entries": 60,
+        "contracts": 3,
+        "realized_excess_mean": 0.006602848488689415,
         "realized_excess_min": -0.0027555739057096244,
-        "share_realized_beats_tbill": 0.96875,
-        "ret_1x_mean": 0.053763348776871986,
+        "share_realized_beats_tbill": 0.85,
+        "ret_1x_mean": 0.024302189809737848,
         "liq_1x": 0,
         "extra_1x_max_pct": 0.0
        },
        "second_half": {
-        "entries": 186,
-        "contracts": 5,
-        "realized_excess_mean": 0.0066488851408712775,
-        "realized_excess_min": -0.000918601370929039,
-        "share_realized_beats_tbill": 0.967741935483871,
-        "ret_1x_mean": 0.02492815469391264,
+        "entries": 134,
+        "contracts": 4,
+        "realized_excess_mean": 0.006213719437192601,
+        "realized_excess_min": -0.0005854537510906685,
+        "share_realized_beats_tbill": 0.9850746268656716,
+        "ret_1x_mean": 0.02441343240851683,
         "liq_1x": 0,
         "extra_1x_max_pct": 0.0
        },
-       "share_of_entries_taken": 0.25497420781134855
+       "share_of_entries_taken": 0.19695431472081218
       }
+     },
+     "data_exclusions": {
+      "antes_de_primera_entrega_conocida": 4804,
+      "futuro_sin_operaciones": 11477
      }
     }
    }
   }
  },
- "generated_at": "2026-10-13T19:52:11Z",
+ "generated_at": "2026-10-13T20:02:39Z",
  "step_hours": 24,
  "errors": [],
  "costs": {
@@ -1812,5 +1766,5 @@
   "status": "ASSUMED (nivel base público, sin cuenta)"
  },
  "benchmark": "FRED DTB3 (letra EE.UU. 3 meses), mismo plazo, sin anualizar",
- "results_note": "6186 entradas simuladas; detalle en lab_data/research/"
+ "results_note": "5044 entradas simuladas; detalle en lab_data/research/"
 }

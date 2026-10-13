@@ -238,7 +238,8 @@ def study_carry(step_hours=24, history=None, session=None):
         # marcas de tiempo al CIERRE de la vela (apertura + 1h)
         sp = {t + HOUR: c for t, c in spot.items()}
         prices = carry.ContractPrices(
-            {code: ({b[0] + HOUR: b[4] for b in series[ct]}, {b[0] + HOUR: b[2] for b in series[ct]})
+            {code: ({b[0] + HOUR: b[4] for b in series[ct]}, {b[0] + HOUR: b[2] for b in series[ct]},
+                    {b[0] + HOUR: b[5] for b in series[ct]})
              for ct, code in (("CURRENT_QUARTER", "CQ"), ("NEXT_QUARTER", "NQ"))}, expiries)
         res = {}
         for code in ("CQ", "NQ"):
@@ -248,11 +249,13 @@ def study_carry(step_hours=24, history=None, session=None):
                     sens[f"fees_x{m}"] = carry.rule_eval(
                         carry.simulate(sp, prices, deliveries, expiries, rates, step_hours, code, twap))
             recs = carry.simulate(sp, prices, deliveries, expiries, rates, step_hours, code, twap)
+            excluded = dict(carry.DATA_EXCLUSIONS)
             for r_ in recs:
                 r_["pair"] = pair
             recs_all += recs
             res[code] = carry.summarize(recs)
             res[code]["sensitivity"] = sens
+            res[code]["data_exclusions"] = excluded
         out["pairs"][pair] = {"delivery_checks": checks, "bars": {k: len(v) for k, v in series.items()},
                               "spot_bars": len(spot), "results": res}
     out.update({"generated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
