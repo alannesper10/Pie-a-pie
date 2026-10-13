@@ -40,6 +40,20 @@ class LabStore:
                         (run_id, snap.tick, snap.ts, zlib.compress(snap.to_json().encode())))
         self.db.commit()
 
+    def iter_snapshots(self, run_id, start_tick=0):
+        """Snapshots de a uno (no carga toda la corrida en memoria)."""
+        from .sources import Snapshot
+        cur = self.db.execute("SELECT tick FROM snapshots WHERE run_id=? AND tick>=? ORDER BY tick",
+                              (run_id, start_tick))
+        for (tick,) in cur.fetchall():
+            (blob,) = self.db.execute("SELECT data FROM snapshots WHERE run_id=? AND tick=?",
+                                      (run_id, tick)).fetchone()
+            yield Snapshot.from_json(zlib.decompress(blob).decode())
+
+    def max_tick(self, run_id):
+        r = self.db.execute("SELECT MAX(tick) FROM snapshots WHERE run_id=?", (run_id,)).fetchone()
+        return -1 if r[0] is None else r[0]
+
     def load_snapshots(self, run_id):
         from .sources import Snapshot
         rows = self.db.execute("SELECT data FROM snapshots WHERE run_id=? ORDER BY tick",

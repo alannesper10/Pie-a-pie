@@ -138,6 +138,27 @@ def test_profit_that_is_not_guaranteed_does_not_count():
     assert m["verdict"]["label"] == "SIN EVIDENCIA SUFICIENTE"
 
 
-def test_speculative_strategies_are_never_called_arbitrage():
-    rows = [row(t, 0.3, hour=t % 12, classification="ESPECULATIVA") for t in range(40)]
-    assert strategy_metrics("liquidity_provision", rows, None)["verdict"]["label"] ==         "ESPECULATIVA (no es arbitraje)"
+def test_statistical_strategies_are_never_called_arbitrage():
+    rows = [row(t, 0.3, hour=t % 12, classification="ESTADISTICA") for t in range(40)]
+    m = strategy_metrics("liquidity_provision", rows, None)
+    assert m["verdict"]["label"].startswith("ESTADISTICA:")
+    assert m["verdict"]["label"].endswith("(no es arbitraje)")
+
+
+def test_categories_are_never_mixed_in_totals():
+    rows = ([row(t, 0.3, classification="ARBITRAJE_GARANTIZADO") for t in range(3)]
+            + [row(t, 5.0, classification="NO_EJECUTABLE") for t in range(3)]
+            + [row(t, -1.0, classification="SIN_EDGE") for t in range(3)])
+    m = strategy_metrics("cross_exchange", rows, None)
+    assert m["net_simulated_usd"] == pytest.approx(0.9)          # solo garantizadas
+    cats = m["by_category"]
+    assert cats["NO_EJECUTABLE"]["n"] == 3 and cats["SIN_EDGE"]["n"] == 3
+    assert cats["ARBITRAJE_GARANTIZADO"]["net_simulated_usd"] == pytest.approx(0.9)
+
+
+def test_sensitivity_separates_fees_and_slippage():
+    r = row(0, 1.0, classification="ARBITRAJE_GARANTIZADO")
+    r["costs"] = {"fee_compra": {"usd": 0.2}, "slippage_extra": {"usd": 0.1}}
+    s = strategy_metrics("cross_exchange", [r], None)["sensitivity"]
+    assert s["fees_x2"] == pytest.approx(0.8) and s["slippage_x2"] == pytest.approx(0.9)
+    assert s["fees_x1.5_slippage_x2"] == pytest.approx(0.8)

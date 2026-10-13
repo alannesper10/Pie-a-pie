@@ -1,5 +1,5 @@
 from lab.core import ASSUMED, VERIFIED, Cost, Opportunity, classify_lab
-from src.guarantee import GUARANTEED, NO_EDGE, SPECULATIVE, UNVERIFIABLE
+from src.guarantee import GUARANTEED, NO_EDGE, NOT_EXECUTABLE, STATISTICAL, UNVERIFIABLE
 
 
 def opp(net_sim=None, status="FILLED", gross=1.0, costs=None, reason="FILLED"):
@@ -25,8 +25,8 @@ def test_verified_costs_are_not_stressed():
     assert classify_lab(o, "arbitrage")[0] == GUARANTEED
 
 
-def test_partial_or_failed_leg_is_not_demonstrated():
-    assert classify_lab(opp(0.5, status="PARTIAL", reason="PARTIAL"), "arbitrage")[0] == UNVERIFIABLE
+def test_partial_or_failed_leg_is_not_executable():
+    assert classify_lab(opp(0.5, status="PARTIAL", reason="PARTIAL"), "arbitrage")[0] == NOT_EXECUTABLE
     assert classify_lab(opp(-0.3, status="LEG_FAILED", reason="LEG_FAILED"), "arbitrage")[0] == NO_EDGE
 
 
@@ -42,7 +42,7 @@ def test_regression_no_edge_is_not_mislabeled_unverifiable():
         o = opp(None, gross=0.1, costs={"fee": Cost(0.3, VERIFIED, "t")}, reason=reason)
         assert classify_lab(o, "arbitrage")[0] == NO_EDGE
     o = opp(None, gross=1.0, costs={"fee": Cost(0.1, VERIFIED, "t")}, reason="BUDGET_TOO_SMALL")
-    assert classify_lab(o, "arbitrage")[0] == UNVERIFIABLE      # hay edge, no entra en capital
+    assert classify_lab(o, "arbitrage")[0] == NOT_EXECUTABLE    # hay edge, no entra en capital
     assert classify_lab(opp(None, reason="NO_BOOK_FOR_LEG"), "arbitrage")[0] == UNVERIFIABLE
 
 
@@ -51,7 +51,8 @@ def test_stale_or_suspicious_is_unverifiable():
     assert classify_lab(opp(None, reason="SUSPICIOUS_SPREAD_CHECK_TRANSFERS"), "arbitrage")[0] == UNVERIFIABLE
 
 
-def test_speculative_nature_is_never_guaranteed():
-    assert classify_lab(opp(5.0), "speculative")[0] == SPECULATIVE
-    assert classify_lab(opp(-1.0), "speculative")[0] == NO_EDGE
+def test_statistical_nature_is_never_guaranteed():
+    assert classify_lab(opp(5.0), "statistical")[0] == STATISTICAL
+    assert classify_lab(opp(5.0), "speculative")[0] == STATISTICAL      # alias histórico
+    assert classify_lab(opp(-1.0), "statistical")[0] == NO_EDGE
     assert classify_lab(opp(5.0), "unverifiable")[0] == UNVERIFIABLE

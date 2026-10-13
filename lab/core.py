@@ -60,8 +60,12 @@ class Opportunity:
     assumptions: List[str] = field(default_factory=list)
     sim: Optional[dict] = None    # resultado de la simulación de ejecución
     uid: str = ""                 # lo asigna el runner al guardar (re-guardado idempotente)
-    classification: str = ""      # ARBITRAJE_GARANTIZADO | ESPECULATIVA | NO_VERIFICABLE | SIN_EDGE
+    classification: str = ""      # ver src/guarantee.CATEGORIES
     classification_reason: str = ""
+    lock_hours: Optional[float] = None   # cuánto queda bloqueado el capital (None = instantáneo/desconocido)
+    max_loss_usd: Optional[float] = None # pérdida posible en el peor escenario modelado
+    valid_until: Optional[str] = None    # vigencia conocida (vencimiento, cierre del mercado)
+    final_result: Optional[dict] = None  # resultado verificado ex post (liquidación real)
 
     @property
     def net_estimated_usd(self):
@@ -75,11 +79,21 @@ class Opportunity:
     def net_simulated_usd(self):
         return None if not self.sim else self.sim.get("net_usd")
 
+    @property
+    def costs_verified_usd(self):
+        return sum(c.usd for c in self.costs.values() if c.status == VERIFIED)
+
+    @property
+    def costs_assumed_usd(self):
+        return sum(c.usd for c in self.costs.values() if c.status != VERIFIED)
+
     def to_row(self):
         d = asdict(self)
         d["costs"] = {k: asdict(v) for k, v in self.costs.items()}
         d["net_estimated_usd"] = self.net_estimated_usd
         d["net_estimated_pct"] = self.net_estimated_pct
+        d["costs_verified_usd"] = self.costs_verified_usd
+        d["costs_assumed_usd"] = self.costs_assumed_usd
         return d
 
 
@@ -194,33 +208,42 @@ class StrategyLedger:
 COST_STRESS = 1.5
 # Datos faltantes o sospechosos: no se puede verificar, haya o no neto estimado.
 UNVERIFIABLE_REASONS = ("STALE", "SUSPICIOUS", "NO_BOOK", "MISSING", "NO_TRADES", "NO_QUOTES",
-                        "ERROR")
+                        "ERROR", "NO_DATA", "UNAVAILABLE")
+# Hay datos y edge estimado, pero no se puede ejecutar con nuestro capital/libro.
+NOT_EXECUTABLE_REASONS = ("MIN_SIZE", "BUDGET", "NO_CAPITAL", "INSUFFICIENT_DEPTH", "INFEASIBLE")
 
 
 def classify_lab(o, nature):
     """Clasificación común (misma regla que src/guarantee.py).
 
-    nature: "arbitrage" (puede ser garantizado), "speculative" (nunca lo es:
-    depende de precios/funding futuros) o "unverifiable" (requiere verificación
-    manual que no existe)."""
-    from src.guarantee import GUARANTEED, NO_EDGE, SPECULATIVE, UNVERIFIABLE
+    nature: "arbitrage" (puede ser garantizado), "statistical" (ventaja
+    estimada por un modelo; nunca garantizada; alias histórico "speculative")
+    o "unverifiable" (requiere verificación manual que no existe)."""
+    from src.guarantee import (
+        GUARANTEED, NO_EDGE, NOT_EXECUTABLE, STATISTICAL, UNVERIFIABLE,
+    )
     sim = o.sim or {}
     net = sim.get("net_usd")
     positive = (net if net is not None else o.net_estimated_usd) > 0
-    if nature == "speculative":
-        return (SPECULATIVE, "estrategia estadística: el resultado depende de precios o "
-                "funding futuros") if positive else (NO_EDGE, "neto <= 0")
+    reason = o.reason or ""
+    if nature in ("statistical", "speculative"):
+        if any(k in reason for k in UNVERIFIABLE_REASONS):
+            return UNVERIFIABLE, f"no verificable: {reason}"
+        return (STATISTICAL, "ventaja estimada por modelo; depende de precios/funding "
+                "futuros y exige validación fuera de muestra") if positive \
+            else (NO_EDGE, "neto <= 0")
     if nature == "unverifiable":
-        return UNVERIFIABLE, "requiere pares verificados a mano"
-    if any(k in (o.reason or "") for k in UNVERIFIABLE_REASONS):
-        return UNVERIFIABLE, f"no verificable: {o.reason}"
+        return UNVERIFIABLE, "requiere verificación manual que no existe"
+    if any(k in reason for k in UNVERIFIABLE_REASONS):
+        return UNVERIFIABLE, f"no verificable: {reason}"
     if not sim:
         if o.net_estimated_usd <= 0:
             return NO_EDGE, "neto estimado <= 0 después de costos"
-        # Hay neto estimado pero no se ejecutó (tamaño mínimo, presupuesto, capital).
-        return UNVERIFIABLE, f"neto estimado > 0 pero no ejecutable: {o.reason}"
+        if any(k in reason for k in NOT_EXECUTABLE_REASONS):
+            return NOT_EXECUTABLE, f"edge estimado pero no ejecutable: {reason}"
+        return UNVERIFIABLE, f"neto estimado > 0 sin simulación de ejecución: {reason}"
     if sim.get("status") != "FILLED":
-        return (UNVERIFIABLE, f"ejecución no demostrada: {sim.get('status')}") if positive \
+        return (NOT_EXECUTABLE, f"ejecución incompleta: {sim.get('status')}") if positive \
             else (NO_EDGE, f"ejecución {sim.get('status')} con neto <= 0")
     if net is None or net <= 0:
         return NO_EDGE, "ejecutada con neto <= 0"

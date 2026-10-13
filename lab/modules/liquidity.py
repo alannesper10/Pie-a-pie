@@ -55,7 +55,7 @@ def apply_trades(order, trades, side):
 
 class LiquidityProvision(Module):
     name = "liquidity_provision"
-    nature = "speculative"   # depende de fills futuros y selección adversa
+    nature = "statistical"   # depende de fills futuros y selección adversa
     needs_crypto_books = True
     needs_trades = True
 

@@ -6,7 +6,7 @@ import pytest
 import scanner
 from src.config import BotConfig
 from src.event_arbitrage import evaluate_event_bundle, prefilter_event
-from src.guarantee import GUARANTEED, SPECULATIVE, UNVERIFIABLE
+from src.guarantee import GUARANTEED, NOT_EXECUTABLE, SPECULATIVE, UNVERIFIABLE
 
 
 def ob(yes_ask, size):
@@ -77,7 +77,7 @@ def test_price_moves_after_latency_is_not_executable(tmp_path, monkeypatch):
     o, _ = run_gate(tmp_path, monkeypatch, BOOKS, after)
     (row,) = audit_rows(tmp_path)
     assert row["exec_status"] == "EJECUCION_FALLIDA"
-    assert row["classification"] == UNVERIFIABLE and not o.executable
+    assert row["classification"] == NOT_EXECUTABLE and not o.executable
 
 
 def test_insufficient_depth_after_latency(tmp_path, monkeypatch):

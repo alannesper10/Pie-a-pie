@@ -79,8 +79,11 @@ def out_of_sample(rows):
             "out_of_sample_net": score(oos, best)}
 
 
-NATURE = {"basis_funding": "speculative", "liquidity_provision": "speculative",
-          "prediction_cross_venue": "unverifiable"}
+NATURE = {"basis_funding": "statistical", "liquidity_provision": "statistical",
+          "prediction_cross_venue": "unverifiable", "stat_arb_pairs": "statistical",
+          "etf_relations": "statistical", "calendar_spread": "statistical",
+          "orderbook_imbalance": "statistical"}
+STATISTICAL_NATURES = ("statistical", "speculative")
 
 
 def strategy_metrics(name, rows, ledger):
@@ -89,8 +92,8 @@ def strategy_metrics(name, rows, ledger):
     by_class = Counter(r.get("classification") or "SIN_CLASIFICAR" for r in rows)
     nature = NATURE.get(name, "arbitrage")
     accepted = [r for r in rows if r.get("decision") == "ACCEPTED"]
-    sims = accepted if nature == "speculative" else [
-        r for r in accepted if r.get("classification") == "ARBITRAJE_GARANTIZADO"]
+    target = "ESTADISTICA" if nature in STATISTICAL_NATURES else "ARBITRAJE_GARANTIZADO"
+    sims = [r for r in accepted if r.get("classification") == target]
     nets = [_sim_net(r) for r in sims if _sim_net(r) is not None]
     pcts = [(r.get("sim") or {}).get("net_pct_capital") for r in sims
             if (r.get("sim") or {}).get("net_pct_capital") is not None]
@@ -121,7 +124,10 @@ def strategy_metrics(name, rows, ledger):
         },
         "reasons": dict(Counter(r.get("reason") for r in rows).most_common(12)),
         "classification": dict(by_class), "nature": nature,
-        "accepted_not_guaranteed": len(accepted) - (len(sims) if nature != "speculative" else len(accepted)),
+        "accepted_not_counted": len(accepted) - len(sims),
+        "by_category": category_breakdown(rows),
+        "by_market": market_breakdown(sims),
+        "sensitivity": sensitivity(sims),
         "net_simulated_usd": sum(nets),
         "capital_committed_usd": cap,
         "return_on_committed": sum(nets) / cap if cap else None,
@@ -135,13 +141,57 @@ def strategy_metrics(name, rows, ledger):
         "ledger": ledger,
     }
     m["verdict"] = verdict(m)
-    if nature == "speculative":
-        m["verdict"] = {"label": "ESPECULATIVA (no es arbitraje)",
+    if nature in STATISTICAL_NATURES:
+        m["verdict"] = {"label": f"ESTADISTICA: {m['verdict']['label']} (no es arbitraje)",
                         "why": f"neto simulado {m['net_simulated_usd']:+.4f} USD; "
                                + m["verdict"]["why"]}
     elif nature == "unverifiable":
         m["verdict"] = {"label": "NO VERIFICABLE", "why": "sin pares verificados a mano"}
     return m
+
+
+def category_breakdown(rows):
+    """Conteos y sumas SEPARADOS por categoría: nunca se mezclan en un total."""
+    out = {}
+    for r in rows:
+        c = r.get("classification") or "SIN_CLASIFICAR"
+        d = out.setdefault(c, {"n": 0, "net_estimated_usd": 0.0, "net_simulated_usd": 0.0,
+                               "capital_usd": 0.0, "max_loss_usd": 0.0})
+        d["n"] += 1
+        d["net_estimated_usd"] += r.get("net_estimated_usd") or 0.0
+        d["net_simulated_usd"] += _sim_net(r) or 0.0
+        d["capital_usd"] += r.get("capital_usd") or 0.0
+        d["max_loss_usd"] = max(d["max_loss_usd"], r.get("max_loss_usd") or 0.0)
+    return out
+
+
+def market_breakdown(rows):
+    out = defaultdict(lambda: {"n": 0, "net_usd": 0.0})
+    for r in rows:
+        k = "+".join(r.get("venues") or []) + ":" + "+".join(r.get("instruments") or [])[:60]
+        out[k]["n"] += 1
+        out[k]["net_usd"] += _sim_net(r) or 0.0
+    return dict(out)
+
+
+def sensitivity(rows):
+    """Neto simulado ante costos más exigentes, separando comisiones y
+    deslizamiento. La latencia se compara entre corridas con distinta latencia
+    de recolección (no se puede inventar un libro a otra latencia)."""
+    def scaled(fee_k, slip_k):
+        tot = 0.0
+        for r in rows:
+            n = _sim_net(r)
+            if n is None:
+                continue
+            extra = 0.0
+            for name, c in (r.get("costs") or {}).items():
+                k = slip_k if "slip" in name.lower() or "profundidad" in name.lower() else fee_k
+                extra += (k - 1) * (c or {}).get("usd", 0.0)
+            tot += n - extra
+        return tot
+    return {"fees_x1.5": scaled(1.5, 1.0), "fees_x2": scaled(2.0, 1.0),
+            "slippage_x2": scaled(1.0, 2.0), "fees_x1.5_slippage_x2": scaled(1.5, 2.0)}
 
 
 def verdict(m):

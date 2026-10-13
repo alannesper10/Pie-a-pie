@@ -21,10 +21,22 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional
 
+# Taxonomía común (5 categorías + apuestas especulativas aparte):
+#   1 ARBITRAJE_GARANTIZADO  cobertura y ejecución demostradas
+#   2 ESTADISTICA            ventaja ESTIMADA por un modelo (requiere fuera de muestra)
+#   3 NO_EJECUTABLE          datos suficientes, pero no se puede ejecutar
+#                            (profundidad, tamaño mínimo, capital, pata fallida)
+#   4 NO_VERIFICABLE         falta información para decidir (libros, reglas, costos)
+#   5 SIN_EDGE               sin ventaja neta después de costos
+#   ESPECULATIVA             apuesta: gana solo si ocurre un resultado no cubierto y
+#                            no hay ventaja estimada. Nunca suma rentabilidad.
 GUARANTEED = "ARBITRAJE_GARANTIZADO"
-SPECULATIVE = "ESPECULATIVA"
+STATISTICAL = "ESTADISTICA"
+NOT_EXECUTABLE = "NO_EJECUTABLE"
 UNVERIFIABLE = "NO_VERIFICABLE"
 NO_EDGE = "SIN_EDGE"
+SPECULATIVE = "ESPECULATIVA"
+CATEGORIES = (GUARANTEED, STATISTICAL, NOT_EXECUTABLE, UNVERIFIABLE, NO_EDGE, SPECULATIVE)
 
 EXEC_VERIFIED = "EJECUCION_VERIFICADA"
 EXEC_NOT_DEMONSTRATED = "EJECUCION_NO_DEMOSTRADA"
@@ -290,6 +302,8 @@ def classify(*, net_expected, coverage_proven, exec_status, net_min, net_min_str
                              "un resultado no cubierto genera pérdida")
     if net_min is None or net_min <= 0:
         return SPECULATIVE, "algún escenario cubierto da pérdida neta"
+    if exec_status == EXEC_FAILED:
+        return NOT_EXECUTABLE, "el libro tras la latencia no alcanza para el volumen completo"
     if exec_status != EXEC_VERIFIED:
         return UNVERIFIABLE, "ejecución no demostrada con libros verificados"
     if net_min_stressed is None or net_min_stressed <= 0:

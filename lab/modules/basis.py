@@ -37,7 +37,7 @@ class RegistryBooks:
 
 class BasisFunding(Module):
     name = "basis_funding"
-    nature = "speculative"   # el funding futuro y el basis no están garantizados
+    nature = "statistical"   # el funding futuro y el basis no están garantizados
     replayable = False      # usa datos de perpetuos en vivo propios
 
     def __init__(self, db_path, seed=None, exchanges=None, assets=None, runner=None):
