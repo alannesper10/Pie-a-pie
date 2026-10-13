@@ -76,6 +76,23 @@ python run_lab.py consolidate                                                  #
 La guardia de recursos (`--max-rss-mb`, `--max-minutes`) corta ordenadamente
 guardando el checkpoint; la caché histórica nunca vuelve a descargar lo que ya tiene.
 
+## Ejecutor de órdenes de HORUS (modo 2, PAPER)
+
+Contrato versionado `horus.order/v1` → `pieapie.report/v1` (ver
+`docs/ARQUITECTURA.md`). Idempotencia por `order_id`, eventos inmutables
+encadenados por hash, límites propios en `config/executor_limits.json` (más
+restrictivos que cualquier orden), ruteo entre venues por precio efectivo con
+comisiones. Si no puede cumplir la orden dentro de sus parámetros, se detiene
+(`HALTED_NEEDS_INSTRUCTION`) e informa; nunca cambia la estrategia.
+
+```powershell
+python run_executor.py example > executor_io/inbox/orden.json
+python run_executor.py process            # o --loop --every 15
+python run_executor.py status [ORDER_ID]
+python run_executor.py verify             # integridad de la cadena de eventos
+python -m lab.carry_monitor               # monitor de cash-and-carry (solo observación)
+```
+
 ## Comandos
 
 ```powershell

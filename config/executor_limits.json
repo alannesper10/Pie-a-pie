@@ -1,0 +1,12 @@
+{
+  "paper_only": true,
+  "paper_capital_usd": 100.0,
+  "asset_classes": ["crypto_spot"],
+  "venues": ["binance", "bybit", "okx", "kraken", "coinbase"],
+  "max_notional_per_order_usd": 50.0,
+  "max_total_exposure_usd": 90.0,
+  "max_loss_per_order_usd": 10.0,
+  "max_decision_price_deviation_bps": 100,
+  "max_open_orders": 5,
+  "note": "Límites PROPIOS de Pie a Pie. Ninguna orden de HORUS puede superarlos; se aplica el más restrictivo."
+}
