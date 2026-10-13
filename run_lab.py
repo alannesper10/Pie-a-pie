@@ -232,13 +232,27 @@ def cmd_suggest_pairs(args):
         print(f"  {c['score']:.2f} {c['kalshi_ticker']} ~ {c['polymarket_question']}")
 
 
+def cmd_research(args):
+    """Estudios estadísticos (G etf, H stat_arb, I imbalance, descubrimiento)."""
+    from lab.research import runner as rr
+    fn = {"stat_arb": rr.study_stat_arb, "etf": rr.study_etf, "imbalance": rr.study_imbalance,
+          "discovery": rr.study_discovery, "all": rr.run_all}[args.study]
+    res = fn()
+    print(json.dumps({k: (v.get("funnel") or v.get("bh_rejections") or v.get("error") or "ok")
+                      if isinstance(v, dict) else v for k, v in (res if args.study == "all"
+                                                                 else {args.study: res}).items()},
+                     indent=1, default=str))
+
+
 def main(argv=None):
     if not PAPER_ONLY:
         sys.exit("El laboratorio es solo simulación (PAPER_ONLY).")
     p = argparse.ArgumentParser(description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("cmd", choices=["run", "collect", "evaluate", "replay", "report",
-                                   "suggest-pairs"])
+                                   "suggest-pairs", "research"])
+    p.add_argument("--study", default="all",
+                   choices=["stat_arb", "etf", "imbalance", "discovery", "all"])
     p.add_argument("--resume", action="store_true", help="collect: continuar --run desde el último tick")
     p.add_argument("--max-rss-mb", type=float, default=1500.0)
     p.add_argument("--max-minutes", type=float, default=None)
@@ -255,7 +269,7 @@ def main(argv=None):
     args = p.parse_args(argv)
     logging.basicConfig(level=logging.INFO, datefmt="%H:%M:%S",
                         format="%(asctime)s %(levelname)s %(message)s")
-    {"run": cmd_run, "collect": cmd_collect, "evaluate": cmd_replay, "replay": cmd_replay,
+    {"research": cmd_research, "run": cmd_run, "collect": cmd_collect, "evaluate": cmd_replay, "replay": cmd_replay,
      "report": cmd_report,
      "suggest-pairs": cmd_suggest_pairs}[args.cmd](args)
 
