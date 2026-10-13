@@ -37,7 +37,7 @@ def fetch_kalshi_quotes(client, tickers):
 
 def build_snapshot(tick, crypto=None, polymarket=None, latency_ms=500.0, need_trades=True,
                    need_polymarket=True, sleep=time.sleep, markets_cache=None,
-                   pairs=None, kalshi_client=None, dex=None, futures=None):
+                   pairs=None, kalshi_client=None, dex=None, futures=None, ccl=None):
     snap = Snapshot(tick=tick, ts=now_iso(), latency_ms=latency_ms)
     if crypto is not None:
         snap.errors.extend(crypto.init_errors)
@@ -83,6 +83,9 @@ def build_snapshot(tick, crypto=None, polymarket=None, latency_ms=500.0, need_tr
             snap.errors.append({"venue": "jupiter", "what": "sol_usd", "error": "NO_DATA: sin libro SOL/USDC"})
     if futures is not None:
         snap.futures["books"], snap.futures["meta"], errs = futures.fetch()
+        snap.errors.extend(errs)
+    if ccl is not None:
+        snap.ccl, errs = ccl.fetch()
         snap.errors.extend(errs)
     # Latencia: los libros de ejecución se piden DESPUÉS de esperar.
     sleep(latency_ms / 1000)

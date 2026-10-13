@@ -45,6 +45,7 @@ class Snapshot:
     kalshi: dict = field(default_factory=dict)
     dex: dict = field(default_factory=dict)            # Jupiter: quotes T0/T1 + fee de prioridad
     futures: dict = field(default_factory=dict)        # futuros con vencimiento: libros T0/T1
+    ccl: dict = field(default_factory=dict)            # BYMA/ADR: puntas (data912, terceros)
     errors: List[dict] = field(default_factory=list)
     latency_ms: float = 0.0
 
@@ -58,7 +59,7 @@ class Snapshot:
     def to_json(self):
         return json.dumps({k: getattr(self, k) for k in (
             "tick", "ts", "books", "books_after", "trades", "markets", "polymarket",
-            "kalshi", "dex", "futures", "errors", "latency_ms")}, default=str)
+            "kalshi", "dex", "futures", "ccl", "errors", "latency_ms")}, default=str)
 
     @classmethod
     def from_json(cls, s):
@@ -145,9 +146,9 @@ class CryptoSource:
 class PolymarketSource:
     """Gamma (eventos) + CLOB (libros). Público y sin claves."""
 
-    def __init__(self, session=None, max_events=150, max_books=200):
+    def __init__(self, session=None, max_events=150, max_books=1000, batch_size=100):
         self.s = session or requests.Session()
-        self.max_events, self.max_books = max_events, max_books
+        self.max_events, self.max_books, self.batch_size = max_events, max_books, batch_size
 
     def fetch(self):
         errs = []
@@ -179,6 +180,12 @@ class PolymarketSource:
                          "negRisk": True, "markets": ms})
         return {"events": slim, "books": {}}, errs
 
+    @staticmethod
+    def _parse(b):
+        return {"bids": sorted([[float(x["price"]), float(x["size"])] for x in b.get("bids", [])], reverse=True),
+                "asks": sorted([[float(x["price"]), float(x["size"])] for x in b.get("asks", [])]),
+                "fetched_at": now_iso(), "server_ts": b.get("timestamp"), "hash": b.get("hash")}
+
     def _one_book(self, t):
         try:
             r = self.s.get(f"{CLOB}/book", params={"token_id": t}, timeout=15)
@@ -186,22 +193,49 @@ class PolymarketSource:
                 return t, None, {"venue": "polymarket", "what": "book", "token": t,
                                  "error": "HTTP 404 (sin libro)"}
             r.raise_for_status()
-            b = r.json()
-            return t, {"bids": sorted([[float(x["price"]), float(x["size"])] for x in b.get("bids", [])], reverse=True),
-                       "asks": sorted([[float(x["price"]), float(x["size"])] for x in b.get("asks", [])]),
-                       "fetched_at": now_iso()}, None
+            return t, self._parse(r.json()), None
         except Exception as e:  # noqa: BLE001
             return t, None, {"venue": "polymarket", "what": "book", "token": t,
                              "error": f"{type(e).__name__}: {str(e)[:120]}"}
 
-    def fetch_books(self, token_ids, workers=12):
+    def _batch(self, chunk):
+        """POST /books: un pedido por lote. Las respuestas NO vienen en orden:
+        se asocian por asset_id. Lo que no vuelve se pide de a uno."""
         books, errs = {}, []
-        with ThreadPoolExecutor(max_workers=workers) as pool:
-            for t, b, e in pool.map(self._one_book, list(dict.fromkeys(token_ids))[:self.max_books]):
+        try:
+            r = self.s.post(f"{CLOB}/books", json=[{"token_id": t} for t in chunk], timeout=30)
+            r.raise_for_status()
+            for b in r.json():
+                if b.get("asset_id") in chunk:
+                    books[b["asset_id"]] = self._parse(b)
+        except Exception as e:  # noqa: BLE001
+            errs.append({"venue": "polymarket", "what": "books_batch", "n": len(chunk),
+                         "error": f"{type(e).__name__}: {str(e)[:120]}"})
+        for t in chunk:
+            if t not in books:
+                _, b, err = self._one_book(t)
                 if b is not None:
                     books[t] = b
-                if e:
-                    errs.append(e)
+                if err:
+                    errs.append(err)
+        return books, errs
+
+    def fetch_books(self, token_ids, workers=4):
+        """Libros completos de TODOS los tokens pedidos. Si se supera max_books,
+        el recorte se registra como error (antes era silencioso: 559 casos
+        quedaron NO_BOOK_FOR_LEG por un corte en 200)."""
+        books, errs = {}, []
+        toks = list(dict.fromkeys(token_ids))
+        if len(toks) > self.max_books:
+            errs.append({"venue": "polymarket", "what": "books", "error": "TRUNCATED",
+                         "requested": len(toks), "kept": self.max_books,
+                         "dropped": toks[self.max_books:]})
+            toks = toks[:self.max_books]
+        chunks = [toks[i:i + self.batch_size] for i in range(0, len(toks), self.batch_size)]
+        with ThreadPoolExecutor(max_workers=workers) as pool:
+            for b, e in pool.map(self._batch, chunks):
+                books.update(b)
+                errs.extend(e)
         return books, errs
 
 
@@ -295,6 +329,93 @@ class FuturesSource:
                 errs.append({"venue": v, "symbol": sym, "what": "futures_book",
                              "error": f"{type(e).__name__}: {str(e)[:120]}"})
         return books, self.meta, errs
+
+
+DATA912 = "https://data912.com/live"
+CCL_LOCAL = ("GGAL", "GGALD", "BMA", "BMA.D", "PAMP", "PAMPD", "YPFD", "YPFDD", "CEPU", "CEPUD",
+             "TGSU2", "TGSUD", "EDN", "EDND", "SUPV", "SUPVD", "LOMA", "LOMAD", "CRES", "CRESD",
+             "IRSA", "IRSAD", "TECO2", "TECOD")
+CCL_ADRS = ("GGAL", "BMA", "PAM", "YPF", "CEPU", "TGS", "EDN", "SUPV", "LOMA", "CRESY", "IRS", "TEO")
+
+
+BYMA_FREE = "https://open.bymadata.com.ar/vanoms-be-core/rest/api/bymadata/free"
+NASDAQ_QUOTE = "https://api.nasdaq.com/api/quote/{}/info"
+WEB_HEADERS = {"User-Agent": "Mozilla/5.0", "Accept": "application/json"}
+
+
+def _money(x):
+    try:
+        return float(str(x).replace("$", "").replace(",", ""))
+    except (TypeError, ValueError):
+        return None
+
+
+class CclSource:
+    """Puntas de acciones argentinas (BYMA) y de sus ADR. Tres fuentes, cada una
+    con su estado; nunca se completan ni se interpolan cotizaciones:
+      byma     open.bymadata.com.ar (OFICIAL, gratuita, CON DEMORA ~20 min;
+               panel líder en pesos, plazos de liquidación 1 y 2)
+      nasdaq   api.nasdaq.com (puntas y tamaños de los ADR; isRealTime informado
+               por la API)
+      data912  data912.com (TERCEROS, comunitaria, sin garantía)
+    Solo top of book: no hay profundidad."""
+
+    def __init__(self, session=None, adrs=CCL_ADRS, use=("byma", "nasdaq", "data912")):
+        self.s = session or requests.Session()
+        self.adrs, self.use = adrs, use
+
+    def _get(self, ep):
+        r = self.s.get(f"{DATA912}/{ep}", timeout=20)
+        r.raise_for_status()
+        return r.json()
+
+    def _byma(self):
+        r = self.s.post(f"{BYMA_FREE}/leading-equity", json={}, headers=WEB_HEADERS, timeout=20)
+        r.raise_for_status()
+        rows = {}
+        for x in r.json().get("data") or []:
+            rows[f"{x.get('symbol')}|{x.get('settlementType')}"] = {k: x.get(k) for k in (
+                "symbol", "settlementType", "denominationCcy", "bidPrice", "quantityBid",
+                "offerPrice", "quantityOffer", "trade", "tradeHour", "volume", "vwap",
+                "previousClosingPrice")}
+        return rows
+
+    def _nasdaq(self, sym):
+        r = self.s.get(NASDAQ_QUOTE.format(sym), params={"assetclass": "stocks"},
+                       headers=WEB_HEADERS, timeout=20)
+        r.raise_for_status()
+        p = ((r.json() or {}).get("data") or {}).get("primaryData") or {}
+        return {"bid": _money(p.get("bidPrice")), "ask": _money(p.get("askPrice")),
+                "bid_size": _money(p.get("bidSize")), "ask_size": _money(p.get("askSize")),
+                "last": _money(p.get("lastSalePrice")), "last_ts": p.get("lastTradeTimestamp"),
+                "real_time": p.get("isRealTime"), "fetched_at": now_iso()}
+
+    def fetch(self):
+        out, errs = {"fetched_at": now_iso()}, []
+        if "byma" in self.use:
+            try:
+                out["byma"], out["byma_fetched_at"] = self._byma(), now_iso()
+            except Exception as e:  # noqa: BLE001
+                errs.append({"venue": "byma", "what": "leading-equity",
+                             "error": f"{type(e).__name__}: {str(e)[:120]}"})
+        if "nasdaq" in self.use:
+            out["nasdaq"] = {}
+            for sym in self.adrs:
+                try:
+                    out["nasdaq"][sym] = self._nasdaq(sym)
+                except Exception as e:  # noqa: BLE001
+                    errs.append({"venue": "nasdaq", "what": sym,
+                                 "error": f"{type(e).__name__}: {str(e)[:120]}"})
+        if "data912" in self.use:
+            for ep, keep, key in (("arg_stocks", CCL_LOCAL, "symbol"), ("usa_adrs", CCL_ADRS, "symbol"),
+                                  ("ccl", CCL_ADRS, "ticker_usa")):
+                try:
+                    out[ep] = {x[key]: x for x in self._get(ep) if x.get(key) in keep}
+                    out[f"{ep}_fetched_at"] = now_iso()
+                except Exception as e:  # noqa: BLE001
+                    errs.append({"venue": "data912", "what": ep,
+                                 "error": f"{type(e).__name__}: {str(e)[:120]}"})
+        return out, errs
 
 
 SOL_MINT = "So11111111111111111111111111111111111111112"
