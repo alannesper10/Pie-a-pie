@@ -1,0 +1,1816 @@
+{
+ "pairs": {
+  "ETHUSDT": {
+   "delivery_checks": [
+    {
+     "expiry": 1648195200000,
+     "cq_close_vs_delivery": 0.0001211004847205821,
+     "spot_twap_vs_delivery": -0.0018002543110178237
+    },
+    {
+     "expiry": 1656057600000,
+     "cq_close_vs_delivery": 0.005812174977056994,
+     "spot_twap_vs_delivery": 0.006681233521245833
+    },
+    {
+     "expiry": 1664524800000,
+     "cq_close_vs_delivery": -0.0014919360854580566,
+     "spot_twap_vs_delivery": 0.0018865531800618118
+    },
+    {
+     "expiry": 1672387200000,
+     "cq_close_vs_delivery": 0.0023441241461590323,
+     "spot_twap_vs_delivery": -0.0015154188476543817
+    },
+    {
+     "expiry": 1680249600000,
+     "cq_close_vs_delivery": -5.585250470563352e-05,
+     "spot_twap_vs_delivery": -0.0010230317111905585
+    },
+    {
+     "expiry": 1688112000000,
+     "cq_close_vs_delivery": -0.00037203962753518116,
+     "spot_twap_vs_delivery": 0.0014458168572928365
+    },
+    {
+     "expiry": 1695974400000,
+     "cq_close_vs_delivery": 6.587063008245408e-05,
+     "spot_twap_vs_delivery": 0.005923965332087722
+    },
+    {
+     "expiry": 1703836800000,
+     "cq_close_vs_delivery": 0.0014143910024282391,
+     "spot_twap_vs_delivery": -0.001609082775955395
+    },
+    {
+     "expiry": 1711699200000,
+     "cq_close_vs_delivery": -0.002662943425119524,
+     "spot_twap_vs_delivery": -0.005095248550769482
+    },
+    {
+     "expiry": 1719561600000,
+     "cq_close_vs_delivery": 0.0006535473095636846,
+     "spot_twap_vs_delivery": -0.0016202163967757865
+    },
+    {
+     "expiry": 1727424000000,
+     "cq_close_vs_delivery": -0.0003609958974321037,
+     "spot_twap_vs_delivery": 0.00023502337072400792
+    },
+    {
+     "expiry": 1735286400000,
+     "cq_close_vs_delivery": 0.00043431118246473055,
+     "spot_twap_vs_delivery": -0.00019758662760860357
+    },
+    {
+     "expiry": 1743148800000,
+     "cq_close_vs_delivery": 0.0001622136405974306,
+     "spot_twap_vs_delivery": -7.709508510111984e-05
+    },
+    {
+     "expiry": 1751011200000,
+     "cq_close_vs_delivery": 0.00038507861338921145,
+     "spot_twap_vs_delivery": -5.079760431936364e-05
+    },
+    {
+     "expiry": 1758873600000,
+     "cq_close_vs_delivery": -0.0002450254724397638,
+     "spot_twap_vs_delivery": -0.00011068685404314049
+    },
+    {
+     "expiry": 1766736000000,
+     "cq_close_vs_delivery": 0.005644767216540059,
+     "spot_twap_vs_delivery": -0.0001449104419768421
+    },
+    {
+     "expiry": 1774598400000,
+     "cq_close_vs_delivery": 0.00269304594616826,
+     "spot_twap_vs_delivery": 1.0153315057381818e-05
+    },
+    {
+     "expiry": 1782460800000,
+     "cq_close_vs_delivery": -0.005765036821644198,
+     "spot_twap_vs_delivery": 1.4960439120415003e-05
+    }
+   ],
+   "bars": {
+    "CURRENT_QUARTER": 44732,
+    "NEXT_QUARTER": 37294
+   },
+   "spot_bars": 44729,
+   "results": {
+    "CQ": {
+     "entries": 1736,
+     "periods": 18,
+     "share_net_pos": 0.6555299539170507,
+     "share_beats_tbill": 0.18433179723502305,
+     "ret_1x_mean": 0.002229870375743719,
+     "excess_1x_mean": -0.002598979467989544,
+     "periods_mean_beats_tbill": 2,
+     "index_dev_abs_max_pct": 0.006681233521245821,
+     "liquidations": {
+      "1x": 7,
+      "2x": 207,
+      "3x": 307
+     },
+     "extra_capital_max_pct": {
+      "1x": 0.02527150767697262,
+      "2x": 0.3668732597640426,
+      "3x": 0.5383677144139638
+     },
+     "early_exit_share_negative": {
+      "early_25": 0.7292626728110599,
+      "early_50": 0.6002304147465438,
+      "early_75": 0.47580645161290325
+     },
+     "early_exit_worst": {
+      "early_25": -0.027206349709363472,
+      "early_50": -0.01478721323704465,
+      "early_75": -0.019609718396816092
+     },
+     "rule": {
+      "rule": "exceso ex ante sobre la letra > 0 (1x)",
+      "all": {
+       "entries": 272,
+       "contracts": 7,
+       "realized_excess_mean": 0.004907417904564916,
+       "realized_excess_min": -0.0034350221006545145,
+       "share_realized_beats_tbill": 0.8713235294117647,
+       "ret_1x_mean": 0.00856395536163415,
+       "liq_1x": 0,
+       "extra_1x_max_pct": 0.0
+      },
+      "first_half": {
+       "entries": 180,
+       "contracts": 3,
+       "realized_excess_mean": 0.005739999668344048,
+       "realized_excess_min": -0.0034350221006545145,
+       "share_realized_beats_tbill": 0.8333333333333334,
+       "ret_1x_mean": 0.007461516524330008,
+       "liq_1x": 0,
+       "extra_1x_max_pct": 0.0
+      },
+      "second_half": {
+       "entries": 92,
+       "contracts": 4,
+       "realized_excess_mean": 0.0032784535841274857,
+       "realized_excess_min": -0.0006680121265975475,
+       "share_realized_beats_tbill": 0.9456521739130435,
+       "ret_1x_mean": 0.010720900912881385,
+       "liq_1x": 0,
+       "extra_1x_max_pct": 0.0
+      },
+      "share_of_entries_taken": 0.15668202764976957
+     },
+     "by_period": [
+      {
+       "expiry": "2022-03-25",
+       "entries": 199,
+       "basis_mean_pct": 0.012826744193206892,
+       "ret_1x_mean": 0.00403885991885162,
+       "ret_1x_min": -0.0031027258341093395,
+       "ret_1x_max": 0.02060018779487038,
+       "share_net_pos": 0.5728643216080402,
+       "share_beats_tbill": 0.5527638190954773,
+       "index_dev_pct": -0.0018002543110178775,
+       "liq_1x": 0,
+       "liq_2x": 15,
+       "liq_3x": 41,
+       "max_rise_pct": 0.8108082801538483
+      },
+      {
+       "expiry": "2022-06-24",
+       "entries": 90,
+       "basis_mean_pct": 0.0040538254628536205,
+       "ret_1x_mean": 0.002626130219470361,
+       "ret_1x_min": -0.0002835297083909255,
+       "ret_1x_max": 0.00808129020011823,
+       "share_net_pos": 0.9777777777777777,
+       "share_beats_tbill": 0.9555555555555556,
+       "index_dev_pct": 0.006681233521245821,
+       "liq_1x": 0,
+       "liq_2x": 0,
+       "liq_3x": 0,
+       "max_rise_pct": 0.2513053324666066
+      },
+      {
+       "expiry": "2022-09-30",
+       "entries": 97,
+       "basis_mean_pct": -0.0038230185692134087,
+       "ret_1x_mean": -0.0025165018989946803,
+       "ret_1x_min": -0.008717557687304138,
+       "ret_1x_max": 0.002326732481602231,
+       "share_net_pos": 0.26804123711340205,
+       "share_beats_tbill": 0.0,
+       "index_dev_pct": 0.0018865531800617635,
+       "liq_1x": 0,
+       "liq_2x": 23,
+       "liq_3x": 28,
+       "max_rise_pct": 0.9210767906665389
+      },
+      {
+       "expiry": "2022-12-30",
+       "entries": 90,
+       "basis_mean_pct": -0.0015296178440158156,
+       "ret_1x_mean": -0.0029191271535979873,
+       "ret_1x_min": -0.004432987611666942,
+       "ret_1x_max": -0.0013391165449295412,
+       "share_net_pos": 0.0,
+       "share_beats_tbill": 0.0,
+       "index_dev_pct": -0.0015154188476543518,
+       "liq_1x": 0,
+       "liq_2x": 0,
+       "liq_3x": 0,
+       "max_rise_pct": 0.3190108871537871
+      },
+      {
+       "expiry": "2023-03-31",
+       "entries": 90,
+       "basis_mean_pct": 0.005395704213300367,
+       "ret_1x_mean": 0.00046867853579479995,
+       "ret_1x_min": -0.0021007303021657246,
+       "ret_1x_max": 0.003466643487012343,
+       "share_net_pos": 0.5444444444444444,
+       "share_beats_tbill": 0.0,
+       "index_dev_pct": -0.0010230317111905706,
+       "liq_1x": 0,
+       "liq_2x": 5,
+       "liq_3x": 13,
+       "max_rise_pct": 0.5585331570756848
+      },
+      {
+       "expiry": "2023-06-30",
+       "entries": 90,
+       "basis_mean_pct": 0.005434068885627033,
+       "ret_1x_mean": 0.0019087189313845136,
+       "ret_1x_min": -0.0015307721325329522,
+       "ret_1x_max": 0.0065138448038871985,
+       "share_net_pos": 0.8222222222222222,
+       "share_beats_tbill": 0.0,
+       "index_dev_pct": 0.0014458168572927359,
+       "liq_1x": 0,
+       "liq_2x": 0,
+       "liq_3x": 0,
+       "max_rise_pct": 0.2070048793529844
+      },
+      {
+       "expiry": "2023-09-29",
+       "entries": 90,
+       "basis_mean_pct": 0.005433371112502461,
+       "ret_1x_mean": 0.004029119837565954,
+       "ret_1x_min": 0.0007269092534726655,
+       "ret_1x_max": 0.007447303001039797,
+       "share_net_pos": 1.0,
+       "share_beats_tbill": 0.07777777777777778,
+       "index_dev_pct": 0.00592396533208762,
+       "liq_1x": 0,
+       "liq_2x": 0,
+       "liq_3x": 0,
+       "max_rise_pct": 0.09598052197684837
+      },
+      {
+       "expiry": "2023-12-29",
+       "entries": 90,
+       "basis_mean_pct": 0.0071142276154744985,
+       "ret_1x_mean": 0.0008678669735746251,
+       "ret_1x_min": -0.0034910033396351194,
+       "ret_1x_max": 0.0039323395674936415,
+       "share_net_pos": 0.7111111111111111,
+       "share_beats_tbill": 0.0,
+       "index_dev_pct": -0.0016090827759553715,
+       "liq_1x": 0,
+       "liq_2x": 13,
+       "liq_3x": 35,
+       "max_rise_pct": 0.582287799050786
+      },
+      {
+       "expiry": "2024-03-29",
+       "entries": 90,
+       "basis_mean_pct": 0.01838006928380589,
+       "ret_1x_mean": 0.004103353263697151,
+       "ret_1x_min": -0.005253916188030238,
+       "ret_1x_max": 0.020405182866343775,
+       "share_net_pos": 0.8333333333333334,
+       "share_beats_tbill": 0.25555555555555554,
+       "index_dev_pct": -0.0050952485507695265,
+       "liq_1x": 0,
+       "liq_2x": 48,
+       "liq_3x": 59,
+       "max_rise_pct": 0.8544945443232075
+      },
+      {
+       "expiry": "2024-06-28",
+       "entries": 90,
+       "basis_mean_pct": 0.018264021676261427,
+       "ret_1x_mean": 0.006628617523819035,
+       "ret_1x_min": -0.0025066943471460487,
+       "ret_1x_max": 0.03292712218339302,
+       "share_net_pos": 0.8333333333333334,
+       "share_beats_tbill": 0.18888888888888888,
+       "index_dev_pct": -0.0016202163967758258,
+       "liq_1x": 0,
+       "liq_2x": 0,
+       "liq_3x": 9,
+       "max_rise_pct": 0.3697138171437515
+      },
+      {
+       "expiry": "2024-09-27",
+       "entries": 90,
+       "basis_mean_pct": 0.011519960290320475,
+       "ret_1x_mean": 0.00433596626743831,
+       "ret_1x_min": -0.001416020933217703,
+       "ret_1x_max": 0.01389437198214233,
+       "share_net_pos": 0.7888888888888889,
+       "share_beats_tbill": 0.05555555555555555,
+       "index_dev_pct": 0.0002350233707239848,
+       "liq_1x": 0,
+       "liq_2x": 0,
+       "liq_3x": 0,
+       "max_rise_pct": 0.24711140290586564
+      },
+      {
+       "expiry": "2024-12-27",
+       "entries": 90,
+       "basis_mean_pct": 0.013595454562800466,
+       "ret_1x_mean": 0.005029696859628942,
+       "ret_1x_min": -0.0017307516335219849,
+       "ret_1x_max": 0.008790264034721794,
+       "share_net_pos": 0.9222222222222223,
+       "share_beats_tbill": 0.4222222222222222,
+       "index_dev_pct": -0.00019758662760854882,
+       "liq_1x": 0,
+       "liq_2x": 41,
+       "liq_3x": 45,
+       "max_rise_pct": 0.7204794980954516
+      },
+      {
+       "expiry": "2025-03-28",
+       "entries": 90,
+       "basis_mean_pct": 0.0122402049357834,
+       "ret_1x_mean": 0.004724222588247485,
+       "ret_1x_min": -0.0011495278025114783,
+       "ret_1x_max": 0.014536814065792094,
+       "share_net_pos": 0.7888888888888889,
+       "share_beats_tbill": 0.37777777777777777,
+       "index_dev_pct": -7.709508510111443e-05,
+       "liq_1x": 0,
+       "liq_2x": 0,
+       "liq_3x": 0,
+       "max_rise_pct": 0.20609794613858035
+      },
+      {
+       "expiry": "2025-06-27",
+       "entries": 90,
+       "basis_mean_pct": 0.00546531839517742,
+       "ret_1x_mean": 0.0010449892277553975,
+       "ret_1x_min": -0.001614176886397228,
+       "ret_1x_max": 0.003198371861354638,
+       "share_net_pos": 0.7666666666666667,
+       "share_beats_tbill": 0.0,
+       "index_dev_pct": -5.079760431935154e-05,
+       "liq_1x": 1,
+       "liq_2x": 42,
+       "liq_3x": 42,
+       "max_rise_pct": 1.0024692728130287
+      },
+      {
+       "expiry": "2025-09-26",
+       "entries": 90,
+       "basis_mean_pct": 0.007589487932685178,
+       "ret_1x_mean": 0.0021543276764748004,
+       "ret_1x_min": -0.002400180559022187,
+       "ret_1x_max": 0.0055038955303822485,
+       "share_net_pos": 0.7555555555555555,
+       "share_beats_tbill": 0.0,
+       "index_dev_pct": -0.00011068685404312325,
+       "liq_1x": 6,
+       "liq_2x": 20,
+       "liq_3x": 35,
+       "max_rise_pct": 1.0403584695166055
+      },
+      {
+       "expiry": "2025-12-26",
+       "entries": 90,
+       "basis_mean_pct": 0.0063984072389440955,
+       "ret_1x_mean": 0.0017094227596477199,
+       "ret_1x_min": -0.0016331417087233127,
+       "ret_1x_max": 0.007416435251415887,
+       "share_net_pos": 0.6333333333333333,
+       "share_beats_tbill": 0.0,
+       "index_dev_pct": -0.00014491044197679286,
+       "liq_1x": 0,
+       "liq_2x": 0,
+       "liq_3x": 0,
+       "max_rise_pct": 0.24542841791346182
+      },
+      {
+       "expiry": "2026-03-27",
+       "entries": 90,
+       "basis_mean_pct": 0.003999947129248298,
+       "ret_1x_mean": 0.0005761763284876047,
+       "ret_1x_min": -0.0016049480299305994,
+       "ret_1x_max": 0.0032037401796384812,
+       "share_net_pos": 0.5333333333333333,
+       "share_beats_tbill": 0.0,
+       "index_dev_pct": 1.0153315057455936e-05,
+       "liq_1x": 0,
+       "liq_2x": 0,
+       "liq_3x": 0,
+       "max_rise_pct": 0.3095024013684511
+      },
+      {
+       "expiry": "2026-06-26",
+       "entries": 90,
+       "basis_mean_pct": 0.001696266732151851,
+       "ret_1x_mean": -0.0004945761433653009,
+       "ret_1x_min": -0.0013441919516129842,
+       "ret_1x_max": 0.0010659903950949018,
+       "share_net_pos": 0.17777777777777778,
+       "share_beats_tbill": 0.0,
+       "index_dev_pct": 1.496043912038053e-05,
+       "liq_1x": 0,
+       "liq_2x": 0,
+       "liq_3x": 0,
+       "max_rise_pct": 0.2287995142514445
+      }
+     ],
+     "sensitivity": {
+      "fees_x1.5": {
+       "rule": "exceso ex ante sobre la letra > 0 (1x)",
+       "all": {
+        "entries": 232,
+        "contracts": 6,
+        "realized_excess_mean": 0.005109074564998418,
+        "realized_excess_min": -0.0032847258563836555,
+        "share_realized_beats_tbill": 0.8663793103448276,
+        "ret_1x_mean": 0.008601974489034055,
+        "liq_1x": 0,
+        "extra_1x_max_pct": 0.0
+       },
+       "first_half": {
+        "entries": 163,
+        "contracts": 3,
+        "realized_excess_mean": 0.005751290170688245,
+        "realized_excess_min": -0.0032847258563836555,
+        "share_realized_beats_tbill": 0.8159509202453987,
+        "ret_1x_mean": 0.007515773043478735,
+        "liq_1x": 0,
+        "extra_1x_max_pct": 0.0
+       },
+       "second_half": {
+        "entries": 69,
+        "contracts": 3,
+        "realized_excess_mean": 0.0035919565399630286,
+        "realized_excess_min": -0.0006471911623575268,
+        "share_realized_beats_tbill": 0.9855072463768116,
+        "ret_1x_mean": 0.0111679286285343,
+        "liq_1x": 0,
+        "extra_1x_max_pct": 0.0
+       },
+       "share_of_entries_taken": 0.1336405529953917
+      },
+      "fees_x2.0": {
+       "rule": "exceso ex ante sobre la letra > 0 (1x)",
+       "all": {
+        "entries": 206,
+        "contracts": 6,
+        "realized_excess_mean": 0.005037858891629193,
+        "realized_excess_min": -0.004207292859497064,
+        "share_realized_beats_tbill": 0.8786407766990292,
+        "ret_1x_mean": 0.008515387832311977,
+        "liq_1x": 0,
+        "extra_1x_max_pct": 0.0
+       },
+       "first_half": {
+        "entries": 147,
+        "contracts": 3,
+        "realized_excess_mean": 0.005696291759418461,
+        "realized_excess_min": -0.004207292859497064,
+        "share_realized_beats_tbill": 0.8435374149659864,
+        "ret_1x_mean": 0.0075593727816345635,
+        "liq_1x": 0,
+        "extra_1x_max_pct": 0.0
+       },
+       "second_half": {
+        "entries": 59,
+        "contracts": 3,
+        "realized_excess_mean": 0.0033973566617135596,
+        "realized_excess_min": -0.0001336694043254233,
+        "share_realized_beats_tbill": 0.9661016949152542,
+        "ret_1x_mean": 0.010897323636542144,
+        "liq_1x": 0,
+        "extra_1x_max_pct": 0.0
+       },
+       "share_of_entries_taken": 0.11866359447004608
+      }
+     }
+    },
+    "NQ": {
+     "entries": 1357,
+     "periods": 17,
+     "share_net_pos": 0.8165070007369197,
+     "share_beats_tbill": 0.2417096536477524,
+     "ret_1x_mean": -0.002822590998197089,
+     "excess_1x_mean": -0.01708060448358501,
+     "periods_mean_beats_tbill": 3,
+     "index_dev_abs_max_pct": 0.006681233521245821,
+     "liquidations": {
+      "1x": 127,
+      "2x": 391,
+      "3x": 678
+     },
+     "extra_capital_max_pct": {
+      "1x": 0.6843214566989017,
+      "2x": 1.2546148660265866,
+      "3x": 1.541450997859604
+     },
+     "early_exit_share_negative": {
+      "early_25": 0.4650269023827825,
+      "early_50": 0.35003684598378776,
+      "early_75": 0.3006632277081798
+     },
+     "early_exit_worst": {
+      "early_25": -0.36834438168319544,
+      "early_50": -0.5688417874548239,
+      "early_75": -0.35474516054815797
+     },
+     "rule": {
+      "rule": "exceso ex ante sobre la letra > 0 (1x)",
+      "all": {
+       "entries": 337,
+       "contracts": 9,
+       "realized_excess_mean": 0.03929799281494184,
+       "realized_excess_min": -0.003968135727034954,
+       "share_realized_beats_tbill": 0.9614243323442137,
+       "ret_1x_mean": 0.05201814923240487,
+       "liq_1x": 0,
+       "extra_1x_max_pct": 0.0
+      },
+      "first_half": {
+       "entries": 124,
+       "contracts": 5,
+       "realized_excess_mean": 0.09426704143967707,
+       "realized_excess_min": -0.003968135727034954,
+       "share_realized_beats_tbill": 0.9435483870967742,
+       "ret_1x_mean": 0.09694412437932075,
+       "liq_1x": 0,
+       "extra_1x_max_pct": 0.0
+      },
+      "second_half": {
+       "entries": 213,
+       "contracts": 4,
+       "realized_excess_mean": 0.007297232113218042,
+       "realized_excess_min": -0.001147206038059824,
+       "share_realized_beats_tbill": 0.971830985915493,
+       "ret_1x_mean": 0.025864060414482016,
+       "liq_1x": 0,
+       "extra_1x_max_pct": 0.0
+      },
+      "share_of_entries_taken": 0.2483419307295505
+     },
+     "by_period": [
+      {
+       "expiry": "2022-06-24",
+       "entries": 201,
+       "basis_mean_pct": 0.0043560099212961315,
+       "ret_1x_mean": -0.020653847942360262,
+       "ret_1x_min": -0.3501346667214046,
+       "ret_1x_max": 0.22918010966389632,
+       "share_net_pos": 0.48756218905472637,
+       "share_beats_tbill": 0.48756218905472637,
+       "index_dev_pct": 0.006681233521245821,
+       "liq_1x": 17,
+       "liq_2x": 17,
+       "liq_3x": 110,
+       "max_rise_pct": 1.2931412829095215
+      },
+      {
+       "expiry": "2022-09-30",
+       "entries": 29,
+       "basis_mean_pct": -0.01169814368748472,
+       "ret_1x_mean": -0.007111100759347977,
+       "ret_1x_min": -0.05101565977811214,
+       "ret_1x_max": 0.03246702811874101,
+       "share_net_pos": 0.4482758620689655,
+       "share_beats_tbill": 0.3103448275862069,
+       "index_dev_pct": 0.0018865531800617635,
+       "liq_1x": 0,
+       "liq_2x": 5,
+       "liq_3x": 5,
+       "max_rise_pct": 0.8611677290246071
+      },
+      {
+       "expiry": "2022-12-30",
+       "entries": 98,
+       "basis_mean_pct": -0.19957160447133354,
+       "ret_1x_mean": -0.12024429171911209,
+       "ret_1x_min": -0.2743703276215499,
+       "ret_1x_max": 0.04424209132007676,
+       "share_net_pos": 0.09183673469387756,
+       "share_beats_tbill": 0.08163265306122448,
+       "index_dev_pct": -0.0015154188476543518,
+       "liq_1x": 0,
+       "liq_2x": 0,
+       "liq_3x": 90,
+       "max_rise_pct": 0.46812268308036664
+      },
+      {
+       "expiry": "2023-03-31",
+       "entries": 21,
+       "basis_mean_pct": 0.008617645876928376,
+       "ret_1x_mean": 0.001673806025965522,
+       "ret_1x_min": -0.015648257546127947,
+       "ret_1x_max": 0.01937298848897031,
+       "share_net_pos": 0.42857142857142855,
+       "share_beats_tbill": 0.09523809523809523,
+       "index_dev_pct": -0.0010230317111905706,
+       "liq_1x": 0,
+       "liq_2x": 8,
+       "liq_3x": 21,
+       "max_rise_pct": 0.5640422834401055
+      },
+      {
+       "expiry": "2023-06-30",
+       "entries": 5,
+       "basis_mean_pct": 0.010386317824726987,
+       "ret_1x_mean": 0.004367244644530691,
+       "ret_1x_min": 0.0021269440815643316,
+       "ret_1x_max": 0.005536800971169426,
+       "share_net_pos": 1.0,
+       "share_beats_tbill": 0.0,
+       "index_dev_pct": 0.0014458168572927359,
+       "liq_1x": 0,
+       "liq_2x": 0,
+       "liq_3x": 0,
+       "max_rise_pct": 0.25150738096888214
+      },
+      {
+       "expiry": "2023-09-29",
+       "entries": 20,
+       "basis_mean_pct": -0.018247407243070318,
+       "ret_1x_mean": -0.00832653984890833,
+       "ret_1x_min": -0.07162156495420142,
+       "ret_1x_max": 0.013005615027909433,
+       "share_net_pos": 0.45,
+       "share_beats_tbill": 0.0,
+       "index_dev_pct": 0.00592396533208762,
+       "liq_1x": 0,
+       "liq_2x": 0,
+       "liq_3x": 0,
+       "max_rise_pct": 0.12948116192436143
+      },
+      {
+       "expiry": "2023-12-29",
+       "entries": 73,
+       "basis_mean_pct": 0.008782690966134344,
+       "ret_1x_mean": 0.0014723004721582794,
+       "ret_1x_min": -0.02967395331253158,
+       "ret_1x_max": 0.011190144271106338,
+       "share_net_pos": 0.8082191780821918,
+       "share_beats_tbill": 0.0,
+       "index_dev_pct": -0.0016090827759553715,
+       "liq_1x": 0,
+       "liq_2x": 14,
+       "liq_3x": 42,
+       "max_rise_pct": 0.5473472171354239
+      },
+      {
+       "expiry": "2024-03-29",
+       "entries": 91,
+       "basis_mean_pct": 0.023869745406297313,
+       "ret_1x_mean": 0.0049714595675207016,
+       "ret_1x_min": -0.00033718371444499976,
+       "ret_1x_max": 0.015032866600935085,
+       "share_net_pos": 0.9560439560439561,
+       "share_beats_tbill": 0.01098901098901099,
+       "index_dev_pct": -0.0050952485507695265,
+       "liq_1x": 53,
+       "liq_2x": 91,
+       "liq_3x": 91,
+       "max_rise_pct": 1.6475548702720197
+      },
+      {
+       "expiry": "2024-06-28",
+       "entries": 91,
+       "basis_mean_pct": 0.05658219007537905,
+       "ret_1x_mean": 0.024820577168700137,
+       "ret_1x_min": 0.014602232253340928,
+       "ret_1x_max": 0.039390594325287825,
+       "share_net_pos": 1.0,
+       "share_beats_tbill": 0.6483516483516484,
+       "index_dev_pct": -0.0016202163967758258,
+       "liq_1x": 0,
+       "liq_2x": 51,
+       "liq_3x": 60,
+       "max_rise_pct": 0.8987262990928069
+      },
+      {
+       "expiry": "2024-09-27",
+       "entries": 91,
+       "basis_mean_pct": 0.05293184462496193,
+       "ret_1x_mean": 0.02440116809887689,
+       "ret_1x_min": 0.012962087353078751,
+       "ret_1x_max": 0.05817149229300623,
+       "share_net_pos": 1.0,
+       "share_beats_tbill": 0.6373626373626373,
+       "index_dev_pct": 0.0002350233707239848,
+       "liq_1x": 0,
+       "liq_2x": 0,
+       "liq_3x": 13,
+       "max_rise_pct": 0.3915272144325981
+      },
+      {
+       "expiry": "2024-12-27",
+       "entries": 91,
+       "basis_mean_pct": 0.03351692637649616,
+       "ret_1x_mean": 0.014670081918085845,
+       "ret_1x_min": 0.005556441998372108,
+       "ret_1x_max": 0.025852413390126342,
+       "share_net_pos": 1.0,
+       "share_beats_tbill": 0.0,
+       "index_dev_pct": -0.00019758662760854882,
+       "liq_1x": 0,
+       "liq_2x": 49,
+       "liq_3x": 56,
+       "max_rise_pct": 0.8024177773141026
+      },
+      {
+       "expiry": "2025-03-28",
+       "entries": 91,
+       "basis_mean_pct": 0.04251613893448655,
+       "ret_1x_mean": 0.019540492300120102,
+       "ret_1x_min": 0.014022993702947188,
+       "ret_1x_max": 0.026985722505035663,
+       "share_net_pos": 1.0,
+       "share_beats_tbill": 0.6043956043956044,
+       "index_dev_pct": -7.709508510111443e-05,
+       "liq_1x": 0,
+       "liq_2x": 41,
+       "liq_3x": 45,
+       "max_rise_pct": 0.7747023870715712
+      },
+      {
+       "expiry": "2025-06-27",
+       "entries": 91,
+       "basis_mean_pct": 0.03535453664034365,
+       "ret_1x_mean": 0.01583313168999624,
+       "ret_1x_min": 0.003906518869616683,
+       "ret_1x_max": 0.02902057835516543,
+       "share_net_pos": 1.0,
+       "share_beats_tbill": 0.4175824175824176,
+       "index_dev_pct": -5.079760431935154e-05,
+       "liq_1x": 0,
+       "liq_2x": 4,
+       "liq_3x": 20,
+       "max_rise_pct": 0.5106008916050984
+      },
+      {
+       "expiry": "2025-09-26",
+       "entries": 91,
+       "basis_mean_pct": 0.020581967867969224,
+       "ret_1x_mean": 0.007914738885003603,
+       "ret_1x_min": 0.0033568290141409844,
+       "ret_1x_max": 0.01035220355708352,
+       "share_net_pos": 1.0,
+       "share_beats_tbill": 0.0,
+       "index_dev_pct": -0.00011068685404312325,
+       "liq_1x": 51,
+       "liq_2x": 91,
+       "liq_3x": 91,
+       "max_rise_pct": 2.336028222842863
+      },
+      {
+       "expiry": "2025-12-26",
+       "entries": 91,
+       "basis_mean_pct": 0.025412489064441924,
+       "ret_1x_mean": 0.01112090583139489,
+       "ret_1x_min": 0.0059343070517315025,
+       "ret_1x_max": 0.01641866832461868,
+       "share_net_pos": 1.0,
+       "share_beats_tbill": 0.0,
+       "index_dev_pct": -0.00014491044197679286,
+       "liq_1x": 6,
+       "liq_2x": 20,
+       "liq_3x": 33,
+       "max_rise_pct": 1.0492502684075293
+      },
+      {
+       "expiry": "2026-03-27",
+       "entries": 91,
+       "basis_mean_pct": 0.01752224091111884,
+       "ret_1x_mean": 0.0074596462824950424,
+       "ret_1x_min": 0.0025457978118723504,
+       "ret_1x_max": 0.014870319854072596,
+       "share_net_pos": 1.0,
+       "share_beats_tbill": 0.0,
+       "index_dev_pct": 1.0153315057455936e-05,
+       "liq_1x": 0,
+       "liq_2x": 0,
+       "liq_3x": 0,
+       "max_rise_pct": 0.2652985589814769
+      },
+      {
+       "expiry": "2026-06-26",
+       "entries": 91,
+       "basis_mean_pct": 0.011761750194827244,
+       "ret_1x_mean": 0.004579849632506789,
+       "ret_1x_min": 0.0005093631921813958,
+       "ret_1x_max": 0.00857209976115567,
+       "share_net_pos": 1.0,
+       "share_beats_tbill": 0.0,
+       "index_dev_pct": 1.496043912038053e-05,
+       "liq_1x": 0,
+       "liq_2x": 0,
+       "liq_3x": 1,
+       "max_rise_pct": 0.34239685957243204
+      }
+     ],
+     "sensitivity": {
+      "fees_x1.5": {
+       "rule": "exceso ex ante sobre la letra > 0 (1x)",
+       "all": {
+        "entries": 315,
+        "contracts": 9,
+        "realized_excess_mean": 0.041445420565988225,
+        "realized_excess_min": -0.00442726064660286,
+        "share_realized_beats_tbill": 0.9714285714285714,
+        "ret_1x_mean": 0.05380280862088895,
+        "liq_1x": 0,
+        "extra_1x_max_pct": 0.0
+       },
+       "first_half": {
+        "entries": 120,
+        "contracts": 5,
+        "realized_excess_mean": 0.09695042951647088,
+        "realized_excess_min": -0.00442726064660286,
+        "share_realized_beats_tbill": 0.9583333333333334,
+        "ret_1x_mean": 0.09925943808396123,
+        "liq_1x": 0,
+        "extra_1x_max_pct": 0.0
+       },
+       "second_half": {
+        "entries": 195,
+        "contracts": 4,
+        "realized_excess_mean": 0.007288491981075819,
+        "realized_excess_min": -0.0011133497116942344,
+        "share_realized_beats_tbill": 0.9794871794871794,
+        "ret_1x_mean": 0.025829498182075243,
+        "liq_1x": 0,
+        "extra_1x_max_pct": 0.0
+       },
+       "share_of_entries_taken": 0.23212969786293294
+      },
+      "fees_x2.0": {
+       "rule": "exceso ex ante sobre la letra > 0 (1x)",
+       "all": {
+        "entries": 305,
+        "contracts": 9,
+        "realized_excess_mean": 0.0421947978214353,
+        "realized_excess_min": -0.004534952883127771,
+        "share_realized_beats_tbill": 0.9508196721311475,
+        "ret_1x_mean": 0.05436271287894964,
+        "liq_1x": 0,
+        "extra_1x_max_pct": 0.0
+       },
+       "first_half": {
+        "entries": 118,
+        "contracts": 5,
+        "realized_excess_mean": 0.09810549663181355,
+        "realized_excess_min": -0.004534952883127771,
+        "share_realized_beats_tbill": 0.9661016949152542,
+        "ret_1x_mean": 0.1002399717062359,
+        "liq_1x": 0,
+        "extra_1x_max_pct": 0.0
+       },
+       "second_half": {
+        "entries": 187,
+        "contracts": 4,
+        "realized_excess_mean": 0.006914249909004105,
+        "realized_excess_min": -0.0013055393540763252,
+        "share_realized_beats_tbill": 0.9411764705882353,
+        "ret_1x_mean": 0.025413426560127298,
+        "liq_1x": 0,
+        "extra_1x_max_pct": 0.0
+       },
+       "share_of_entries_taken": 0.2247605011053795
+      }
+     }
+    }
+   }
+  },
+  "BTCUSDT": {
+   "delivery_checks": [
+    {
+     "expiry": 1648195200000,
+     "cq_close_vs_delivery": 0.00035401202279294885,
+     "spot_twap_vs_delivery": -0.0018520502061665223
+    },
+    {
+     "expiry": 1656057600000,
+     "cq_close_vs_delivery": 0.0016868659277045062,
+     "spot_twap_vs_delivery": 0.0027135538718845442
+    },
+    {
+     "expiry": 1664524800000,
+     "cq_close_vs_delivery": -0.0004553361301545822,
+     "spot_twap_vs_delivery": 0.0022546812647088466
+    },
+    {
+     "expiry": 1672387200000,
+     "cq_close_vs_delivery": 0.00032720133789010397,
+     "spot_twap_vs_delivery": -0.0012467178878141638
+    },
+    {
+     "expiry": 1680249600000,
+     "cq_close_vs_delivery": -0.000230098295115444,
+     "spot_twap_vs_delivery": -0.0041698484946538494
+    },
+    {
+     "expiry": 1688112000000,
+     "cq_close_vs_delivery": -0.0023622354686726466,
+     "spot_twap_vs_delivery": 0.0007035622250566309
+    },
+    {
+     "expiry": 1695974400000,
+     "cq_close_vs_delivery": 0.0003394458178060944,
+     "spot_twap_vs_delivery": 0.0019011425549448902
+    },
+    {
+     "expiry": 1703836800000,
+     "cq_close_vs_delivery": 0.03941445692177026,
+     "spot_twap_vs_delivery": -0.0014751895190461273
+    },
+    {
+     "expiry": 1711699200000,
+     "cq_close_vs_delivery": -0.004896545334027058,
+     "spot_twap_vs_delivery": -0.0028082792242501986
+    },
+    {
+     "expiry": 1719561600000,
+     "cq_close_vs_delivery": 0.025764811513487418,
+     "spot_twap_vs_delivery": -0.001252304302376439
+    },
+    {
+     "expiry": 1727424000000,
+     "cq_close_vs_delivery": 0.016955888399592167,
+     "spot_twap_vs_delivery": 0.00021553171401778037
+    },
+    {
+     "expiry": 1735286400000,
+     "cq_close_vs_delivery": -0.0006703884785649317,
+     "spot_twap_vs_delivery": -0.0001359235406878101
+    },
+    {
+     "expiry": 1743148800000,
+     "cq_close_vs_delivery": -0.0006049039421919256,
+     "spot_twap_vs_delivery": -2.525513035145366e-05
+    },
+    {
+     "expiry": 1751011200000,
+     "cq_close_vs_delivery": 0.009401556899317098,
+     "spot_twap_vs_delivery": -0.00014949011064702145
+    },
+    {
+     "expiry": 1758873600000,
+     "cq_close_vs_delivery": -0.000446585364287988,
+     "spot_twap_vs_delivery": 3.444301084742918e-05
+    },
+    {
+     "expiry": 1766736000000,
+     "cq_close_vs_delivery": 0.007719004375640992,
+     "spot_twap_vs_delivery": -0.0002587222948305934
+    },
+    {
+     "expiry": 1774598400000,
+     "cq_close_vs_delivery": 0.008787197753460374,
+     "spot_twap_vs_delivery": -0.00012267314527669715
+    },
+    {
+     "expiry": 1782460800000,
+     "cq_close_vs_delivery": 0.005700539365070423,
+     "spot_twap_vs_delivery": -8.707278266073537e-05
+    }
+   ],
+   "bars": {
+    "CURRENT_QUARTER": 44732,
+    "NEXT_QUARTER": 37294
+   },
+   "spot_bars": 44729,
+   "results": {
+    "CQ": {
+     "entries": 1736,
+     "periods": 18,
+     "share_net_pos": 0.6785714285714286,
+     "share_beats_tbill": 0.15668202764976957,
+     "ret_1x_mean": 0.002544751682408463,
+     "excess_1x_mean": -0.0022840981613247995,
+     "periods_mean_beats_tbill": 1,
+     "index_dev_abs_max_pct": 0.004169848494653802,
+     "liquidations": {
+      "1x": 0,
+      "2x": 144,
+      "3x": 206
+     },
+     "extra_capital_max_pct": {
+      "1x": 0.0,
+      "2x": 0.24220944807019057,
+      "3x": 0.3993710377751866
+     },
+     "early_exit_share_negative": {
+      "early_25": 0.706221198156682,
+      "early_50": 0.5368663594470046,
+      "early_75": 0.41647465437788017
+     },
+     "early_exit_worst": {
+      "early_25": -0.02937338101062599,
+      "early_50": -0.015165350197704585,
+      "early_75": -0.015852775711432635
+     },
+     "rule": {
+      "rule": "exceso ex ante sobre la letra > 0 (1x)",
+      "all": {
+       "entries": 287,
+       "contracts": 7,
+       "realized_excess_mean": 0.0045030790382260995,
+       "realized_excess_min": -0.0021335323831585384,
+       "share_realized_beats_tbill": 0.8536585365853658,
+       "ret_1x_mean": 0.00823303547385779,
+       "liq_1x": 0,
+       "extra_1x_max_pct": 0.0
+      },
+      "first_half": {
+       "entries": 183,
+       "contracts": 3,
+       "realized_excess_mean": 0.005379222769995669,
+       "realized_excess_min": -0.0021335323831585384,
+       "share_realized_beats_tbill": 0.8032786885245902,
+       "ret_1x_mean": 0.007032899254993522,
+       "liq_1x": 0,
+       "extra_1x_max_pct": 0.0
+      },
+      "second_half": {
+       "entries": 104,
+       "contracts": 4,
+       "realized_excess_mean": 0.00296140304867003,
+       "realized_excess_min": -0.00038438208300212943,
+       "share_realized_beats_tbill": 0.9423076923076923,
+       "ret_1x_mean": 0.010344813628205492,
+       "liq_1x": 0,
+       "extra_1x_max_pct": 0.0
+      },
+      "share_of_entries_taken": 0.16532258064516128
+     },
+     "by_period": [
+      {
+       "expiry": "2022-03-25",
+       "entries": 199,
+       "basis_mean_pct": 0.01242899740618916,
+       "ret_1x_mean": 0.003808858554280047,
+       "ret_1x_min": -0.0029456686782876715,
+       "ret_1x_max": 0.018814140426435588,
+       "share_net_pos": 0.5778894472361809,
+       "share_beats_tbill": 0.5326633165829145,
+       "index_dev_pct": -0.0018520502061665615,
+       "liq_1x": 0,
+       "liq_2x": 22,
+       "liq_3x": 31,
+       "max_rise_pct": 0.742152395302287
+      },
+      {
+       "expiry": "2022-06-24",
+       "entries": 90,
+       "basis_mean_pct": 0.0038376055081139615,
+       "ret_1x_mean": 0.0015253009945892675,
+       "ret_1x_min": -0.0021103713845308115,
+       "ret_1x_max": 0.0064150067555001425,
+       "share_net_pos": 0.8444444444444444,
+       "share_beats_tbill": 0.45555555555555555,
+       "index_dev_pct": 0.00271355387188444,
+       "liq_1x": 0,
+       "liq_2x": 0,
+       "liq_3x": 0,
+       "max_rise_pct": 0.20379390753969728
+      },
+      {
+       "expiry": "2022-09-30",
+       "entries": 97,
+       "basis_mean_pct": 0.003025051327210922,
+       "ret_1x_mean": 0.0010866213729489402,
+       "ret_1x_min": -0.0009489518651112583,
+       "ret_1x_max": 0.0043137837226389485,
+       "share_net_pos": 0.5979381443298969,
+       "share_beats_tbill": 0.030927835051546393,
+       "index_dev_pct": 0.002254681264708877,
+       "liq_1x": 0,
+       "liq_2x": 0,
+       "liq_3x": 0,
+       "max_rise_pct": 0.32072875127062317
+      },
+      {
+       "expiry": "2022-12-30",
+       "entries": 90,
+       "basis_mean_pct": 0.0014605896570251378,
+       "ret_1x_mean": -0.00129725615527675,
+       "ret_1x_min": -0.004984462479157472,
+       "ret_1x_max": 0.0010135928904922013,
+       "share_net_pos": 0.43333333333333335,
+       "share_beats_tbill": 0.0,
+       "index_dev_pct": -0.0012467178878142037,
+       "liq_1x": 0,
+       "liq_2x": 0,
+       "liq_3x": 0,
+       "max_rise_pct": 0.18248641738574634
+      },
+      {
+       "expiry": "2023-03-31",
+       "entries": 90,
+       "basis_mean_pct": 0.005806695249882632,
+       "ret_1x_mean": -0.0014406031876237017,
+       "ret_1x_min": -0.005281738107277259,
+       "ret_1x_max": 0.0011636458751431047,
+       "share_net_pos": 0.17777777777777778,
+       "share_beats_tbill": 0.0,
+       "index_dev_pct": -0.004169848494653802,
+       "liq_1x": 0,
+       "liq_2x": 15,
+       "liq_3x": 30,
+       "max_rise_pct": 0.7628494792547664
+      },
+      {
+       "expiry": "2023-06-30",
+       "entries": 90,
+       "basis_mean_pct": 0.005824366352117712,
+       "ret_1x_mean": 0.0016927527249398988,
+       "ret_1x_min": -0.0018666120163155987,
+       "ret_1x_max": 0.0054598043283640915,
+       "share_net_pos": 0.8111111111111111,
+       "share_beats_tbill": 0.0,
+       "index_dev_pct": 0.0007035622250566023,
+       "liq_1x": 0,
+       "liq_2x": 0,
+       "liq_3x": 0,
+       "max_rise_pct": 0.26074186707214597
+      },
+      {
+       "expiry": "2023-09-29",
+       "entries": 90,
+       "basis_mean_pct": 0.008849356809792767,
+       "ret_1x_mean": 0.003818039967308303,
+       "ret_1x_min": -0.0009549115081512086,
+       "ret_1x_max": 0.008724850559070723,
+       "share_net_pos": 0.8,
+       "share_beats_tbill": 0.0,
+       "index_dev_pct": 0.0019011425549447832,
+       "liq_1x": 0,
+       "liq_2x": 0,
+       "liq_3x": 0,
+       "max_rise_pct": 0.08491707676881766
+      },
+      {
+       "expiry": "2023-12-29",
+       "entries": 90,
+       "basis_mean_pct": 0.009650905789456772,
+       "ret_1x_mean": 0.002223599683117956,
+       "ret_1x_min": -0.0031326369082187414,
+       "ret_1x_max": 0.005149709985944534,
+       "share_net_pos": 0.8555555555555555,
+       "share_beats_tbill": 0.0,
+       "index_dev_pct": -0.0014751895190461594,
+       "liq_1x": 0,
+       "liq_2x": 23,
+       "liq_3x": 25,
+       "max_rise_pct": 0.6635923083173889
+      },
+      {
+       "expiry": "2024-03-29",
+       "entries": 90,
+       "basis_mean_pct": 0.017442840678233307,
+       "ret_1x_mean": 0.004872251673249102,
+       "ret_1x_min": -0.0036879608112134195,
+       "ret_1x_max": 0.023424208599335316,
+       "share_net_pos": 0.8888888888888888,
+       "share_beats_tbill": 0.26666666666666666,
+       "index_dev_pct": -0.0028082792242502316,
+       "liq_1x": 0,
+       "liq_2x": 46,
+       "liq_3x": 60,
+       "max_rise_pct": 0.8501889659663906
+      },
+      {
+       "expiry": "2024-06-28",
+       "entries": 90,
+       "basis_mean_pct": 0.01800769220244499,
+       "ret_1x_mean": 0.006820574616991156,
+       "ret_1x_min": -0.0024188458556123594,
+       "ret_1x_max": 0.03196850990453332,
+       "share_net_pos": 0.8444444444444444,
+       "share_beats_tbill": 0.2,
+       "index_dev_pct": -0.0012523043023764911,
+       "liq_1x": 0,
+       "liq_2x": 0,
+       "liq_3x": 0,
+       "max_rise_pct": 0.2505553879487672
+      },
+      {
+       "expiry": "2024-09-27",
+       "entries": 90,
+       "basis_mean_pct": 0.011477301216764883,
+       "ret_1x_mean": 0.004228768731095726,
+       "ret_1x_min": -0.0018403823043199319,
+       "ret_1x_max": 0.013430353896915881,
+       "share_net_pos": 0.7888888888888889,
+       "share_beats_tbill": 0.044444444444444446,
+       "index_dev_pct": 0.00021553171401780458,
+       "liq_1x": 0,
+       "liq_2x": 0,
+       "liq_3x": 0,
+       "max_rise_pct": 0.29148092220769173
+      },
+      {
+       "expiry": "2024-12-27",
+       "entries": 90,
+       "basis_mean_pct": 0.014428652432315135,
+       "ret_1x_mean": 0.005407909392627941,
+       "ret_1x_min": -0.0019388458480564645,
+       "ret_1x_max": 0.009733119994105026,
+       "share_net_pos": 0.9222222222222223,
+       "share_beats_tbill": 0.4444444444444444,
+       "index_dev_pct": -0.00013592354068782275,
+       "liq_1x": 0,
+       "liq_2x": 38,
+       "liq_3x": 45,
+       "max_rise_pct": 0.7622753822325585
+      },
+      {
+       "expiry": "2025-03-28",
+       "entries": 90,
+       "basis_mean_pct": 0.01299738382005886,
+       "ret_1x_mean": 0.004970597429216814,
+       "ret_1x_min": -0.0014431432314493584,
+       "ret_1x_max": 0.015352266436992829,
+       "share_net_pos": 0.7888888888888889,
+       "share_beats_tbill": 0.4,
+       "index_dev_pct": -2.525513035139889e-05,
+       "liq_1x": 0,
+       "liq_2x": 0,
+       "liq_3x": 0,
+       "max_rise_pct": 0.19444816832905043
+      },
+      {
+       "expiry": "2025-06-27",
+       "entries": 90,
+       "basis_mean_pct": 0.006433507672038467,
+       "ret_1x_mean": 0.0015193846798866736,
+       "ret_1x_min": -0.0015652675230350328,
+       "ret_1x_max": 0.004468292756794281,
+       "share_net_pos": 0.7555555555555555,
+       "share_beats_tbill": 0.0,
+       "index_dev_pct": -0.00014949011064707118,
+       "liq_1x": 0,
+       "liq_2x": 0,
+       "liq_3x": 15,
+       "max_rise_pct": 0.48965331260558864
+      },
+      {
+       "expiry": "2025-09-26",
+       "entries": 90,
+       "basis_mean_pct": 0.00811473737835089,
+       "ret_1x_mean": 0.002570372968384235,
+       "ret_1x_min": -0.0014212043574348323,
+       "ret_1x_max": 0.0061862744943996335,
+       "share_net_pos": 0.7888888888888889,
+       "share_beats_tbill": 0.0,
+       "index_dev_pct": 3.444301084742552e-05,
+       "liq_1x": 0,
+       "liq_2x": 0,
+       "liq_3x": 0,
+       "max_rise_pct": 0.17281460743270194
+      },
+      {
+       "expiry": "2025-12-26",
+       "entries": 90,
+       "basis_mean_pct": 0.007335265510638646,
+       "ret_1x_mean": 0.0021020501550096196,
+       "ret_1x_min": -0.0013901012255407325,
+       "ret_1x_max": 0.007615477234557115,
+       "share_net_pos": 0.7222222222222222,
+       "share_beats_tbill": 0.0,
+       "index_dev_pct": -0.0002587222948305399,
+       "liq_1x": 0,
+       "liq_2x": 0,
+       "liq_3x": 0,
+       "max_rise_pct": 0.17424972259341787
+      },
+      {
+       "expiry": "2026-03-27",
+       "entries": 90,
+       "basis_mean_pct": 0.005009635555338498,
+       "ret_1x_mean": 0.0010011088503677225,
+       "ret_1x_min": -0.0014316092863222599,
+       "ret_1x_max": 0.004967592463396058,
+       "share_net_pos": 0.5777777777777777,
+       "share_beats_tbill": 0.0,
+       "index_dev_pct": -0.0001226731452767341,
+       "liq_1x": 0,
+       "liq_2x": 0,
+       "liq_3x": 0,
+       "max_rise_pct": 0.20407569141193593
+      },
+      {
+       "expiry": "2026-06-26",
+       "entries": 90,
+       "basis_mean_pct": 0.0018363093630567589,
+       "ret_1x_mean": -0.0005223659107360048,
+       "ret_1x_min": -0.0016260039543792915,
+       "ret_1x_max": 0.0013821107321926513,
+       "share_net_pos": 0.16666666666666666,
+       "share_beats_tbill": 0.0,
+       "index_dev_pct": -8.707278266077256e-05,
+       "liq_1x": 0,
+       "liq_2x": 0,
+       "liq_3x": 0,
+       "max_rise_pct": 0.24263889409208406
+      }
+     ],
+     "sensitivity": {
+      "fees_x1.5": {
+       "rule": "exceso ex ante sobre la letra > 0 (1x)",
+       "all": {
+        "entries": 246,
+        "contracts": 6,
+        "realized_excess_mean": 0.0045846285927114705,
+        "realized_excess_min": -0.0026572774461008555,
+        "share_realized_beats_tbill": 0.8658536585365854,
+        "ret_1x_mean": 0.00820304380919331,
+        "liq_1x": 0,
+        "extra_1x_max_pct": 0.0
+       },
+       "first_half": {
+        "entries": 162,
+        "contracts": 3,
+        "realized_excess_mean": 0.005468228666580087,
+        "realized_excess_min": -0.0026572774461008555,
+        "share_realized_beats_tbill": 0.8395061728395061,
+        "ret_1x_mean": 0.007111135110039419,
+        "liq_1x": 0,
+        "extra_1x_max_pct": 0.0
+       },
+       "second_half": {
+        "entries": 84,
+        "contracts": 3,
+        "realized_excess_mean": 0.0028805427359648544,
+        "realized_excess_min": -0.0003679753329042662,
+        "share_realized_beats_tbill": 0.9166666666666666,
+        "ret_1x_mean": 0.010308867728990102,
+        "liq_1x": 0,
+        "extra_1x_max_pct": 0.0
+       },
+       "share_of_entries_taken": 0.14170506912442396
+      },
+      "fees_x2.0": {
+       "rule": "exceso ex ante sobre la letra > 0 (1x)",
+       "all": {
+        "entries": 206,
+        "contracts": 6,
+        "realized_excess_mean": 0.0048301827166373655,
+        "realized_excess_min": -0.0026940467487127206,
+        "share_realized_beats_tbill": 0.9077669902912622,
+        "ret_1x_mean": 0.008161529350008571,
+        "liq_1x": 0,
+        "extra_1x_max_pct": 0.0
+       },
+       "first_half": {
+        "entries": 142,
+        "contracts": 3,
+        "realized_excess_mean": 0.005656948449288019,
+        "realized_excess_min": -0.0026940467487127206,
+        "share_realized_beats_tbill": 0.8802816901408451,
+        "ret_1x_mean": 0.007091393918810521,
+        "liq_1x": 0,
+        "extra_1x_max_pct": 0.0
+       },
+       "second_half": {
+        "entries": 64,
+        "contracts": 3,
+        "realized_excess_mean": 0.002995796247318727,
+        "realized_excess_min": -0.00020216352344646152,
+        "share_realized_beats_tbill": 0.96875,
+        "ret_1x_mean": 0.010535892337979245,
+        "liq_1x": 0,
+        "extra_1x_max_pct": 0.0
+       },
+       "share_of_entries_taken": 0.11866359447004608
+      }
+     }
+    },
+    "NQ": {
+     "entries": 1357,
+     "periods": 17,
+     "share_net_pos": 0.8607221812822402,
+     "share_beats_tbill": 0.2763448784082535,
+     "ret_1x_mean": 0.0066098274600028374,
+     "excess_1x_mean": -0.007648186025385086,
+     "periods_mean_beats_tbill": 3,
+     "index_dev_abs_max_pct": 0.004169848494653802,
+     "liquidations": {
+      "1x": 43,
+      "2x": 339,
+      "3x": 432
+     },
+     "extra_capital_max_pct": {
+      "1x": 0.38249513905658183,
+      "2x": 0.8489038521031772,
+      "3x": 1.0831681545124232
+     },
+     "early_exit_share_negative": {
+      "early_25": 0.42890084550345886,
+      "early_50": 0.27044952100221076,
+      "early_75": 0.2144436256448047
+     },
+     "early_exit_worst": {
+      "early_25": -0.2392039818348578,
+      "early_50": -0.33127513274691056,
+      "early_75": -0.21572703623444034
+     },
+     "rule": {
+      "rule": "exceso ex ante sobre la letra > 0 (1x)",
+      "all": {
+       "entries": 386,
+       "contracts": 10,
+       "realized_excess_mean": 0.024903421074425735,
+       "realized_excess_min": -0.0014110125236559481,
+       "share_realized_beats_tbill": 0.9689119170984456,
+       "ret_1x_mean": 0.03761086875019259,
+       "liq_1x": 0,
+       "extra_1x_max_pct": 0.0
+      },
+      "first_half": {
+       "entries": 162,
+       "contracts": 5,
+       "realized_excess_mean": 0.04992676421488099,
+       "realized_excess_min": -0.0014110125236559481,
+       "share_realized_beats_tbill": 0.9753086419753086,
+       "ret_1x_mean": 0.05443829046088526,
+       "liq_1x": 0,
+       "extra_1x_max_pct": 0.0
+      },
+      "second_half": {
+       "entries": 224,
+       "contracts": 5,
+       "realized_excess_mean": 0.0068061818389179235,
+       "realized_excess_min": -0.0007482798051930209,
+       "share_realized_beats_tbill": 0.9642857142857143,
+       "ret_1x_mean": 0.025441036977280927,
+       "liq_1x": 0,
+       "extra_1x_max_pct": 0.0
+      },
+      "share_of_entries_taken": 0.2844509948415623
+     },
+     "by_period": [
+      {
+       "expiry": "2022-06-24",
+       "entries": 201,
+       "basis_mean_pct": -0.019771660266792536,
+       "ret_1x_mean": -0.020865441830408313,
+       "ret_1x_min": -0.21219214847337706,
+       "ret_1x_max": 0.15213275622902572,
+       "share_net_pos": 0.4975124378109453,
+       "share_beats_tbill": 0.4975124378109453,
+       "index_dev_pct": 0.00271355387188444,
+       "liq_1x": 0,
+       "liq_2x": 17,
+       "liq_3x": 17,
+       "max_rise_pct": 0.5639594116682671
+      },
+      {
+       "expiry": "2022-09-30",
+       "entries": 29,
+       "basis_mean_pct": 0.018067395575830328,
+       "ret_1x_mean": 0.007551913551166401,
+       "ret_1x_min": -0.03324449193402909,
+       "ret_1x_max": 0.057293102989020094,
+       "share_net_pos": 0.6206896551724138,
+       "share_beats_tbill": 0.41379310344827586,
+       "index_dev_pct": 0.002254681264708877,
+       "liq_1x": 0,
+       "liq_2x": 0,
+       "liq_3x": 0,
+       "max_rise_pct": 0.2603068168251821
+      },
+      {
+       "expiry": "2022-12-30",
+       "entries": 98,
+       "basis_mean_pct": -0.013390293445328652,
+       "ret_1x_mean": -0.009885104749654277,
+       "ret_1x_min": -0.08816223682592468,
+       "ret_1x_max": 0.057338627727570736,
+       "share_net_pos": 0.4489795918367347,
+       "share_beats_tbill": 0.35714285714285715,
+       "index_dev_pct": -0.0012467178878142037,
+       "liq_1x": 0,
+       "liq_2x": 0,
+       "liq_3x": 0,
+       "max_rise_pct": 0.15378983818908565
+      },
+      {
+       "expiry": "2023-03-31",
+       "entries": 21,
+       "basis_mean_pct": 0.007699226166309031,
+       "ret_1x_mean": -0.0012810022025525453,
+       "ret_1x_min": -0.02044057962543088,
+       "ret_1x_max": 0.011727765217063724,
+       "share_net_pos": 0.38095238095238093,
+       "share_beats_tbill": 0.0,
+       "index_dev_pct": -0.004169848494653802,
+       "liq_1x": 0,
+       "liq_2x": 8,
+       "liq_3x": 21,
+       "max_rise_pct": 0.7609771405122263
+      },
+      {
+       "expiry": "2023-06-30",
+       "entries": 5,
+       "basis_mean_pct": 0.012551429677562575,
+       "ret_1x_mean": 0.005029853103535664,
+       "ret_1x_min": 0.0037463790279515345,
+       "ret_1x_max": 0.0076024242819756034,
+       "share_net_pos": 1.0,
+       "share_beats_tbill": 0.0,
+       "index_dev_pct": 0.0007035622250566023,
+       "liq_1x": 0,
+       "liq_2x": 0,
+       "liq_3x": 0,
+       "max_rise_pct": 0.15225699333306508
+      },
+      {
+       "expiry": "2023-09-29",
+       "entries": 20,
+       "basis_mean_pct": -0.010251498712352458,
+       "ret_1x_mean": -0.005993694126756208,
+       "ret_1x_min": -0.04339132329168956,
+       "ret_1x_max": 0.008382840990478993,
+       "share_net_pos": 0.6,
+       "share_beats_tbill": 0.0,
+       "index_dev_pct": 0.0019011425549447832,
+       "liq_1x": 0,
+       "liq_2x": 0,
+       "liq_3x": 0,
+       "max_rise_pct": 0.1528067083266571
+      },
+      {
+       "expiry": "2023-12-29",
+       "entries": 73,
+       "basis_mean_pct": 0.02565687229627842,
+       "ret_1x_mean": 0.009587189997553092,
+       "ret_1x_min": -0.005665364245326705,
+       "ret_1x_max": 0.03271316558117395,
+       "share_net_pos": 0.9726027397260274,
+       "share_beats_tbill": 0.0958904109589041,
+       "index_dev_pct": -0.0014751895190461594,
+       "liq_1x": 0,
+       "liq_2x": 42,
+       "liq_3x": 73,
+       "max_rise_pct": 0.729419534690837
+      },
+      {
+       "expiry": "2024-03-29",
+       "entries": 91,
+       "basis_mean_pct": 0.0298643567776675,
+       "ret_1x_mean": 0.00966104510665358,
+       "ret_1x_min": 0.0027041169630127016,
+       "ret_1x_max": 0.015908998224105568,
+       "share_net_pos": 1.0,
+       "share_beats_tbill": 0.04395604395604396,
+       "index_dev_pct": -0.0028082792242502316,
+       "liq_1x": 42,
+       "liq_2x": 91,
+       "liq_3x": 91,
+       "max_rise_pct": 1.7444078116823953
+      },
+      {
+       "expiry": "2024-06-28",
+       "entries": 91,
+       "basis_mean_pct": 0.05400419315154249,
+       "ret_1x_mean": 0.023859715183782375,
+       "ret_1x_min": 0.014542203382071564,
+       "ret_1x_max": 0.03882813766608739,
+       "share_net_pos": 1.0,
+       "share_beats_tbill": 0.5824175824175825,
+       "index_dev_pct": -0.0012523043023764911,
+       "liq_1x": 0,
+       "liq_2x": 47,
+       "liq_3x": 60,
+       "max_rise_pct": 0.9452904196178855
+      },
+      {
+       "expiry": "2024-09-27",
+       "entries": 91,
+       "basis_mean_pct": 0.052812708612085445,
+       "ret_1x_mean": 0.02420715810360782,
+       "ret_1x_min": 0.012785901580382062,
+       "ret_1x_max": 0.05852561583986278,
+       "share_net_pos": 1.0,
+       "share_beats_tbill": 0.6043956043956044,
+       "index_dev_pct": 0.00021553171401780458,
+       "liq_1x": 0,
+       "liq_2x": 0,
+       "liq_3x": 0,
+       "max_rise_pct": 0.26079972184750755
+      },
+      {
+       "expiry": "2024-12-27",
+       "entries": 91,
+       "basis_mean_pct": 0.035717372082531416,
+       "ret_1x_mean": 0.015476518873517855,
+       "ret_1x_min": 0.006582133132283669,
+       "ret_1x_max": 0.02649792192543065,
+       "share_net_pos": 1.0,
+       "share_beats_tbill": 0.0989010989010989,
+       "index_dev_pct": -0.00013592354068782275,
+       "liq_1x": 1,
+       "liq_2x": 90,
+       "liq_3x": 91,
+       "max_rise_pct": 1.1134723966390339
+      },
+      {
+       "expiry": "2025-03-28",
+       "entries": 91,
+       "basis_mean_pct": 0.043755752103368184,
+       "ret_1x_mean": 0.019828976053164624,
+       "ret_1x_min": 0.014301015384045873,
+       "ret_1x_max": 0.025431933823519985,
+       "share_net_pos": 1.0,
+       "share_beats_tbill": 0.6593406593406593,
+       "index_dev_pct": -2.525513035139889e-05,
+       "liq_1x": 0,
+       "liq_2x": 40,
+       "liq_3x": 45,
+       "max_rise_pct": 0.800579640718563
+      },
+      {
+       "expiry": "2025-06-27",
+       "entries": 91,
+       "basis_mean_pct": 0.03669482597512489,
+       "ret_1x_mean": 0.016252094598616894,
+       "ret_1x_min": 0.004290605001062037,
+       "ret_1x_max": 0.02993177445752365,
+       "share_net_pos": 1.0,
+       "share_beats_tbill": 0.43956043956043955,
+       "index_dev_pct": -0.00014949011064707118,
+       "liq_1x": 0,
+       "liq_2x": 0,
+       "liq_3x": 8,
+       "max_rise_pct": 0.3614050856794919
+      },
+      {
+       "expiry": "2025-09-26",
+       "entries": 91,
+       "basis_mean_pct": 0.023075018355980106,
+       "ret_1x_mean": 0.009813163490880706,
+       "ret_1x_min": 0.003976369622850003,
+       "ret_1x_max": 0.014140410233556115,
+       "share_net_pos": 1.0,
+       "share_beats_tbill": 0.0,
+       "index_dev_pct": 3.444301084742552e-05,
+       "liq_1x": 0,
+       "liq_2x": 4,
+       "liq_3x": 26,
+       "max_rise_pct": 0.5913483546749689
+      },
+      {
+       "expiry": "2025-12-26",
+       "entries": 91,
+       "basis_mean_pct": 0.02753611551597457,
+       "ret_1x_mean": 0.01213227033364114,
+       "ret_1x_min": 0.006964517991379304,
+       "ret_1x_max": 0.01752698530859554,
+       "share_net_pos": 1.0,
+       "share_beats_tbill": 0.0,
+       "index_dev_pct": -0.0002587222948305399,
+       "liq_1x": 0,
+       "liq_2x": 0,
+       "liq_3x": 0,
+       "max_rise_pct": 0.17877774594331863
+      },
+      {
+       "expiry": "2026-03-27",
+       "entries": 91,
+       "basis_mean_pct": 0.021805168300300732,
+       "ret_1x_mean": 0.009447222606084531,
+       "ret_1x_min": 0.003429849111271552,
+       "ret_1x_max": 0.01799276057413941,
+       "share_net_pos": 1.0,
+       "share_beats_tbill": 0.0,
+       "index_dev_pct": -0.0001226731452767341,
+       "liq_1x": 0,
+       "liq_2x": 0,
+       "liq_3x": 0,
+       "max_rise_pct": 0.17097267769925195
+      },
+      {
+       "expiry": "2026-06-26",
+       "entries": 91,
+       "basis_mean_pct": 0.014628487319113096,
+       "ret_1x_mean": 0.005860134958488815,
+       "ret_1x_min": 0.0006638889420075536,
+       "ret_1x_max": 0.011691395414250353,
+       "share_net_pos": 1.0,
+       "share_beats_tbill": 0.0,
+       "index_dev_pct": -8.707278266077256e-05,
+       "liq_1x": 0,
+       "liq_2x": 0,
+       "liq_3x": 0,
+       "max_rise_pct": 0.3035455753012284
+      }
+     ],
+     "sensitivity": {
+      "fees_x1.5": {
+       "rule": "exceso ex ante sobre la letra > 0 (1x)",
+       "all": {
+        "entries": 364,
+        "contracts": 10,
+        "realized_excess_mean": 0.025724424528496707,
+        "realized_excess_min": -0.002369702372400336,
+        "share_realized_beats_tbill": 0.9587912087912088,
+        "ret_1x_mean": 0.037957662045762584,
+        "liq_1x": 0,
+        "extra_1x_max_pct": 0.0
+       },
+       "first_half": {
+        "entries": 162,
+        "contracts": 5,
+        "realized_excess_mean": 0.04932018478354926,
+        "realized_excess_min": -0.002369702372400336,
+        "share_realized_beats_tbill": 0.9629629629629629,
+        "ret_1x_mean": 0.05383171102955354,
+        "liq_1x": 0,
+        "extra_1x_max_pct": 0.0
+       },
+       "second_half": {
+        "entries": 202,
+        "contracts": 5,
+        "realized_excess_mean": 0.006801092046721883,
+        "realized_excess_min": -0.0009178025126057032,
+        "share_realized_beats_tbill": 0.9554455445544554,
+        "ret_1x_mean": 0.025226989098365876,
+        "liq_1x": 0,
+        "extra_1x_max_pct": 0.0
+       },
+       "share_of_entries_taken": 0.26823876197494473
+      },
+      "fees_x2.0": {
+       "rule": "exceso ex ante sobre la letra > 0 (1x)",
+       "all": {
+        "entries": 346,
+        "contracts": 10,
+        "realized_excess_mean": 0.026392871031280192,
+        "realized_excess_min": -0.0027555739057096244,
+        "share_realized_beats_tbill": 0.9682080924855492,
+        "ret_1x_mean": 0.03826234848950078,
+        "liq_1x": 0,
+        "extra_1x_max_pct": 0.0
+       },
+       "first_half": {
+        "entries": 160,
+        "contracts": 5,
+        "realized_excess_mean": 0.04934525462888056,
+        "realized_excess_min": -0.0027555739057096244,
+        "share_realized_beats_tbill": 0.96875,
+        "ret_1x_mean": 0.053763348776871986,
+        "liq_1x": 0,
+        "extra_1x_max_pct": 0.0
+       },
+       "second_half": {
+        "entries": 186,
+        "contracts": 5,
+        "realized_excess_mean": 0.0066488851408712775,
+        "realized_excess_min": -0.000918601370929039,
+        "share_realized_beats_tbill": 0.967741935483871,
+        "ret_1x_mean": 0.02492815469391264,
+        "liq_1x": 0,
+        "extra_1x_max_pct": 0.0
+       },
+       "share_of_entries_taken": 0.25497420781134855
+      }
+     }
+    }
+   }
+  }
+ },
+ "generated_at": "2026-10-13T19:52:11Z",
+ "step_hours": 24,
+ "errors": [],
+ "costs": {
+  "spot_taker": 0.001,
+  "fut_taker": 0.0005,
+  "settle_fee": 0.0005,
+  "half_spread": {
+   "spot": 2e-06,
+   "fut": 3.5e-05
+  },
+  "mmr": 0.005,
+  "status": "ASSUMED (nivel base público, sin cuenta)"
+ },
+ "benchmark": "FRED DTB3 (letra EE.UU. 3 meses), mismo plazo, sin anualizar",
+ "results_note": "6186 entradas simuladas; detalle en lab_data/research/"
+}

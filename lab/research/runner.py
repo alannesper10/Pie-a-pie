@@ -168,3 +168,107 @@ def run_all():
     except Exception as e:  # noqa: BLE001
         out["discovery"] = {"error": f"{type(e).__name__}: {e}"}
     return out
+
+
+CARRY_PAIRS = ("ETHUSDT", "BTCUSDT")
+
+
+DELIVERY_HOUR_UTC = 8      # especificación de Binance; se verifica contra las velas
+
+
+def delivery_check(cq_close_by_open, day_ms, price):
+    """Cierre del continuo CQ en la vela que cierra a las 08:00 vs el precio de
+    entrega publicado (si la hora es correcta, la diferencia es chica)."""
+    c = cq_close_by_open.get(day_ms + (DELIVERY_HOUR_UTC - 1) * HOUR)
+    return None if c is None else c / price - 1
+
+
+def spot_twap_fetch(session, pair, exp_ms):
+    """TWAP del spot (velas de 1m) en la media hora previa a la entrega: es lo
+    que replica el precio de entrega (promedio del índice de 30 min)."""
+    r = session.get("https://api.binance.com/api/v3/klines",
+                    params={"symbol": pair, "interval": "1m", "startTime": exp_ms - 30 * 60_000,
+                            "endTime": exp_ms - 1, "limit": 30}, timeout=20)
+    r.raise_for_status()
+    closes = [float(x[4]) for x in r.json()]
+    return sum(closes) / len(closes) if len(closes) >= 25 else None
+
+
+def study_carry(step_hours=24, history=None, session=None):
+    import requests
+    from . import carry
+    s = session or requests.Session()
+    history = history or HistoryCache()
+    now = int(time.time() * 1000) // HOUR * HOUR
+    errors, recs_all, out = [], [], {"pairs": {}}
+    try:
+        rates = carry.fred_dtb3(s)
+    except Exception as e:  # noqa: BLE001
+        rates, _ = {}, errors.append(f"FRED DTB3: {e}")
+    for pair in CARRY_PAIRS:
+        d = s.get("https://fapi.binance.com/futures/data/delivery-price",
+                  params={"pair": pair}, timeout=20).json()
+        days = {x["deliveryTime"]: float(x["deliveryPrice"]) for x in d}
+        since = min(days) - 200 * 24 * HOUR
+        series = {}
+        for ct in ("CURRENT_QUARTER", "NEXT_QUARTER"):
+            f = carry.binance_klines_fetcher(s, "https://fapi.binance.com/fapi/v1/continuousKlines",
+                                             {"pair": pair, "contractType": ct, "interval": "1h"})
+            r = history.ensure("binance_cont", f"{pair}:{ct}", "1h", since, now, f)
+            errors += r["errors"]
+            series[ct] = history.bars("binance_cont", f"{pair}:{ct}", "1h")
+        f = carry.binance_klines_fetcher(s, "https://api.binance.com/api/v3/klines",
+                                         {"symbol": pair, "interval": "1h"})
+        r = history.ensure("binance_spot_rest", pair, "1h", since, now, f)
+        errors += r["errors"]
+        spot = history.closes("binance_spot_rest", pair, "1h")
+        cq = {b[0]: b[4] for b in series["CURRENT_QUARTER"]}
+        deliveries, checks, twap = {}, [], {}
+        for day, px in sorted(days.items()):
+            exp = day + DELIVERY_HOUR_UTC * HOUR
+            deliveries[exp] = px
+            try:
+                twap[exp] = spot_twap_fetch(s, pair, exp)
+            except Exception as e:  # noqa: BLE001
+                errors.append(f"TWAP {pair} {exp}: {e}")
+            checks.append({"expiry": exp, "cq_close_vs_delivery": delivery_check(cq, day, px),
+                           "spot_twap_vs_delivery": (twap[exp] / px - 1) if twap.get(exp) else None})
+        twap = {k: v for k, v in twap.items() if v}
+        expiries = sorted(deliveries)
+        # marcas de tiempo al CIERRE de la vela (apertura + 1h)
+        sp = {t + HOUR: c for t, c in spot.items()}
+        prices = carry.ContractPrices(
+            {code: ({b[0] + HOUR: b[4] for b in series[ct]}, {b[0] + HOUR: b[2] for b in series[ct]})
+             for ct, code in (("CURRENT_QUARTER", "CQ"), ("NEXT_QUARTER", "NQ"))}, expiries)
+        res = {}
+        for code in ("CQ", "NQ"):
+            sens = {}
+            for m in (1.5, 2.0):
+                with carry.fee_scale(m):
+                    sens[f"fees_x{m}"] = carry.rule_eval(
+                        carry.simulate(sp, prices, deliveries, expiries, rates, step_hours, code, twap))
+            recs = carry.simulate(sp, prices, deliveries, expiries, rates, step_hours, code, twap)
+            for r_ in recs:
+                r_["pair"] = pair
+            recs_all += recs
+            res[code] = carry.summarize(recs)
+            res[code]["sensitivity"] = sens
+        out["pairs"][pair] = {"delivery_checks": checks, "bars": {k: len(v) for k, v in series.items()},
+                              "spot_bars": len(spot), "results": res}
+    out.update({"generated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+                "step_hours": step_hours, "errors": errors,
+                "costs": {"spot_taker": carry.SPOT_TAKER, "fut_taker": carry.FUT_TAKER,
+                          "settle_fee": carry.SETTLE_FEE, "half_spread": carry.HALF_SPREAD,
+                          "mmr": carry.MMR, "status": "ASSUMED (nivel base público, sin cuenta)"},
+                "benchmark": "FRED DTB3 (letra EE.UU. 3 meses), mismo plazo, sin anualizar",
+                "results": recs_all})
+    # detalle completo (todas las entradas) solo en lab_data/; a reports/ va el resumen
+    full = Path("lab_data") / "research"
+    full.mkdir(parents=True, exist_ok=True)
+    (full / "research_carry.json").write_text(json.dumps(out, indent=1, default=str), encoding="utf-8")
+    slim = {k: v for k, v in out.items() if k != "results"}
+    slim["results_note"] = f"{len(recs_all)} entradas simuladas; detalle en lab_data/research/"
+    OUT.mkdir(parents=True, exist_ok=True)
+    (OUT / "research_carry.json").write_text(json.dumps(slim, indent=1, default=str,
+                                                       ensure_ascii=False), encoding="utf-8")
+    return out

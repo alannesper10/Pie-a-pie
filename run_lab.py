@@ -24,11 +24,24 @@ from lab.runner import Lab, build_snapshot
 from lab.sources import now_iso
 from lab.store import LabStore
 
-DB = Path("lab_data") / "lab.sqlite"
+DB = Path(os.environ.get("LAB_DB", Path("lab_data") / "lab.sqlite"))
 ALL = ("cross_exchange", "triangular", "cex_dex", "cash_and_carry", "calendar_spread",
        "basis_funding", "polymarket_buy_all_no", "prediction_cross_venue",
        "liquidity_provision")
 log = logging.getLogger("lab")
+
+
+def code_version():
+    """sha de git del código que generó la corrida (separa resultados de versiones)."""
+    import subprocess
+    try:
+        sha = subprocess.run(["git", "rev-parse", "--short", "HEAD"], capture_output=True,
+                             text=True, timeout=10).stdout.strip()
+        dirty = subprocess.run(["git", "status", "--porcelain", "--", "lab", "run_lab.py"],
+                               capture_output=True, text=True, timeout=10).stdout.strip()
+        return sha + ("-dirty" if dirty else "")
+    except Exception:  # noqa: BLE001
+        return "desconocida"
 
 
 def make_modules(names, run_id, seed, live=True):
@@ -94,16 +107,21 @@ def cmd_collect(args):
         start = store.max_tick(run_id) + 1
         log.info("reanudando %s desde el tick %d", run_id, start)
     else:
-        store.start_run(run_id, now_iso(), "collect", args.seed, args=vars(args))
-    pairs = load_verified_pairs()
-    crypto, pm, kalshi = _sources((True, True, pairs))
-    from lab.sources import FuturesSource, JupiterSource
-    dex, futures = JupiterSource(), FuturesSource()
+        store.start_run(run_id, now_iso(), "collect", args.seed,
+                        args={**vars(args), "code_version": code_version()})
+    src = set(args.sources.split(","))
+    pairs = load_verified_pairs() if "polymarket" in src else []
+    crypto, pm, kalshi = _sources(("crypto" in src, "polymarket" in src, pairs))
+    from lab.sources import CclSource, FuturesSource, JupiterSource
+    dex = JupiterSource() if "dex" in src else None
+    futures = FuturesSource() if "futures" in src else None
+    ccl = CclSource() if "ccl" in src else None
     guard, markets = _guard(args), {}
     for t in range(start, start + args.ticks):
         t0 = time.monotonic()
         snap = build_snapshot(t, crypto, pm, args.latency_ms, markets_cache=markets,
-                              pairs=pairs, kalshi_client=kalshi, dex=dex, futures=futures)
+                              pairs=pairs, kalshi_client=kalshi, dex=dex, futures=futures,
+                              ccl=ccl, need_trades="crypto" in src)
         store.save_snapshot(run_id, snap)
         ok, why = guard.check()
         log.info("collect %s tick %d | errores %d | %.1fs | memoria pico %.0f MB",
@@ -236,12 +254,31 @@ def cmd_research(args):
     """Estudios estadísticos (G etf, H stat_arb, I imbalance, descubrimiento)."""
     from lab.research import runner as rr
     fn = {"stat_arb": rr.study_stat_arb, "etf": rr.study_etf, "imbalance": rr.study_imbalance,
-          "discovery": rr.study_discovery, "all": rr.run_all}[args.study]
+          "discovery": rr.study_discovery, "carry": rr.study_carry, "all": rr.run_all}[args.study]
     res = fn()
     print(json.dumps({k: (v.get("funnel") or v.get("bh_rejections") or v.get("error") or "ok")
                       if isinstance(v, dict) else v for k, v in (res if args.study == "all"
                                                                  else {args.study: res}).items()},
                      indent=1, default=str))
+
+
+def cmd_pm_gaps(args):
+    """Diagnóstico de los casos Polymarket NO_BOOK_FOR_LEG de una corrida guardada."""
+    from lab.research.pm_gaps import diagnose_run
+    store = LabStore(DB)
+    run_id = args.run or store.latest_run("collect")
+    r = diagnose_run(store.iter_snapshots(run_id))
+    r["run_id"] = run_id
+    full = Path("lab_data") / "research"
+    full.mkdir(parents=True, exist_ok=True)
+    (full / f"polymarket_gaps_{run_id}.json").write_text(
+        json.dumps(r, indent=1, ensure_ascii=False), encoding="utf-8")
+    slim = {k: v for k, v in r.items() if k != "detail"}
+    REPORT_DIR.mkdir(parents=True, exist_ok=True)
+    (REPORT_DIR / f"polymarket_gaps_{run_id}.json").write_text(
+        json.dumps(slim, indent=1, ensure_ascii=False), encoding="utf-8")
+    print(json.dumps({k: slim[k] for k in ("run_id", "cases", "causes_by_leg", "events",
+                                           "gamma_positive_indicative")}, indent=1))
 
 
 def cmd_consolidate(args):
@@ -256,9 +293,9 @@ def main(argv=None):
     p = argparse.ArgumentParser(description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("cmd", choices=["run", "collect", "evaluate", "replay", "report",
-                                   "suggest-pairs", "research", "consolidate"])
+                                   "suggest-pairs", "research", "consolidate", "pm-gaps"])
     p.add_argument("--study", default="all",
-                   choices=["stat_arb", "etf", "imbalance", "discovery", "all"])
+                   choices=["stat_arb", "etf", "imbalance", "discovery", "carry", "all"])
     p.add_argument("--resume", action="store_true", help="collect: continuar --run desde el último tick")
     p.add_argument("--max-rss-mb", type=float, default=1500.0)
     p.add_argument("--max-minutes", type=float, default=None)
@@ -267,6 +304,8 @@ def main(argv=None):
     p.add_argument("--latency-ms", type=float, default=500)
     p.add_argument("--seed", type=int, default=7)
     p.add_argument("--modules", default=None)
+    p.add_argument("--sources", default="crypto,polymarket,dex,futures",
+                   help="collect: fuentes a recolectar (crypto,polymarket,dex,futures,ccl)")
     p.add_argument("--run", default=None)
     p.add_argument("--notify", action="store_true")
     p.add_argument("--top", type=int, default=50)
@@ -275,7 +314,7 @@ def main(argv=None):
     args = p.parse_args(argv)
     logging.basicConfig(level=logging.INFO, datefmt="%H:%M:%S",
                         format="%(asctime)s %(levelname)s %(message)s")
-    {"consolidate": cmd_consolidate, "research": cmd_research, "run": cmd_run, "collect": cmd_collect, "evaluate": cmd_replay, "replay": cmd_replay,
+    {"pm-gaps": cmd_pm_gaps, "consolidate": cmd_consolidate, "research": cmd_research, "run": cmd_run, "collect": cmd_collect, "evaluate": cmd_replay, "replay": cmd_replay,
      "report": cmd_report,
      "suggest-pairs": cmd_suggest_pairs}[args.cmd](args)
 
