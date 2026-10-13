@@ -47,6 +47,35 @@ python run_lab.py suggest-pairs            # candidatas Kalshi~Polymarket (UNVER
 
 `lab_data/` (SQLite) queda fuera de git. El laboratorio no escribe en `data/`.
 
+### Familias y comandos (versión multiestrategia)
+
+| Familia | Módulo | Naturaleza |
+|---|---|---|
+| A. Entre exchanges | `cross_exchange` (inventario por par; rebalanceo solo al agotarse) | arbitraje |
+| B. Triangular 3-4 patas | `triangular` | arbitraje |
+| C. Basis/funding perpetuo | `basis_funding` (vivo) + `run_funding.py phase0` | estadística |
+| D. Predicción | `polymarket_buy_all_no`, `prediction_cross_venue`, Kalshi en Actions | arbitraje / no verificable |
+| E. CEX vs DEX | `cex_dex` (Jupiter, mínimo garantizado, re-cotización) | arbitraje no atómico |
+| F. Futuros con vencimiento | `cash_and_carry`, `calendar_spread` | arbitraje / estadística |
+| G. ETF y ADR/CCL | `research --study etf` | estadística (ejecución no verificable) |
+| H. Pares cointegrados | `research --study stat_arb` | estadística |
+| I. Microestructura | `liquidity_provision`, `research --study imbalance` | estadística |
+| Descubrimiento | `research --study discovery` (criterios congelados, BH global) | estadística |
+
+Categorías (nunca se mezclan): ARBITRAJE_GARANTIZADO, ESTADISTICA,
+NO_EJECUTABLE, NO_VERIFICABLE, SIN_EDGE (+ ESPECULATIVA aparte).
+
+```powershell
+python run_lab.py collect --ticks 9 --interval-sec 0 --max-minutes 9 --run R   # recolección (checkpoint por tick)
+python run_lab.py collect --resume --run R --ticks 9                           # reanudar
+python run_lab.py evaluate --run R --seed 7                                    # evaluación tick a tick
+python run_lab.py research --study all                                         # G, H, I y descubrimiento
+python run_lab.py consolidate                                                  # reports/lab/consolidated.md
+```
+
+La guardia de recursos (`--max-rss-mb`, `--max-minutes`) corta ordenadamente
+guardando el checkpoint; la caché histórica nunca vuelve a descargar lo que ya tiene.
+
 ## Comandos
 
 ```powershell

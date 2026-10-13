@@ -244,13 +244,19 @@ def cmd_research(args):
                      indent=1, default=str))
 
 
+def cmd_consolidate(args):
+    from lab.consolidated import write
+    write()
+    print((REPORT_DIR / "consolidated.md").read_text(encoding="utf-8"))
+
+
 def main(argv=None):
     if not PAPER_ONLY:
         sys.exit("El laboratorio es solo simulación (PAPER_ONLY).")
     p = argparse.ArgumentParser(description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("cmd", choices=["run", "collect", "evaluate", "replay", "report",
-                                   "suggest-pairs", "research"])
+                                   "suggest-pairs", "research", "consolidate"])
     p.add_argument("--study", default="all",
                    choices=["stat_arb", "etf", "imbalance", "discovery", "all"])
     p.add_argument("--resume", action="store_true", help="collect: continuar --run desde el último tick")
@@ -269,7 +275,7 @@ def main(argv=None):
     args = p.parse_args(argv)
     logging.basicConfig(level=logging.INFO, datefmt="%H:%M:%S",
                         format="%(asctime)s %(levelname)s %(message)s")
-    {"research": cmd_research, "run": cmd_run, "collect": cmd_collect, "evaluate": cmd_replay, "replay": cmd_replay,
+    {"consolidate": cmd_consolidate, "research": cmd_research, "run": cmd_run, "collect": cmd_collect, "evaluate": cmd_replay, "replay": cmd_replay,
      "report": cmd_report,
      "suggest-pairs": cmd_suggest_pairs}[args.cmd](args)
 

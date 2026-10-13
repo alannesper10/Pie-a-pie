@@ -71,15 +71,29 @@ def relation_trades(spread: List[float], start, end, cfg: RelationConfig):
     return trades, windows
 
 
+DAY_MS = 86_400_000
+
+
+def by_date(series: Dict[int, float]) -> Dict[int, float]:
+    """Normaliza velas diarias a la fecha calendario (UTC). Yahoo marca cada
+    vela con la hora de apertura de SU bolsa (NYSE 13:30 UTC, BYMA otra), así
+    que alinear por timestamp exacto no encontraba ningún día en común."""
+    return {t // DAY_MS * DAY_MS: v for t, v in series.items()}
+
+
 def ccl_series(closes: Dict[str, Dict[int, float]], ratios=ADR_RATIOS):
     """CCL implícito por emisora y verificación del ratio contra la mediana."""
     ccl, checks = {}, {}
     for adr, (local, ratio) in ratios.items():
         a, l = closes.get(adr), closes.get(local)
+        a, l = (by_date(a) if a else a), (by_date(l) if l else l)
         if not a or not l:
             checks[adr] = "SIN_DATOS"
             continue
         common = sorted(set(a) & set(l))
+        if not common:
+            checks[adr] = "SIN_FECHAS_EN_COMUN"
+            continue
         ccl[adr] = {t: l[t] * ratio / a[t] for t in common if a[t]}
     if len(ccl) >= 2:
         last = {k: v[max(v)] for k, v in ccl.items() if v}
@@ -101,8 +115,9 @@ def evaluate_relations(named_series: Dict[str, Dict[int, float]], pairs, cfg=Rel
         if a not in named_series or b not in named_series:
             results.append({"pair": f"{a}~{b}", "kind": kind, "verdict": "SIN_DATOS"})
             continue
-        common = sorted(set(named_series[a]) & set(named_series[b]))
-        spread = [math.log(named_series[a][t] / named_series[b][t]) for t in common]
+        sa_, sb_ = by_date(named_series[a]), by_date(named_series[b])
+        common = sorted(set(sa_) & set(sb_))
+        spread = [math.log(sa_[t] / sb_[t]) for t in common]
         n = len(spread)
         split = int(n * (1 - cfg.test_fraction))
         tr, win = relation_trades(spread, 0, split, cfg)
@@ -127,7 +142,8 @@ def evaluate_relations(named_series: Dict[str, Dict[int, float]], pairs, cfg=Rel
                           "net_sum_costs_x1.5": sum(x["gross"] - 1.5 * x["cost"] for x in tr)}
         ok = (res["selected"] and res["oos"] and res["oos"]["trades"] >= cfg.min_trades
               and res["oos"]["net_sum"] > 0 and res["oos"]["net_sum_costs_x1.5"] > 0)
-        res["verdict"] = "ESTADISTICA" if ok else ("SIN_EVIDENCIA" if res["selected"] else "SIN_EDGE")
+        # Significativo pero con pocas operaciones = muestra insuficiente, no "sin edge".
+        res["verdict"] = "ESTADISTICA" if ok else ("SIN_EVIDENCIA" if r else "SIN_EDGE")
         res["execution"] = "NO_VERIFICABLE (cierres diarios, sin bid/ask ni simultaneidad)"
     for res in results:
         res.pop("_spread", None)

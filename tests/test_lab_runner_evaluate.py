@@ -162,3 +162,12 @@ def test_sensitivity_separates_fees_and_slippage():
     s = strategy_metrics("cross_exchange", [r], None)["sensitivity"]
     assert s["fees_x2"] == pytest.approx(0.8) and s["slippage_x2"] == pytest.approx(0.9)
     assert s["fees_x1.5_slippage_x2"] == pytest.approx(0.8)
+
+
+def test_regression_statistical_net_counts_losers_too():
+    # Bug: solo se sumaban las filas ESTADISTICA (positivas): sesgo de selección.
+    rows = ([row(t, 0.5, classification="ESTADISTICA") for t in range(2)]
+            + [row(t, -0.4, classification="SIN_EDGE") for t in range(5)])
+    m = strategy_metrics("liquidity_provision", rows, None)
+    assert m["net_simulated_usd"] == pytest.approx(1.0 - 2.0)
+    assert m["evidence"]["simulated_executed"] == 7

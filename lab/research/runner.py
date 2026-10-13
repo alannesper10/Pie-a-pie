@@ -18,9 +18,34 @@ UNIVERSE = ("BTC/USDT", "ETH/USDT", "SOL/USDT", "BNB/USDT", "XRP/USDT", "ADA/USD
 HOUR = 3_600_000
 
 
+TOP_IN_REPORT = 50
+
+
 def _write(name, data):
+    """Detalle completo en lab_data/ (fuera de git); a reports/ va un resumen:
+    totales + las TOP_IN_REPORT filas de menor p + todas las promovidas."""
+    full = Path("lab_data") / "research"
+    full.mkdir(parents=True, exist_ok=True)
+    (full / f"research_{name}.json").write_text(json.dumps(data, indent=1, default=str,
+                                                           ensure_ascii=False), encoding="utf-8")
+    slim = dict(data)
+    res = data.get("results")
+    if isinstance(res, list):   # conteos SIEMPRE sobre todas las filas, no sobre el recorte
+        counts = {}
+        for r in res:
+            v = r.get("verdict") or ("PROMOVIDA" if r.get("promoted") else "NO_PROMOVIDA")
+            counts[v] = counts.get(v, 0) + 1
+        slim["verdict_counts_all"] = counts
+    if isinstance(res, list) and len(res) > TOP_IN_REPORT:
+        key = "p_train" if res and "p_train" in res[0] else "p"
+        ordered = sorted(res, key=lambda r: r.get(key, 1.0))
+        keep = ordered[:TOP_IN_REPORT] + [r for r in ordered[TOP_IN_REPORT:] if r.get("promoted")
+                                          or r.get("verdict") == "ESTADISTICA"]
+        slim["results"] = keep
+        slim["results_note"] = (f"{len(res)} filas en total; se muestran {len(keep)} (menor p y "
+                                f"todas las promovidas). Detalle completo: lab_data/research/")
     OUT.mkdir(parents=True, exist_ok=True)
-    (OUT / f"research_{name}.json").write_text(json.dumps(data, indent=1, default=str,
+    (OUT / f"research_{name}.json").write_text(json.dumps(slim, indent=1, default=str,
                                                           ensure_ascii=False), encoding="utf-8")
 
 

@@ -108,7 +108,7 @@ def evaluate_pairs(series: Dict[str, List[float]], n: int, cfg: StatArbConfig = 
                    "net_sum_costs_x1.5": sum(r["gross"] - 1.5 * r["cost"] for r in tr)}
         verdict = ("ESTADISTICA" if selected and oos and oos["trades"] >= cfg.min_trades
                    and oos["net_sum"] > 0 and oos["net_sum_costs_x1.5"] > 0 else
-                   "SIN_EVIDENCIA" if selected else "SIN_EDGE")
+                   "SIN_EVIDENCIA" if rej else "SIN_EDGE")
         out.append({
             "pair": f"{k[0]}~{k[1]}", "discovery_trades": len(nets),
             "discovery_net_sum": sum(nets), "discovery_gross_sum": sum(r["gross"] for r in d["trades"]),

@@ -1,0 +1,192 @@
+{
+ "lab": [
+  {
+   "familia": "F. Calendar spread",
+   "estrategia": "calendar_spread",
+   "evidencia": "collect-final",
+   "observadas": 756,
+   "ARBITRAJE_GARANTIZADO": 0,
+   "ESTADISTICA": 0,
+   "NO_EJECUTABLE": 0,
+   "NO_VERIFICABLE": 756,
+   "SIN_EDGE": 0,
+   "neto_contado_usd": 0,
+   "veredicto": "ESTADISTICA: SIN EVIDENCIA SUFICIENTE (no es arbitraje)"
+  },
+  {
+   "familia": "F. Spot vs futuro con vencimiento",
+   "estrategia": "cash_and_carry",
+   "evidencia": "collect-final",
+   "observadas": 1080,
+   "ARBITRAJE_GARANTIZADO": 1,
+   "ESTADISTICA": 0,
+   "NO_EJECUTABLE": 308,
+   "NO_VERIFICABLE": 0,
+   "SIN_EDGE": 771,
+   "neto_contado_usd": 0.23790020370666212,
+   "veredicto": "SIN EVIDENCIA SUFICIENTE"
+  },
+  {
+   "familia": "E. CEX vs DEX (Jupiter)",
+   "estrategia": "cex_dex",
+   "evidencia": "collect-final",
+   "observadas": 1500,
+   "ARBITRAJE_GARANTIZADO": 0,
+   "ESTADISTICA": 0,
+   "NO_EJECUTABLE": 0,
+   "NO_VERIFICABLE": 0,
+   "SIN_EDGE": 1500,
+   "neto_contado_usd": 0,
+   "veredicto": "SIN EVIDENCIA SUFICIENTE"
+  },
+  {
+   "familia": "A. Entre exchanges (CEX)",
+   "estrategia": "cross_exchange",
+   "evidencia": "collect-final",
+   "observadas": 780,
+   "ARBITRAJE_GARANTIZADO": 0,
+   "ESTADISTICA": 0,
+   "NO_EJECUTABLE": 0,
+   "NO_VERIFICABLE": 6,
+   "SIN_EDGE": 774,
+   "neto_contado_usd": 0,
+   "veredicto": "SIN EVIDENCIA SUFICIENTE"
+  },
+  {
+   "familia": "I. Provisión de liquidez",
+   "estrategia": "liquidity_provision",
+   "evidencia": "collect-final",
+   "observadas": 203,
+   "ARBITRAJE_GARANTIZADO": 0,
+   "ESTADISTICA": 4,
+   "NO_EJECUTABLE": 0,
+   "NO_VERIFICABLE": 0,
+   "SIN_EDGE": 199,
+   "neto_contado_usd": -2.603787935696574,
+   "veredicto": "ESTADISTICA: NO RENTABLE (no es arbitraje)"
+  },
+  {
+   "familia": "D. Predicción: Polymarket NO",
+   "estrategia": "polymarket_buy_all_no",
+   "evidencia": "collect-final",
+   "observadas": 1646,
+   "ARBITRAJE_GARANTIZADO": 0,
+   "ESTADISTICA": 0,
+   "NO_EJECUTABLE": 1,
+   "NO_VERIFICABLE": 559,
+   "SIN_EDGE": 1086,
+   "neto_contado_usd": 0,
+   "veredicto": "SIN EVIDENCIA SUFICIENTE"
+  },
+  {
+   "familia": "D. Predicción: Kalshi~Polymarket",
+   "estrategia": "prediction_cross_venue",
+   "evidencia": "collect-final",
+   "observadas": 0,
+   "ARBITRAJE_GARANTIZADO": 0,
+   "ESTADISTICA": 0,
+   "NO_EJECUTABLE": 0,
+   "NO_VERIFICABLE": 0,
+   "SIN_EDGE": 0,
+   "neto_contado_usd": 0,
+   "veredicto": "NO VERIFICABLE"
+  },
+  {
+   "familia": "B. Triangular (3-4 patas)",
+   "estrategia": "triangular",
+   "evidencia": "collect-final",
+   "observadas": 695,
+   "ARBITRAJE_GARANTIZADO": 0,
+   "ESTADISTICA": 0,
+   "NO_EJECUTABLE": 0,
+   "NO_VERIFICABLE": 0,
+   "SIN_EDGE": 695,
+   "neto_contado_usd": 0,
+   "veredicto": "SIN EVIDENCIA SUFICIENTE"
+  }
+ ],
+ "research": {
+  "stat_arb": {
+   "familia": "H. Pares cointegrados",
+   "probadas": 45,
+   "sobreviven_BH": 0,
+   "veredictos": {
+    "SIN_EDGE": 45
+   }
+  },
+  "etf": {
+   "familia": "G. ETF / CCL",
+   "probadas": 8,
+   "sobreviven_BH": 1,
+   "veredictos": {
+    "SIN_EDGE": 7,
+    "SIN_EVIDENCIA": 1
+   }
+  },
+  "imbalance": {
+   "familia": "I. Desbalance del libro",
+   "probadas": 660,
+   "sobreviven_BH": 0,
+   "veredictos": {
+    "SIN_EDGE": 660
+   }
+  },
+  "discovery": {
+   "familia": "Descubrimiento",
+   "probadas": 921,
+   "sobreviven_BH": 0,
+   "veredictos": {
+    "NO_PROMOVIDA": 921
+   }
+  }
+ },
+ "external": {
+  "kalshi_current": {
+   "cycles": 386,
+   "opportunities": 63114,
+   "net_positive": 2,
+   "executable": 2,
+   "pnl_realized": 0
+  },
+  "buy_all_no": {
+   "cycles": 370,
+   "opportunities": 55381,
+   "net_positive": 0,
+   "executable": 0,
+   "pnl_realized": 0
+  },
+  "strike_inconsistency": {
+   "cycles": 370,
+   "opportunities": 54392,
+   "net_positive": 0,
+   "executable": 0,
+   "pnl_realized": 0
+  },
+  "funding_basis": {
+   "cycles": 45,
+   "opportunities": 0,
+   "net_positive": 0,
+   "executable": 0,
+   "pnl_realized": 0.0
+  }
+ },
+ "lab_run": {
+  "run_id": "replay-collect-final-s7-161723",
+  "started": "2026-10-13T19:17:23.014+00:00",
+  "mode": "replay",
+  "seed": 7,
+  "source_run": "collect-final",
+  "args": "{\"cmd\": \"evaluate\", \"study\": \"all\", \"resume\": false, \"max_rss_mb\": 1500.0, \"max_minutes\": null, \"ticks\": 10, \"interval_sec\": 30, \"latency_ms\": 500, \"seed\": 7, \"modules\": null, \"run\": \"collect-final\", \"notify\": false, \"top\": 50, \"max_events\": 300, \"kalshi_pages\": 20}"
+ },
+ "errors": {
+  "total": 42,
+  "by_source": {
+   "jupiter:SOL->USDC|10": 7,
+   "jupiter:USDC->SOL|10": 7,
+   "jupiter:SOL->USDC|25": 7,
+   "jupiter:USDC->SOL|25": 7,
+   "jupiter:SOL->USDC|45": 7,
+   "jupiter:USDC->SOL|45": 7
+  }
+ }
+}

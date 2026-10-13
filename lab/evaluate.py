@@ -92,8 +92,13 @@ def strategy_metrics(name, rows, ledger):
     by_class = Counter(r.get("classification") or "SIN_CLASIFICAR" for r in rows)
     nature = NATURE.get(name, "arbitrage")
     accepted = [r for r in rows if r.get("decision") == "ACCEPTED"]
-    target = "ESTADISTICA" if nature in STATISTICAL_NATURES else "ARBITRAJE_GARANTIZADO"
-    sims = [r for r in accepted if r.get("classification") == target]
+    if nature in STATISTICAL_NATURES:
+        # Estrategia estadística: se cuentan TODAS las operaciones ejecutadas
+        # (ganadoras y perdedoras). Contar solo las clasificadas positivas sería
+        # sesgo de selección (bug detectado en la consolidación).
+        sims = accepted
+    else:
+        sims = [r for r in accepted if r.get("classification") == "ARBITRAJE_GARANTIZADO"]
     nets = [_sim_net(r) for r in sims if _sim_net(r) is not None]
     pcts = [(r.get("sim") or {}).get("net_pct_capital") for r in sims
             if (r.get("sim") or {}).get("net_pct_capital") is not None]

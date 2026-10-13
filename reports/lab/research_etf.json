@@ -1,0 +1,189 @@
+{
+ "source": "Yahoo Finance (cierres diarios)",
+ "days": 730,
+ "errors": [],
+ "etf": {
+  "config": {
+   "formation_d": 120,
+   "trading_d": 20,
+   "entry_z": 2.0,
+   "exit_z": 0.5,
+   "cost_per_execution": 0.0002,
+   "borrow_per_day": 8.219178082191782e-06,
+   "test_fraction": 0.3,
+   "min_trades": 8,
+   "bh_q": 0.1
+  },
+  "pairs_tested": 5,
+  "bh_rejections": 1,
+  "results": [
+   {
+    "pair": "SPY~IVV",
+    "kind": "ETF",
+    "observations": 500,
+    "split": 350,
+    "discovery_trades": 4,
+    "discovery_net_sum": 0.006850971665997032,
+    "discovery_gross_sum": 0.008496177145449086,
+    "p": 0.06177968895195274,
+    "t": 2.1253056556395253,
+    "stationary_window_share": 1.0,
+    "bh_significant": false,
+    "selected": false,
+    "oos": null,
+    "verdict": "SIN_EDGE",
+    "execution": "NO_VERIFICABLE (cierres diarios, sin bid/ask ni simultaneidad)"
+   },
+   {
+    "pair": "SPY~VOO",
+    "kind": "ETF",
+    "observations": 500,
+    "split": 350,
+    "discovery_trades": 4,
+    "discovery_net_sum": 0.007787611636276701,
+    "discovery_gross_sum": 0.009453365060934235,
+    "p": 0.0664971657159591,
+    "t": 2.0481961057308498,
+    "stationary_window_share": 1.0,
+    "bh_significant": false,
+    "selected": false,
+    "oos": null,
+    "verdict": "SIN_EDGE",
+    "execution": "NO_VERIFICABLE (cierres diarios, sin bid/ask ni simultaneidad)"
+   },
+   {
+    "pair": "IVV~VOO",
+    "kind": "ETF",
+    "observations": 500,
+    "split": 350,
+    "discovery_trades": 3,
+    "discovery_net_sum": 0.0030712443989821935,
+    "discovery_gross_sum": 0.004361655357886303,
+    "p": 0.001405031270088064,
+    "t": 18.824576208065967,
+    "stationary_window_share": 0.3333333333333333,
+    "bh_significant": true,
+    "selected": false,
+    "oos": null,
+    "verdict": "SIN_EVIDENCIA",
+    "execution": "NO_VERIFICABLE (cierres diarios, sin bid/ask ni simultaneidad)"
+   },
+   {
+    "pair": "QQQ~QQQM",
+    "kind": "ETF",
+    "observations": 500,
+    "split": 350,
+    "discovery_trades": 9,
+    "discovery_net_sum": -0.0024972421826824744,
+    "discovery_gross_sum": 0.0012959085022490324,
+    "p": 0.9999425640357018,
+    "t": -6.980349956084408,
+    "stationary_window_share": 0.9166666666666666,
+    "bh_significant": false,
+    "selected": false,
+    "oos": null,
+    "verdict": "SIN_EDGE",
+    "execution": "NO_VERIFICABLE (cierres diarios, sin bid/ask ni simultaneidad)"
+   },
+   {
+    "pair": "GLD~IAU",
+    "kind": "ETF",
+    "observations": 500,
+    "split": 350,
+    "discovery_trades": 11,
+    "discovery_net_sum": -0.0013591199304721802,
+    "discovery_gross_sum": 0.003258688288705902,
+    "p": 0.9410231126090681,
+    "t": -1.710544105938335,
+    "stationary_window_share": 0.9166666666666666,
+    "bh_significant": false,
+    "selected": false,
+    "oos": null,
+    "verdict": "SIN_EDGE",
+    "execution": "NO_VERIFICABLE (cierres diarios, sin bid/ask ni simultaneidad)"
+   }
+  ],
+  "verdict_counts_all": {
+   "SIN_EDGE": 4,
+   "SIN_EVIDENCIA": 1
+  }
+ },
+ "ccl_checks": {
+  "GGAL": "OK (CCL 1613.7)",
+  "BMA": "OK (CCL 1607.1)",
+  "PAM": "OK (CCL 1615.0)",
+  "YPF": "RATIO_NO_VERIFICADO (CCL 161.2 vs mediana 1613.7)"
+ },
+ "ccl": {
+  "config": {
+   "formation_d": 120,
+   "trading_d": 20,
+   "entry_z": 2.0,
+   "exit_z": 0.5,
+   "cost_per_execution": 0.005,
+   "borrow_per_day": 8.219178082191782e-06,
+   "test_fraction": 0.3,
+   "min_trades": 8,
+   "bh_q": 0.1
+  },
+  "pairs_tested": 3,
+  "bh_rejections": 0,
+  "results": [
+   {
+    "pair": "BMA~GGAL",
+    "kind": "CCL",
+    "observations": 475,
+    "split": 332,
+    "discovery_trades": 7,
+    "discovery_net_sum": 0.016951308511596472,
+    "discovery_gross_sum": 0.08704993864858278,
+    "p": 0.11827982678276316,
+    "t": 1.3149074798513387,
+    "stationary_window_share": 1.0,
+    "bh_significant": false,
+    "selected": false,
+    "oos": null,
+    "verdict": "SIN_EDGE",
+    "execution": "NO_VERIFICABLE (cierres diarios, sin bid/ask ni simultaneidad)"
+   },
+   {
+    "pair": "BMA~PAM",
+    "kind": "CCL",
+    "observations": 475,
+    "split": 332,
+    "discovery_trades": 6,
+    "discovery_net_sum": -0.0005883753228728156,
+    "discovery_gross_sum": 0.059489706868908004,
+    "p": 0.5382049783303179,
+    "t": -0.10084821857124257,
+    "stationary_window_share": 1.0,
+    "bh_significant": false,
+    "selected": false,
+    "oos": null,
+    "verdict": "SIN_EDGE",
+    "execution": "NO_VERIFICABLE (cierres diarios, sin bid/ask ni simultaneidad)"
+   },
+   {
+    "pair": "GGAL~PAM",
+    "kind": "CCL",
+    "observations": 475,
+    "split": 332,
+    "discovery_trades": 10,
+    "discovery_net_sum": 0.030031224372928926,
+    "discovery_gross_sum": 0.13014629286607962,
+    "p": 0.08744132419810835,
+    "t": 1.4728437182927359,
+    "stationary_window_share": 1.0,
+    "bh_significant": false,
+    "selected": false,
+    "oos": null,
+    "verdict": "SIN_EDGE",
+    "execution": "NO_VERIFICABLE (cierres diarios, sin bid/ask ni simultaneidad)"
+   }
+  ],
+  "verdict_counts_all": {
+   "SIN_EDGE": 3
+  }
+ },
+ "ccl_cost_note": "0.5% por ejecución ASSUMED (comisiones BYMA + spread)"
+}
