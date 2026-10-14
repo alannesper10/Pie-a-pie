@@ -1,5 +1,5 @@
 {
- "refreshed_at": "2026-10-14T04:04:16+00:00",
+ "refreshed_at": "2026-10-14T04:45:02+00:00",
  "params": {
   "min_volume": 100.0,
   "gap_tol": 0.0,
@@ -125,8 +125,8 @@
      "close_time": "2026-10-27T20:00:00Z",
      "expected_expiration_time": "2026-10-25T23:00:00Z",
      "yes_ask_dollars": "0.6600",
-     "yes_ask_size_fp": "2019.09",
-     "volume_24h_fp": "31921.97"
+     "yes_ask_size_fp": "2414.47",
+     "volume_24h_fp": "31730.85"
     },
     {
      "ticker": "KXLALIGAGAME-26OCT25BARRMA-RMA",
@@ -135,8 +135,8 @@
      "close_time": "2026-10-27T20:00:00Z",
      "expected_expiration_time": "2026-10-25T23:00:00Z",
      "yes_ask_dollars": "0.2100",
-     "yes_ask_size_fp": "92.00",
-     "volume_24h_fp": "29849.06"
+     "yes_ask_size_fp": "599.29",
+     "volume_24h_fp": "29268.71"
     },
     {
      "ticker": "KXLALIGAGAME-26OCT25BARRMA-TIE",
@@ -145,12 +145,12 @@
      "close_time": "2026-10-27T20:00:00Z",
      "expected_expiration_time": "2026-10-25T23:00:00Z",
      "yes_ask_dollars": "0.1800",
-     "yes_ask_size_fp": "733.80",
-     "volume_24h_fp": "3276.36"
+     "yes_ask_size_fp": "326.55",
+     "volume_24h_fp": "3640.62"
     }
    ],
    "prelim_sum": 1.05,
-   "volume_24h": 65047.39,
+   "volume_24h": 64640.18,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -233,7 +233,7 @@
      "close_time": "2026-10-27T16:30:00Z",
      "expected_expiration_time": "2026-10-25T19:30:00Z",
      "yes_ask_dollars": "0.1500",
-     "yes_ask_size_fp": "3158.00",
+     "yes_ask_size_fp": "5158.00",
      "volume_24h_fp": "642.00"
     },
     {
@@ -297,7 +297,7 @@
      "close_time": "2026-10-27T14:00:00Z",
      "expected_expiration_time": "2026-10-25T17:00:00Z",
      "yes_ask_dollars": "0.2900",
-     "yes_ask_size_fp": "115.50",
+     "yes_ask_size_fp": "115.43",
      "volume_24h_fp": "344.41"
     },
     {
@@ -675,7 +675,7 @@
      "close_time": "2026-10-26T11:30:00Z",
      "expected_expiration_time": "2026-10-24T14:30:00Z",
      "yes_ask_dollars": "0.6100",
-     "yes_ask_size_fp": "3231.49",
+     "yes_ask_size_fp": "5231.49",
      "volume_24h_fp": "458.63"
     },
     {
@@ -772,8 +772,8 @@
      "status": "active",
      "close_time": "2026-10-24T16:45:00Z",
      "expected_expiration_time": "2026-10-22T19:45:00Z",
-     "yes_ask_dollars": "0.6000",
-     "yes_ask_size_fp": "1.25",
+     "yes_ask_dollars": "0.4600",
+     "yes_ask_size_fp": "5.80",
      "volume_24h_fp": "0.00"
     },
     {
@@ -797,7 +797,7 @@
      "volume_24h_fp": "0.00"
     }
    ],
-   "prelim_sum": 1.79,
+   "prelim_sum": 1.65,
    "volume_24h": 114.09,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
@@ -826,9 +826,9 @@
      "status": "active",
      "close_time": "2026-10-23T19:00:00Z",
      "expected_expiration_time": "2026-10-21T22:00:00Z",
-     "yes_ask_dollars": "0.7900",
-     "yes_ask_size_fp": "4.00",
-     "volume_24h_fp": "538.85"
+     "yes_ask_dollars": "0.8000",
+     "yes_ask_size_fp": "58.00",
+     "volume_24h_fp": "539.85"
     },
     {
      "ticker": "KXUCLGAME-26OCT21RMARBL-RBL",
@@ -836,8 +836,8 @@
      "status": "active",
      "close_time": "2026-10-23T19:00:00Z",
      "expected_expiration_time": "2026-10-21T22:00:00Z",
-     "yes_ask_dollars": "0.1100",
-     "yes_ask_size_fp": "27.00",
+     "yes_ask_dollars": "0.1300",
+     "yes_ask_size_fp": "95.00",
      "volume_24h_fp": "119.00"
     },
     {
@@ -846,13 +846,67 @@
      "status": "active",
      "close_time": "2026-10-23T19:00:00Z",
      "expected_expiration_time": "2026-10-21T22:00:00Z",
-     "yes_ask_dollars": "0.2100",
-     "yes_ask_size_fp": "93.00",
+     "yes_ask_dollars": "0.2400",
+     "yes_ask_size_fp": "100.00",
      "volume_24h_fp": "27.00"
     }
    ],
-   "prelim_sum": 1.11,
-   "volume_24h": 684.85,
+   "prelim_sum": 1.17,
+   "volume_24h": 685.85,
+   "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
+   "fee_multiplier": null,
+   "coverage": {
+    "proven": true,
+    "method": "HEAD_TO_HEAD_WITH_TIE",
+    "reasons": [
+     "strikes: no todas las patas son strikes"
+    ],
+    "residuals": [
+     {
+      "name": "CANCELACION_O_REPROGRAMACION",
+      "payout": "precio justo seg\u00fan reglas de Kalshi (no garantizado)"
+     }
+    ],
+    "open_list_evidence": []
+   }
+  },
+  {
+   "event_ticker": "KXUCLGAME-26OCT21RBBFEY",
+   "title": "Real Betis vs Feyenoord",
+   "legs": [
+    {
+     "ticker": "KXUCLGAME-26OCT21RBBFEY-RBB",
+     "yes_sub_title": "Real Betis",
+     "status": "active",
+     "close_time": "2026-10-23T19:00:00Z",
+     "expected_expiration_time": "2026-10-21T22:00:00Z",
+     "yes_ask_dollars": "0.5700",
+     "yes_ask_size_fp": "127.00",
+     "volume_24h_fp": "229.44"
+    },
+    {
+     "ticker": "KXUCLGAME-26OCT21RBBFEY-FEY",
+     "yes_sub_title": "Feyenoord",
+     "status": "active",
+     "close_time": "2026-10-23T19:00:00Z",
+     "expected_expiration_time": "2026-10-21T22:00:00Z",
+     "yes_ask_dollars": "0.5000",
+     "yes_ask_size_fp": "175.00",
+     "volume_24h_fp": "0.00"
+    },
+    {
+     "ticker": "KXUCLGAME-26OCT21RBBFEY-TIE",
+     "yes_sub_title": "Tie",
+     "status": "active",
+     "close_time": "2026-10-23T19:00:00Z",
+     "expected_expiration_time": "2026-10-21T22:00:00Z",
+     "yes_ask_dollars": "0.4900",
+     "yes_ask_size_fp": "100.00",
+     "volume_24h_fp": "0.00"
+    }
+   ],
+   "prelim_sum": 1.5599999999999998,
+   "volume_24h": 229.44,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -880,8 +934,8 @@
      "status": "active",
      "close_time": "2026-10-23T19:00:00Z",
      "expected_expiration_time": "2026-10-21T22:00:00Z",
-     "yes_ask_dollars": "0.7900",
-     "yes_ask_size_fp": "3.00",
+     "yes_ask_dollars": "0.8000",
+     "yes_ask_size_fp": "12.00",
      "volume_24h_fp": "540.82"
     },
     {
@@ -890,8 +944,8 @@
      "status": "active",
      "close_time": "2026-10-23T19:00:00Z",
      "expected_expiration_time": "2026-10-21T22:00:00Z",
-     "yes_ask_dollars": "0.2300",
-     "yes_ask_size_fp": "82.00",
+     "yes_ask_dollars": "0.2600",
+     "yes_ask_size_fp": "16.00",
      "volume_24h_fp": "6.35"
     },
     {
@@ -901,11 +955,11 @@
      "close_time": "2026-10-23T19:00:00Z",
      "expected_expiration_time": "2026-10-21T22:00:00Z",
      "yes_ask_dollars": "0.4000",
-     "yes_ask_size_fp": "2.00",
+     "yes_ask_size_fp": "164.00",
      "volume_24h_fp": "52.02"
     }
    ],
-   "prelim_sum": 1.42,
+   "prelim_sum": 1.46,
    "volume_24h": 599.19,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
@@ -945,8 +999,8 @@
      "close_time": "2026-10-23T19:00:00Z",
      "expected_expiration_time": "2026-10-21T22:00:00Z",
      "yes_ask_dollars": "0.3800",
-     "yes_ask_size_fp": "1100.00",
-     "volume_24h_fp": "974.45"
+     "yes_ask_size_fp": "1209.00",
+     "volume_24h_fp": "959.02"
     },
     {
      "ticker": "KXUCLGAME-26OCT21BMUARS-TIE",
@@ -954,13 +1008,13 @@
      "status": "active",
      "close_time": "2026-10-23T19:00:00Z",
      "expected_expiration_time": "2026-10-21T22:00:00Z",
-     "yes_ask_dollars": "0.2400",
-     "yes_ask_size_fp": "24.00",
-     "volume_24h_fp": "166.80"
+     "yes_ask_dollars": "0.2300",
+     "yes_ask_size_fp": "21.00",
+     "volume_24h_fp": "165.22"
     }
    ],
-   "prelim_sum": 1.06,
-   "volume_24h": 1332.04,
+   "prelim_sum": 1.05,
+   "volume_24h": 1315.03,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -989,7 +1043,7 @@
      "close_time": "2026-10-23T19:00:00Z",
      "expected_expiration_time": "2026-10-21T22:00:00Z",
      "yes_ask_dollars": "0.7600",
-     "yes_ask_size_fp": "71.00",
+     "yes_ask_size_fp": "128.00",
      "volume_24h_fp": "5.49"
     },
     {
@@ -999,8 +1053,8 @@
      "close_time": "2026-10-23T19:00:00Z",
      "expected_expiration_time": "2026-10-21T22:00:00Z",
      "yes_ask_dollars": "0.2300",
-     "yes_ask_size_fp": "75.66",
-     "volume_24h_fp": "138.98"
+     "yes_ask_size_fp": "24.00",
+     "volume_24h_fp": "155.49"
     },
     {
      "ticker": "KXUCLGAME-26OCT21AVLVIK-TIE",
@@ -1008,13 +1062,13 @@
      "status": "active",
      "close_time": "2026-10-23T19:00:00Z",
      "expected_expiration_time": "2026-10-21T22:00:00Z",
-     "yes_ask_dollars": "0.3200",
-     "yes_ask_size_fp": "100.00",
+     "yes_ask_dollars": "0.2200",
+     "yes_ask_size_fp": "5.00",
      "volume_24h_fp": "0.00"
     }
    ],
-   "prelim_sum": 1.31,
-   "volume_24h": 144.47,
+   "prelim_sum": 1.21,
+   "volume_24h": 160.98000000000002,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -1042,8 +1096,8 @@
      "status": "active",
      "close_time": "2026-10-23T16:45:00Z",
      "expected_expiration_time": "2026-10-21T19:45:00Z",
-     "yes_ask_dollars": "0.5400",
-     "yes_ask_size_fp": "1.00",
+     "yes_ask_dollars": "0.5100",
+     "yes_ask_size_fp": "36.00",
      "volume_24h_fp": "427.64"
     },
     {
@@ -1053,8 +1107,8 @@
      "close_time": "2026-10-23T16:45:00Z",
      "expected_expiration_time": "2026-10-21T19:45:00Z",
      "yes_ask_dollars": "0.4200",
-     "yes_ask_size_fp": "53.85",
-     "volume_24h_fp": "365.88"
+     "yes_ask_size_fp": "100.00",
+     "volume_24h_fp": "372.90"
     },
     {
      "ticker": "KXUCLGAME-26OCT21COMMUN-TIE",
@@ -1062,13 +1116,13 @@
      "status": "active",
      "close_time": "2026-10-23T16:45:00Z",
      "expected_expiration_time": "2026-10-21T19:45:00Z",
-     "yes_ask_dollars": "0.3600",
-     "yes_ask_size_fp": "64.00",
+     "yes_ask_dollars": "0.4400",
+     "yes_ask_size_fp": "175.00",
      "volume_24h_fp": "0.00"
     }
    ],
-   "prelim_sum": 1.3199999999999998,
-   "volume_24h": 793.52,
+   "prelim_sum": 1.3699999999999999,
+   "volume_24h": 800.54,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -1096,8 +1150,8 @@
      "status": "active",
      "close_time": "2026-10-22T19:00:00Z",
      "expected_expiration_time": "2026-10-20T22:00:00Z",
-     "yes_ask_dollars": "0.4500",
-     "yes_ask_size_fp": "10.00",
+     "yes_ask_dollars": "0.4400",
+     "yes_ask_size_fp": "14.00",
      "volume_24h_fp": "2.39"
     },
     {
@@ -1106,8 +1160,8 @@
      "status": "active",
      "close_time": "2026-10-22T19:00:00Z",
      "expected_expiration_time": "2026-10-20T22:00:00Z",
-     "yes_ask_dollars": "0.5300",
-     "yes_ask_size_fp": "7.00",
+     "yes_ask_dollars": "0.5500",
+     "yes_ask_size_fp": "94.00",
      "volume_24h_fp": "144.39"
     },
     {
@@ -1116,13 +1170,13 @@
      "status": "active",
      "close_time": "2026-10-22T19:00:00Z",
      "expected_expiration_time": "2026-10-20T22:00:00Z",
-     "yes_ask_dollars": "0.3900",
-     "yes_ask_size_fp": "100.00",
-     "volume_24h_fp": "0.00"
+     "yes_ask_dollars": "0.3700",
+     "yes_ask_size_fp": "19.00",
+     "volume_24h_fp": "2.00"
     }
    ],
-   "prelim_sum": 1.37,
-   "volume_24h": 146.77999999999997,
+   "prelim_sum": 1.3599999999999999,
+   "volume_24h": 148.77999999999997,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -1150,8 +1204,8 @@
      "status": "active",
      "close_time": "2026-10-22T19:00:00Z",
      "expected_expiration_time": "2026-10-20T22:00:00Z",
-     "yes_ask_dollars": "0.8200",
-     "yes_ask_size_fp": "32.00",
+     "yes_ask_dollars": "0.8100",
+     "yes_ask_size_fp": "2.00",
      "volume_24h_fp": "7.54"
     },
     {
@@ -1160,7 +1214,7 @@
      "status": "active",
      "close_time": "2026-10-22T19:00:00Z",
      "expected_expiration_time": "2026-10-20T22:00:00Z",
-     "yes_ask_dollars": "0.1300",
+     "yes_ask_dollars": "0.1200",
      "yes_ask_size_fp": "100.00",
      "volume_24h_fp": "183.93"
     },
@@ -1170,12 +1224,12 @@
      "status": "active",
      "close_time": "2026-10-22T19:00:00Z",
      "expected_expiration_time": "2026-10-20T22:00:00Z",
-     "yes_ask_dollars": "0.1600",
-     "yes_ask_size_fp": "2.00",
+     "yes_ask_dollars": "0.2000",
+     "yes_ask_size_fp": "100.00",
      "volume_24h_fp": "19.00"
     }
    ],
-   "prelim_sum": 1.1099999999999999,
+   "prelim_sum": 1.1300000000000001,
    "volume_24h": 210.47,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
@@ -1204,9 +1258,9 @@
      "status": "active",
      "close_time": "2026-10-22T19:00:00Z",
      "expected_expiration_time": "2026-10-20T22:00:00Z",
-     "yes_ask_dollars": "0.3500",
-     "yes_ask_size_fp": "100.00",
-     "volume_24h_fp": "814.80"
+     "yes_ask_dollars": "0.3400",
+     "yes_ask_size_fp": "500.00",
+     "volume_24h_fp": "2051.40"
     },
     {
      "ticker": "KXUCLGAME-26OCT20PSGBAR-BAR",
@@ -1214,9 +1268,9 @@
      "status": "active",
      "close_time": "2026-10-22T19:00:00Z",
      "expected_expiration_time": "2026-10-20T22:00:00Z",
-     "yes_ask_dollars": "0.5300",
-     "yes_ask_size_fp": "250.00",
-     "volume_24h_fp": "6132.84"
+     "yes_ask_dollars": "0.5200",
+     "yes_ask_size_fp": "499.79",
+     "volume_24h_fp": "6281.51"
     },
     {
      "ticker": "KXUCLGAME-26OCT20PSGBAR-TIE",
@@ -1224,13 +1278,13 @@
      "status": "active",
      "close_time": "2026-10-22T19:00:00Z",
      "expected_expiration_time": "2026-10-20T22:00:00Z",
-     "yes_ask_dollars": "0.1800",
-     "yes_ask_size_fp": "128.00",
-     "volume_24h_fp": "2093.60"
+     "yes_ask_dollars": "0.2000",
+     "yes_ask_size_fp": "800.00",
+     "volume_24h_fp": "2348.60"
     }
    ],
    "prelim_sum": 1.06,
-   "volume_24h": 9041.24,
+   "volume_24h": 10681.51,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -1260,7 +1314,7 @@
      "expected_expiration_time": "2026-10-20T22:00:00Z",
      "yes_ask_dollars": "0.8400",
      "yes_ask_size_fp": "459.64",
-     "volume_24h_fp": "554.95"
+     "volume_24h_fp": "578.76"
     },
     {
      "ticker": "KXUCLGAME-26OCT20MCIAEK-AEK",
@@ -1269,7 +1323,7 @@
      "close_time": "2026-10-22T19:00:00Z",
      "expected_expiration_time": "2026-10-20T22:00:00Z",
      "yes_ask_dollars": "0.0900",
-     "yes_ask_size_fp": "119.00",
+     "yes_ask_size_fp": "112.00",
      "volume_24h_fp": "290.56"
     },
     {
@@ -1278,13 +1332,13 @@
      "status": "active",
      "close_time": "2026-10-22T19:00:00Z",
      "expected_expiration_time": "2026-10-20T22:00:00Z",
-     "yes_ask_dollars": "0.1300",
-     "yes_ask_size_fp": "99.33",
+     "yes_ask_dollars": "0.1100",
+     "yes_ask_size_fp": "52.00",
      "volume_24h_fp": "52.24"
     }
    ],
-   "prelim_sum": 1.06,
-   "volume_24h": 897.75,
+   "prelim_sum": 1.04,
+   "volume_24h": 921.56,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -1322,7 +1376,7 @@
      "status": "active",
      "close_time": "2026-10-22T19:00:00Z",
      "expected_expiration_time": "2026-10-20T22:00:00Z",
-     "yes_ask_dollars": "0.2700",
+     "yes_ask_dollars": "0.2900",
      "yes_ask_size_fp": "100.00",
      "volume_24h_fp": "26.82"
     },
@@ -1332,12 +1386,12 @@
      "status": "active",
      "close_time": "2026-10-22T19:00:00Z",
      "expected_expiration_time": "2026-10-20T22:00:00Z",
-     "yes_ask_dollars": "0.5000",
-     "yes_ask_size_fp": "175.00",
+     "yes_ask_dollars": "0.4400",
+     "yes_ask_size_fp": "100.00",
      "volume_24h_fp": "0.00"
     }
    ],
-   "prelim_sum": 1.4500000000000002,
+   "prelim_sum": 1.41,
    "volume_24h": 102.28999999999999,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
@@ -1386,12 +1440,12 @@
      "status": "active",
      "close_time": "2026-10-22T19:00:00Z",
      "expected_expiration_time": "2026-10-20T22:00:00Z",
-     "yes_ask_dollars": "0.5200",
-     "yes_ask_size_fp": "175.00",
+     "yes_ask_dollars": "0.4700",
+     "yes_ask_size_fp": "6.00",
      "volume_24h_fp": "0.00"
     }
    ],
-   "prelim_sum": 1.42,
+   "prelim_sum": 1.3699999999999999,
    "volume_24h": 115.05000000000001,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
@@ -1420,8 +1474,8 @@
      "status": "active",
      "close_time": "2026-10-22T16:45:00Z",
      "expected_expiration_time": "2026-10-20T19:45:00Z",
-     "yes_ask_dollars": "0.2400",
-     "yes_ask_size_fp": "34.00",
+     "yes_ask_dollars": "0.2300",
+     "yes_ask_size_fp": "1.00",
      "volume_24h_fp": "17.16"
     },
     {
@@ -1431,8 +1485,8 @@
      "close_time": "2026-10-22T16:45:00Z",
      "expected_expiration_time": "2026-10-20T19:45:00Z",
      "yes_ask_dollars": "0.6800",
-     "yes_ask_size_fp": "465.61",
-     "volume_24h_fp": "104.39"
+     "yes_ask_size_fp": "455.55",
+     "volume_24h_fp": "114.45"
     },
     {
      "ticker": "KXUCLGAME-26OCT20SBHBVB-TIE",
@@ -1445,8 +1499,8 @@
      "volume_24h_fp": "0.00"
     }
    ],
-   "prelim_sum": 1.21,
-   "volume_24h": 121.55,
+   "prelim_sum": 1.2,
+   "volume_24h": 131.61,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -1474,9 +1528,9 @@
      "status": "active",
      "close_time": "2026-10-22T16:45:00Z",
      "expected_expiration_time": "2026-10-20T19:45:00Z",
-     "yes_ask_dollars": "0.5700",
-     "yes_ask_size_fp": "1.00",
-     "volume_24h_fp": "517.62"
+     "yes_ask_dollars": "0.5800",
+     "yes_ask_size_fp": "205.99",
+     "volume_24h_fp": "541.92"
     },
     {
      "ticker": "KXUCLGAME-26OCT20FENSLA-SLA",
@@ -1484,8 +1538,8 @@
      "status": "active",
      "close_time": "2026-10-22T16:45:00Z",
      "expected_expiration_time": "2026-10-20T19:45:00Z",
-     "yes_ask_dollars": "0.3100",
-     "yes_ask_size_fp": "4.00",
+     "yes_ask_dollars": "0.3200",
+     "yes_ask_size_fp": "9.00",
      "volume_24h_fp": "98.06"
     },
     {
@@ -1494,13 +1548,13 @@
      "status": "active",
      "close_time": "2026-10-22T16:45:00Z",
      "expected_expiration_time": "2026-10-20T19:45:00Z",
-     "yes_ask_dollars": "0.4300",
-     "yes_ask_size_fp": "146.00",
+     "yes_ask_dollars": "0.4200",
+     "yes_ask_size_fp": "195.00",
      "volume_24h_fp": "5.74"
     }
    ],
-   "prelim_sum": 1.3099999999999998,
-   "volume_24h": 621.42,
+   "prelim_sum": 1.3199999999999998,
+   "volume_24h": 645.7199999999999,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -1529,8 +1583,8 @@
      "close_time": "2026-10-21T19:00:00Z",
      "expected_expiration_time": "2026-10-19T22:00:00Z",
      "yes_ask_dollars": "0.6600",
-     "yes_ask_size_fp": "30532.03",
-     "volume_24h_fp": "3047.79"
+     "yes_ask_size_fp": "30534.03",
+     "volume_24h_fp": "3044.79"
     },
     {
      "ticker": "KXEPLGAME-26OCT19TOTCOV-COV",
@@ -1539,8 +1593,8 @@
      "close_time": "2026-10-21T19:00:00Z",
      "expected_expiration_time": "2026-10-19T22:00:00Z",
      "yes_ask_dollars": "0.1600",
-     "yes_ask_size_fp": "99392.00",
-     "volume_24h_fp": "2460.11"
+     "yes_ask_size_fp": "78592.00",
+     "volume_24h_fp": "2404.11"
     },
     {
      "ticker": "KXEPLGAME-26OCT19TOTCOV-TIE",
@@ -1549,12 +1603,12 @@
      "close_time": "2026-10-21T19:00:00Z",
      "expected_expiration_time": "2026-10-19T22:00:00Z",
      "yes_ask_dollars": "0.2100",
-     "yes_ask_size_fp": "16415.52",
+     "yes_ask_size_fp": "14815.52",
      "volume_24h_fp": "216.59"
     }
    ],
    "prelim_sum": 1.03,
-   "volume_24h": 5724.49,
+   "volume_24h": 5665.49,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -1691,7 +1745,7 @@
      "close_time": "2026-10-21T01:00:00Z",
      "expected_expiration_time": "2026-10-19T04:00:00Z",
      "yes_ask_dollars": "0.5700",
-     "yes_ask_size_fp": "982.05",
+     "yes_ask_size_fp": "5187.05",
      "volume_24h_fp": "306.04"
     },
     {
@@ -1701,8 +1755,8 @@
      "close_time": "2026-10-21T01:00:00Z",
      "expected_expiration_time": "2026-10-19T04:00:00Z",
      "yes_ask_dollars": "0.2300",
-     "yes_ask_size_fp": "136.67",
-     "volume_24h_fp": "901.74"
+     "yes_ask_size_fp": "1866.75",
+     "volume_24h_fp": "909.99"
     },
     {
      "ticker": "KXLIGAMXGAME-26OCT18MONPAC-TIE",
@@ -1711,12 +1765,12 @@
      "close_time": "2026-10-21T01:00:00Z",
      "expected_expiration_time": "2026-10-19T04:00:00Z",
      "yes_ask_dollars": "0.2200",
-     "yes_ask_size_fp": "319.18",
+     "yes_ask_size_fp": "2194.18",
      "volume_24h_fp": "144.31"
     }
    ],
    "prelim_sum": 1.02,
-   "volume_24h": 1352.0900000000001,
+   "volume_24h": 1360.3400000000001,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -1819,7 +1873,7 @@
      "close_time": "2026-10-20T20:05:00Z",
      "expected_expiration_time": "2026-10-18T23:05:00Z",
      "yes_ask_dollars": "0.1100",
-     "yes_ask_size_fp": "760.00",
+     "yes_ask_size_fp": "1760.00",
      "volume_24h_fp": "565.00"
     }
    ],
@@ -1848,8 +1902,8 @@
      "close_time": "2026-10-20T19:00:00Z",
      "expected_expiration_time": "2026-10-18T22:00:00Z",
      "yes_ask_dollars": "0.7800",
-     "yes_ask_size_fp": "979.90",
-     "volume_24h_fp": "1232.57"
+     "yes_ask_size_fp": "862.79",
+     "volume_24h_fp": "1231.35"
     },
     {
      "ticker": "KXLALIGAGAME-26OCT18RMASEV-SEV",
@@ -1858,8 +1912,8 @@
      "close_time": "2026-10-20T19:00:00Z",
      "expected_expiration_time": "2026-10-18T22:00:00Z",
      "yes_ask_dollars": "0.0900",
-     "yes_ask_size_fp": "170.90",
-     "volume_24h_fp": "6771.23"
+     "yes_ask_size_fp": "68.62",
+     "volume_24h_fp": "6314.26"
     },
     {
      "ticker": "KXLALIGAGAME-26OCT18RMASEV-TIE",
@@ -1868,12 +1922,12 @@
      "close_time": "2026-10-20T19:00:00Z",
      "expected_expiration_time": "2026-10-18T22:00:00Z",
      "yes_ask_dollars": "0.1500",
-     "yes_ask_size_fp": "5063.64",
-     "volume_24h_fp": "283.52"
+     "yes_ask_size_fp": "7424.64",
+     "volume_24h_fp": "220.60"
     }
    ],
    "prelim_sum": 1.02,
-   "volume_24h": 8287.32,
+   "volume_24h": 7766.21,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -1912,8 +1966,8 @@
      "close_time": "2026-10-20T19:00:00Z",
      "expected_expiration_time": "2026-10-18T22:00:00Z",
      "yes_ask_dollars": "0.4150",
-     "yes_ask_size_fp": "673.00",
-     "volume_24h_fp": "222.00"
+     "yes_ask_size_fp": "563.00",
+     "volume_24h_fp": "2.00"
     },
     {
      "ticker": "KXBRASILEIROGAME-26OCT18GPACRU-TIE",
@@ -1927,7 +1981,7 @@
     }
    ],
    "prelim_sum": 1.02,
-   "volume_24h": 517.36,
+   "volume_24h": 297.36,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -1967,7 +2021,7 @@
      "expected_expiration_time": "2026-10-18T22:00:00Z",
      "yes_ask_dollars": "0.2700",
      "yes_ask_size_fp": "387.00",
-     "volume_24h_fp": "448.17"
+     "volume_24h_fp": "430.23"
     },
     {
      "ticker": "KXBRASILEIROGAME-26OCT18FLUSAN-TIE",
@@ -1981,7 +2035,7 @@
     }
    ],
    "prelim_sum": 1.02,
-   "volume_24h": 450.17,
+   "volume_24h": 432.23,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -2020,7 +2074,7 @@
      "close_time": "2026-10-20T18:45:00Z",
      "expected_expiration_time": "2026-10-18T21:45:00Z",
      "yes_ask_dollars": "0.1900",
-     "yes_ask_size_fp": "9967.08",
+     "yes_ask_size_fp": "11854.08",
      "volume_24h_fp": "382.71"
     },
     {
@@ -2084,7 +2138,7 @@
      "close_time": "2026-10-20T17:00:00Z",
      "expected_expiration_time": "2026-10-18T20:00:00Z",
      "yes_ask_dollars": "0.2400",
-     "yes_ask_size_fp": "1530.00",
+     "yes_ask_size_fp": "1330.00",
      "volume_24h_fp": "0.00"
     }
    ],
@@ -2113,8 +2167,8 @@
      "close_time": "2026-10-20T17:00:00Z",
      "expected_expiration_time": "2026-10-18T20:00:00Z",
      "yes_ask_dollars": "0.6500",
-     "yes_ask_size_fp": "2760.00",
-     "volume_24h_fp": "15.00"
+     "yes_ask_size_fp": "2729.97",
+     "volume_24h_fp": "45.03"
     },
     {
      "ticker": "KXNFL1H-26OCT18TENIND-TEN",
@@ -2138,7 +2192,7 @@
     }
    ],
    "prelim_sum": 1.02,
-   "volume_24h": 107.01,
+   "volume_24h": 137.04,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -2172,7 +2226,7 @@
      "close_time": "2026-10-20T16:30:00Z",
      "expected_expiration_time": "2026-10-18T19:30:00Z",
      "yes_ask_dollars": "0.4600",
-     "yes_ask_size_fp": "6288.33",
+     "yes_ask_size_fp": "8189.33",
      "volume_24h_fp": "185.69"
     },
     {
@@ -2217,7 +2271,7 @@
      "expected_expiration_time": "2026-10-18T19:00:00Z",
      "yes_ask_dollars": "0.5200",
      "yes_ask_size_fp": "330.00",
-     "volume_24h_fp": "531.84"
+     "volume_24h_fp": "531.63"
     },
     {
      "ticker": "KXSERIEAGAME-26OCT18ACMATA-ATA",
@@ -2236,12 +2290,12 @@
      "close_time": "2026-10-20T16:00:00Z",
      "expected_expiration_time": "2026-10-18T19:00:00Z",
      "yes_ask_dollars": "0.2700",
-     "yes_ask_size_fp": "11124.17",
+     "yes_ask_size_fp": "11117.17",
      "volume_24h_fp": "18.26"
     }
    ],
    "prelim_sum": 1.02,
-   "volume_24h": 558.01,
+   "volume_24h": 557.8,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -2280,8 +2334,8 @@
      "close_time": "2026-10-20T15:30:00Z",
      "expected_expiration_time": "2026-10-18T18:30:00Z",
      "yes_ask_dollars": "0.6100",
-     "yes_ask_size_fp": "20465.99",
-     "volume_24h_fp": "10654.46"
+     "yes_ask_size_fp": "20459.80",
+     "volume_24h_fp": "10633.95"
     },
     {
      "ticker": "KXEPLGAME-26OCT18NFOARS-TIE",
@@ -2295,7 +2349,7 @@
     }
    ],
    "prelim_sum": 1.01,
-   "volume_24h": 10881.8,
+   "volume_24h": 10861.29,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -2323,7 +2377,7 @@
      "status": "active",
      "close_time": "2026-10-20T14:00:00Z",
      "expected_expiration_time": "2026-10-18T17:00:00Z",
-     "yes_ask_dollars": "0.8100",
+     "yes_ask_dollars": "0.7300",
      "yes_ask_size_fp": "1.00",
      "volume_24h_fp": "285.19"
     },
@@ -2333,8 +2387,8 @@
      "status": "active",
      "close_time": "2026-10-20T14:00:00Z",
      "expected_expiration_time": "2026-10-18T17:00:00Z",
-     "yes_ask_dollars": "0.4300",
-     "yes_ask_size_fp": "4.00",
+     "yes_ask_dollars": "0.6300",
+     "yes_ask_size_fp": "3.00",
      "volume_24h_fp": "0.00"
     },
     {
@@ -2343,12 +2397,12 @@
      "status": "active",
      "close_time": "2026-10-20T14:00:00Z",
      "expected_expiration_time": "2026-10-18T17:00:00Z",
-     "yes_ask_dollars": "0.4600",
-     "yes_ask_size_fp": "4.00",
+     "yes_ask_dollars": "0.5300",
+     "yes_ask_size_fp": "3.00",
      "volume_24h_fp": "0.00"
     }
    ],
-   "prelim_sum": 1.7,
+   "prelim_sum": 1.89,
    "volume_24h": 285.19,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
@@ -2387,8 +2441,8 @@
      "status": "active",
      "close_time": "2026-10-20T13:30:00Z",
      "expected_expiration_time": "2026-10-18T16:30:00Z",
-     "yes_ask_dollars": "0.2400",
-     "yes_ask_size_fp": "9219.13",
+     "yes_ask_dollars": "0.2300",
+     "yes_ask_size_fp": "330.00",
      "volume_24h_fp": "385.00"
     },
     {
@@ -2402,7 +2456,7 @@
      "volume_24h_fp": "0.00"
     }
    ],
-   "prelim_sum": 1.04,
+   "prelim_sum": 1.03,
    "volume_24h": 402.73,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
@@ -2441,8 +2495,8 @@
      "status": "active",
      "close_time": "2026-10-20T13:00:00Z",
      "expected_expiration_time": "2026-10-18T16:00:00Z",
-     "yes_ask_dollars": "0.1800",
-     "yes_ask_size_fp": "14.11",
+     "yes_ask_dollars": "0.2500",
+     "yes_ask_size_fp": "5.00",
      "volume_24h_fp": "0.00"
     },
     {
@@ -2451,12 +2505,12 @@
      "status": "active",
      "close_time": "2026-10-20T13:00:00Z",
      "expected_expiration_time": "2026-10-18T16:00:00Z",
-     "yes_ask_dollars": "0.1300",
-     "yes_ask_size_fp": "20.00",
+     "yes_ask_dollars": "0.7400",
+     "yes_ask_size_fp": "15.00",
      "volume_24h_fp": "0.00"
     }
    ],
-   "prelim_sum": 1.15,
+   "prelim_sum": 1.8299999999999998,
    "volume_24h": 216.06,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
@@ -2486,8 +2540,8 @@
      "close_time": "2026-10-20T13:00:00Z",
      "expected_expiration_time": "2026-10-18T16:00:00Z",
      "yes_ask_dollars": "0.4000",
-     "yes_ask_size_fp": "13957.58",
-     "volume_24h_fp": "1103.73"
+     "yes_ask_size_fp": "13963.58",
+     "volume_24h_fp": "1067.75"
     },
     {
      "ticker": "KXEPLGAME-26OCT18LEEMUN-MUN",
@@ -2496,8 +2550,8 @@
      "close_time": "2026-10-20T13:00:00Z",
      "expected_expiration_time": "2026-10-18T16:00:00Z",
      "yes_ask_dollars": "0.3500",
-     "yes_ask_size_fp": "15342.31",
-     "volume_24h_fp": "2297.45"
+     "yes_ask_size_fp": "11323.93",
+     "volume_24h_fp": "2462.12"
     },
     {
      "ticker": "KXEPLGAME-26OCT18LEEMUN-TIE",
@@ -2506,12 +2560,12 @@
      "close_time": "2026-10-20T13:00:00Z",
      "expected_expiration_time": "2026-10-18T16:00:00Z",
      "yes_ask_dollars": "0.2700",
-     "yes_ask_size_fp": "16268.56",
-     "volume_24h_fp": "85.13"
+     "yes_ask_size_fp": "16690.23",
+     "volume_24h_fp": "91.13"
     }
    ],
    "prelim_sum": 1.02,
-   "volume_24h": 3486.31,
+   "volume_24h": 3621.0,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -2540,7 +2594,7 @@
      "close_time": "2026-10-20T13:00:00Z",
      "expected_expiration_time": "2026-10-18T16:00:00Z",
      "yes_ask_dollars": "0.6300",
-     "yes_ask_size_fp": "56.19",
+     "yes_ask_size_fp": "67.64",
      "volume_24h_fp": "761.44"
     },
     {
@@ -2560,7 +2614,7 @@
      "close_time": "2026-10-20T13:00:00Z",
      "expected_expiration_time": "2026-10-18T16:00:00Z",
      "yes_ask_dollars": "0.2200",
-     "yes_ask_size_fp": "11691.03",
+     "yes_ask_size_fp": "13698.03",
      "volume_24h_fp": "4.31"
     }
    ],
@@ -2594,7 +2648,7 @@
      "close_time": "2026-10-20T13:00:00Z",
      "expected_expiration_time": "2026-10-18T16:00:00Z",
      "yes_ask_dollars": "0.4700",
-     "yes_ask_size_fp": "2033.96",
+     "yes_ask_size_fp": "33.96",
      "volume_24h_fp": "162.14"
     },
     {
@@ -2603,9 +2657,9 @@
      "status": "active",
      "close_time": "2026-10-20T13:00:00Z",
      "expected_expiration_time": "2026-10-18T16:00:00Z",
-     "yes_ask_dollars": "0.2700",
-     "yes_ask_size_fp": "288.62",
-     "volume_24h_fp": "87.23"
+     "yes_ask_dollars": "0.2800",
+     "yes_ask_size_fp": "16146.99",
+     "volume_24h_fp": "55.52"
     },
     {
      "ticker": "KXEPLGAME-26OCT18BOUSUN-TIE",
@@ -2614,12 +2668,12 @@
      "close_time": "2026-10-20T13:00:00Z",
      "expected_expiration_time": "2026-10-18T16:00:00Z",
      "yes_ask_dollars": "0.2700",
-     "yes_ask_size_fp": "4698.33",
+     "yes_ask_size_fp": "4716.33",
      "volume_24h_fp": "54.52"
     }
    ],
-   "prelim_sum": 1.01,
-   "volume_24h": 303.89,
+   "prelim_sum": 1.02,
+   "volume_24h": 272.18,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -2658,7 +2712,7 @@
      "close_time": "2026-10-20T12:00:00Z",
      "expected_expiration_time": "2026-10-18T15:00:00Z",
      "yes_ask_dollars": "0.2700",
-     "yes_ask_size_fp": "4283.02",
+     "yes_ask_size_fp": "6283.02",
      "volume_24h_fp": "79.15"
     },
     {
@@ -2755,9 +2809,9 @@
      "status": "active",
      "close_time": "2026-10-20T03:00:00Z",
      "expected_expiration_time": "2026-10-18T06:00:00Z",
-     "yes_ask_dollars": "0.7500",
-     "yes_ask_size_fp": "9502.59",
-     "volume_24h_fp": "86.73"
+     "yes_ask_dollars": "0.7400",
+     "yes_ask_size_fp": "2000.00",
+     "volume_24h_fp": "84.77"
     },
     {
      "ticker": "KXLIGAMXGAME-26OCT17CRAJUA-JUA",
@@ -2766,8 +2820,8 @@
      "close_time": "2026-10-20T03:00:00Z",
      "expected_expiration_time": "2026-10-18T06:00:00Z",
      "yes_ask_dollars": "0.1100",
-     "yes_ask_size_fp": "3710.45",
-     "volume_24h_fp": "425.40"
+     "yes_ask_size_fp": "3788.34",
+     "volume_24h_fp": "442.51"
     },
     {
      "ticker": "KXLIGAMXGAME-26OCT17CRAJUA-TIE",
@@ -2776,12 +2830,12 @@
      "close_time": "2026-10-20T03:00:00Z",
      "expected_expiration_time": "2026-10-18T06:00:00Z",
      "yes_ask_dollars": "0.1700",
-     "yes_ask_size_fp": "3483.00",
+     "yes_ask_size_fp": "3882.00",
      "volume_24h_fp": "21.10"
     }
    ],
-   "prelim_sum": 1.03,
-   "volume_24h": 533.23,
+   "prelim_sum": 1.02,
+   "volume_24h": 548.38,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -2810,7 +2864,7 @@
      "close_time": "2026-10-20T02:30:00Z",
      "expected_expiration_time": "2026-10-18T05:30:00Z",
      "yes_ask_dollars": "0.3000",
-     "yes_ask_size_fp": "3164.00",
+     "yes_ask_size_fp": "2358.00",
      "volume_24h_fp": "109.00"
     },
     {
@@ -2820,7 +2874,7 @@
      "close_time": "2026-10-20T02:30:00Z",
      "expected_expiration_time": "2026-10-18T05:30:00Z",
      "yes_ask_dollars": "0.5000",
-     "yes_ask_size_fp": "1100.00",
+     "yes_ask_size_fp": "2569.00",
      "volume_24h_fp": "98.52"
     },
     {
@@ -2830,7 +2884,7 @@
      "close_time": "2026-10-20T02:30:00Z",
      "expected_expiration_time": "2026-10-18T05:30:00Z",
      "yes_ask_dollars": "0.2500",
-     "yes_ask_size_fp": "1315.00",
+     "yes_ask_size_fp": "127.00",
      "volume_24h_fp": "0.00"
     }
    ],
@@ -2864,7 +2918,7 @@
      "close_time": "2026-10-20T02:30:00Z",
      "expected_expiration_time": "2026-10-18T05:30:00Z",
      "yes_ask_dollars": "0.6600",
-     "yes_ask_size_fp": "634.90",
+     "yes_ask_size_fp": "585.90",
      "volume_24h_fp": "130.48"
     },
     {
@@ -2874,7 +2928,7 @@
      "close_time": "2026-10-20T02:30:00Z",
      "expected_expiration_time": "2026-10-18T05:30:00Z",
      "yes_ask_dollars": "0.1800",
-     "yes_ask_size_fp": "3494.00",
+     "yes_ask_size_fp": "3558.00",
      "volume_24h_fp": "0.00"
     },
     {
@@ -2884,7 +2938,7 @@
      "close_time": "2026-10-20T02:30:00Z",
      "expected_expiration_time": "2026-10-18T05:30:00Z",
      "yes_ask_dollars": "0.2100",
-     "yes_ask_size_fp": "1269.00",
+     "yes_ask_size_fp": "1338.00",
      "volume_24h_fp": "0.00"
     }
    ],
@@ -2928,7 +2982,7 @@
      "close_time": "2026-10-20T02:30:00Z",
      "expected_expiration_time": "2026-10-18T05:30:00Z",
      "yes_ask_dollars": "0.3100",
-     "yes_ask_size_fp": "48.00",
+     "yes_ask_size_fp": "117.00",
      "volume_24h_fp": "123.08"
     },
     {
@@ -2938,7 +2992,7 @@
      "close_time": "2026-10-20T02:30:00Z",
      "expected_expiration_time": "2026-10-18T05:30:00Z",
      "yes_ask_dollars": "0.2400",
-     "yes_ask_size_fp": "64.00",
+     "yes_ask_size_fp": "73.00",
      "volume_24h_fp": "0.00"
     }
    ],
@@ -2972,7 +3026,7 @@
      "close_time": "2026-10-20T01:00:00Z",
      "expected_expiration_time": "2026-10-18T04:00:00Z",
      "yes_ask_dollars": "0.7400",
-     "yes_ask_size_fp": "4675.25",
+     "yes_ask_size_fp": "6603.25",
      "volume_24h_fp": "334.40"
     },
     {
@@ -2982,8 +3036,8 @@
      "close_time": "2026-10-20T01:00:00Z",
      "expected_expiration_time": "2026-10-18T04:00:00Z",
      "yes_ask_dollars": "0.1200",
-     "yes_ask_size_fp": "2458.05",
-     "volume_24h_fp": "1588.48"
+     "yes_ask_size_fp": "2442.36",
+     "volume_24h_fp": "1604.17"
     },
     {
      "ticker": "KXLIGAMXGAME-26OCT17TOLASL-TIE",
@@ -2997,7 +3051,7 @@
     }
    ],
    "prelim_sum": 1.02,
-   "volume_24h": 2488.93,
+   "volume_24h": 2504.62,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -3025,9 +3079,9 @@
      "status": "active",
      "close_time": "2026-10-20T01:00:00Z",
      "expected_expiration_time": "2026-10-18T04:00:00Z",
-     "yes_ask_dollars": "0.3200",
-     "yes_ask_size_fp": "4.47",
-     "volume_24h_fp": "1702.37"
+     "yes_ask_dollars": "0.3300",
+     "yes_ask_size_fp": "9838.60",
+     "volume_24h_fp": "1759.51"
     },
     {
      "ticker": "KXLIGAMXGAME-26OCT17LEOAME-AME",
@@ -3036,8 +3090,8 @@
      "close_time": "2026-10-20T01:00:00Z",
      "expected_expiration_time": "2026-10-18T04:00:00Z",
      "yes_ask_dollars": "0.4200",
-     "yes_ask_size_fp": "30452.73",
-     "volume_24h_fp": "4278.49"
+     "yes_ask_size_fp": "30450.45",
+     "volume_24h_fp": "4232.65"
     },
     {
      "ticker": "KXLIGAMXGAME-26OCT17LEOAME-TIE",
@@ -3046,12 +3100,12 @@
      "close_time": "2026-10-20T01:00:00Z",
      "expected_expiration_time": "2026-10-18T04:00:00Z",
      "yes_ask_dollars": "0.2800",
-     "yes_ask_size_fp": "3016.85",
-     "volume_24h_fp": "469.80"
+     "yes_ask_size_fp": "2984.85",
+     "volume_24h_fp": "501.80"
     }
    ],
-   "prelim_sum": 1.02,
-   "volume_24h": 6450.66,
+   "prelim_sum": 1.03,
+   "volume_24h": 6493.96,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -3188,7 +3242,7 @@
      "close_time": "2026-10-20T00:30:00Z",
      "expected_expiration_time": "2026-10-18T03:30:00Z",
      "yes_ask_dollars": "0.3600",
-     "yes_ask_size_fp": "2347.00",
+     "yes_ask_size_fp": "2338.00",
      "volume_24h_fp": "250.00"
     },
     {
@@ -3208,7 +3262,7 @@
      "close_time": "2026-10-20T00:30:00Z",
      "expected_expiration_time": "2026-10-18T03:30:00Z",
      "yes_ask_dollars": "0.2500",
-     "yes_ask_size_fp": "1251.00",
+     "yes_ask_size_fp": "1320.00",
      "volume_24h_fp": "0.00"
     }
    ],
@@ -3252,7 +3306,7 @@
      "close_time": "2026-10-20T00:30:00Z",
      "expected_expiration_time": "2026-10-18T03:30:00Z",
      "yes_ask_dollars": "0.3200",
-     "yes_ask_size_fp": "4055.00",
+     "yes_ask_size_fp": "4054.00",
      "volume_24h_fp": "151.00"
     },
     {
@@ -3296,7 +3350,7 @@
      "close_time": "2026-10-20T00:00:00Z",
      "expected_expiration_time": "2026-10-18T03:00:00Z",
      "yes_ask_dollars": "0.4600",
-     "yes_ask_size_fp": "1132.30",
+     "yes_ask_size_fp": "1132.36",
      "volume_24h_fp": "34.75"
     },
     {
@@ -3305,8 +3359,8 @@
      "status": "active",
      "close_time": "2026-10-20T00:00:00Z",
      "expected_expiration_time": "2026-10-18T03:00:00Z",
-     "yes_ask_dollars": "0.2850",
-     "yes_ask_size_fp": "696.15",
+     "yes_ask_dollars": "0.2800",
+     "yes_ask_size_fp": "4.61",
      "volume_24h_fp": "85.00"
     },
     {
@@ -3315,12 +3369,12 @@
      "status": "active",
      "close_time": "2026-10-20T00:00:00Z",
      "expected_expiration_time": "2026-10-18T03:00:00Z",
-     "yes_ask_dollars": "0.2800",
-     "yes_ask_size_fp": "1335.97",
+     "yes_ask_dollars": "0.2750",
+     "yes_ask_size_fp": "563.00",
      "volume_24h_fp": "0.03"
     }
    ],
-   "prelim_sum": 1.025,
+   "prelim_sum": 1.0150000000000001,
    "volume_24h": 119.78,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
@@ -3350,8 +3404,8 @@
      "close_time": "2026-10-19T23:30:00Z",
      "expected_expiration_time": "2026-10-18T02:30:00Z",
      "yes_ask_dollars": "0.2600",
-     "yes_ask_size_fp": "305.00",
-     "volume_24h_fp": "53.03"
+     "yes_ask_size_fp": "301.35",
+     "volume_24h_fp": "56.68"
     },
     {
      "ticker": "KXNCAAF1H-26OCT17NDBYU-ND",
@@ -3370,12 +3424,12 @@
      "close_time": "2026-10-19T23:30:00Z",
      "expected_expiration_time": "2026-10-18T02:30:00Z",
      "yes_ask_dollars": "0.0800",
-     "yes_ask_size_fp": "107.00",
+     "yes_ask_size_fp": "1.00",
      "volume_24h_fp": "1146.57"
     }
    ],
    "prelim_sum": 1.0,
-   "volume_24h": 1209.6,
+   "volume_24h": 1213.25,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -3424,7 +3478,7 @@
      "close_time": "2026-10-19T23:30:00Z",
      "expected_expiration_time": "2026-10-18T02:30:00Z",
      "yes_ask_dollars": "0.2400",
-     "yes_ask_size_fp": "1274.00",
+     "yes_ask_size_fp": "1339.00",
      "volume_24h_fp": "0.00"
     }
    ],
@@ -3502,6 +3556,60 @@
    }
   },
   {
+   "event_ticker": "KXMLSGAME-26OCT17ATLMIA",
+   "title": "Atlanta vs Miami",
+   "legs": [
+    {
+     "ticker": "KXMLSGAME-26OCT17ATLMIA-ATL",
+     "yes_sub_title": "Atlanta",
+     "status": "active",
+     "close_time": "2026-10-19T23:30:00Z",
+     "expected_expiration_time": "2026-10-18T02:30:00Z",
+     "yes_ask_dollars": "0.2500",
+     "yes_ask_size_fp": "4.00",
+     "volume_24h_fp": "3.63"
+    },
+    {
+     "ticker": "KXMLSGAME-26OCT17ATLMIA-MIA",
+     "yes_sub_title": "Miami",
+     "status": "active",
+     "close_time": "2026-10-19T23:30:00Z",
+     "expected_expiration_time": "2026-10-18T02:30:00Z",
+     "yes_ask_dollars": "0.5600",
+     "yes_ask_size_fp": "19.00",
+     "volume_24h_fp": "85.86"
+    },
+    {
+     "ticker": "KXMLSGAME-26OCT17ATLMIA-TIE",
+     "yes_sub_title": "Tie",
+     "status": "active",
+     "close_time": "2026-10-19T23:30:00Z",
+     "expected_expiration_time": "2026-10-18T02:30:00Z",
+     "yes_ask_dollars": "0.2100",
+     "yes_ask_size_fp": "467.00",
+     "volume_24h_fp": "13.14"
+    }
+   ],
+   "prelim_sum": 1.02,
+   "volume_24h": 102.63,
+   "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
+   "fee_multiplier": null,
+   "coverage": {
+    "proven": true,
+    "method": "HEAD_TO_HEAD_WITH_TIE",
+    "reasons": [
+     "strikes: no todas las patas son strikes"
+    ],
+    "residuals": [
+     {
+      "name": "CANCELACION_O_REPROGRAMACION",
+      "payout": "precio justo seg\u00fan reglas de Kalshi (no garantizado)"
+     }
+    ],
+    "open_list_evidence": []
+   }
+  },
+  {
    "event_ticker": "KXLIGAMXGAME-26OCT17CDGTIG",
    "title": "Guadalajara vs Tigres",
    "legs": [
@@ -3513,7 +3621,7 @@
      "expected_expiration_time": "2026-10-18T02:07:00Z",
      "yes_ask_dollars": "0.5300",
      "yes_ask_size_fp": "9434.89",
-     "volume_24h_fp": "635.54"
+     "volume_24h_fp": "626.58"
     },
     {
      "ticker": "KXLIGAMXGAME-26OCT17CDGTIG-TIG",
@@ -3522,8 +3630,8 @@
      "close_time": "2026-10-19T23:07:00Z",
      "expected_expiration_time": "2026-10-18T02:07:00Z",
      "yes_ask_dollars": "0.2400",
-     "yes_ask_size_fp": "7183.80",
-     "volume_24h_fp": "8704.03"
+     "yes_ask_size_fp": "9170.18",
+     "volume_24h_fp": "8740.10"
     },
     {
      "ticker": "KXLIGAMXGAME-26OCT17CDGTIG-TIE",
@@ -3537,7 +3645,7 @@
     }
    ],
    "prelim_sum": 1.04,
-   "volume_24h": 10322.970000000001,
+   "volume_24h": 10350.08,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -3576,8 +3684,8 @@
      "close_time": "2026-10-19T23:00:00Z",
      "expected_expiration_time": "2026-10-18T02:00:00Z",
      "yes_ask_dollars": "0.3500",
-     "yes_ask_size_fp": "15154.39",
-     "volume_24h_fp": "1256.25"
+     "yes_ask_size_fp": "15047.75",
+     "volume_24h_fp": "1335.57"
     },
     {
      "ticker": "KXLIGAMXGAME-26OCT17SLAQUE-TIE",
@@ -3591,7 +3699,7 @@
     }
    ],
    "prelim_sum": 1.02,
-   "volume_24h": 2781.92,
+   "volume_24h": 2861.24,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -3781,9 +3889,9 @@
      "status": "active",
      "close_time": "2026-10-19T20:30:00Z",
      "expected_expiration_time": "2026-10-17T23:30:00Z",
-     "yes_ask_dollars": "0.4000",
-     "yes_ask_size_fp": "8.00",
-     "volume_24h_fp": "2.00"
+     "yes_ask_dollars": "0.4100",
+     "yes_ask_size_fp": "211.12",
+     "volume_24h_fp": "13.88"
     },
     {
      "ticker": "KXMLSGAME-26OCT17MINSTL-STL",
@@ -3791,9 +3899,9 @@
      "status": "active",
      "close_time": "2026-10-19T20:30:00Z",
      "expected_expiration_time": "2026-10-17T23:30:00Z",
-     "yes_ask_dollars": "0.3900",
-     "yes_ask_size_fp": "104.00",
-     "volume_24h_fp": "241.99"
+     "yes_ask_dollars": "0.3800",
+     "yes_ask_size_fp": "1250.00",
+     "volume_24h_fp": "267.21"
     },
     {
      "ticker": "KXMLSGAME-26OCT17MINSTL-TIE",
@@ -3807,7 +3915,7 @@
     }
    ],
    "prelim_sum": 1.03,
-   "volume_24h": 243.99,
+   "volume_24h": 281.09,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -3836,7 +3944,7 @@
      "close_time": "2026-10-19T19:30:00Z",
      "expected_expiration_time": "2026-10-17T22:30:00Z",
      "yes_ask_dollars": "0.5400",
-     "yes_ask_size_fp": "729.00",
+     "yes_ask_size_fp": "502.00",
      "volume_24h_fp": "0.00"
     },
     {
@@ -3889,8 +3997,8 @@
      "status": "active",
      "close_time": "2026-10-19T19:30:00Z",
      "expected_expiration_time": "2026-10-17T22:30:00Z",
-     "yes_ask_dollars": "0.8200",
-     "yes_ask_size_fp": "200.00",
+     "yes_ask_dollars": "0.8100",
+     "yes_ask_size_fp": "100.00",
      "volume_24h_fp": "174.51"
     },
     {
@@ -3900,7 +4008,7 @@
      "close_time": "2026-10-19T19:30:00Z",
      "expected_expiration_time": "2026-10-17T22:30:00Z",
      "yes_ask_dollars": "0.1500",
-     "yes_ask_size_fp": "100.00",
+     "yes_ask_size_fp": "1370.95",
      "volume_24h_fp": "0.00"
     },
     {
@@ -3910,11 +4018,11 @@
      "close_time": "2026-10-19T19:30:00Z",
      "expected_expiration_time": "2026-10-17T22:30:00Z",
      "yes_ask_dollars": "0.0600",
-     "yes_ask_size_fp": "100.00",
+     "yes_ask_size_fp": "1244.80",
      "volume_24h_fp": "0.00"
     }
    ],
-   "prelim_sum": 1.03,
+   "prelim_sum": 1.02,
    "volume_24h": 174.51,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
@@ -3953,8 +4061,8 @@
      "status": "active",
      "close_time": "2026-10-19T19:00:00Z",
      "expected_expiration_time": "2026-10-17T22:00:00Z",
-     "yes_ask_dollars": "0.3100",
-     "yes_ask_size_fp": "10.00",
+     "yes_ask_dollars": "0.3400",
+     "yes_ask_size_fp": "11.00",
      "volume_24h_fp": "0.00"
     },
     {
@@ -3968,7 +4076,7 @@
      "volume_24h_fp": "0.00"
     }
    ],
-   "prelim_sum": 1.38,
+   "prelim_sum": 1.41,
    "volume_24h": 263.0,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
@@ -3998,8 +4106,8 @@
      "close_time": "2026-10-19T19:00:00Z",
      "expected_expiration_time": "2026-10-17T22:00:00Z",
      "yes_ask_dollars": "0.2900",
-     "yes_ask_size_fp": "1255.40",
-     "volume_24h_fp": "402.70"
+     "yes_ask_size_fp": "1255.10",
+     "volume_24h_fp": "62.70"
     },
     {
      "ticker": "KXLALIGAGAME-26OCT17VCFATH-ATH",
@@ -4008,7 +4116,7 @@
      "close_time": "2026-10-19T19:00:00Z",
      "expected_expiration_time": "2026-10-17T22:00:00Z",
      "yes_ask_dollars": "0.4400",
-     "yes_ask_size_fp": "1346.22",
+     "yes_ask_size_fp": "1246.22",
      "volume_24h_fp": "299.51"
     },
     {
@@ -4023,7 +4131,7 @@
     }
    ],
    "prelim_sum": 1.02,
-   "volume_24h": 728.47,
+   "volume_24h": 388.46999999999997,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -4062,7 +4170,7 @@
      "close_time": "2026-10-19T18:45:00Z",
      "expected_expiration_time": "2026-10-17T21:45:00Z",
      "yes_ask_dollars": "0.1200",
-     "yes_ask_size_fp": "9551.50",
+     "yes_ask_size_fp": "8915.50",
      "volume_24h_fp": "0.00"
     },
     {
@@ -4072,7 +4180,7 @@
      "close_time": "2026-10-19T18:45:00Z",
      "expected_expiration_time": "2026-10-17T21:45:00Z",
      "yes_ask_dollars": "0.1900",
-     "yes_ask_size_fp": "3748.47",
+     "yes_ask_size_fp": "3860.47",
      "volume_24h_fp": "1.59"
     }
    ],
@@ -4126,7 +4234,7 @@
      "close_time": "2026-10-19T18:45:00Z",
      "expected_expiration_time": "2026-10-17T21:45:00Z",
      "yes_ask_dollars": "0.2500",
-     "yes_ask_size_fp": "8119.50",
+     "yes_ask_size_fp": "10119.50",
      "volume_24h_fp": "0.00"
     }
    ],
@@ -4160,7 +4268,7 @@
      "close_time": "2026-10-19T18:30:00Z",
      "expected_expiration_time": "2026-10-17T21:30:00Z",
      "yes_ask_dollars": "0.6400",
-     "yes_ask_size_fp": "153.00",
+     "yes_ask_size_fp": "158.00",
      "volume_24h_fp": "161.04"
     },
     {
@@ -4170,7 +4278,7 @@
      "close_time": "2026-10-19T18:30:00Z",
      "expected_expiration_time": "2026-10-17T21:30:00Z",
      "yes_ask_dollars": "0.2000",
-     "yes_ask_size_fp": "1276.00",
+     "yes_ask_size_fp": "5.00",
      "volume_24h_fp": "0.00"
     },
     {
@@ -4180,7 +4288,7 @@
      "close_time": "2026-10-19T18:30:00Z",
      "expected_expiration_time": "2026-10-17T21:30:00Z",
      "yes_ask_dollars": "0.2100",
-     "yes_ask_size_fp": "2274.00",
+     "yes_ask_size_fp": "2344.00",
      "volume_24h_fp": "0.00"
     }
    ],
@@ -4279,7 +4387,7 @@
      "expected_expiration_time": "2026-10-17T20:00:00Z",
      "yes_ask_dollars": "0.0100",
      "yes_ask_size_fp": "17.56",
-     "volume_24h_fp": "383.42"
+     "volume_24h_fp": "374.07"
     },
     {
      "ticker": "KXNCAAF1H-26OCT17CITTXAM-TIE",
@@ -4293,7 +4401,7 @@
     }
    ],
    "prelim_sum": 1.02,
-   "volume_24h": 1962.42,
+   "volume_24h": 1953.07,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -4322,7 +4430,7 @@
      "close_time": "2026-10-19T16:30:00Z",
      "expected_expiration_time": "2026-10-17T19:30:00Z",
      "yes_ask_dollars": "0.1600",
-     "yes_ask_size_fp": "8460.84",
+     "yes_ask_size_fp": "10752.84",
      "volume_24h_fp": "1034.92"
     },
     {
@@ -4332,8 +4440,8 @@
      "close_time": "2026-10-19T16:30:00Z",
      "expected_expiration_time": "2026-10-17T19:30:00Z",
      "yes_ask_dollars": "0.7000",
-     "yes_ask_size_fp": "5451.35",
-     "volume_24h_fp": "50693.60"
+     "yes_ask_size_fp": "1481.18",
+     "volume_24h_fp": "52587.01"
     },
     {
      "ticker": "KXLALIGAGAME-26OCT17RBBBAR-TIE",
@@ -4342,12 +4450,12 @@
      "close_time": "2026-10-19T16:30:00Z",
      "expected_expiration_time": "2026-10-17T19:30:00Z",
      "yes_ask_dollars": "0.1700",
-     "yes_ask_size_fp": "9410.60",
+     "yes_ask_size_fp": "9510.60",
      "volume_24h_fp": "840.99"
     }
    ],
    "prelim_sum": 1.03,
-   "volume_24h": 52569.51,
+   "volume_24h": 54462.920000000006,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -4376,7 +4484,7 @@
      "close_time": "2026-10-19T16:30:00Z",
      "expected_expiration_time": "2026-10-17T19:30:00Z",
      "yes_ask_dollars": "0.4300",
-     "yes_ask_size_fp": "16458.40",
+     "yes_ask_size_fp": "16360.40",
      "volume_24h_fp": "263.22"
     },
     {
@@ -4385,8 +4493,8 @@
      "status": "active",
      "close_time": "2026-10-19T16:30:00Z",
      "expected_expiration_time": "2026-10-17T19:30:00Z",
-     "yes_ask_dollars": "0.3200",
-     "yes_ask_size_fp": "705.37",
+     "yes_ask_dollars": "0.3300",
+     "yes_ask_size_fp": "63059.31",
      "volume_24h_fp": "536.77"
     },
     {
@@ -4396,11 +4504,11 @@
      "close_time": "2026-10-19T16:30:00Z",
      "expected_expiration_time": "2026-10-17T19:30:00Z",
      "yes_ask_dollars": "0.2600",
-     "yes_ask_size_fp": "2430.25",
+     "yes_ask_size_fp": "3634.25",
      "volume_24h_fp": "46.87"
     }
    ],
-   "prelim_sum": 1.01,
+   "prelim_sum": 1.02,
    "volume_24h": 846.86,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
@@ -4602,7 +4710,7 @@
      "close_time": "2026-10-19T16:00:00Z",
      "expected_expiration_time": "2026-10-17T19:00:00Z",
      "yes_ask_dollars": "0.6300",
-     "yes_ask_size_fp": "16998.92",
+     "yes_ask_size_fp": "18998.92",
      "volume_24h_fp": "319.65"
     },
     {
@@ -4656,7 +4764,7 @@
      "close_time": "2026-10-19T16:00:00Z",
      "expected_expiration_time": "2026-10-17T19:00:00Z",
      "yes_ask_dollars": "0.5400",
-     "yes_ask_size_fp": "1120.00",
+     "yes_ask_size_fp": "1320.00",
      "volume_24h_fp": "1.01"
     },
     {
@@ -4667,11 +4775,11 @@
      "expected_expiration_time": "2026-10-17T19:00:00Z",
      "yes_ask_dollars": "0.0900",
      "yes_ask_size_fp": "1353.42",
-     "volume_24h_fp": "185.33"
+     "volume_24h_fp": "118.75"
     }
    ],
    "prelim_sum": 1.02,
-   "volume_24h": 188.68,
+   "volume_24h": 122.1,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -4754,8 +4862,8 @@
      "close_time": "2026-10-19T14:15:00Z",
      "expected_expiration_time": "2026-10-17T17:15:00Z",
      "yes_ask_dollars": "0.6900",
-     "yes_ask_size_fp": "14022.80",
-     "volume_24h_fp": "448.85"
+     "yes_ask_size_fp": "16022.80",
+     "volume_24h_fp": "447.40"
     },
     {
      "ticker": "KXLALIGAGAME-26OCT17VILELC-ELC",
@@ -4764,7 +4872,7 @@
      "close_time": "2026-10-19T14:15:00Z",
      "expected_expiration_time": "2026-10-17T17:15:00Z",
      "yes_ask_dollars": "0.1500",
-     "yes_ask_size_fp": "3567.69",
+     "yes_ask_size_fp": "4341.69",
      "volume_24h_fp": "641.78"
     },
     {
@@ -4779,7 +4887,7 @@
     }
    ],
    "prelim_sum": 1.03,
-   "volume_24h": 1299.56,
+   "volume_24h": 1298.11,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -4809,7 +4917,7 @@
      "expected_expiration_time": "2026-10-17T17:00:00Z",
      "yes_ask_dollars": "0.8100",
      "yes_ask_size_fp": "20535.16",
-     "volume_24h_fp": "9075.36"
+     "volume_24h_fp": "9039.00"
     },
     {
      "ticker": "KXEPLGAME-26OCT17MCIIPS-IPS",
@@ -4818,8 +4926,8 @@
      "close_time": "2026-10-19T14:00:00Z",
      "expected_expiration_time": "2026-10-17T17:00:00Z",
      "yes_ask_dollars": "0.0700",
-     "yes_ask_size_fp": "4455.90",
-     "volume_24h_fp": "7669.20"
+     "yes_ask_size_fp": "5215.76",
+     "volume_24h_fp": "8497.46"
     },
     {
      "ticker": "KXEPLGAME-26OCT17MCIIPS-TIE",
@@ -4828,12 +4936,12 @@
      "close_time": "2026-10-19T14:00:00Z",
      "expected_expiration_time": "2026-10-17T17:00:00Z",
      "yes_ask_dollars": "0.1300",
-     "yes_ask_size_fp": "94985.07",
-     "volume_24h_fp": "217.30"
+     "yes_ask_size_fp": "94806.83",
+     "volume_24h_fp": "216.58"
     }
    ],
    "prelim_sum": 1.0100000000000002,
-   "volume_24h": 16961.86,
+   "volume_24h": 17753.04,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -4862,7 +4970,7 @@
      "close_time": "2026-10-19T14:00:00Z",
      "expected_expiration_time": "2026-10-17T17:00:00Z",
      "yes_ask_dollars": "0.5600",
-     "yes_ask_size_fp": "121.56",
+     "yes_ask_size_fp": "63959.18",
      "volume_24h_fp": "1630.82"
     },
     {
@@ -4872,8 +4980,8 @@
      "close_time": "2026-10-19T14:00:00Z",
      "expected_expiration_time": "2026-10-17T17:00:00Z",
      "yes_ask_dollars": "0.2100",
-     "yes_ask_size_fp": "36295.77",
-     "volume_24h_fp": "3294.51"
+     "yes_ask_size_fp": "38367.12",
+     "volume_24h_fp": "2411.78"
     },
     {
      "ticker": "KXEPLGAME-26OCT17FULHUL-TIE",
@@ -4883,11 +4991,11 @@
      "expected_expiration_time": "2026-10-17T17:00:00Z",
      "yes_ask_dollars": "0.2400",
      "yes_ask_size_fp": "419.00",
-     "volume_24h_fp": "99.19"
+     "volume_24h_fp": "96.19"
     }
    ],
    "prelim_sum": 1.01,
-   "volume_24h": 5024.52,
+   "volume_24h": 4138.79,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -4916,7 +5024,7 @@
      "close_time": "2026-10-19T14:00:00Z",
      "expected_expiration_time": "2026-10-17T17:00:00Z",
      "yes_ask_dollars": "0.4100",
-     "yes_ask_size_fp": "20560.06",
+     "yes_ask_size_fp": "17760.06",
      "volume_24h_fp": "363.00"
     },
     {
@@ -4926,8 +5034,8 @@
      "close_time": "2026-10-19T14:00:00Z",
      "expected_expiration_time": "2026-10-17T17:00:00Z",
      "yes_ask_dollars": "0.3400",
-     "yes_ask_size_fp": "48025.60",
-     "volume_24h_fp": "4574.52"
+     "yes_ask_size_fp": "47640.60",
+     "volume_24h_fp": "4351.94"
     },
     {
      "ticker": "KXEPLGAME-26OCT17BRELFC-TIE",
@@ -4941,7 +5049,7 @@
     }
    ],
    "prelim_sum": 1.02,
-   "volume_24h": 5043.93,
+   "volume_24h": 4821.349999999999,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -5024,7 +5132,7 @@
      "close_time": "2026-10-19T13:30:00Z",
      "expected_expiration_time": "2026-10-17T16:30:00Z",
      "yes_ask_dollars": "0.2000",
-     "yes_ask_size_fp": "2404.80",
+     "yes_ask_size_fp": "2504.80",
      "volume_24h_fp": "9.46"
     },
     {
@@ -5034,7 +5142,7 @@
      "close_time": "2026-10-19T13:30:00Z",
      "expected_expiration_time": "2026-10-17T16:30:00Z",
      "yes_ask_dollars": "0.6100",
-     "yes_ask_size_fp": "20626.08",
+     "yes_ask_size_fp": "17651.40",
      "volume_24h_fp": "525.81"
     },
     {
@@ -5044,7 +5152,7 @@
      "close_time": "2026-10-19T13:30:00Z",
      "expected_expiration_time": "2026-10-17T16:30:00Z",
      "yes_ask_dollars": "0.2200",
-     "yes_ask_size_fp": "964.00",
+     "yes_ask_size_fp": "1327.00",
      "volume_24h_fp": "0.00"
     }
    ],
@@ -5088,7 +5196,7 @@
      "close_time": "2026-10-19T13:00:00Z",
      "expected_expiration_time": "2026-10-17T16:00:00Z",
      "yes_ask_dollars": "0.2600",
-     "yes_ask_size_fp": "2831.00",
+     "yes_ask_size_fp": "2996.00",
      "volume_24h_fp": "0.00"
     },
     {
@@ -5142,8 +5250,8 @@
      "close_time": "2026-10-19T13:00:00Z",
      "expected_expiration_time": "2026-10-17T16:00:00Z",
      "yes_ask_dollars": "0.5800",
-     "yes_ask_size_fp": "4511.53",
-     "volume_24h_fp": "183.06"
+     "yes_ask_size_fp": "3678.27",
+     "volume_24h_fp": "1016.06"
     },
     {
      "ticker": "KXSERIEAGAME-26OCT17VENNAP-TIE",
@@ -5157,7 +5265,7 @@
     }
    ],
    "prelim_sum": 1.01,
-   "volume_24h": 208.69,
+   "volume_24h": 1041.69,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -5250,8 +5358,8 @@
      "close_time": "2026-10-19T12:00:00Z",
      "expected_expiration_time": "2026-10-17T15:00:00Z",
      "yes_ask_dollars": "0.5700",
-     "yes_ask_size_fp": "3643.44",
-     "volume_24h_fp": "9555.27"
+     "yes_ask_size_fp": "6633.80",
+     "volume_24h_fp": "10452.63"
     },
     {
      "ticker": "KXLALIGAGAME-26OCT17ESPATM-TIE",
@@ -5265,7 +5373,7 @@
     }
    ],
    "prelim_sum": 1.02,
-   "volume_24h": 9975.87,
+   "volume_24h": 10873.23,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -5314,12 +5422,66 @@
      "close_time": "2026-10-19T11:45:00Z",
      "expected_expiration_time": "2026-10-17T14:45:00Z",
      "yes_ask_dollars": "0.0800",
-     "yes_ask_size_fp": "2173.00",
+     "yes_ask_size_fp": "4173.00",
      "volume_24h_fp": "0.00"
     }
    ],
    "prelim_sum": 1.04,
    "volume_24h": 426.52,
+   "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
+   "fee_multiplier": null,
+   "coverage": {
+    "proven": true,
+    "method": "HEAD_TO_HEAD_WITH_TIE",
+    "reasons": [
+     "strikes: no todas las patas son strikes"
+    ],
+    "residuals": [
+     {
+      "name": "CANCELACION_O_REPROGRAMACION",
+      "payout": "precio justo seg\u00fan reglas de Kalshi (no garantizado)"
+     }
+    ],
+    "open_list_evidence": []
+   }
+  },
+  {
+   "event_ticker": "KXCHNSLGAME-26OCT17QINLIT",
+   "title": "Qingdao Hainiu vs Liaoning Tieren",
+   "legs": [
+    {
+     "ticker": "KXCHNSLGAME-26OCT17QINLIT-QIN",
+     "yes_sub_title": "Qingdao Hainiu",
+     "status": "active",
+     "close_time": "2026-10-19T11:35:00Z",
+     "expected_expiration_time": "2026-10-17T14:35:00Z",
+     "yes_ask_dollars": "0.1900",
+     "yes_ask_size_fp": "4572.00",
+     "volume_24h_fp": "0.00"
+    },
+    {
+     "ticker": "KXCHNSLGAME-26OCT17QINLIT-LIT",
+     "yes_sub_title": "Liaoning Tieren",
+     "status": "active",
+     "close_time": "2026-10-19T11:35:00Z",
+     "expected_expiration_time": "2026-10-17T14:35:00Z",
+     "yes_ask_dollars": "0.6300",
+     "yes_ask_size_fp": "250.78",
+     "volume_24h_fp": "140.19"
+    },
+    {
+     "ticker": "KXCHNSLGAME-26OCT17QINLIT-TIE",
+     "yes_sub_title": "Tie",
+     "status": "active",
+     "close_time": "2026-10-19T11:35:00Z",
+     "expected_expiration_time": "2026-10-17T14:35:00Z",
+     "yes_ask_dollars": "0.2200",
+     "yes_ask_size_fp": "1573.10",
+     "volume_24h_fp": "0.00"
+    }
+   ],
+   "prelim_sum": 1.04,
+   "volume_24h": 140.19,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -5349,7 +5511,7 @@
      "expected_expiration_time": "2026-10-17T14:30:00Z",
      "yes_ask_dollars": "0.3000",
      "yes_ask_size_fp": "26741.31",
-     "volume_24h_fp": "508.81"
+     "volume_24h_fp": "471.46"
     },
     {
      "ticker": "KXEPLGAME-26OCT17EVECFC-CFC",
@@ -5358,8 +5520,8 @@
      "close_time": "2026-10-19T11:30:00Z",
      "expected_expiration_time": "2026-10-17T14:30:00Z",
      "yes_ask_dollars": "0.4600",
-     "yes_ask_size_fp": "15176.87",
-     "volume_24h_fp": "9005.12"
+     "yes_ask_size_fp": "16642.82",
+     "volume_24h_fp": "9165.90"
     },
     {
      "ticker": "KXEPLGAME-26OCT17EVECFC-TIE",
@@ -5368,12 +5530,12 @@
      "close_time": "2026-10-19T11:30:00Z",
      "expected_expiration_time": "2026-10-17T14:30:00Z",
      "yes_ask_dollars": "0.2700",
-     "yes_ask_size_fp": "38587.91",
+     "yes_ask_size_fp": "40587.91",
      "volume_24h_fp": "178.02"
     }
    ],
    "prelim_sum": 1.03,
-   "volume_24h": 9691.95,
+   "volume_24h": 9815.38,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -5564,7 +5726,7 @@
      "close_time": "2026-10-19T05:00:00Z",
      "expected_expiration_time": "2026-10-17T08:00:00Z",
      "yes_ask_dollars": "0.2000",
-     "yes_ask_size_fp": "133.23",
+     "yes_ask_size_fp": "133.09",
      "volume_24h_fp": "15691.65"
     },
     {
@@ -5575,7 +5737,7 @@
      "expected_expiration_time": "2026-10-17T08:00:00Z",
      "yes_ask_dollars": "0.5600",
      "yes_ask_size_fp": "888.75",
-     "volume_24h_fp": "6320.96"
+     "volume_24h_fp": "6296.65"
     },
     {
      "ticker": "KXJLEAGUEGAME-26OCT17VERTOK-TIE",
@@ -5584,12 +5746,12 @@
      "close_time": "2026-10-19T05:00:00Z",
      "expected_expiration_time": "2026-10-17T08:00:00Z",
      "yes_ask_dollars": "0.2500",
-     "yes_ask_size_fp": "6.58",
+     "yes_ask_size_fp": "6.57",
      "volume_24h_fp": "659.00"
     }
    ],
    "prelim_sum": 1.01,
-   "volume_24h": 22671.61,
+   "volume_24h": 22647.3,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -5618,7 +5780,7 @@
      "close_time": "2026-10-19T03:00:00Z",
      "expected_expiration_time": "2026-10-17T06:00:00Z",
      "yes_ask_dollars": "0.5300",
-     "yes_ask_size_fp": "20735.80",
+     "yes_ask_size_fp": "22985.29",
      "volume_24h_fp": "275.41"
     },
     {
@@ -5628,8 +5790,8 @@
      "close_time": "2026-10-19T03:00:00Z",
      "expected_expiration_time": "2026-10-17T06:00:00Z",
      "yes_ask_dollars": "0.2300",
-     "yes_ask_size_fp": "16153.20",
-     "volume_24h_fp": "1107.40"
+     "yes_ask_size_fp": "16302.47",
+     "volume_24h_fp": "1115.65"
     },
     {
      "ticker": "KXLIGAMXGAME-26OCT16TIJPUE-TIE",
@@ -5638,12 +5800,12 @@
      "close_time": "2026-10-19T03:00:00Z",
      "expected_expiration_time": "2026-10-17T06:00:00Z",
      "yes_ask_dollars": "0.2600",
-     "yes_ask_size_fp": "25658.20",
+     "yes_ask_size_fp": "25708.20",
      "volume_24h_fp": "2106.74"
     }
    ],
    "prelim_sum": 1.02,
-   "volume_24h": 3489.5499999999997,
+   "volume_24h": 3497.7999999999997,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -5673,7 +5835,7 @@
      "expected_expiration_time": "2026-10-17T06:00:00Z",
      "yes_ask_dollars": "0.3900",
      "yes_ask_size_fp": "5831.37",
-     "volume_24h_fp": "271.39"
+     "volume_24h_fp": "225.63"
     },
     {
      "ticker": "KXLIGAMXGAME-26OCT16ALAPUM-PUM",
@@ -5682,8 +5844,8 @@
      "close_time": "2026-10-19T03:00:00Z",
      "expected_expiration_time": "2026-10-17T06:00:00Z",
      "yes_ask_dollars": "0.3500",
-     "yes_ask_size_fp": "2508.15",
-     "volume_24h_fp": "1650.10"
+     "yes_ask_size_fp": "3019.69",
+     "volume_24h_fp": "1523.19"
     },
     {
      "ticker": "KXLIGAMXGAME-26OCT16ALAPUM-TIE",
@@ -5692,12 +5854,12 @@
      "close_time": "2026-10-19T03:00:00Z",
      "expected_expiration_time": "2026-10-17T06:00:00Z",
      "yes_ask_dollars": "0.2800",
-     "yes_ask_size_fp": "1669.00",
+     "yes_ask_size_fp": "1584.00",
      "volume_24h_fp": "1275.21"
     }
    ],
    "prelim_sum": 1.02,
-   "volume_24h": 3196.7,
+   "volume_24h": 3024.03,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -5726,8 +5888,8 @@
      "close_time": "2026-10-19T03:00:00Z",
      "expected_expiration_time": "2026-10-17T06:00:00Z",
      "yes_ask_dollars": "0.6500",
-     "yes_ask_size_fp": "1328.00",
-     "volume_24h_fp": "308.94"
+     "yes_ask_size_fp": "423.00",
+     "volume_24h_fp": "587.86"
     },
     {
      "ticker": "KXLIGAEXPGAME-26OCT16CLUTLA-TLA",
@@ -5735,8 +5897,8 @@
      "status": "active",
      "close_time": "2026-10-19T03:00:00Z",
      "expected_expiration_time": "2026-10-17T06:00:00Z",
-     "yes_ask_dollars": "0.1900",
-     "yes_ask_size_fp": "124.00",
+     "yes_ask_dollars": "0.1800",
+     "yes_ask_size_fp": "74.00",
      "volume_24h_fp": "40.06"
     },
     {
@@ -5750,8 +5912,8 @@
      "volume_24h_fp": "0.00"
     }
    ],
-   "prelim_sum": 1.04,
-   "volume_24h": 349.0,
+   "prelim_sum": 1.03,
+   "volume_24h": 627.9200000000001,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -5781,7 +5943,7 @@
      "expected_expiration_time": "2026-10-17T04:00:00Z",
      "yes_ask_dollars": "0.3800",
      "yes_ask_size_fp": "17750.24",
-     "volume_24h_fp": "501.56"
+     "volume_24h_fp": "451.12"
     },
     {
      "ticker": "KXLIGAMXGAME-26OCT16NCXATL-ATL",
@@ -5790,8 +5952,8 @@
      "close_time": "2026-10-19T01:00:00Z",
      "expected_expiration_time": "2026-10-17T04:00:00Z",
      "yes_ask_dollars": "0.3600",
-     "yes_ask_size_fp": "2463.54",
-     "volume_24h_fp": "1005.90"
+     "yes_ask_size_fp": "2457.83",
+     "volume_24h_fp": "985.33"
     },
     {
      "ticker": "KXLIGAMXGAME-26OCT16NCXATL-TIE",
@@ -5800,12 +5962,12 @@
      "close_time": "2026-10-19T01:00:00Z",
      "expected_expiration_time": "2026-10-17T04:00:00Z",
      "yes_ask_dollars": "0.2700",
-     "yes_ask_size_fp": "3278.76",
-     "volume_24h_fp": "1150.73"
+     "yes_ask_size_fp": "6466.76",
+     "volume_24h_fp": "1080.26"
     }
    ],
    "prelim_sum": 1.01,
-   "volume_24h": 2658.19,
+   "volume_24h": 2516.71,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -5834,7 +5996,7 @@
      "close_time": "2026-10-19T00:30:00Z",
      "expected_expiration_time": "2026-10-17T03:30:00Z",
      "yes_ask_dollars": "0.5700",
-     "yes_ask_size_fp": "400.00",
+     "yes_ask_size_fp": "1995.91",
      "volume_24h_fp": "7853.12"
     },
     {
@@ -5844,7 +6006,7 @@
      "close_time": "2026-10-19T00:30:00Z",
      "expected_expiration_time": "2026-10-17T03:30:00Z",
      "yes_ask_dollars": "0.1800",
-     "yes_ask_size_fp": "1675.33",
+     "yes_ask_size_fp": "1675.34",
      "volume_24h_fp": "2181.57"
     },
     {
@@ -5860,60 +6022,6 @@
    ],
    "prelim_sum": 1.01,
    "volume_24h": 10874.03,
-   "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
-   "fee_multiplier": null,
-   "coverage": {
-    "proven": true,
-    "method": "HEAD_TO_HEAD_WITH_TIE",
-    "reasons": [
-     "strikes: no todas las patas son strikes"
-    ],
-    "residuals": [
-     {
-      "name": "CANCELACION_O_REPROGRAMACION",
-      "payout": "precio justo seg\u00fan reglas de Kalshi (no garantizado)"
-     }
-    ],
-    "open_list_evidence": []
-   }
-  },
-  {
-   "event_ticker": "KXNWSLGAME-26OCT16BOSRAC",
-   "title": "Boston Legacy FC vs Racing Louisville",
-   "legs": [
-    {
-     "ticker": "KXNWSLGAME-26OCT16BOSRAC-BOS",
-     "yes_sub_title": "Boston Legacy FC",
-     "status": "active",
-     "close_time": "2026-10-19T00:00:00Z",
-     "expected_expiration_time": "2026-10-17T03:00:00Z",
-     "yes_ask_dollars": "0.5800",
-     "yes_ask_size_fp": "5.00",
-     "volume_24h_fp": "42.00"
-    },
-    {
-     "ticker": "KXNWSLGAME-26OCT16BOSRAC-RAC",
-     "yes_sub_title": "Racing Louisville",
-     "status": "active",
-     "close_time": "2026-10-19T00:00:00Z",
-     "expected_expiration_time": "2026-10-17T03:00:00Z",
-     "yes_ask_dollars": "0.2300",
-     "yes_ask_size_fp": "7.00",
-     "volume_24h_fp": "105.70"
-    },
-    {
-     "ticker": "KXNWSLGAME-26OCT16BOSRAC-TIE",
-     "yes_sub_title": "Tie",
-     "status": "active",
-     "close_time": "2026-10-19T00:00:00Z",
-     "expected_expiration_time": "2026-10-17T03:00:00Z",
-     "yes_ask_dollars": "0.2400",
-     "yes_ask_size_fp": "184.37",
-     "volume_24h_fp": "41.63"
-    }
-   ],
-   "prelim_sum": 1.0499999999999998,
-   "volume_24h": 189.33,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -5952,7 +6060,7 @@
      "close_time": "2026-10-19T00:00:00Z",
      "expected_expiration_time": "2026-10-17T03:00:00Z",
      "yes_ask_dollars": "0.7800",
-     "yes_ask_size_fp": "200.00",
+     "yes_ask_size_fp": "1400.00",
      "volume_24h_fp": "100.00"
     },
     {
@@ -5968,60 +6076,6 @@
    ],
    "prelim_sum": 1.03,
    "volume_24h": 100.0,
-   "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
-   "fee_multiplier": null,
-   "coverage": {
-    "proven": true,
-    "method": "HEAD_TO_HEAD_WITH_TIE",
-    "reasons": [
-     "strikes: no todas las patas son strikes"
-    ],
-    "residuals": [
-     {
-      "name": "CANCELACION_O_REPROGRAMACION",
-      "payout": "precio justo seg\u00fan reglas de Kalshi (no garantizado)"
-     }
-    ],
-    "open_list_evidence": []
-   }
-  },
-  {
-   "event_ticker": "KXARGNACBGAME-26OCT16ARQUI",
-   "title": "Rafaela vs Quilmes",
-   "legs": [
-    {
-     "ticker": "KXARGNACBGAME-26OCT16ARQUI-AR",
-     "yes_sub_title": "Rafaela",
-     "status": "active",
-     "close_time": "2026-10-19T00:00:00Z",
-     "expected_expiration_time": "2026-10-17T03:00:00Z",
-     "yes_ask_dollars": "0.3900",
-     "yes_ask_size_fp": "152.00",
-     "volume_24h_fp": "195.00"
-    },
-    {
-     "ticker": "KXARGNACBGAME-26OCT16ARQUI-QUI",
-     "yes_sub_title": "Quilmes",
-     "status": "active",
-     "close_time": "2026-10-19T00:00:00Z",
-     "expected_expiration_time": "2026-10-17T03:00:00Z",
-     "yes_ask_dollars": "0.3000",
-     "yes_ask_size_fp": "791.32",
-     "volume_24h_fp": "0.26"
-    },
-    {
-     "ticker": "KXARGNACBGAME-26OCT16ARQUI-TIE",
-     "yes_sub_title": "Tie",
-     "status": "active",
-     "close_time": "2026-10-19T00:00:00Z",
-     "expected_expiration_time": "2026-10-17T03:00:00Z",
-     "yes_ask_dollars": "0.3300",
-     "yes_ask_size_fp": "1003.42",
-     "volume_24h_fp": "0.00"
-    }
-   ],
-   "prelim_sum": 1.02,
-   "volume_24h": 195.26,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -6060,7 +6114,7 @@
      "close_time": "2026-10-18T23:30:00Z",
      "expected_expiration_time": "2026-10-17T02:30:00Z",
      "yes_ask_dollars": "0.3300",
-     "yes_ask_size_fp": "785.38",
+     "yes_ask_size_fp": "785.32",
      "volume_24h_fp": "55.68"
     },
     {
@@ -6167,8 +6221,8 @@
      "status": "active",
      "close_time": "2026-10-18T22:30:00Z",
      "expected_expiration_time": "2026-10-17T01:30:00Z",
-     "yes_ask_dollars": "0.7900",
-     "yes_ask_size_fp": "111.00",
+     "yes_ask_dollars": "0.7800",
+     "yes_ask_size_fp": "1.00",
      "volume_24h_fp": "59.37"
     },
     {
@@ -6182,7 +6236,7 @@
      "volume_24h_fp": "154.97"
     }
    ],
-   "prelim_sum": 1.01,
+   "prelim_sum": 1.0,
    "volume_24h": 731.94,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
@@ -6213,7 +6267,7 @@
      "expected_expiration_time": "2026-10-16T22:00:00Z",
      "yes_ask_dollars": "0.4600",
      "yes_ask_size_fp": "150.64",
-     "volume_24h_fp": "1831.49"
+     "volume_24h_fp": "1827.31"
     },
     {
      "ticker": "KXLALIGAGAME-26OCT16DEPLEV-LEV",
@@ -6222,7 +6276,7 @@
      "close_time": "2026-10-18T19:00:00Z",
      "expected_expiration_time": "2026-10-16T22:00:00Z",
      "yes_ask_dollars": "0.2800",
-     "yes_ask_size_fp": "13892.90",
+     "yes_ask_size_fp": "12448.90",
      "volume_24h_fp": "249.90"
     },
     {
@@ -6237,7 +6291,7 @@
     }
    ],
    "prelim_sum": 1.02,
-   "volume_24h": 2120.42,
+   "volume_24h": 2116.24,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -6265,9 +6319,9 @@
      "status": "active",
      "close_time": "2026-10-18T19:00:00Z",
      "expected_expiration_time": "2026-10-16T22:00:00Z",
-     "yes_ask_dollars": "0.3300",
-     "yes_ask_size_fp": "1.00",
-     "volume_24h_fp": "122.88"
+     "yes_ask_dollars": "0.3400",
+     "yes_ask_size_fp": "5979.40",
+     "volume_24h_fp": "193.17"
     },
     {
      "ticker": "KXEFLCHAMPIONSHIPGAME-26OCT16BURWOL-WOL",
@@ -6290,8 +6344,8 @@
      "volume_24h_fp": "88.58"
     }
    ],
-   "prelim_sum": 1.02,
-   "volume_24h": 258.35,
+   "prelim_sum": 1.03,
+   "volume_24h": 328.64,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -6320,7 +6374,7 @@
      "close_time": "2026-10-18T18:45:00Z",
      "expected_expiration_time": "2026-10-16T21:45:00Z",
      "yes_ask_dollars": "0.3800",
-     "yes_ask_size_fp": "958.99",
+     "yes_ask_size_fp": "1049.31",
      "volume_24h_fp": "125.47"
     },
     {
@@ -6329,8 +6383,8 @@
      "status": "active",
      "close_time": "2026-10-18T18:45:00Z",
      "expected_expiration_time": "2026-10-16T21:45:00Z",
-     "yes_ask_dollars": "0.3700",
-     "yes_ask_size_fp": "8582.77",
+     "yes_ask_dollars": "0.3600",
+     "yes_ask_size_fp": "330.00",
      "volume_24h_fp": "0.00"
     },
     {
@@ -6340,11 +6394,11 @@
      "close_time": "2026-10-18T18:45:00Z",
      "expected_expiration_time": "2026-10-16T21:45:00Z",
      "yes_ask_dollars": "0.2700",
-     "yes_ask_size_fp": "2300.88",
+     "yes_ask_size_fp": "3412.88",
      "volume_24h_fp": "100.00"
     }
    ],
-   "prelim_sum": 1.02,
+   "prelim_sum": 1.01,
    "volume_24h": 225.47,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
@@ -6423,7 +6477,7 @@
      "close_time": "2026-10-18T00:15:00Z",
      "expected_expiration_time": "2026-10-16T03:15:00Z",
      "yes_ask_dollars": "0.4000",
-     "yes_ask_size_fp": "961.00",
+     "yes_ask_size_fp": "1960.00",
      "volume_24h_fp": "0.00"
     },
     {
@@ -6433,7 +6487,7 @@
      "close_time": "2026-10-18T00:15:00Z",
      "expected_expiration_time": "2026-10-16T03:15:00Z",
      "yes_ask_dollars": "0.4800",
-     "yes_ask_size_fp": "1580.00",
+     "yes_ask_size_fp": "1579.00",
      "volume_24h_fp": "0.00"
     },
     {
@@ -6443,7 +6497,7 @@
      "close_time": "2026-10-18T00:15:00Z",
      "expected_expiration_time": "2026-10-16T03:15:00Z",
      "yes_ask_dollars": "0.1500",
-     "yes_ask_size_fp": "1965.00",
+     "yes_ask_size_fp": "2965.00",
      "volume_24h_fp": "1737.18"
     }
    ],
@@ -6481,8 +6535,8 @@
      "status": "active",
      "close_time": "2026-10-18T00:15:00Z",
      "expected_expiration_time": "2026-10-16T03:15:00Z",
-     "yes_ask_dollars": "0.5200",
-     "yes_ask_size_fp": "1.00",
+     "yes_ask_dollars": "0.5300",
+     "yes_ask_size_fp": "5.00",
      "volume_24h_fp": "14.65"
     },
     {
@@ -6492,12 +6546,12 @@
      "close_time": "2026-10-18T00:15:00Z",
      "expected_expiration_time": "2026-10-16T03:15:00Z",
      "yes_ask_dollars": "0.0900",
-     "yes_ask_size_fp": "10.00",
-     "volume_24h_fp": "0.00"
+     "yes_ask_size_fp": "108.00",
+     "volume_24h_fp": "10.37"
     }
    ],
-   "prelim_sum": 1.06,
-   "volume_24h": 175.93,
+   "prelim_sum": 1.07,
+   "volume_24h": 186.3,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -6521,8 +6575,8 @@
      "close_time": "2026-10-18T00:15:00Z",
      "expected_expiration_time": "2026-10-16T03:15:00Z",
      "yes_ask_dollars": "0.3700",
-     "yes_ask_size_fp": "330.38",
-     "volume_24h_fp": "1.34"
+     "yes_ask_size_fp": "219.52",
+     "volume_24h_fp": "195.48"
     },
     {
      "ticker": "KXNFL1Q-26OCT15SEADEN-SEA",
@@ -6531,7 +6585,7 @@
      "close_time": "2026-10-18T00:15:00Z",
      "expected_expiration_time": "2026-10-16T03:15:00Z",
      "yes_ask_dollars": "0.4200",
-     "yes_ask_size_fp": "4843.42",
+     "yes_ask_size_fp": "3669.42",
      "volume_24h_fp": "732.08"
     },
     {
@@ -6541,12 +6595,12 @@
      "close_time": "2026-10-18T00:15:00Z",
      "expected_expiration_time": "2026-10-16T03:15:00Z",
      "yes_ask_dollars": "0.2400",
-     "yes_ask_size_fp": "3235.00",
+     "yes_ask_size_fp": "4295.00",
      "volume_24h_fp": "1189.79"
     }
    ],
    "prelim_sum": 1.03,
-   "volume_24h": 1923.21,
+   "volume_24h": 2117.35,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -6590,12 +6644,12 @@
      "close_time": "2026-10-18T00:15:00Z",
      "expected_expiration_time": "2026-10-16T03:15:00Z",
      "yes_ask_dollars": "0.1100",
-     "yes_ask_size_fp": "1665.51",
-     "volume_24h_fp": "4967.57"
+     "yes_ask_size_fp": "2904.13",
+     "volume_24h_fp": "5406.00"
     }
    ],
    "prelim_sum": 1.02,
-   "volume_24h": 6762.629999999999,
+   "volume_24h": 7201.0599999999995,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -6629,8 +6683,8 @@
      "close_time": "2026-10-17T23:00:00Z",
      "expected_expiration_time": "2026-10-16T02:00:00Z",
      "yes_ask_dollars": "0.2800",
-     "yes_ask_size_fp": "2688.99",
-     "volume_24h_fp": "6.01"
+     "yes_ask_size_fp": "3079.49",
+     "volume_24h_fp": "14.51"
     },
     {
      "ticker": "KXARGPREMDIVGAME-26OCT15HURGLP-TIE",
@@ -6639,12 +6693,12 @@
      "close_time": "2026-10-17T23:00:00Z",
      "expected_expiration_time": "2026-10-16T02:00:00Z",
      "yes_ask_dollars": "0.3500",
-     "yes_ask_size_fp": "7033.94",
+     "yes_ask_size_fp": "7042.44",
      "volume_24h_fp": "0.00"
     }
    ],
    "prelim_sum": 1.02,
-   "volume_24h": 133.44,
+   "volume_24h": 141.94,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -6673,7 +6727,7 @@
      "close_time": "2026-10-17T19:00:00Z",
      "expected_expiration_time": "2026-10-15T22:00:00Z",
      "yes_ask_dollars": "0.5000",
-     "yes_ask_size_fp": "3475.29",
+     "yes_ask_size_fp": "3410.05",
      "volume_24h_fp": "19.32"
     },
     {
@@ -6683,7 +6737,7 @@
      "close_time": "2026-10-17T19:00:00Z",
      "expected_expiration_time": "2026-10-15T22:00:00Z",
      "yes_ask_dollars": "0.2800",
-     "yes_ask_size_fp": "6685.91",
+     "yes_ask_size_fp": "9730.61",
      "volume_24h_fp": "5252.73"
     },
     {
@@ -6693,7 +6747,7 @@
      "close_time": "2026-10-17T19:00:00Z",
      "expected_expiration_time": "2026-10-15T22:00:00Z",
      "yes_ask_dollars": "0.2300",
-     "yes_ask_size_fp": "828.00",
+     "yes_ask_size_fp": "939.98",
      "volume_24h_fp": "4.00"
     }
    ],
@@ -6727,7 +6781,7 @@
      "close_time": "2026-10-17T19:00:00Z",
      "expected_expiration_time": "2026-10-15T22:00:00Z",
      "yes_ask_dollars": "0.7900",
-     "yes_ask_size_fp": "6260.08",
+     "yes_ask_size_fp": "6261.81",
      "volume_24h_fp": "19.45"
     },
     {
@@ -6737,7 +6791,7 @@
      "close_time": "2026-10-17T19:00:00Z",
      "expected_expiration_time": "2026-10-15T22:00:00Z",
      "yes_ask_dollars": "0.0800",
-     "yes_ask_size_fp": "7593.53",
+     "yes_ask_size_fp": "7585.23",
      "volume_24h_fp": "82.01"
     },
     {
@@ -6747,7 +6801,7 @@
      "close_time": "2026-10-17T19:00:00Z",
      "expected_expiration_time": "2026-10-15T22:00:00Z",
      "yes_ask_dollars": "0.1500",
-     "yes_ask_size_fp": "4722.74",
+     "yes_ask_size_fp": "5950.74",
      "volume_24h_fp": "2.26"
     }
    ],
@@ -6781,7 +6835,7 @@
      "close_time": "2026-10-17T19:00:00Z",
      "expected_expiration_time": "2026-10-15T22:00:00Z",
      "yes_ask_dollars": "0.2700",
-     "yes_ask_size_fp": "1303.71",
+     "yes_ask_size_fp": "880.00",
      "volume_24h_fp": "0.00"
     },
     {
@@ -6791,7 +6845,7 @@
      "close_time": "2026-10-17T19:00:00Z",
      "expected_expiration_time": "2026-10-15T22:00:00Z",
      "yes_ask_dollars": "0.4600",
-     "yes_ask_size_fp": "6308.56",
+     "yes_ask_size_fp": "7028.76",
      "volume_24h_fp": "210.44"
     },
     {
@@ -6801,12 +6855,12 @@
      "close_time": "2026-10-17T19:00:00Z",
      "expected_expiration_time": "2026-10-15T22:00:00Z",
      "yes_ask_dollars": "0.2800",
-     "yes_ask_size_fp": "75.00",
-     "volume_24h_fp": "3.00"
+     "yes_ask_size_fp": "73.00",
+     "volume_24h_fp": "4.00"
     }
    ],
    "prelim_sum": 1.01,
-   "volume_24h": 213.44,
+   "volume_24h": 214.44,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -6855,7 +6909,7 @@
      "close_time": "2026-10-17T19:00:00Z",
      "expected_expiration_time": "2026-10-15T22:00:00Z",
      "yes_ask_dollars": "0.2800",
-     "yes_ask_size_fp": "5356.21",
+     "yes_ask_size_fp": "5373.21",
      "volume_24h_fp": "10286.46"
     }
    ],
@@ -6888,8 +6942,8 @@
      "status": "active",
      "close_time": "2026-10-17T19:00:00Z",
      "expected_expiration_time": "2026-10-15T22:00:00Z",
-     "yes_ask_dollars": "0.7000",
-     "yes_ask_size_fp": "1419.69",
+     "yes_ask_dollars": "0.6900",
+     "yes_ask_size_fp": "38.71",
      "volume_24h_fp": "0.00"
     },
     {
@@ -6899,7 +6953,7 @@
      "close_time": "2026-10-17T19:00:00Z",
      "expected_expiration_time": "2026-10-15T22:00:00Z",
      "yes_ask_dollars": "0.1300",
-     "yes_ask_size_fp": "2219.34",
+     "yes_ask_size_fp": "2742.27",
      "volume_24h_fp": "384.28"
     },
     {
@@ -6913,7 +6967,7 @@
      "volume_24h_fp": "6.49"
     }
    ],
-   "prelim_sum": 1.02,
+   "prelim_sum": 1.01,
    "volume_24h": 390.77,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
@@ -6943,7 +6997,7 @@
      "close_time": "2026-10-17T19:00:00Z",
      "expected_expiration_time": "2026-10-15T22:00:00Z",
      "yes_ask_dollars": "0.4800",
-     "yes_ask_size_fp": "2839.67",
+     "yes_ask_size_fp": "2965.67",
      "volume_24h_fp": "25.61"
     },
     {
@@ -6953,7 +7007,7 @@
      "close_time": "2026-10-17T19:00:00Z",
      "expected_expiration_time": "2026-10-15T22:00:00Z",
      "yes_ask_dollars": "0.2600",
-     "yes_ask_size_fp": "598.36",
+     "yes_ask_size_fp": "1426.36",
      "volume_24h_fp": "921.18"
     },
     {
@@ -6963,7 +7017,7 @@
      "close_time": "2026-10-17T19:00:00Z",
      "expected_expiration_time": "2026-10-15T22:00:00Z",
      "yes_ask_dollars": "0.2700",
-     "yes_ask_size_fp": "863.00",
+     "yes_ask_size_fp": "1385.00",
      "volume_24h_fp": "0.00"
     }
    ],
@@ -6997,7 +7051,7 @@
      "close_time": "2026-10-17T19:00:00Z",
      "expected_expiration_time": "2026-10-15T22:00:00Z",
      "yes_ask_dollars": "0.7900",
-     "yes_ask_size_fp": "16265.76",
+     "yes_ask_size_fp": "16375.76",
      "volume_24h_fp": "70.00"
     },
     {
@@ -7051,8 +7105,8 @@
      "close_time": "2026-10-17T19:00:00Z",
      "expected_expiration_time": "2026-10-15T22:00:00Z",
      "yes_ask_dollars": "0.7400",
-     "yes_ask_size_fp": "3537.94",
-     "volume_24h_fp": "436.15"
+     "yes_ask_size_fp": "3446.66",
+     "volume_24h_fp": "711.36"
     },
     {
      "ticker": "KXUECLGAME-26OCT15STTIBE-IBE",
@@ -7061,7 +7115,7 @@
      "close_time": "2026-10-17T19:00:00Z",
      "expected_expiration_time": "2026-10-15T22:00:00Z",
      "yes_ask_dollars": "0.0900",
-     "yes_ask_size_fp": "1241.29",
+     "yes_ask_size_fp": "1248.04",
      "volume_24h_fp": "246.74"
     },
     {
@@ -7071,12 +7125,12 @@
      "close_time": "2026-10-17T19:00:00Z",
      "expected_expiration_time": "2026-10-15T22:00:00Z",
      "yes_ask_dollars": "0.1800",
-     "yes_ask_size_fp": "6618.77",
+     "yes_ask_size_fp": "8618.77",
      "volume_24h_fp": "0.00"
     }
    ],
    "prelim_sum": 1.01,
-   "volume_24h": 682.89,
+   "volume_24h": 958.1,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -7115,8 +7169,8 @@
      "close_time": "2026-10-17T19:00:00Z",
      "expected_expiration_time": "2026-10-15T22:00:00Z",
      "yes_ask_dollars": "0.0500",
-     "yes_ask_size_fp": "1683.65",
-     "volume_24h_fp": "271.99"
+     "yes_ask_size_fp": "1701.90",
+     "volume_24h_fp": "162.99"
     },
     {
      "ticker": "KXUECLGAME-26OCT15SKBLIN-TIE",
@@ -7130,7 +7184,7 @@
     }
    ],
    "prelim_sum": 1.0,
-   "volume_24h": 305.35,
+   "volume_24h": 196.35000000000002,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -7159,7 +7213,7 @@
      "close_time": "2026-10-17T19:00:00Z",
      "expected_expiration_time": "2026-10-15T22:00:00Z",
      "yes_ask_dollars": "0.7600",
-     "yes_ask_size_fp": "2466.59",
+     "yes_ask_size_fp": "4466.59",
      "volume_24h_fp": "1413.83"
     },
     {
@@ -7213,7 +7267,7 @@
      "close_time": "2026-10-17T19:00:00Z",
      "expected_expiration_time": "2026-10-15T22:00:00Z",
      "yes_ask_dollars": "0.9600",
-     "yes_ask_size_fp": "15197.53",
+     "yes_ask_size_fp": "14965.53",
      "volume_24h_fp": "662.77"
     },
     {
@@ -7267,7 +7321,7 @@
      "close_time": "2026-10-17T16:45:00Z",
      "expected_expiration_time": "2026-10-15T19:45:00Z",
      "yes_ask_dollars": "0.4400",
-     "yes_ask_size_fp": "6147.17",
+     "yes_ask_size_fp": "4741.75",
      "volume_24h_fp": "134.48"
     },
     {
@@ -7287,7 +7341,7 @@
      "close_time": "2026-10-17T16:45:00Z",
      "expected_expiration_time": "2026-10-15T19:45:00Z",
      "yes_ask_dollars": "0.2700",
-     "yes_ask_size_fp": "5203.16",
+     "yes_ask_size_fp": "5635.16",
      "volume_24h_fp": "18.28"
     }
    ],
@@ -7375,7 +7429,7 @@
      "close_time": "2026-10-17T16:45:00Z",
      "expected_expiration_time": "2026-10-15T19:45:00Z",
      "yes_ask_dollars": "0.8000",
-     "yes_ask_size_fp": "2408.89",
+     "yes_ask_size_fp": "4362.25",
      "volume_24h_fp": "685.80"
     },
     {
@@ -7384,8 +7438,8 @@
      "status": "active",
      "close_time": "2026-10-17T16:45:00Z",
      "expected_expiration_time": "2026-10-15T19:45:00Z",
-     "yes_ask_dollars": "0.0700",
-     "yes_ask_size_fp": "12.98",
+     "yes_ask_dollars": "0.0800",
+     "yes_ask_size_fp": "2256.37",
      "volume_24h_fp": "74.08"
     },
     {
@@ -7399,7 +7453,7 @@
      "volume_24h_fp": "2.01"
     }
    ],
-   "prelim_sum": 1.0100000000000002,
+   "prelim_sum": 1.02,
    "volume_24h": 761.89,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
@@ -7429,7 +7483,7 @@
      "close_time": "2026-10-17T16:45:00Z",
      "expected_expiration_time": "2026-10-15T19:45:00Z",
      "yes_ask_dollars": "0.1300",
-     "yes_ask_size_fp": "743.00",
+     "yes_ask_size_fp": "731.00",
      "volume_24h_fp": "225.37"
     },
     {
@@ -7439,7 +7493,7 @@
      "close_time": "2026-10-17T16:45:00Z",
      "expected_expiration_time": "2026-10-15T19:45:00Z",
      "yes_ask_dollars": "0.6700",
-     "yes_ask_size_fp": "2025.00",
+     "yes_ask_size_fp": "2109.01",
      "volume_24h_fp": "14.56"
     },
     {
@@ -7449,7 +7503,7 @@
      "close_time": "2026-10-17T16:45:00Z",
      "expected_expiration_time": "2026-10-15T19:45:00Z",
      "yes_ask_dollars": "0.2100",
-     "yes_ask_size_fp": "189.82",
+     "yes_ask_size_fp": "44.55",
      "volume_24h_fp": "0.00"
     }
    ],
@@ -7483,7 +7537,7 @@
      "close_time": "2026-10-17T16:45:00Z",
      "expected_expiration_time": "2026-10-15T19:45:00Z",
      "yes_ask_dollars": "0.1500",
-     "yes_ask_size_fp": "225.05",
+     "yes_ask_size_fp": "225.07",
      "volume_24h_fp": "0.00"
     },
     {
@@ -7537,8 +7591,8 @@
      "close_time": "2026-10-17T02:30:00Z",
      "expected_expiration_time": "2026-10-15T05:30:00Z",
      "yes_ask_dollars": "0.4300",
-     "yes_ask_size_fp": "26609.02",
-     "volume_24h_fp": "161.48"
+     "yes_ask_size_fp": "29081.84",
+     "volume_24h_fp": "172.66"
     },
     {
      "ticker": "KXMLSGAME-26OCT14SDHOU-HOU",
@@ -7547,8 +7601,8 @@
      "close_time": "2026-10-17T02:30:00Z",
      "expected_expiration_time": "2026-10-15T05:30:00Z",
      "yes_ask_dollars": "0.3200",
-     "yes_ask_size_fp": "29004.91",
-     "volume_24h_fp": "350.24"
+     "yes_ask_size_fp": "28802.07",
+     "volume_24h_fp": "553.08"
     },
     {
      "ticker": "KXMLSGAME-26OCT14SDHOU-TIE",
@@ -7562,7 +7616,7 @@
     }
    ],
    "prelim_sum": 1.01,
-   "volume_24h": 562.9,
+   "volume_24h": 776.9200000000001,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -7591,8 +7645,8 @@
      "close_time": "2026-10-17T02:30:00Z",
      "expected_expiration_time": "2026-10-15T05:30:00Z",
      "yes_ask_dollars": "0.4700",
-     "yes_ask_size_fp": "7477.77",
-     "volume_24h_fp": "192.53"
+     "yes_ask_size_fp": "7809.75",
+     "volume_24h_fp": "161.75"
     },
     {
      "ticker": "KXMLSGAME-26OCT14LAGPOR-POR",
@@ -7601,8 +7655,8 @@
      "close_time": "2026-10-17T02:30:00Z",
      "expected_expiration_time": "2026-10-15T05:30:00Z",
      "yes_ask_dollars": "0.3000",
-     "yes_ask_size_fp": "27815.44",
-     "volume_24h_fp": "190.70"
+     "yes_ask_size_fp": "30355.44",
+     "volume_24h_fp": "205.70"
     },
     {
      "ticker": "KXMLSGAME-26OCT14LAGPOR-TIE",
@@ -7612,11 +7666,11 @@
      "expected_expiration_time": "2026-10-15T05:30:00Z",
      "yes_ask_dollars": "0.2400",
      "yes_ask_size_fp": "29115.04",
-     "volume_24h_fp": "63.39"
+     "volume_24h_fp": "27.79"
     }
    ],
    "prelim_sum": 1.01,
-   "volume_24h": 446.62,
+   "volume_24h": 395.24,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -7645,7 +7699,7 @@
      "close_time": "2026-10-17T02:30:00Z",
      "expected_expiration_time": "2026-10-15T05:30:00Z",
      "yes_ask_dollars": "0.6800",
-     "yes_ask_size_fp": "38166.94",
+     "yes_ask_size_fp": "40180.45",
      "volume_24h_fp": "657.32"
     },
     {
@@ -7655,8 +7709,8 @@
      "close_time": "2026-10-17T02:30:00Z",
      "expected_expiration_time": "2026-10-15T05:30:00Z",
      "yes_ask_dollars": "0.1400",
-     "yes_ask_size_fp": "16074.23",
-     "volume_24h_fp": "2231.34"
+     "yes_ask_size_fp": "29911.01",
+     "volume_24h_fp": "2235.83"
     },
     {
      "ticker": "KXMLSGAME-26OCT14LAFCATX-TIE",
@@ -7670,7 +7724,7 @@
     }
    ],
    "prelim_sum": 1.01,
-   "volume_24h": 2900.27,
+   "volume_24h": 2904.7599999999998,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -7699,8 +7753,8 @@
      "close_time": "2026-10-17T01:30:00Z",
      "expected_expiration_time": "2026-10-15T04:30:00Z",
      "yes_ask_dollars": "0.5300",
-     "yes_ask_size_fp": "6679.00",
-     "volume_24h_fp": "1803.93"
+     "yes_ask_size_fp": "6669.87",
+     "volume_24h_fp": "1813.06"
     },
     {
      "ticker": "KXMLSGAME-26OCT14RSLSJ-SJ",
@@ -7709,7 +7763,7 @@
      "close_time": "2026-10-17T01:30:00Z",
      "expected_expiration_time": "2026-10-15T04:30:00Z",
      "yes_ask_dollars": "0.2500",
-     "yes_ask_size_fp": "29069.32",
+     "yes_ask_size_fp": "29070.32",
      "volume_24h_fp": "2169.53"
     },
     {
@@ -7719,12 +7773,12 @@
      "close_time": "2026-10-17T01:30:00Z",
      "expected_expiration_time": "2026-10-15T04:30:00Z",
      "yes_ask_dollars": "0.2300",
-     "yes_ask_size_fp": "28499.67",
+     "yes_ask_size_fp": "28137.67",
      "volume_24h_fp": "0.00"
     }
    ],
    "prelim_sum": 1.01,
-   "volume_24h": 3973.46,
+   "volume_24h": 3982.59,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -7753,8 +7807,8 @@
      "close_time": "2026-10-17T01:30:00Z",
      "expected_expiration_time": "2026-10-15T04:30:00Z",
      "yes_ask_dollars": "0.4600",
-     "yes_ask_size_fp": "30318.97",
-     "volume_24h_fp": "628.85"
+     "yes_ask_size_fp": "32315.88",
+     "volume_24h_fp": "630.94"
     },
     {
      "ticker": "KXMLSGAME-26OCT14COLMIN-MIN",
@@ -7763,7 +7817,7 @@
      "close_time": "2026-10-17T01:30:00Z",
      "expected_expiration_time": "2026-10-15T04:30:00Z",
      "yes_ask_dollars": "0.2900",
-     "yes_ask_size_fp": "16243.85",
+     "yes_ask_size_fp": "16244.85",
      "volume_24h_fp": "23.03"
     },
     {
@@ -7773,12 +7827,12 @@
      "close_time": "2026-10-17T01:30:00Z",
      "expected_expiration_time": "2026-10-15T04:30:00Z",
      "yes_ask_dollars": "0.2600",
-     "yes_ask_size_fp": "30126.01",
+     "yes_ask_size_fp": "29771.21",
      "volume_24h_fp": "13.53"
     }
    ],
    "prelim_sum": 1.01,
-   "volume_24h": 665.41,
+   "volume_24h": 667.5,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -7806,8 +7860,8 @@
      "status": "active",
      "close_time": "2026-10-17T00:30:00Z",
      "expected_expiration_time": "2026-10-15T03:30:00Z",
-     "yes_ask_dollars": "0.3400",
-     "yes_ask_size_fp": "10.00",
+     "yes_ask_dollars": "0.3300",
+     "yes_ask_size_fp": "5.00",
      "volume_24h_fp": "4044.00"
     },
     {
@@ -7817,7 +7871,7 @@
      "close_time": "2026-10-17T00:30:00Z",
      "expected_expiration_time": "2026-10-15T03:30:00Z",
      "yes_ask_dollars": "0.2900",
-     "yes_ask_size_fp": "2.00",
+     "yes_ask_size_fp": "587.00",
      "volume_24h_fp": "1386.00"
     },
     {
@@ -7826,12 +7880,12 @@
      "status": "active",
      "close_time": "2026-10-17T00:30:00Z",
      "expected_expiration_time": "2026-10-15T03:30:00Z",
-     "yes_ask_dollars": "0.3600",
-     "yes_ask_size_fp": "5.00",
+     "yes_ask_dollars": "0.3500",
+     "yes_ask_size_fp": "11.54",
      "volume_24h_fp": "5429.00"
     }
    ],
-   "prelim_sum": 0.99,
+   "prelim_sum": 0.97,
    "volume_24h": 10859.0,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
@@ -7861,8 +7915,8 @@
      "close_time": "2026-10-17T00:30:00Z",
      "expected_expiration_time": "2026-10-15T03:30:00Z",
      "yes_ask_dollars": "0.4400",
-     "yes_ask_size_fp": "33971.71",
-     "volume_24h_fp": "13773.21"
+     "yes_ask_size_fp": "38379.29",
+     "volume_24h_fp": "15435.09"
     },
     {
      "ticker": "KXMLSGAME-26OCT14STLVAN-VAN",
@@ -7871,8 +7925,8 @@
      "close_time": "2026-10-17T00:30:00Z",
      "expected_expiration_time": "2026-10-15T03:30:00Z",
      "yes_ask_dollars": "0.3300",
-     "yes_ask_size_fp": "29204.38",
-     "volume_24h_fp": "100.91"
+     "yes_ask_size_fp": "28856.91",
+     "volume_24h_fp": "115.38"
     },
     {
      "ticker": "KXMLSGAME-26OCT14STLVAN-TIE",
@@ -7881,12 +7935,12 @@
      "close_time": "2026-10-17T00:30:00Z",
      "expected_expiration_time": "2026-10-15T03:30:00Z",
      "yes_ask_dollars": "0.2500",
-     "yes_ask_size_fp": "24080.51",
-     "volume_24h_fp": "303.70"
+     "yes_ask_size_fp": "26191.41",
+     "volume_24h_fp": "1443.84"
     }
    ],
    "prelim_sum": 1.02,
-   "volume_24h": 14177.82,
+   "volume_24h": 16994.31,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -7915,8 +7969,8 @@
      "close_time": "2026-10-17T00:30:00Z",
      "expected_expiration_time": "2026-10-15T03:30:00Z",
      "yes_ask_dollars": "0.8000",
-     "yes_ask_size_fp": "24312.42",
-     "volume_24h_fp": "1975.70"
+     "yes_ask_size_fp": "24468.79",
+     "volume_24h_fp": "1982.82"
     },
     {
      "ticker": "KXMLSGAME-26OCT14NSHSKC-SKC",
@@ -7925,8 +7979,8 @@
      "close_time": "2026-10-17T00:30:00Z",
      "expected_expiration_time": "2026-10-15T03:30:00Z",
      "yes_ask_dollars": "0.0900",
-     "yes_ask_size_fp": "53576.60",
-     "volume_24h_fp": "2027.79"
+     "yes_ask_size_fp": "54177.60",
+     "volume_24h_fp": "2017.35"
     },
     {
      "ticker": "KXMLSGAME-26OCT14NSHSKC-TIE",
@@ -7935,12 +7989,12 @@
      "close_time": "2026-10-17T00:30:00Z",
      "expected_expiration_time": "2026-10-15T03:30:00Z",
      "yes_ask_dollars": "0.1300",
-     "yes_ask_size_fp": "34969.51",
+     "yes_ask_size_fp": "37153.51",
      "volume_24h_fp": "560.84"
     }
    ],
    "prelim_sum": 1.02,
-   "volume_24h": 4564.33,
+   "volume_24h": 4561.01,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -7969,8 +8023,8 @@
      "close_time": "2026-10-17T00:30:00Z",
      "expected_expiration_time": "2026-10-15T03:30:00Z",
      "yes_ask_dollars": "0.5200",
-     "yes_ask_size_fp": "7397.49",
-     "volume_24h_fp": "1660.25"
+     "yes_ask_size_fp": "4158.00",
+     "volume_24h_fp": "1661.23"
     },
     {
      "ticker": "KXMLSGAME-26OCT14DALSEA-SEA",
@@ -7979,8 +8033,8 @@
      "close_time": "2026-10-17T00:30:00Z",
      "expected_expiration_time": "2026-10-15T03:30:00Z",
      "yes_ask_dollars": "0.2600",
-     "yes_ask_size_fp": "63636.42",
-     "volume_24h_fp": "2508.76"
+     "yes_ask_size_fp": "66357.65",
+     "volume_24h_fp": "2547.76"
     },
     {
      "ticker": "KXMLSGAME-26OCT14DALSEA-TIE",
@@ -7988,13 +8042,13 @@
      "status": "active",
      "close_time": "2026-10-17T00:30:00Z",
      "expected_expiration_time": "2026-10-15T03:30:00Z",
-     "yes_ask_dollars": "0.2400",
-     "yes_ask_size_fp": "27096.63",
+     "yes_ask_dollars": "0.2300",
+     "yes_ask_size_fp": "631.00",
      "volume_24h_fp": "73.25"
     }
    ],
-   "prelim_sum": 1.02,
-   "volume_24h": 4242.26,
+   "prelim_sum": 1.01,
+   "volume_24h": 4282.24,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -8023,8 +8077,8 @@
      "close_time": "2026-10-17T00:30:00Z",
      "expected_expiration_time": "2026-10-15T03:30:00Z",
      "yes_ask_dollars": "0.3900",
-     "yes_ask_size_fp": "26251.57",
-     "volume_24h_fp": "2785.20"
+     "yes_ask_size_fp": "27722.28",
+     "volume_24h_fp": "2797.49"
     },
     {
      "ticker": "KXMLSGAME-26OCT14CHIPHI-PHI",
@@ -8033,8 +8087,8 @@
      "close_time": "2026-10-17T00:30:00Z",
      "expected_expiration_time": "2026-10-15T03:30:00Z",
      "yes_ask_dollars": "0.3700",
-     "yes_ask_size_fp": "28095.65",
-     "volume_24h_fp": "890.51"
+     "yes_ask_size_fp": "27561.65",
+     "volume_24h_fp": "865.51"
     },
     {
      "ticker": "KXMLSGAME-26OCT14CHIPHI-TIE",
@@ -8043,12 +8097,12 @@
      "close_time": "2026-10-17T00:30:00Z",
      "expected_expiration_time": "2026-10-15T03:30:00Z",
      "yes_ask_dollars": "0.2500",
-     "yes_ask_size_fp": "1440.94",
-     "volume_24h_fp": "327.62"
+     "yes_ask_size_fp": "1956.94",
+     "volume_24h_fp": "309.62"
     }
    ],
    "prelim_sum": 1.01,
-   "volume_24h": 4003.33,
+   "volume_24h": 3972.62,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -8077,7 +8131,7 @@
      "close_time": "2026-10-17T00:00:00Z",
      "expected_expiration_time": "2026-10-15T03:00:00Z",
      "yes_ask_dollars": "0.4500",
-     "yes_ask_size_fp": "2079.00",
+     "yes_ask_size_fp": "3079.00",
      "volume_24h_fp": "12.56"
     },
     {
@@ -8087,8 +8141,8 @@
      "close_time": "2026-10-17T00:00:00Z",
      "expected_expiration_time": "2026-10-15T03:00:00Z",
      "yes_ask_dollars": "0.4900",
-     "yes_ask_size_fp": "1527.40",
-     "volume_24h_fp": "1251.45"
+     "yes_ask_size_fp": "3378.83",
+     "volume_24h_fp": "2239.62"
     },
     {
      "ticker": "KXNCAAF1H-26OCT14WKUSHSU-TIE",
@@ -8097,12 +8151,12 @@
      "close_time": "2026-10-17T00:00:00Z",
      "expected_expiration_time": "2026-10-15T03:00:00Z",
      "yes_ask_dollars": "0.0800",
-     "yes_ask_size_fp": "1080.00",
+     "yes_ask_size_fp": "1104.00",
      "volume_24h_fp": "0.00"
     }
    ],
    "prelim_sum": 1.02,
-   "volume_24h": 1264.01,
+   "volume_24h": 2252.18,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -8131,7 +8185,7 @@
      "close_time": "2026-10-18T00:00:00Z",
      "expected_expiration_time": "2026-10-15T03:00:00Z",
      "yes_ask_dollars": "0.3400",
-     "yes_ask_size_fp": "1359.00",
+     "yes_ask_size_fp": "1361.00",
      "volume_24h_fp": "5.73"
     },
     {
@@ -8141,7 +8195,7 @@
      "close_time": "2026-10-18T00:00:00Z",
      "expected_expiration_time": "2026-10-15T03:00:00Z",
      "yes_ask_dollars": "0.5400",
-     "yes_ask_size_fp": "448.00",
+     "yes_ask_size_fp": "449.00",
      "volume_24h_fp": "4.22"
     },
     {
@@ -8195,8 +8249,8 @@
      "close_time": "2026-10-18T00:00:00Z",
      "expected_expiration_time": "2026-10-15T03:00:00Z",
      "yes_ask_dollars": "0.5200",
-     "yes_ask_size_fp": "10007.60",
-     "volume_24h_fp": "3565.16"
+     "yes_ask_size_fp": "9703.00",
+     "volume_24h_fp": "4433.71"
     },
     {
      "ticker": "KXMLBF5-26OCT142000MILLAD-TIE",
@@ -8205,12 +8259,12 @@
      "close_time": "2026-10-18T00:00:00Z",
      "expected_expiration_time": "2026-10-15T03:00:00Z",
      "yes_ask_dollars": "0.1700",
-     "yes_ask_size_fp": "2143.22",
-     "volume_24h_fp": "3392.86"
+     "yes_ask_size_fp": "2036.22",
+     "volume_24h_fp": "3445.97"
     }
    ],
    "prelim_sum": 1.01,
-   "volume_24h": 8653.06,
+   "volume_24h": 9574.72,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -8239,7 +8293,7 @@
      "close_time": "2026-10-18T00:00:00Z",
      "expected_expiration_time": "2026-10-15T03:00:00Z",
      "yes_ask_dollars": "0.3100",
-     "yes_ask_size_fp": "1312.32",
+     "yes_ask_size_fp": "1280.32",
      "volume_24h_fp": "992.14"
     },
     {
@@ -8249,8 +8303,8 @@
      "close_time": "2026-10-18T00:00:00Z",
      "expected_expiration_time": "2026-10-15T03:00:00Z",
      "yes_ask_dollars": "0.4500",
-     "yes_ask_size_fp": "235.37",
-     "volume_24h_fp": "634.02"
+     "yes_ask_size_fp": "115.46",
+     "volume_24h_fp": "753.93"
     },
     {
      "ticker": "KXMLBF3-26OCT142000MILLAD-TIE",
@@ -8259,12 +8313,12 @@
      "close_time": "2026-10-18T00:00:00Z",
      "expected_expiration_time": "2026-10-15T03:00:00Z",
      "yes_ask_dollars": "0.2600",
-     "yes_ask_size_fp": "2282.65",
-     "volume_24h_fp": "964.23"
+     "yes_ask_size_fp": "2271.16",
+     "volume_24h_fp": "971.72"
     }
    ],
    "prelim_sum": 1.02,
-   "volume_24h": 2590.39,
+   "volume_24h": 2717.79,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -8293,7 +8347,7 @@
      "close_time": "2026-10-16T23:30:00Z",
      "expected_expiration_time": "2026-10-15T02:30:00Z",
      "yes_ask_dollars": "0.4200",
-     "yes_ask_size_fp": "1362.00",
+     "yes_ask_size_fp": "2209.00",
      "volume_24h_fp": "11.44"
     },
     {
@@ -8303,7 +8357,7 @@
      "close_time": "2026-10-16T23:30:00Z",
      "expected_expiration_time": "2026-10-15T02:30:00Z",
      "yes_ask_dollars": "0.5200",
-     "yes_ask_size_fp": "1792.00",
+     "yes_ask_size_fp": "1794.00",
      "volume_24h_fp": "0.00"
     },
     {
@@ -8313,7 +8367,7 @@
      "close_time": "2026-10-16T23:30:00Z",
      "expected_expiration_time": "2026-10-15T02:30:00Z",
      "yes_ask_dollars": "0.0800",
-     "yes_ask_size_fp": "2253.00",
+     "yes_ask_size_fp": "2298.00",
      "volume_24h_fp": "507.59"
     }
    ],
@@ -8346,9 +8400,9 @@
      "status": "active",
      "close_time": "2026-10-16T23:30:00Z",
      "expected_expiration_time": "2026-10-15T02:30:00Z",
-     "yes_ask_dollars": "0.4500",
-     "yes_ask_size_fp": "2809.00",
-     "volume_24h_fp": "167.10"
+     "yes_ask_dollars": "0.4400",
+     "yes_ask_size_fp": "26182.66",
+     "volume_24h_fp": "178.03"
     },
     {
      "ticker": "KXMLSGAME-26OCT14TORORL-ORL",
@@ -8357,7 +8411,7 @@
      "close_time": "2026-10-16T23:30:00Z",
      "expected_expiration_time": "2026-10-15T02:30:00Z",
      "yes_ask_dollars": "0.3100",
-     "yes_ask_size_fp": "31636.19",
+     "yes_ask_size_fp": "1497.00",
      "volume_24h_fp": "388.84"
     },
     {
@@ -8367,12 +8421,12 @@
      "close_time": "2026-10-16T23:30:00Z",
      "expected_expiration_time": "2026-10-15T02:30:00Z",
      "yes_ask_dollars": "0.2500",
-     "yes_ask_size_fp": "27872.49",
+     "yes_ask_size_fp": "14101.43",
      "volume_24h_fp": "387.23"
     }
    ],
-   "prelim_sum": 1.01,
-   "volume_24h": 943.17,
+   "prelim_sum": 1.0,
+   "volume_24h": 954.1,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -8401,7 +8455,7 @@
      "close_time": "2026-10-16T23:30:00Z",
      "expected_expiration_time": "2026-10-15T02:30:00Z",
      "yes_ask_dollars": "0.4100",
-     "yes_ask_size_fp": "18320.58",
+     "yes_ask_size_fp": "18325.10",
      "volume_24h_fp": "389.59"
     },
     {
@@ -8421,12 +8475,12 @@
      "close_time": "2026-10-16T23:30:00Z",
      "expected_expiration_time": "2026-10-15T02:30:00Z",
      "yes_ask_dollars": "0.2600",
-     "yes_ask_size_fp": "52841.17",
-     "volume_24h_fp": "445.57"
+     "yes_ask_size_fp": "55103.17",
+     "volume_24h_fp": "427.57"
     }
    ],
    "prelim_sum": 1.01,
-   "volume_24h": 997.99,
+   "volume_24h": 979.99,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -8455,8 +8509,8 @@
      "close_time": "2026-10-16T23:30:00Z",
      "expected_expiration_time": "2026-10-15T02:30:00Z",
      "yes_ask_dollars": "0.6500",
-     "yes_ask_size_fp": "14619.70",
-     "volume_24h_fp": "26255.53"
+     "yes_ask_size_fp": "11866.18",
+     "volume_24h_fp": "26008.92"
     },
     {
      "ticker": "KXMLSGAME-26OCT14MIANYC-NYC",
@@ -8465,8 +8519,8 @@
      "close_time": "2026-10-16T23:30:00Z",
      "expected_expiration_time": "2026-10-15T02:30:00Z",
      "yes_ask_dollars": "0.1700",
-     "yes_ask_size_fp": "40594.28",
-     "volume_24h_fp": "7595.56"
+     "yes_ask_size_fp": "40176.07",
+     "volume_24h_fp": "7725.34"
     },
     {
      "ticker": "KXMLSGAME-26OCT14MIANYC-TIE",
@@ -8475,12 +8529,12 @@
      "close_time": "2026-10-16T23:30:00Z",
      "expected_expiration_time": "2026-10-15T02:30:00Z",
      "yes_ask_dollars": "0.1900",
-     "yes_ask_size_fp": "34420.18",
+     "yes_ask_size_fp": "38251.19",
      "volume_24h_fp": "3372.32"
     }
    ],
    "prelim_sum": 1.01,
-   "volume_24h": 37223.409999999996,
+   "volume_24h": 37106.58,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -8509,8 +8563,8 @@
      "close_time": "2026-10-16T23:30:00Z",
      "expected_expiration_time": "2026-10-15T02:30:00Z",
      "yes_ask_dollars": "0.5100",
-     "yes_ask_size_fp": "36697.75",
-     "volume_24h_fp": "549.87"
+     "yes_ask_size_fp": "36743.94",
+     "volume_24h_fp": "559.34"
     },
     {
      "ticker": "KXMLSGAME-26OCT14DCUNYRB-NYRB",
@@ -8519,8 +8573,8 @@
      "close_time": "2026-10-16T23:30:00Z",
      "expected_expiration_time": "2026-10-15T02:30:00Z",
      "yes_ask_dollars": "0.2600",
-     "yes_ask_size_fp": "1196.43",
-     "volume_24h_fp": "2896.40"
+     "yes_ask_size_fp": "766.43",
+     "volume_24h_fp": "3001.40"
     },
     {
      "ticker": "KXMLSGAME-26OCT14DCUNYRB-TIE",
@@ -8529,12 +8583,12 @@
      "close_time": "2026-10-16T23:30:00Z",
      "expected_expiration_time": "2026-10-15T02:30:00Z",
      "yes_ask_dollars": "0.2400",
-     "yes_ask_size_fp": "26898.39",
+     "yes_ask_size_fp": "29504.39",
      "volume_24h_fp": "1951.51"
     }
    ],
    "prelim_sum": 1.01,
-   "volume_24h": 5397.78,
+   "volume_24h": 5512.25,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -8563,7 +8617,7 @@
      "close_time": "2026-10-16T23:30:00Z",
      "expected_expiration_time": "2026-10-15T02:30:00Z",
      "yes_ask_dollars": "0.4900",
-     "yes_ask_size_fp": "48490.67",
+     "yes_ask_size_fp": "50863.46",
      "volume_24h_fp": "364.06"
     },
     {
@@ -8573,8 +8627,8 @@
      "close_time": "2026-10-16T23:30:00Z",
      "expected_expiration_time": "2026-10-15T02:30:00Z",
      "yes_ask_dollars": "0.2800",
-     "yes_ask_size_fp": "12057.82",
-     "volume_24h_fp": "2280.79"
+     "yes_ask_size_fp": "11585.82",
+     "volume_24h_fp": "2286.39"
     },
     {
      "ticker": "KXMLSGAME-26OCT14CLBCLT-TIE",
@@ -8583,12 +8637,12 @@
      "close_time": "2026-10-16T23:30:00Z",
      "expected_expiration_time": "2026-10-15T02:30:00Z",
      "yes_ask_dollars": "0.2400",
-     "yes_ask_size_fp": "1437.00",
-     "volume_24h_fp": "27.68"
+     "yes_ask_size_fp": "1358.00",
+     "volume_24h_fp": "11.85"
     }
    ],
    "prelim_sum": 1.01,
-   "volume_24h": 2672.5299999999997,
+   "volume_24h": 2662.2999999999997,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -8616,9 +8670,9 @@
      "status": "active",
      "close_time": "2026-10-16T23:30:00Z",
      "expected_expiration_time": "2026-10-15T02:30:00Z",
-     "yes_ask_dollars": "0.5200",
-     "yes_ask_size_fp": "280.47",
-     "volume_24h_fp": "1926.23"
+     "yes_ask_dollars": "0.5400",
+     "yes_ask_size_fp": "2011.03",
+     "volume_24h_fp": "2200.02"
     },
     {
      "ticker": "KXMLSGAME-26OCT14CINNE-NE",
@@ -8626,9 +8680,9 @@
      "status": "active",
      "close_time": "2026-10-16T23:30:00Z",
      "expected_expiration_time": "2026-10-15T02:30:00Z",
-     "yes_ask_dollars": "0.2600",
-     "yes_ask_size_fp": "29390.55",
-     "volume_24h_fp": "1948.82"
+     "yes_ask_dollars": "0.2500",
+     "yes_ask_size_fp": "63683.78",
+     "volume_24h_fp": "1887.14"
     },
     {
      "ticker": "KXMLSGAME-26OCT14CINNE-TIE",
@@ -8636,13 +8690,13 @@
      "status": "active",
      "close_time": "2026-10-16T23:30:00Z",
      "expected_expiration_time": "2026-10-15T02:30:00Z",
-     "yes_ask_dollars": "0.2300",
-     "yes_ask_size_fp": "30371.47",
+     "yes_ask_dollars": "0.2200",
+     "yes_ask_size_fp": "32663.38",
      "volume_24h_fp": "152.38"
     }
    ],
    "prelim_sum": 1.01,
-   "volume_24h": 4027.43,
+   "volume_24h": 4239.54,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -8681,8 +8735,8 @@
      "close_time": "2026-10-16T23:30:00Z",
      "expected_expiration_time": "2026-10-15T02:30:00Z",
      "yes_ask_dollars": "0.1000",
-     "yes_ask_size_fp": "907.97",
-     "volume_24h_fp": "294.51"
+     "yes_ask_size_fp": "898.57",
+     "volume_24h_fp": "293.47"
     },
     {
      "ticker": "KXDIMAYORGAME-26OCT14SFEJAG-TIE",
@@ -8691,12 +8745,12 @@
      "close_time": "2026-10-16T23:30:00Z",
      "expected_expiration_time": "2026-10-15T02:30:00Z",
      "yes_ask_dollars": "0.1900",
-     "yes_ask_size_fp": "1837.00",
+     "yes_ask_size_fp": "603.00",
      "volume_24h_fp": "0.00"
     }
    ],
    "prelim_sum": 1.01,
-   "volume_24h": 368.85,
+   "volume_24h": 367.81000000000006,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -8725,7 +8779,7 @@
      "close_time": "2026-10-16T22:00:00Z",
      "expected_expiration_time": "2026-10-15T01:00:00Z",
      "yes_ask_dollars": "0.1700",
-     "yes_ask_size_fp": "1273.20",
+     "yes_ask_size_fp": "1274.20",
      "volume_24h_fp": "1841.17"
     },
     {
@@ -8735,8 +8789,8 @@
      "close_time": "2026-10-16T22:00:00Z",
      "expected_expiration_time": "2026-10-15T01:00:00Z",
      "yes_ask_dollars": "0.5700",
-     "yes_ask_size_fp": "3799.69",
-     "volume_24h_fp": "2811.72"
+     "yes_ask_size_fp": "3678.77",
+     "volume_24h_fp": "2932.64"
     },
     {
      "ticker": "KXARGPREMDIVGAME-26OCT14CASRIV-TIE",
@@ -8750,7 +8804,7 @@
     }
    ],
    "prelim_sum": 1.01,
-   "volume_24h": 4957.15,
+   "volume_24h": 5078.07,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -8778,9 +8832,9 @@
      "status": "active",
      "close_time": "2026-10-16T21:30:00Z",
      "expected_expiration_time": "2026-10-15T00:30:00Z",
-     "yes_ask_dollars": "0.7800",
-     "yes_ask_size_fp": "6055.48",
-     "volume_24h_fp": "218.74"
+     "yes_ask_dollars": "0.7600",
+     "yes_ask_size_fp": "1880.00",
+     "volume_24h_fp": "220.00"
     },
     {
      "ticker": "KXDIMAYORGAME-26OCT14JUNPER-PER",
@@ -8788,9 +8842,9 @@
      "status": "active",
      "close_time": "2026-10-16T21:30:00Z",
      "expected_expiration_time": "2026-10-15T00:30:00Z",
-     "yes_ask_dollars": "0.0800",
-     "yes_ask_size_fp": "2699.57",
-     "volume_24h_fp": "1368.22"
+     "yes_ask_dollars": "0.0900",
+     "yes_ask_size_fp": "4696.27",
+     "volume_24h_fp": "2210.67"
     },
     {
      "ticker": "KXDIMAYORGAME-26OCT14JUNPER-TIE",
@@ -8799,12 +8853,12 @@
      "close_time": "2026-10-16T21:30:00Z",
      "expected_expiration_time": "2026-10-15T00:30:00Z",
      "yes_ask_dollars": "0.1500",
-     "yes_ask_size_fp": "1731.54",
-     "volume_24h_fp": "31.46"
+     "yes_ask_size_fp": "1170.01",
+     "volume_24h_fp": "37.46"
     }
    ],
-   "prelim_sum": 1.01,
-   "volume_24h": 1618.42,
+   "prelim_sum": 1.0,
+   "volume_24h": 2468.13,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -8833,8 +8887,8 @@
      "close_time": "2026-10-16T19:00:00Z",
      "expected_expiration_time": "2026-10-14T22:00:00Z",
      "yes_ask_dollars": "0.1000",
-     "yes_ask_size_fp": "261773.50",
-     "volume_24h_fp": "11415.04"
+     "yes_ask_size_fp": "270228.82",
+     "volume_24h_fp": "12204.38"
     },
     {
      "ticker": "KXUCLGAME-26OCT14SLOVFB-VFB",
@@ -8843,8 +8897,8 @@
      "close_time": "2026-10-16T19:00:00Z",
      "expected_expiration_time": "2026-10-14T22:00:00Z",
      "yes_ask_dollars": "0.7500",
-     "yes_ask_size_fp": "22057.95",
-     "volume_24h_fp": "6535.82"
+     "yes_ask_size_fp": "21912.02",
+     "volume_24h_fp": "6675.28"
     },
     {
      "ticker": "KXUCLGAME-26OCT14SLOVFB-TIE",
@@ -8853,12 +8907,12 @@
      "close_time": "2026-10-16T19:00:00Z",
      "expected_expiration_time": "2026-10-14T22:00:00Z",
      "yes_ask_dollars": "0.1600",
-     "yes_ask_size_fp": "134824.53",
-     "volume_24h_fp": "1946.88"
+     "yes_ask_size_fp": "129164.17",
+     "volume_24h_fp": "2009.83"
     }
    ],
    "prelim_sum": 1.01,
-   "volume_24h": 19897.74,
+   "volume_24h": 20889.489999999998,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -8887,8 +8941,8 @@
      "close_time": "2026-10-16T19:00:00Z",
      "expected_expiration_time": "2026-10-14T22:00:00Z",
      "yes_ask_dollars": "0.3600",
-     "yes_ask_size_fp": "130258.42",
-     "volume_24h_fp": "6142.90"
+     "yes_ask_size_fp": "172369.02",
+     "volume_24h_fp": "6442.23"
     },
     {
      "ticker": "KXUCLGAME-26OCT14SHAAEK-AEK",
@@ -8897,8 +8951,8 @@
      "close_time": "2026-10-16T19:00:00Z",
      "expected_expiration_time": "2026-10-14T22:00:00Z",
      "yes_ask_dollars": "0.3700",
-     "yes_ask_size_fp": "29590.21",
-     "volume_24h_fp": "2340.15"
+     "yes_ask_size_fp": "26828.03",
+     "volume_24h_fp": "2596.90"
     },
     {
      "ticker": "KXUCLGAME-26OCT14SHAAEK-TIE",
@@ -8906,13 +8960,13 @@
      "status": "active",
      "close_time": "2026-10-16T19:00:00Z",
      "expected_expiration_time": "2026-10-14T22:00:00Z",
-     "yes_ask_dollars": "0.2900",
-     "yes_ask_size_fp": "218850.98",
-     "volume_24h_fp": "18086.31"
+     "yes_ask_dollars": "0.2800",
+     "yes_ask_size_fp": "41682.00",
+     "volume_24h_fp": "18197.14"
     }
    ],
-   "prelim_sum": 1.02,
-   "volume_24h": 26569.36,
+   "prelim_sum": 1.01,
+   "volume_24h": 27236.27,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -8941,8 +8995,8 @@
      "close_time": "2026-10-16T19:00:00Z",
      "expected_expiration_time": "2026-10-14T22:00:00Z",
      "yes_ask_dollars": "0.2700",
-     "yes_ask_size_fp": "474778.72",
-     "volume_24h_fp": "88236.24"
+     "yes_ask_size_fp": "476353.60",
+     "volume_24h_fp": "98582.66"
     },
     {
      "ticker": "KXUCLGAME-26OCT14ROMRMA-RMA",
@@ -8951,8 +9005,8 @@
      "close_time": "2026-10-16T19:00:00Z",
      "expected_expiration_time": "2026-10-14T22:00:00Z",
      "yes_ask_dollars": "0.5000",
-     "yes_ask_size_fp": "629382.80",
-     "volume_24h_fp": "460267.63"
+     "yes_ask_size_fp": "593924.90",
+     "volume_24h_fp": "503616.80"
     },
     {
      "ticker": "KXUCLGAME-26OCT14ROMRMA-TIE",
@@ -8961,12 +9015,12 @@
      "close_time": "2026-10-16T19:00:00Z",
      "expected_expiration_time": "2026-10-14T22:00:00Z",
      "yes_ask_dollars": "0.2500",
-     "yes_ask_size_fp": "305314.50",
-     "volume_24h_fp": "12370.97"
+     "yes_ask_size_fp": "299166.01",
+     "volume_24h_fp": "13733.91"
     }
    ],
    "prelim_sum": 1.02,
-   "volume_24h": 560874.84,
+   "volume_24h": 615933.37,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -8995,8 +9049,8 @@
      "close_time": "2026-10-16T19:00:00Z",
      "expected_expiration_time": "2026-10-14T22:00:00Z",
      "yes_ask_dollars": "0.4800",
-     "yes_ask_size_fp": "237142.04",
-     "volume_24h_fp": "59929.15"
+     "yes_ask_size_fp": "243916.57",
+     "volume_24h_fp": "64721.22"
     },
     {
      "ticker": "KXUCLGAME-26OCT14RBBFCP-FCP",
@@ -9005,8 +9059,8 @@
      "close_time": "2026-10-16T19:00:00Z",
      "expected_expiration_time": "2026-10-14T22:00:00Z",
      "yes_ask_dollars": "0.2800",
-     "yes_ask_size_fp": "180214.11",
-     "volume_24h_fp": "13587.93"
+     "yes_ask_size_fp": "189342.70",
+     "volume_24h_fp": "13818.87"
     },
     {
      "ticker": "KXUCLGAME-26OCT14RBBFCP-TIE",
@@ -9015,12 +9069,12 @@
      "close_time": "2026-10-16T19:00:00Z",
      "expected_expiration_time": "2026-10-14T22:00:00Z",
      "yes_ask_dollars": "0.2600",
-     "yes_ask_size_fp": "240884.88",
-     "volume_24h_fp": "20992.45"
+     "yes_ask_size_fp": "241649.02",
+     "volume_24h_fp": "21278.76"
     }
    ],
    "prelim_sum": 1.02,
-   "volume_24h": 94509.53,
+   "volume_24h": 99818.85,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -9048,9 +9102,9 @@
      "status": "active",
      "close_time": "2026-10-16T19:00:00Z",
      "expected_expiration_time": "2026-10-14T22:00:00Z",
-     "yes_ask_dollars": "0.4500",
-     "yes_ask_size_fp": "142.63",
-     "volume_24h_fp": "385713.52"
+     "yes_ask_dollars": "0.4600",
+     "yes_ask_size_fp": "2836.95",
+     "volume_24h_fp": "401638.61"
     },
     {
      "ticker": "KXUCLGAME-26OCT14MCIPSG-PSG",
@@ -9059,8 +9113,8 @@
      "close_time": "2026-10-16T19:00:00Z",
      "expected_expiration_time": "2026-10-14T22:00:00Z",
      "yes_ask_dollars": "0.3200",
-     "yes_ask_size_fp": "26836.21",
-     "volume_24h_fp": "137911.14"
+     "yes_ask_size_fp": "640283.31",
+     "volume_24h_fp": "143622.17"
     },
     {
      "ticker": "KXUCLGAME-26OCT14MCIPSG-TIE",
@@ -9069,12 +9123,12 @@
      "close_time": "2026-10-16T19:00:00Z",
      "expected_expiration_time": "2026-10-14T22:00:00Z",
      "yes_ask_dollars": "0.2400",
-     "yes_ask_size_fp": "287206.78",
-     "volume_24h_fp": "36273.49"
+     "yes_ask_size_fp": "301867.44",
+     "volume_24h_fp": "37421.89"
     }
    ],
-   "prelim_sum": 1.01,
-   "volume_24h": 559898.15,
+   "prelim_sum": 1.02,
+   "volume_24h": 582682.67,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -9103,8 +9157,8 @@
      "close_time": "2026-10-16T19:00:00Z",
      "expected_expiration_time": "2026-10-14T22:00:00Z",
      "yes_ask_dollars": "0.3100",
-     "yes_ask_size_fp": "13020.94",
-     "volume_24h_fp": "8273.26"
+     "yes_ask_size_fp": "13411.56",
+     "volume_24h_fp": "8700.05"
     },
     {
      "ticker": "KXUCLGAME-26OCT14BOGBVB-BVB",
@@ -9113,8 +9167,8 @@
      "close_time": "2026-10-16T19:00:00Z",
      "expected_expiration_time": "2026-10-14T22:00:00Z",
      "yes_ask_dollars": "0.4700",
-     "yes_ask_size_fp": "525826.94",
-     "volume_24h_fp": "54951.82"
+     "yes_ask_size_fp": "508628.45",
+     "volume_24h_fp": "59327.20"
     },
     {
      "ticker": "KXUCLGAME-26OCT14BOGBVB-TIE",
@@ -9123,12 +9177,12 @@
      "close_time": "2026-10-16T19:00:00Z",
      "expected_expiration_time": "2026-10-14T22:00:00Z",
      "yes_ask_dollars": "0.2400",
-     "yes_ask_size_fp": "167144.63",
-     "volume_24h_fp": "5684.19"
+     "yes_ask_size_fp": "166084.53",
+     "volume_24h_fp": "5769.89"
     }
    ],
    "prelim_sum": 1.02,
-   "volume_24h": 68909.27,
+   "volume_24h": 73797.14,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -9157,8 +9211,8 @@
      "close_time": "2026-10-16T19:00:00Z",
      "expected_expiration_time": "2026-10-14T22:00:00Z",
      "yes_ask_dollars": "0.6000",
-     "yes_ask_size_fp": "285140.02",
-     "volume_24h_fp": "17852.31"
+     "yes_ask_size_fp": "269622.81",
+     "volume_24h_fp": "19135.96"
     },
     {
      "ticker": "KXUCLGAME-26OCT14AVLFEN-FEN",
@@ -9167,8 +9221,8 @@
      "close_time": "2026-10-16T19:00:00Z",
      "expected_expiration_time": "2026-10-14T22:00:00Z",
      "yes_ask_dollars": "0.1900",
-     "yes_ask_size_fp": "298839.89",
-     "volume_24h_fp": "19853.87"
+     "yes_ask_size_fp": "301346.89",
+     "volume_24h_fp": "20074.91"
     },
     {
      "ticker": "KXUCLGAME-26OCT14AVLFEN-TIE",
@@ -9177,12 +9231,12 @@
      "close_time": "2026-10-16T19:00:00Z",
      "expected_expiration_time": "2026-10-14T22:00:00Z",
      "yes_ask_dollars": "0.2300",
-     "yes_ask_size_fp": "45145.28",
-     "volume_24h_fp": "2341.03"
+     "yes_ask_size_fp": "68382.79",
+     "volume_24h_fp": "2365.82"
     }
    ],
    "prelim_sum": 1.02,
-   "volume_24h": 40047.21,
+   "volume_24h": 41576.69,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -9211,7 +9265,7 @@
      "close_time": "2026-10-16T19:00:00Z",
      "expected_expiration_time": "2026-10-14T22:00:00Z",
      "yes_ask_dollars": "0.2000",
-     "yes_ask_size_fp": "2332.77",
+     "yes_ask_size_fp": "6024.07",
      "volume_24h_fp": "133.59"
     },
     {
@@ -9221,7 +9275,7 @@
      "close_time": "2026-10-16T19:00:00Z",
      "expected_expiration_time": "2026-10-14T22:00:00Z",
      "yes_ask_dollars": "0.5900",
-     "yes_ask_size_fp": "25916.34",
+     "yes_ask_size_fp": "27807.34",
      "volume_24h_fp": "2434.97"
     },
     {
@@ -9231,7 +9285,7 @@
      "close_time": "2026-10-16T19:00:00Z",
      "expected_expiration_time": "2026-10-14T22:00:00Z",
      "yes_ask_dollars": "0.2300",
-     "yes_ask_size_fp": "2853.68",
+     "yes_ask_size_fp": "3559.28",
      "volume_24h_fp": "286.88"
     }
    ],
@@ -9265,7 +9319,7 @@
      "close_time": "2026-10-16T18:45:00Z",
      "expected_expiration_time": "2026-10-14T21:45:00Z",
      "yes_ask_dollars": "0.5900",
-     "yes_ask_size_fp": "9232.65",
+     "yes_ask_size_fp": "9761.65",
      "volume_24h_fp": "4136.16"
     },
     {
@@ -9275,7 +9329,7 @@
      "close_time": "2026-10-16T18:45:00Z",
      "expected_expiration_time": "2026-10-14T21:45:00Z",
      "yes_ask_dollars": "0.1900",
-     "yes_ask_size_fp": "7089.75",
+     "yes_ask_size_fp": "10247.10",
      "volume_24h_fp": "4440.04"
     },
     {
@@ -9285,12 +9339,12 @@
      "close_time": "2026-10-16T18:45:00Z",
      "expected_expiration_time": "2026-10-14T21:45:00Z",
      "yes_ask_dollars": "0.2300",
-     "yes_ask_size_fp": "1029.58",
-     "volume_24h_fp": "1528.68"
+     "yes_ask_size_fp": "1028.58",
+     "volume_24h_fp": "1529.68"
     }
    ],
    "prelim_sum": 1.01,
-   "volume_24h": 10104.88,
+   "volume_24h": 10105.88,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -9318,9 +9372,9 @@
      "status": "active",
      "close_time": "2026-10-16T18:45:00Z",
      "expected_expiration_time": "2026-10-14T21:45:00Z",
-     "yes_ask_dollars": "0.4500",
-     "yes_ask_size_fp": "54428.86",
-     "volume_24h_fp": "2153.43"
+     "yes_ask_dollars": "0.4300",
+     "yes_ask_size_fp": "106832.62",
+     "volume_24h_fp": "8085.82"
     },
     {
      "ticker": "KXEFLCHAMPIONSHIPGAME-26OCT14PORSHU-SHU",
@@ -9328,9 +9382,9 @@
      "status": "active",
      "close_time": "2026-10-16T18:45:00Z",
      "expected_expiration_time": "2026-10-14T21:45:00Z",
-     "yes_ask_dollars": "0.2900",
-     "yes_ask_size_fp": "6945.07",
-     "volume_24h_fp": "1565.18"
+     "yes_ask_dollars": "0.3000",
+     "yes_ask_size_fp": "4934.66",
+     "volume_24h_fp": "7623.55"
     },
     {
      "ticker": "KXEFLCHAMPIONSHIPGAME-26OCT14PORSHU-TIE",
@@ -9343,8 +9397,8 @@
      "volume_24h_fp": "232.00"
     }
    ],
-   "prelim_sum": 1.01,
-   "volume_24h": 3950.6099999999997,
+   "prelim_sum": 1.0,
+   "volume_24h": 15941.369999999999,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -9383,7 +9437,7 @@
      "close_time": "2026-10-16T18:45:00Z",
      "expected_expiration_time": "2026-10-14T21:45:00Z",
      "yes_ask_dollars": "0.3700",
-     "yes_ask_size_fp": "20437.86",
+     "yes_ask_size_fp": "12832.86",
      "volume_24h_fp": "1683.51"
     },
     {
@@ -9393,7 +9447,7 @@
      "close_time": "2026-10-16T18:45:00Z",
      "expected_expiration_time": "2026-10-14T21:45:00Z",
      "yes_ask_dollars": "0.2500",
-     "yes_ask_size_fp": "2057.30",
+     "yes_ask_size_fp": "1334.00",
      "volume_24h_fp": "350.00"
     }
    ],
@@ -9481,7 +9535,7 @@
      "close_time": "2026-10-16T17:00:00Z",
      "expected_expiration_time": "2026-10-14T20:00:00Z",
      "yes_ask_dollars": "0.5100",
-     "yes_ask_size_fp": "1418.84",
+     "yes_ask_size_fp": "1418.85",
      "volume_24h_fp": "20.95"
     },
     {
@@ -9491,7 +9545,7 @@
      "close_time": "2026-10-16T17:00:00Z",
      "expected_expiration_time": "2026-10-14T20:00:00Z",
      "yes_ask_dollars": "0.2500",
-     "yes_ask_size_fp": "910.93",
+     "yes_ask_size_fp": "910.94",
      "volume_24h_fp": "172.91"
     },
     {
@@ -9535,7 +9589,7 @@
      "close_time": "2026-10-16T17:00:00Z",
      "expected_expiration_time": "2026-10-14T20:00:00Z",
      "yes_ask_dollars": "0.3200",
-     "yes_ask_size_fp": "2799.46",
+     "yes_ask_size_fp": "2859.46",
      "volume_24h_fp": "74.56"
     },
     {
@@ -9545,7 +9599,7 @@
      "close_time": "2026-10-16T17:00:00Z",
      "expected_expiration_time": "2026-10-14T20:00:00Z",
      "yes_ask_dollars": "0.4100",
-     "yes_ask_size_fp": "1497.69",
+     "yes_ask_size_fp": "1634.06",
      "volume_24h_fp": "588.84"
     },
     {
@@ -9555,12 +9609,12 @@
      "close_time": "2026-10-16T17:00:00Z",
      "expected_expiration_time": "2026-10-14T20:00:00Z",
      "yes_ask_dollars": "0.2900",
-     "yes_ask_size_fp": "1807.00",
-     "volume_24h_fp": "9.23"
+     "yes_ask_size_fp": "1989.72",
+     "volume_24h_fp": "12.51"
     }
    ],
    "prelim_sum": 1.02,
-   "volume_24h": 672.63,
+   "volume_24h": 675.9100000000001,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -9588,8 +9642,8 @@
      "status": "active",
      "close_time": "2026-10-16T17:00:00Z",
      "expected_expiration_time": "2026-10-14T20:00:00Z",
-     "yes_ask_dollars": "0.4200",
-     "yes_ask_size_fp": "2080.64",
+     "yes_ask_dollars": "0.4100",
+     "yes_ask_size_fp": "1016.00",
      "volume_24h_fp": "18.39"
     },
     {
@@ -9599,7 +9653,7 @@
      "close_time": "2026-10-16T17:00:00Z",
      "expected_expiration_time": "2026-10-14T20:00:00Z",
      "yes_ask_dollars": "0.3400",
-     "yes_ask_size_fp": "1076.11",
+     "yes_ask_size_fp": "894.11",
      "volume_24h_fp": "340.06"
     },
     {
@@ -9613,7 +9667,7 @@
      "volume_24h_fp": "0.00"
     }
    ],
-   "prelim_sum": 1.02,
+   "prelim_sum": 1.01,
    "volume_24h": 358.45,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
@@ -9653,7 +9707,7 @@
      "close_time": "2026-10-16T17:00:00Z",
      "expected_expiration_time": "2026-10-14T20:00:00Z",
      "yes_ask_dollars": "0.2800",
-     "yes_ask_size_fp": "1283.67",
+     "yes_ask_size_fp": "1333.67",
      "volume_24h_fp": "0.00"
     },
     {
@@ -9663,12 +9717,12 @@
      "close_time": "2026-10-16T17:00:00Z",
      "expected_expiration_time": "2026-10-14T20:00:00Z",
      "yes_ask_dollars": "0.2400",
-     "yes_ask_size_fp": "1188.00",
-     "volume_24h_fp": "0.00"
+     "yes_ask_size_fp": "1176.14",
+     "volume_24h_fp": "11.86"
     }
    ],
    "prelim_sum": 1.02,
-   "volume_24h": 785.44,
+   "volume_24h": 797.3000000000001,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -9697,7 +9751,7 @@
      "close_time": "2026-10-16T17:00:00Z",
      "expected_expiration_time": "2026-10-14T20:00:00Z",
      "yes_ask_dollars": "0.6200",
-     "yes_ask_size_fp": "1753.19",
+     "yes_ask_size_fp": "1803.17",
      "volume_24h_fp": "468.26"
     },
     {
@@ -9707,7 +9761,7 @@
      "close_time": "2026-10-16T17:00:00Z",
      "expected_expiration_time": "2026-10-14T20:00:00Z",
      "yes_ask_dollars": "0.1900",
-     "yes_ask_size_fp": "2286.06",
+     "yes_ask_size_fp": "2407.06",
      "volume_24h_fp": "14.94"
     },
     {
@@ -9750,8 +9804,8 @@
      "status": "active",
      "close_time": "2026-10-16T17:00:00Z",
      "expected_expiration_time": "2026-10-14T20:00:00Z",
-     "yes_ask_dollars": "0.4500",
-     "yes_ask_size_fp": "3314.72",
+     "yes_ask_dollars": "0.4400",
+     "yes_ask_size_fp": "1785.00",
      "volume_24h_fp": "120.18"
     },
     {
@@ -9761,7 +9815,7 @@
      "close_time": "2026-10-16T17:00:00Z",
      "expected_expiration_time": "2026-10-14T20:00:00Z",
      "yes_ask_dollars": "0.3400",
-     "yes_ask_size_fp": "1240.91",
+     "yes_ask_size_fp": "1240.88",
      "volume_24h_fp": "84.36"
     },
     {
@@ -9775,7 +9829,7 @@
      "volume_24h_fp": "0.00"
     }
    ],
-   "prelim_sum": 1.03,
+   "prelim_sum": 1.02,
    "volume_24h": 204.54000000000002,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
@@ -9805,7 +9859,7 @@
      "close_time": "2026-10-16T17:00:00Z",
      "expected_expiration_time": "2026-10-14T20:00:00Z",
      "yes_ask_dollars": "0.3400",
-     "yes_ask_size_fp": "1158.76",
+     "yes_ask_size_fp": "2581.76",
      "volume_24h_fp": "11.24"
     },
     {
@@ -9815,7 +9869,7 @@
      "close_time": "2026-10-16T17:00:00Z",
      "expected_expiration_time": "2026-10-14T20:00:00Z",
      "yes_ask_dollars": "0.4100",
-     "yes_ask_size_fp": "982.58",
+     "yes_ask_size_fp": "1390.00",
      "volume_24h_fp": "41.09"
     },
     {
@@ -9824,12 +9878,12 @@
      "status": "active",
      "close_time": "2026-10-16T17:00:00Z",
      "expected_expiration_time": "2026-10-14T20:00:00Z",
-     "yes_ask_dollars": "0.2700",
-     "yes_ask_size_fp": "833.82",
+     "yes_ask_dollars": "0.2600",
+     "yes_ask_size_fp": "1176.00",
      "volume_24h_fp": "176.18"
     }
    ],
-   "prelim_sum": 1.02,
+   "prelim_sum": 1.01,
    "volume_24h": 228.51000000000002,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
@@ -9859,8 +9913,8 @@
      "close_time": "2026-10-16T16:45:00Z",
      "expected_expiration_time": "2026-10-14T19:45:00Z",
      "yes_ask_dollars": "0.2700",
-     "yes_ask_size_fp": "40057.05",
-     "volume_24h_fp": "31564.94"
+     "yes_ask_size_fp": "532.39",
+     "volume_24h_fp": "33132.79"
     },
     {
      "ticker": "KXUCLGAME-26OCT14FEYCOM-COM",
@@ -9868,9 +9922,9 @@
      "status": "active",
      "close_time": "2026-10-16T16:45:00Z",
      "expected_expiration_time": "2026-10-14T19:45:00Z",
-     "yes_ask_dollars": "0.5200",
-     "yes_ask_size_fp": "279003.35",
-     "volume_24h_fp": "54331.80"
+     "yes_ask_dollars": "0.5100",
+     "yes_ask_size_fp": "137017.43",
+     "volume_24h_fp": "57849.32"
     },
     {
      "ticker": "KXUCLGAME-26OCT14FEYCOM-TIE",
@@ -9879,12 +9933,12 @@
      "close_time": "2026-10-16T16:45:00Z",
      "expected_expiration_time": "2026-10-14T19:45:00Z",
      "yes_ask_dollars": "0.2300",
-     "yes_ask_size_fp": "130980.78",
-     "volume_24h_fp": "8415.79"
+     "yes_ask_size_fp": "28862.04",
+     "volume_24h_fp": "8452.56"
     }
    ],
-   "prelim_sum": 1.02,
-   "volume_24h": 94312.53,
+   "prelim_sum": 1.01,
+   "volume_24h": 99434.67,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -9912,9 +9966,9 @@
      "status": "active",
      "close_time": "2026-10-16T16:45:00Z",
      "expected_expiration_time": "2026-10-14T19:45:00Z",
-     "yes_ask_dollars": "0.1000",
-     "yes_ask_size_fp": "110992.44",
-     "volume_24h_fp": "70539.26"
+     "yes_ask_dollars": "0.1100",
+     "yes_ask_size_fp": "1713.29",
+     "volume_24h_fp": "73344.22"
     },
     {
      "ticker": "KXUCLGAME-26OCT14ASKLFC-LFC",
@@ -9922,9 +9976,9 @@
      "status": "active",
      "close_time": "2026-10-16T16:45:00Z",
      "expected_expiration_time": "2026-10-14T19:45:00Z",
-     "yes_ask_dollars": "0.7600",
-     "yes_ask_size_fp": "495621.07",
-     "volume_24h_fp": "135601.87"
+     "yes_ask_dollars": "0.7300",
+     "yes_ask_size_fp": "115472.16",
+     "volume_24h_fp": "139457.40"
     },
     {
      "ticker": "KXUCLGAME-26OCT14ASKLFC-TIE",
@@ -9933,12 +9987,12 @@
      "close_time": "2026-10-16T16:45:00Z",
      "expected_expiration_time": "2026-10-14T19:45:00Z",
      "yes_ask_dollars": "0.1600",
-     "yes_ask_size_fp": "203625.14",
-     "volume_24h_fp": "6783.77"
+     "yes_ask_size_fp": "3604.43",
+     "volume_24h_fp": "7197.29"
     }
    ],
-   "prelim_sum": 1.02,
-   "volume_24h": 212924.9,
+   "prelim_sum": 1.0,
+   "volume_24h": 219998.91,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -9966,9 +10020,9 @@
      "status": "active",
      "close_time": "2026-10-16T16:00:00Z",
      "expected_expiration_time": "2026-10-14T19:00:00Z",
-     "yes_ask_dollars": "0.4600",
-     "yes_ask_size_fp": "1729.33",
-     "volume_24h_fp": "77.49"
+     "yes_ask_dollars": "0.4500",
+     "yes_ask_size_fp": "510.21",
+     "volume_24h_fp": "171.49"
     },
     {
      "ticker": "KXCZEFLGAME-26OCT14BOHMLA-MLA",
@@ -9977,8 +10031,8 @@
      "close_time": "2026-10-16T16:00:00Z",
      "expected_expiration_time": "2026-10-14T19:00:00Z",
      "yes_ask_dollars": "0.2900",
-     "yes_ask_size_fp": "1335.18",
-     "volume_24h_fp": "210.97"
+     "yes_ask_size_fp": "1332.18",
+     "volume_24h_fp": "246.82"
     },
     {
      "ticker": "KXCZEFLGAME-26OCT14BOHMLA-TIE",
@@ -9987,12 +10041,12 @@
      "close_time": "2026-10-16T16:00:00Z",
      "expected_expiration_time": "2026-10-14T19:00:00Z",
      "yes_ask_dollars": "0.2600",
-     "yes_ask_size_fp": "1.00",
+     "yes_ask_size_fp": "2.00",
      "volume_24h_fp": "0.00"
     }
    ],
-   "prelim_sum": 1.01,
-   "volume_24h": 288.46,
+   "prelim_sum": 1.0,
+   "volume_24h": 418.31,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -10021,8 +10075,8 @@
      "close_time": "2026-10-16T14:00:00Z",
      "expected_expiration_time": "2026-10-14T17:00:00Z",
      "yes_ask_dollars": "0.6700",
-     "yes_ask_size_fp": "1973.72",
-     "volume_24h_fp": "66.38"
+     "yes_ask_size_fp": "1950.38",
+     "volume_24h_fp": "89.72"
     },
     {
      "ticker": "KXTFF1LIGGAME-26OCT14UMRBOL-BOL",
@@ -10031,8 +10085,8 @@
      "close_time": "2026-10-16T14:00:00Z",
      "expected_expiration_time": "2026-10-14T17:00:00Z",
      "yes_ask_dollars": "0.1300",
-     "yes_ask_size_fp": "1233.64",
-     "volume_24h_fp": "257.14"
+     "yes_ask_size_fp": "1219.17",
+     "volume_24h_fp": "264.39"
     },
     {
      "ticker": "KXTFF1LIGGAME-26OCT14UMRBOL-TIE",
@@ -10046,7 +10100,7 @@
     }
    ],
    "prelim_sum": 1.01,
-   "volume_24h": 1124.63,
+   "volume_24h": 1155.22,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -10075,8 +10129,8 @@
      "close_time": "2026-10-16T13:00:00Z",
      "expected_expiration_time": "2026-10-14T16:00:00Z",
      "yes_ask_dollars": "0.0700",
-     "yes_ask_size_fp": "1962.17",
-     "volume_24h_fp": "1417.31"
+     "yes_ask_size_fp": "1961.17",
+     "volume_24h_fp": "1418.41"
     },
     {
      "ticker": "KXSVKCUPGAME-26OCT14VNTDBB-DBB",
@@ -10084,9 +10138,9 @@
      "status": "active",
      "close_time": "2026-10-16T13:00:00Z",
      "expected_expiration_time": "2026-10-14T16:00:00Z",
-     "yes_ask_dollars": "0.8100",
-     "yes_ask_size_fp": "81.29",
-     "volume_24h_fp": "202.78"
+     "yes_ask_dollars": "0.8200",
+     "yes_ask_size_fp": "1940.69",
+     "volume_24h_fp": "384.35"
     },
     {
      "ticker": "KXSVKCUPGAME-26OCT14VNTDBB-TIE",
@@ -10099,8 +10153,8 @@
      "volume_24h_fp": "61.95"
     }
    ],
-   "prelim_sum": 1.02,
-   "volume_24h": 1682.04,
+   "prelim_sum": 1.0299999999999998,
+   "volume_24h": 1864.71,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -10129,8 +10183,8 @@
      "close_time": "2026-10-16T13:00:00Z",
      "expected_expiration_time": "2026-10-14T16:00:00Z",
      "yes_ask_dollars": "0.0500",
-     "yes_ask_size_fp": "2391.61",
-     "volume_24h_fp": "9262.91"
+     "yes_ask_size_fp": "2179.49",
+     "volume_24h_fp": "9381.71"
     },
     {
      "ticker": "KXSVKCUPGAME-26OCT14PIETRN-TRN",
@@ -10138,9 +10192,9 @@
      "status": "active",
      "close_time": "2026-10-16T13:00:00Z",
      "expected_expiration_time": "2026-10-14T16:00:00Z",
-     "yes_ask_dollars": "0.9500",
-     "yes_ask_size_fp": "135.78",
-     "volume_24h_fp": "1402.79"
+     "yes_ask_dollars": "0.9400",
+     "yes_ask_size_fp": "75.00",
+     "volume_24h_fp": "1409.08"
     },
     {
      "ticker": "KXSVKCUPGAME-26OCT14PIETRN-TIE",
@@ -10149,12 +10203,12 @@
      "close_time": "2026-10-16T13:00:00Z",
      "expected_expiration_time": "2026-10-14T16:00:00Z",
      "yes_ask_dollars": "0.0600",
-     "yes_ask_size_fp": "79.85",
-     "volume_24h_fp": "612.38"
+     "yes_ask_size_fp": "87.47",
+     "volume_24h_fp": "618.67"
     }
    ],
-   "prelim_sum": 1.06,
-   "volume_24h": 11278.08,
+   "prelim_sum": 1.05,
+   "volume_24h": 11409.46,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -10193,8 +10247,8 @@
      "close_time": "2026-10-16T13:00:00Z",
      "expected_expiration_time": "2026-10-14T16:00:00Z",
      "yes_ask_dollars": "0.2700",
-     "yes_ask_size_fp": "2734.65",
-     "volume_24h_fp": "1593.96"
+     "yes_ask_size_fp": "2111.41",
+     "volume_24h_fp": "1732.69"
     },
     {
      "ticker": "KXSERIECGAME-26OCT14LATATA-TIE",
@@ -10203,12 +10257,12 @@
      "close_time": "2026-10-16T13:00:00Z",
      "expected_expiration_time": "2026-10-14T16:00:00Z",
      "yes_ask_dollars": "0.2700",
-     "yes_ask_size_fp": "951.29",
+     "yes_ask_size_fp": "2320.29",
      "volume_24h_fp": "116.71"
     }
    ],
    "prelim_sum": 1.02,
-   "volume_24h": 2436.82,
+   "volume_24h": 2575.55,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -10236,9 +10290,9 @@
      "status": "active",
      "close_time": "2026-10-16T12:30:00Z",
      "expected_expiration_time": "2026-10-14T15:30:00Z",
-     "yes_ask_dollars": "0.1400",
-     "yes_ask_size_fp": "372.83",
-     "volume_24h_fp": "528.86"
+     "yes_ask_dollars": "0.1300",
+     "yes_ask_size_fp": "697.50",
+     "volume_24h_fp": "544.49"
     },
     {
      "ticker": "KXSVKCUPGAME-26OCT14SMYRUZ-RUZ",
@@ -10246,9 +10300,9 @@
      "status": "active",
      "close_time": "2026-10-16T12:30:00Z",
      "expected_expiration_time": "2026-10-14T15:30:00Z",
-     "yes_ask_dollars": "0.6800",
-     "yes_ask_size_fp": "82.42",
-     "volume_24h_fp": "301.49"
+     "yes_ask_dollars": "0.6700",
+     "yes_ask_size_fp": "482.97",
+     "volume_24h_fp": "318.52"
     },
     {
      "ticker": "KXSVKCUPGAME-26OCT14SMYRUZ-TIE",
@@ -10257,12 +10311,12 @@
      "close_time": "2026-10-16T12:30:00Z",
      "expected_expiration_time": "2026-10-14T15:30:00Z",
      "yes_ask_dollars": "0.1900",
-     "yes_ask_size_fp": "97.00",
+     "yes_ask_size_fp": "105.00",
      "volume_24h_fp": "48.54"
     }
    ],
-   "prelim_sum": 1.01,
-   "volume_24h": 878.89,
+   "prelim_sum": 0.99,
+   "volume_24h": 911.55,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -10290,9 +10344,9 @@
      "status": "active",
      "close_time": "2026-10-16T12:30:00Z",
      "expected_expiration_time": "2026-10-14T15:30:00Z",
-     "yes_ask_dollars": "0.1900",
-     "yes_ask_size_fp": "8.00",
-     "volume_24h_fp": "338.41"
+     "yes_ask_dollars": "0.2000",
+     "yes_ask_size_fp": "1.00",
+     "volume_24h_fp": "359.53"
     },
     {
      "ticker": "KXSVKCUPGAME-26OCT14SLBNAM-NAM",
@@ -10300,9 +10354,9 @@
      "status": "active",
      "close_time": "2026-10-16T12:30:00Z",
      "expected_expiration_time": "2026-10-14T15:30:00Z",
-     "yes_ask_dollars": "0.7100",
-     "yes_ask_size_fp": "10.80",
-     "volume_24h_fp": "133.07"
+     "yes_ask_dollars": "0.6800",
+     "yes_ask_size_fp": "8.80",
+     "volume_24h_fp": "155.79"
     },
     {
      "ticker": "KXSVKCUPGAME-26OCT14SLBNAM-TIE",
@@ -10311,12 +10365,12 @@
      "close_time": "2026-10-16T12:30:00Z",
      "expected_expiration_time": "2026-10-14T15:30:00Z",
      "yes_ask_dollars": "0.1800",
-     "yes_ask_size_fp": "387.48",
-     "volume_24h_fp": "563.76"
+     "yes_ask_size_fp": "327.22",
+     "volume_24h_fp": "600.02"
     }
    ],
-   "prelim_sum": 1.0799999999999998,
-   "volume_24h": 1035.24,
+   "prelim_sum": 1.06,
+   "volume_24h": 1115.34,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -10345,8 +10399,8 @@
      "close_time": "2026-10-16T12:30:00Z",
      "expected_expiration_time": "2026-10-14T15:30:00Z",
      "yes_ask_dollars": "0.6800",
-     "yes_ask_size_fp": "966.10",
-     "volume_24h_fp": "1926.73"
+     "yes_ask_size_fp": "1016.29",
+     "volume_24h_fp": "2395.90"
     },
     {
      "ticker": "KXSVKCUPGAME-26OCT14SAMHUM-HUM",
@@ -10355,8 +10409,8 @@
      "close_time": "2026-10-16T12:30:00Z",
      "expected_expiration_time": "2026-10-14T15:30:00Z",
      "yes_ask_dollars": "0.1300",
-     "yes_ask_size_fp": "99.51",
-     "volume_24h_fp": "773.95"
+     "yes_ask_size_fp": "731.00",
+     "volume_24h_fp": "789.57"
     },
     {
      "ticker": "KXSVKCUPGAME-26OCT14SAMHUM-TIE",
@@ -10365,12 +10419,12 @@
      "close_time": "2026-10-16T12:30:00Z",
      "expected_expiration_time": "2026-10-14T15:30:00Z",
      "yes_ask_dollars": "0.1800",
-     "yes_ask_size_fp": "93.28",
-     "volume_24h_fp": "106.19"
+     "yes_ask_size_fp": "14.48",
+     "volume_24h_fp": "211.25"
     }
    ],
    "prelim_sum": 0.99,
-   "volume_24h": 2806.87,
+   "volume_24h": 3396.7200000000003,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -10399,8 +10453,8 @@
      "close_time": "2026-10-16T12:30:00Z",
      "expected_expiration_time": "2026-10-14T15:30:00Z",
      "yes_ask_dollars": "0.2800",
-     "yes_ask_size_fp": "445.27",
-     "volume_24h_fp": "894.67"
+     "yes_ask_size_fp": "560.40",
+     "volume_24h_fp": "899.41"
     },
     {
      "ticker": "KXSVKCUPGAME-26OCT14POVKOS-KOS",
@@ -10409,8 +10463,8 @@
      "close_time": "2026-10-16T12:30:00Z",
      "expected_expiration_time": "2026-10-14T15:30:00Z",
      "yes_ask_dollars": "0.5000",
-     "yes_ask_size_fp": "143.15",
-     "volume_24h_fp": "1199.20"
+     "yes_ask_size_fp": "673.55",
+     "volume_24h_fp": "1238.80"
     },
     {
      "ticker": "KXSVKCUPGAME-26OCT14POVKOS-TIE",
@@ -10419,12 +10473,12 @@
      "close_time": "2026-10-16T12:30:00Z",
      "expected_expiration_time": "2026-10-14T15:30:00Z",
      "yes_ask_dollars": "0.2400",
-     "yes_ask_size_fp": "1678.45",
+     "yes_ask_size_fp": "1472.64",
      "volume_24h_fp": "85.03"
     }
    ],
    "prelim_sum": 1.02,
-   "volume_24h": 2178.9,
+   "volume_24h": 2223.24,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -10453,8 +10507,8 @@
      "close_time": "2026-10-16T12:30:00Z",
      "expected_expiration_time": "2026-10-14T15:30:00Z",
      "yes_ask_dollars": "0.1500",
-     "yes_ask_size_fp": "136.36",
-     "volume_24h_fp": "543.62"
+     "yes_ask_size_fp": "217.78",
+     "volume_24h_fp": "557.35"
     },
     {
      "ticker": "KXSVKCUPGAME-26OCT14FCLTRE-TRE",
@@ -10463,8 +10517,8 @@
      "close_time": "2026-10-16T12:30:00Z",
      "expected_expiration_time": "2026-10-14T15:30:00Z",
      "yes_ask_dollars": "0.6600",
-     "yes_ask_size_fp": "160.58",
-     "volume_24h_fp": "111.61"
+     "yes_ask_size_fp": "128.79",
+     "volume_24h_fp": "129.40"
     },
     {
      "ticker": "KXSVKCUPGAME-26OCT14FCLTRE-TIE",
@@ -10473,12 +10527,12 @@
      "close_time": "2026-10-16T12:30:00Z",
      "expected_expiration_time": "2026-10-14T15:30:00Z",
      "yes_ask_dollars": "0.2100",
-     "yes_ask_size_fp": "1003.44",
+     "yes_ask_size_fp": "1091.44",
      "volume_24h_fp": "26.68"
     }
    ],
    "prelim_sum": 1.02,
-   "volume_24h": 681.91,
+   "volume_24h": 713.4300000000001,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -10507,8 +10561,8 @@
      "close_time": "2026-10-16T11:30:00Z",
      "expected_expiration_time": "2026-10-14T14:30:00Z",
      "yes_ask_dollars": "0.5800",
-     "yes_ask_size_fp": "1222.37",
-     "volume_24h_fp": "4465.37"
+     "yes_ask_size_fp": "2145.89",
+     "volume_24h_fp": "5885.02"
     },
     {
      "ticker": "KXTFF1LIGGAME-26OCT14BATIAS-IAS",
@@ -10517,8 +10571,8 @@
      "close_time": "2026-10-16T11:30:00Z",
      "expected_expiration_time": "2026-10-14T14:30:00Z",
      "yes_ask_dollars": "0.2000",
-     "yes_ask_size_fp": "1058.58",
-     "volume_24h_fp": "15117.52"
+     "yes_ask_size_fp": "825.93",
+     "volume_24h_fp": "15367.29"
     },
     {
      "ticker": "KXTFF1LIGGAME-26OCT14BATIAS-TIE",
@@ -10527,12 +10581,12 @@
      "close_time": "2026-10-16T11:30:00Z",
      "expected_expiration_time": "2026-10-14T14:30:00Z",
      "yes_ask_dollars": "0.2300",
-     "yes_ask_size_fp": "1276.69",
-     "volume_24h_fp": "1676.87"
+     "yes_ask_size_fp": "1233.94",
+     "volume_24h_fp": "1761.37"
     }
    ],
    "prelim_sum": 1.01,
-   "volume_24h": 21259.760000000002,
+   "volume_24h": 23013.68,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -10560,9 +10614,9 @@
      "status": "active",
      "close_time": "2026-10-16T10:00:00Z",
      "expected_expiration_time": "2026-10-14T13:00:00Z",
-     "yes_ask_dollars": "0.5900",
-     "yes_ask_size_fp": "308.26",
-     "volume_24h_fp": "13879.39"
+     "yes_ask_dollars": "0.6000",
+     "yes_ask_size_fp": "5357.85",
+     "volume_24h_fp": "16955.56"
     },
     {
      "ticker": "KXAFCCLGAME-26OCT14VIKJEO-JEO",
@@ -10571,8 +10625,8 @@
      "close_time": "2026-10-16T10:00:00Z",
      "expected_expiration_time": "2026-10-14T13:00:00Z",
      "yes_ask_dollars": "0.1800",
-     "yes_ask_size_fp": "511.01",
-     "volume_24h_fp": "6432.30"
+     "yes_ask_size_fp": "80.00",
+     "volume_24h_fp": "8045.92"
     },
     {
      "ticker": "KXAFCCLGAME-26OCT14VIKJEO-TIE",
@@ -10580,13 +10634,13 @@
      "status": "active",
      "close_time": "2026-10-16T10:00:00Z",
      "expected_expiration_time": "2026-10-14T13:00:00Z",
-     "yes_ask_dollars": "0.2400",
-     "yes_ask_size_fp": "1160.90",
-     "volume_24h_fp": "1584.20"
+     "yes_ask_dollars": "0.2300",
+     "yes_ask_size_fp": "539.13",
+     "volume_24h_fp": "2408.08"
     }
    ],
    "prelim_sum": 1.01,
-   "volume_24h": 21895.89,
+   "volume_24h": 27409.56,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -10615,8 +10669,8 @@
      "close_time": "2026-10-16T10:00:00Z",
      "expected_expiration_time": "2026-10-14T13:00:00Z",
      "yes_ask_dollars": "0.8400",
-     "yes_ask_size_fp": "4724.50",
-     "volume_24h_fp": "8819.33"
+     "yes_ask_size_fp": "1166.67",
+     "volume_24h_fp": "9629.97"
     },
     {
      "ticker": "KXAFCCLGAME-26OCT14REYPOR-POR",
@@ -10625,8 +10679,8 @@
      "close_time": "2026-10-16T10:00:00Z",
      "expected_expiration_time": "2026-10-14T13:00:00Z",
      "yes_ask_dollars": "0.0700",
-     "yes_ask_size_fp": "6805.97",
-     "volume_24h_fp": "41455.28"
+     "yes_ask_size_fp": "9913.20",
+     "volume_24h_fp": "44997.11"
     },
     {
      "ticker": "KXAFCCLGAME-26OCT14REYPOR-TIE",
@@ -10635,12 +10689,12 @@
      "close_time": "2026-10-16T10:00:00Z",
      "expected_expiration_time": "2026-10-14T13:00:00Z",
      "yes_ask_dollars": "0.1100",
-     "yes_ask_size_fp": "7289.56",
-     "volume_24h_fp": "6581.81"
+     "yes_ask_size_fp": "9322.60",
+     "volume_24h_fp": "7201.00"
     }
    ],
    "prelim_sum": 1.02,
-   "volume_24h": 56856.42,
+   "volume_24h": 61828.08,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -10659,42 +10713,96 @@
    }
   },
   {
-   "event_ticker": "KXESOCCERGAME-26OCT132356NINJMAVI",
-   "title": "eSoccer: Nottingham Forest (NINJA) vs Manchester Utd (Mavi)",
+   "event_ticker": "KXESOCCERGAME-26OCT140035HURRHOLI",
+   "title": "eSoccer: Athletic Club (Hurricane) vs Real Sociedad (Holis)",
    "legs": [
     {
-     "ticker": "KXESOCCERGAME-26OCT132356NINJMAVI-NINJ",
-     "yes_sub_title": "Nottingham Forest (NINJA)",
+     "ticker": "KXESOCCERGAME-26OCT140035HURRHOLI-HURR",
+     "yes_sub_title": "Athletic Club (Hurricane)",
      "status": "active",
-     "close_time": "2026-10-28T03:56:00Z",
-     "expected_expiration_time": "2026-10-14T06:56:00Z",
-     "yes_ask_dollars": "0.7400",
-     "yes_ask_size_fp": "3846.00",
-     "volume_24h_fp": "485.97"
+     "close_time": "2026-10-28T04:35:00Z",
+     "expected_expiration_time": "2026-10-14T07:35:00Z",
+     "yes_ask_dollars": "0.0100",
+     "yes_ask_size_fp": "490.00",
+     "volume_24h_fp": "456.70"
     },
     {
-     "ticker": "KXESOCCERGAME-26OCT132356NINJMAVI-MAVI",
-     "yes_sub_title": "Manchester Utd (Mavi)",
+     "ticker": "KXESOCCERGAME-26OCT140035HURRHOLI-HOLI",
+     "yes_sub_title": "Real Sociedad (Holis)",
      "status": "active",
-     "close_time": "2026-10-28T03:56:00Z",
-     "expected_expiration_time": "2026-10-14T06:56:00Z",
-     "yes_ask_dollars": "0.0800",
-     "yes_ask_size_fp": "1087.00",
-     "volume_24h_fp": "640.24"
+     "close_time": "2026-10-28T04:35:00Z",
+     "expected_expiration_time": "2026-10-14T07:35:00Z",
+     "yes_ask_dollars": "1.0000",
+     "yes_ask_size_fp": "0.00",
+     "volume_24h_fp": "181.95"
     },
     {
-     "ticker": "KXESOCCERGAME-26OCT132356NINJMAVI-TIE",
+     "ticker": "KXESOCCERGAME-26OCT140035HURRHOLI-TIE",
      "yes_sub_title": "Tie",
      "status": "active",
-     "close_time": "2026-10-28T03:56:00Z",
-     "expected_expiration_time": "2026-10-14T06:56:00Z",
-     "yes_ask_dollars": "0.2800",
-     "yes_ask_size_fp": "1389.00",
+     "close_time": "2026-10-28T04:35:00Z",
+     "expected_expiration_time": "2026-10-14T07:35:00Z",
+     "yes_ask_dollars": "0.0100",
+     "yes_ask_size_fp": "800.00",
+     "volume_24h_fp": "3.65"
+    }
+   ],
+   "prelim_sum": 1.02,
+   "volume_24h": 642.3,
+   "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
+   "fee_multiplier": null,
+   "coverage": {
+    "proven": true,
+    "method": "HEAD_TO_HEAD_WITH_TIE",
+    "reasons": [
+     "strikes: no todas las patas son strikes"
+    ],
+    "residuals": [
+     {
+      "name": "CANCELACION_O_REPROGRAMACION",
+      "payout": "precio justo seg\u00fan reglas de Kalshi (no garantizado)"
+     }
+    ],
+    "open_list_evidence": []
+   }
+  },
+  {
+   "event_ticker": "KXESOCCERGAME-26OCT140033PINKFEDE",
+   "title": "eSoccer: Villarreal CF (PinkElephant) vs Sevilla FC (Fede)",
+   "legs": [
+    {
+     "ticker": "KXESOCCERGAME-26OCT140033PINKFEDE-PINK",
+     "yes_sub_title": "Villarreal CF (PinkElephant)",
+     "status": "active",
+     "close_time": "2026-10-28T04:33:00Z",
+     "expected_expiration_time": "2026-10-14T07:33:00Z",
+     "yes_ask_dollars": "0.0100",
+     "yes_ask_size_fp": "1001.00",
+     "volume_24h_fp": "295.32"
+    },
+    {
+     "ticker": "KXESOCCERGAME-26OCT140033PINKFEDE-FEDE",
+     "yes_sub_title": "Sevilla FC (Fede)",
+     "status": "active",
+     "close_time": "2026-10-28T04:33:00Z",
+     "expected_expiration_time": "2026-10-14T07:33:00Z",
+     "yes_ask_dollars": "1.0000",
+     "yes_ask_size_fp": "0.00",
+     "volume_24h_fp": "443.48"
+    },
+    {
+     "ticker": "KXESOCCERGAME-26OCT140033PINKFEDE-TIE",
+     "yes_sub_title": "Tie",
+     "status": "active",
+     "close_time": "2026-10-28T04:33:00Z",
+     "expected_expiration_time": "2026-10-14T07:33:00Z",
+     "yes_ask_dollars": "0.0100",
+     "yes_ask_size_fp": "501.00",
      "volume_24h_fp": "0.00"
     }
    ],
-   "prelim_sum": 1.1,
-   "volume_24h": 1126.21,
+   "prelim_sum": 1.02,
+   "volume_24h": 738.8,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -10722,9 +10830,9 @@
      "status": "active",
      "close_time": "2026-10-16T03:00:00Z",
      "expected_expiration_time": "2026-10-14T06:00:00Z",
-     "yes_ask_dollars": "0.3900",
-     "yes_ask_size_fp": "25.00",
-     "volume_24h_fp": "0.00"
+     "yes_ask_dollars": "0.3800",
+     "yes_ask_size_fp": "50.00",
+     "volume_24h_fp": "289.25"
     },
     {
      "ticker": "KXNHL3P-26OCT13BOSSJ-BOS",
@@ -10732,9 +10840,9 @@
      "status": "active",
      "close_time": "2026-10-16T03:00:00Z",
      "expected_expiration_time": "2026-10-14T06:00:00Z",
-     "yes_ask_dollars": "0.4600",
-     "yes_ask_size_fp": "118.00",
-     "volume_24h_fp": "99.10"
+     "yes_ask_dollars": "0.4900",
+     "yes_ask_size_fp": "130.00",
+     "volume_24h_fp": "630.98"
     },
     {
      "ticker": "KXNHL3P-26OCT13BOSSJ-TIE",
@@ -10742,13 +10850,13 @@
      "status": "active",
      "close_time": "2026-10-16T03:00:00Z",
      "expected_expiration_time": "2026-10-14T06:00:00Z",
-     "yes_ask_dollars": "0.3100",
-     "yes_ask_size_fp": "20.00",
-     "volume_24h_fp": "8.94"
+     "yes_ask_dollars": "0.2800",
+     "yes_ask_size_fp": "39.00",
+     "volume_24h_fp": "25.60"
     }
    ],
-   "prelim_sum": 1.1600000000000001,
-   "volume_24h": 108.03999999999999,
+   "prelim_sum": 1.15,
+   "volume_24h": 945.83,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -10776,9 +10884,9 @@
      "status": "active",
      "close_time": "2026-10-16T03:00:00Z",
      "expected_expiration_time": "2026-10-14T06:00:00Z",
-     "yes_ask_dollars": "0.3900",
-     "yes_ask_size_fp": "41.00",
-     "volume_24h_fp": "506.96"
+     "yes_ask_dollars": "0.2100",
+     "yes_ask_size_fp": "21.99",
+     "volume_24h_fp": "1165.10"
     },
     {
      "ticker": "KXNHL2P-26OCT13BOSSJ-BOS",
@@ -10786,9 +10894,9 @@
      "status": "active",
      "close_time": "2026-10-16T03:00:00Z",
      "expected_expiration_time": "2026-10-14T06:00:00Z",
-     "yes_ask_dollars": "0.3900",
-     "yes_ask_size_fp": "171.00",
-     "volume_24h_fp": "283.31"
+     "yes_ask_dollars": "0.4500",
+     "yes_ask_size_fp": "26.77",
+     "volume_24h_fp": "2529.78"
     },
     {
      "ticker": "KXNHL2P-26OCT13BOSSJ-TIE",
@@ -10796,13 +10904,13 @@
      "status": "active",
      "close_time": "2026-10-16T03:00:00Z",
      "expected_expiration_time": "2026-10-14T06:00:00Z",
-     "yes_ask_dollars": "0.3400",
-     "yes_ask_size_fp": "119.00",
-     "volume_24h_fp": "84.28"
+     "yes_ask_dollars": "0.6400",
+     "yes_ask_size_fp": "31.00",
+     "volume_24h_fp": "443.83"
     }
    ],
-   "prelim_sum": 1.12,
-   "volume_24h": 874.55,
+   "prelim_sum": 1.3,
+   "volume_24h": 4138.71,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -10830,9 +10938,9 @@
      "status": "active",
      "close_time": "2026-10-16T02:30:00Z",
      "expected_expiration_time": "2026-10-14T05:30:00Z",
-     "yes_ask_dollars": "0.3000",
-     "yes_ask_size_fp": "150.00",
-     "volume_24h_fp": "173.59"
+     "yes_ask_dollars": "0.4200",
+     "yes_ask_size_fp": "27.00",
+     "volume_24h_fp": "1044.52"
     },
     {
      "ticker": "KXNHL3P-26OCT13EDMLA-EDM",
@@ -10840,9 +10948,9 @@
      "status": "active",
      "close_time": "2026-10-16T02:30:00Z",
      "expected_expiration_time": "2026-10-14T05:30:00Z",
-     "yes_ask_dollars": "0.4500",
-     "yes_ask_size_fp": "150.00",
-     "volume_24h_fp": "41.94"
+     "yes_ask_dollars": "0.5900",
+     "yes_ask_size_fp": "37.00",
+     "volume_24h_fp": "209.58"
     },
     {
      "ticker": "KXNHL3P-26OCT13EDMLA-TIE",
@@ -10850,121 +10958,13 @@
      "status": "active",
      "close_time": "2026-10-16T02:30:00Z",
      "expected_expiration_time": "2026-10-14T05:30:00Z",
-     "yes_ask_dollars": "0.3300",
-     "yes_ask_size_fp": "15.00",
-     "volume_24h_fp": "0.00"
+     "yes_ask_dollars": "0.2800",
+     "yes_ask_size_fp": "119.00",
+     "volume_24h_fp": "1016.02"
     }
    ],
-   "prelim_sum": 1.08,
-   "volume_24h": 215.53,
-   "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
-   "fee_multiplier": null,
-   "coverage": {
-    "proven": true,
-    "method": "HEAD_TO_HEAD_WITH_TIE",
-    "reasons": [
-     "strikes: no todas las patas son strikes"
-    ],
-    "residuals": [
-     {
-      "name": "CANCELACION_O_REPROGRAMACION",
-      "payout": "precio justo seg\u00fan reglas de Kalshi (no garantizado)"
-     }
-    ],
-    "open_list_evidence": []
-   }
-  },
-  {
-   "event_ticker": "KXNHL2P-26OCT13EDMLA",
-   "title": "Edmonton vs Los Angeles: 2nd Period Winner",
-   "legs": [
-    {
-     "ticker": "KXNHL2P-26OCT13EDMLA-LA",
-     "yes_sub_title": "Los Angeles",
-     "status": "active",
-     "close_time": "2026-10-16T02:30:00Z",
-     "expected_expiration_time": "2026-10-14T05:30:00Z",
-     "yes_ask_dollars": "0.5300",
-     "yes_ask_size_fp": "45.00",
-     "volume_24h_fp": "3499.62"
-    },
-    {
-     "ticker": "KXNHL2P-26OCT13EDMLA-EDM",
-     "yes_sub_title": "Edmonton",
-     "status": "active",
-     "close_time": "2026-10-16T02:30:00Z",
-     "expected_expiration_time": "2026-10-14T05:30:00Z",
-     "yes_ask_dollars": "0.7300",
-     "yes_ask_size_fp": "46.00",
-     "volume_24h_fp": "3117.13"
-    },
-    {
-     "ticker": "KXNHL2P-26OCT13EDMLA-TIE",
-     "yes_sub_title": "Tie",
-     "status": "active",
-     "close_time": "2026-10-16T02:30:00Z",
-     "expected_expiration_time": "2026-10-14T05:30:00Z",
-     "yes_ask_dollars": "0.6800",
-     "yes_ask_size_fp": "84.00",
-     "volume_24h_fp": "7.58"
-    }
-   ],
-   "prelim_sum": 1.94,
-   "volume_24h": 6624.33,
-   "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
-   "fee_multiplier": null,
-   "coverage": {
-    "proven": true,
-    "method": "HEAD_TO_HEAD_WITH_TIE",
-    "reasons": [
-     "strikes: no todas las patas son strikes"
-    ],
-    "residuals": [
-     {
-      "name": "CANCELACION_O_REPROGRAMACION",
-      "payout": "precio justo seg\u00fan reglas de Kalshi (no garantizado)"
-     }
-    ],
-    "open_list_evidence": []
-   }
-  },
-  {
-   "event_ticker": "KXNHL3P-26OCT13CGYANA",
-   "title": "Calgary vs Anaheim: 3rd Period Winner",
-   "legs": [
-    {
-     "ticker": "KXNHL3P-26OCT13CGYANA-ANA",
-     "yes_sub_title": "Anaheim",
-     "status": "active",
-     "close_time": "2026-10-16T01:45:00Z",
-     "expected_expiration_time": "2026-10-14T04:45:00Z",
-     "yes_ask_dollars": "0.4800",
-     "yes_ask_size_fp": "36.17",
-     "volume_24h_fp": "2959.97"
-    },
-    {
-     "ticker": "KXNHL3P-26OCT13CGYANA-CGY",
-     "yes_sub_title": "Calgary",
-     "status": "active",
-     "close_time": "2026-10-16T01:45:00Z",
-     "expected_expiration_time": "2026-10-14T04:45:00Z",
-     "yes_ask_dollars": "0.4300",
-     "yes_ask_size_fp": "23.90",
-     "volume_24h_fp": "415.38"
-    },
-    {
-     "ticker": "KXNHL3P-26OCT13CGYANA-TIE",
-     "yes_sub_title": "Tie",
-     "status": "active",
-     "close_time": "2026-10-16T01:45:00Z",
-     "expected_expiration_time": "2026-10-14T04:45:00Z",
-     "yes_ask_dollars": "0.5700",
-     "yes_ask_size_fp": "49.00",
-     "volume_24h_fp": "377.81"
-    }
-   ],
-   "prelim_sum": 1.48,
-   "volume_24h": 3753.16,
+   "prelim_sum": 1.29,
+   "volume_24h": 2270.12,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
@@ -10992,9 +10992,9 @@
      "status": "active",
      "close_time": "2026-10-16T01:30:00Z",
      "expected_expiration_time": "2026-10-14T04:30:00Z",
-     "yes_ask_dollars": "0.5200",
-     "yes_ask_size_fp": "52.00",
-     "volume_24h_fp": "90792.72"
+     "yes_ask_dollars": "0.5500",
+     "yes_ask_size_fp": "11.44",
+     "volume_24h_fp": "91531.87"
     },
     {
      "ticker": "KXDIMAYORGAME-26OCT13MILOC-OC",
@@ -11003,8 +11003,8 @@
      "close_time": "2026-10-16T01:30:00Z",
      "expected_expiration_time": "2026-10-14T04:30:00Z",
      "yes_ask_dollars": "0.1400",
-     "yes_ask_size_fp": "50.00",
-     "volume_24h_fp": "69081.73"
+     "yes_ask_size_fp": "150.00",
+     "volume_24h_fp": "69692.95"
     },
     {
      "ticker": "KXDIMAYORGAME-26OCT13MILOC-TIE",
@@ -11012,13 +11012,13 @@
      "status": "active",
      "close_time": "2026-10-16T01:30:00Z",
      "expected_expiration_time": "2026-10-14T04:30:00Z",
-     "yes_ask_dollars": "0.3800",
-     "yes_ask_size_fp": "191.15",
-     "volume_24h_fp": "19472.25"
+     "yes_ask_dollars": "0.3600",
+     "yes_ask_size_fp": "1.00",
+     "volume_24h_fp": "19504.59"
     }
    ],
-   "prelim_sum": 1.04,
-   "volume_24h": 179346.7,
+   "prelim_sum": 1.05,
+   "volume_24h": 180729.41,
    "exhaustive_reason": "HEAD_TO_HEAD_WITH_TIE",
    "fee_multiplier": null,
    "coverage": {
