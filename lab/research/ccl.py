@@ -31,6 +31,7 @@ el costo total de equilibrio: el máximo costo por operación que el
 diferencial soporta.
 """
 
+import math
 from datetime import datetime
 
 from .stats import mean
@@ -60,12 +61,21 @@ def cost_per_trade_us(mult=1.0, sell=False):
     return BROKER_US * mult + (SEC_FEE_SELL if sell else 0.0)
 
 
+def _pos(x):
+    """Número finito > 0, o None (dato faltante o inválido: texto, NaN, <= 0)."""
+    try:
+        v = float(x)
+    except (TypeError, ValueError):
+        return None
+    return v if math.isfinite(v) and v > 0 else None
+
+
 def _q(row, side):
     """Puntas de data912: (precio, cantidad) o None."""
-    if not row:
+    if not isinstance(row, dict):
         return None
-    p, q = row.get(f"px_{side}"), row.get(f"q_{side}")
-    return (float(p), float(q)) if p and q and p > 0 and q > 0 else None
+    p, q = _pos(row.get(f"px_{side}")), _pos(row.get(f"q_{side}"))
+    return (p, q) if p and q else None
 
 
 def mep_pairs(arg_stocks, mult=1.0):
@@ -75,6 +85,10 @@ def mep_pairs(arg_stocks, mult=1.0):
     for local, dsp in D_SPECIES.items():
         a, d = arg_stocks.get(local), arg_stocks.get(dsp)
         bid_ars, ask_ars, bid_d, ask_d = _q(a, "bid"), _q(a, "ask"), _q(d, "bid"), _q(d, "ask")
+        if bid_ars and ask_ars and bid_ars[0] > ask_ars[0]:
+            bid_ars = ask_ars = None             # punta cruzada: dato inválido
+        if bid_d and ask_d and bid_d[0] > ask_d[0]:
+            bid_d = ask_d = None
         legs[local] = {"sell_usd": (bid_ars[0] / ask_d[0], min(bid_ars[1], ask_d[1]) * ask_d[0])
                        if bid_ars and ask_d else None,
                        "buy_usd": (ask_ars[0] / bid_d[0], min(ask_ars[1], bid_d[1]) * bid_d[0])
@@ -102,8 +116,14 @@ def ccl_pairs(local_quotes, adr_quotes, mult=1.0, allowed=None):
         if allowed is not None and adr not in allowed:
             continue
         lq, aq = local_quotes.get(loc), adr_quotes.get(adr)
-        if not lq or not aq or not all(lq[i] for i in (0, 2)) or not all(aq[i] for i in (0, 2)):
+        if not lq or not aq:
             continue
+        # precios inválidos (faltan, texto, NaN, <= 0): la emisora no participa;
+        # cantidad faltante = 0 de capacidad (nunca se inventa profundidad)
+        lq = (_pos(lq[0]), _pos(lq[1]) or 0.0, _pos(lq[2]), _pos(lq[3]) or 0.0)
+        aq = (_pos(aq[0]), _pos(aq[1]) or 0.0, _pos(aq[2]), _pos(aq[3]) or 0.0)
+        if not all((lq[0], lq[2], aq[0], aq[2])) or lq[0] > lq[2] or aq[0] > aq[2]:
+            continue                    # falta un precio o la punta está cruzada (bid > ask)
         # vender dólares en A: comprar ADR (ask) y vender local (bid)
         sell = (lq[0] * ratio / aq[2], min(lq[1] / ratio, aq[3]) * aq[2])
         buy = (lq[2] * ratio / aq[0], min(lq[3] / ratio, aq[1]) * aq[0])
@@ -173,11 +193,37 @@ def analyze_snapshot(snap):
                 lq[sym] = (v.get("bidPrice"), v.get("quantityBid"), v.get("offerPrice"),
                            v.get("quantityOffer"))
         aq = {k: (v.get("bid"), v.get("bid_size"), v.get("ask"), v.get("ask_size")) for k, v in nq.items()}
-        for p in ccl_pairs(lq, aq, allowed=ok or None):
+        allowed, unverified = byma_allowed(ratio_check(snap), byma_ratio_check(snap))
+        for p in ccl_pairs(lq, aq, allowed=allowed):
             # BYMA gratuito tiene ~20 min de demora: puntas NO simultáneas
             obs.append({**p, "source": "byma_demorado+nasdaq", "skew_s": None, "net_stress": None,
                         "verdict": classify(p, None, None), "tick": snap.tick, "ts": snap.ts})
+        # ratio sin verificar en ninguna fuente: NO_VERIFICABLE y sin cifras
+        # (un dato faltante nunca produce bruto ni neto)
+        quoted = {adr for adr, (loc, _) in RATIOS.items() if loc in lq and adr in aq}
+        for adr in sorted(unverified & quoted):
+            obs.append({"kind": "CCL", "sell_usd_in": adr, "buy_usd_in": None, "gross": None, "net": None,
+                        "usd_capacity": None, "breakeven_cost_per_trade": None,
+                        "source": "byma_demorado+nasdaq", "skew_s": None, "net_stress": None,
+                        "verdict": "NO_VERIFICABLE", "reason": "RATIO_NO_VERIFICADO",
+                        "tick": snap.tick, "ts": snap.ts})
     return obs
+
+
+def byma_allowed(check_data912, check_byma):
+    """Emisoras habilitadas para el cruce BYMA+Nasdaq. Antes, si data912
+    fallaba, se habilitaban TODAS (incluidos ratios inconsistentes como YPF,
+    que daban brutos de +906%). Ahora:
+      - NO_CONSISTENTE en cualquier verificación disponible -> excluida
+      - CONSISTENTE en alguna y en ninguna inconsistente -> habilitada
+      - sin verificación -> no habilitada; se informa como no verificada.
+    -> (habilitadas, sin_verificar)"""
+    bad, good = set(), set()
+    for chk in (check_data912 or {}, check_byma or {}):
+        for k, v in chk.items():
+            (good if v["status"] == "CONSISTENTE" else bad).add(k)
+    allowed = good - bad
+    return allowed, set(RATIOS) - allowed - bad
 
 
 def ratio_check(snap, tol=0.05):
@@ -185,12 +231,37 @@ def ratio_check(snap, tol=0.05):
     debe quedar a menos de `tol` de la mediana de todas."""
     c = snap.ccl or {}
     stocks, adrs = c.get("arg_stocks") or {}, c.get("usa_adrs") or {}
+    lm = {k: _mid(v.get("px_bid"), v.get("px_ask")) for k, v in stocks.items() if isinstance(v, dict)}
+    am = {k: _mid(v.get("px_bid"), v.get("px_ask")) for k, v in adrs.items() if isinstance(v, dict)}
+    return _ratio_status(lm, am, tol)
+
+
+def byma_ratio_check(snap, tol=0.05):
+    """La misma verificación con BYMA (24 hs, demorado) + Nasdaq. Sirve para
+    detectar un ratio mal (diferencias de decenas de %), no para medir edge:
+    las puntas no son simultáneas."""
+    c = snap.ccl or {}
+    lm = {}
+    for k, v in (c.get("byma") or {}).items():
+        sym, _, settle = k.partition("|")
+        if settle == "2" and isinstance(v, dict):
+            lm[sym] = _mid(v.get("bidPrice"), v.get("offerPrice"))
+    am = {k: _mid(v.get("bid"), v.get("ask")) for k, v in (c.get("nasdaq") or {}).items() if isinstance(v, dict)}
+    return _ratio_status(lm, am, tol)
+
+
+def _mid(bid, ask):
+    b, a = _pos(bid), _pos(ask)
+    return (b + a) / 2 if b and a and a >= b else None
+
+
+def _ratio_status(local_mid, adr_mid, tol):
     implied = {}
     for adr, (loc, ratio) in RATIOS.items():
-        s, a = stocks.get(loc), adrs.get(adr)
-        if s and a and s.get("px_bid") and s.get("px_ask") and a.get("px_bid") and a.get("px_ask"):
-            implied[adr] = ((s["px_bid"] + s["px_ask"]) / 2 * ratio) / ((a["px_bid"] + a["px_ask"]) / 2)
-    if not implied:
+        lm, am = local_mid.get(loc), adr_mid.get(adr)
+        if lm and am:
+            implied[adr] = lm * ratio / am
+    if len(implied) < 3:            # sin mediana con sentido: nada queda verificado
         return {}
     med = sorted(implied.values())[len(implied) // 2]
     return {k: {"implied_ccl": v, "dev_vs_median": v / med - 1,
@@ -230,12 +301,13 @@ def summarize(obs):
         d = by_kind.setdefault(k, {"n": 0, "verdicts": Counter(), "gross": []})
         d["n"] += 1
         d["verdicts"][o["verdict"]] += 1
-        d["gross"].append(o["gross"])
+        if o["gross"] is not None:              # sin dato no hay bruto (no se rellena)
+            d["gross"].append(o["gross"])
     out = {}
     for k, d in by_kind.items():
         g = sorted(d["gross"])
         out[k] = {"observations": d["n"], "verdicts": dict(d["verdicts"]),
-                  "gross_max": g[-1], "gross_p95": g[int(0.95 * (len(g) - 1))],
-                  "gross_median": g[len(g) // 2],
-                  "breakeven_cost_per_trade_max": g[-1] / 4}
+                  "gross_max": g[-1] if g else None, "gross_p95": g[int(0.95 * (len(g) - 1))] if g else None,
+                  "gross_median": g[len(g) // 2] if g else None,
+                  "breakeven_cost_per_trade_max": g[-1] / 4 if g else None}
     return out
