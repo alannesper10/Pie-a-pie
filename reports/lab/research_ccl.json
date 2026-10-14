@@ -1,90 +1,91 @@
 {
- "generated_at": "2026-10-13T19:58:04Z",
+ "generated_at": "2026-10-14T17:57:40Z",
  "runs": [
   "watch-20261013",
   "watch-b-20261013"
  ],
- "ticks_with_ccl": 19,
+ "ticks_with_ccl": 253,
  "summary": {
   "MEP|data912": {
-   "observations": 2244,
+   "observations": 31284,
    "verdicts": {
-    "SIN_EDGE": 2244
+    "SIN_EDGE": 31284
    },
-   "gross_max": 0.00026190868479880614,
-   "gross_p95": -0.005860431128973387,
-   "gross_median": -0.013986477041135426,
-   "breakeven_cost_per_trade_max": 6.547717119970153e-05
+   "gross_max": 0.0019610665898874835,
+   "gross_p95": -0.0032967243593430284,
+   "gross_median": -0.010144679044399862,
+   "breakeven_cost_per_trade_max": 0.0004902666474718709
   },
   "CCL|data912": {
-   "observations": 1870,
+   "observations": 22784,
    "verdicts": {
-    "SIN_EDGE": 1870
+    "SIN_EDGE": 22784
    },
-   "gross_max": 0.005691489361702162,
-   "gross_p95": -0.0011933297694389777,
-   "gross_median": -0.011580000032841653,
-   "breakeven_cost_per_trade_max": 0.0014228723404255406
+   "gross_max": 0.006171179248102288,
+   "gross_p95": -0.002861235913390159,
+   "gross_median": -0.012630980793271851,
+   "breakeven_cost_per_trade_max": 0.001542794812025572
   },
   "CCL|byma_demorado+nasdaq": {
-   "observations": 1128,
+   "observations": 16046,
    "verdicts": {
-    "NO_VERIFICABLE": 1128
+    "NO_VERIFICABLE": 15929,
+    "SOSPECHOSO_REVISAR_DATOS": 117
    },
-   "gross_max": 0.014660493827160392,
-   "gross_p95": 0.006448563703719046,
-   "gross_median": -0.008265340964991985,
-   "breakeven_cost_per_trade_max": 0.003665123456790098
+   "gross_max": 9.0609500770475,
+   "gross_p95": 0.00035111636641871335,
+   "gross_median": -0.01019621146834504,
+   "breakeven_cost_per_trade_max": 2.265237519261875
   }
  },
  "ratio_check": {
   "GGAL": {
-   "CONSISTENTE": 17,
-   "NO_CONSISTENTE": 0
+   "CONSISTENTE": 236,
+   "NO_CONSISTENTE": 1
   },
   "BMA": {
-   "CONSISTENTE": 17,
-   "NO_CONSISTENTE": 0
+   "CONSISTENTE": 189,
+   "NO_CONSISTENTE": 48
   },
   "PAM": {
-   "CONSISTENTE": 17,
+   "CONSISTENTE": 237,
    "NO_CONSISTENTE": 0
   },
   "YPF": {
    "CONSISTENTE": 0,
-   "NO_CONSISTENTE": 17
+   "NO_CONSISTENTE": 237
   },
   "CEPU": {
-   "CONSISTENTE": 17,
+   "CONSISTENTE": 237,
    "NO_CONSISTENTE": 0
   },
   "TGS": {
-   "CONSISTENTE": 17,
+   "CONSISTENTE": 237,
    "NO_CONSISTENTE": 0
   },
   "EDN": {
-   "CONSISTENTE": 17,
-   "NO_CONSISTENTE": 0
+   "CONSISTENTE": 189,
+   "NO_CONSISTENTE": 48
   },
   "SUPV": {
-   "CONSISTENTE": 17,
+   "CONSISTENTE": 237,
    "NO_CONSISTENTE": 0
   },
   "LOMA": {
-   "CONSISTENTE": 17,
+   "CONSISTENTE": 237,
    "NO_CONSISTENTE": 0
   },
   "CRESY": {
-   "CONSISTENTE": 17,
-   "NO_CONSISTENTE": 0
+   "CONSISTENTE": 189,
+   "NO_CONSISTENTE": 48
   },
   "IRS": {
-   "CONSISTENTE": 17,
-   "NO_CONSISTENTE": 0
+   "CONSISTENTE": 236,
+   "NO_CONSISTENTE": 1
   },
   "TEO": {
-   "CONSISTENTE": 17,
-   "NO_CONSISTENTE": 0
+   "CONSISTENTE": 189,
+   "NO_CONSISTENTE": 48
   }
  },
  "episodes_potencial": [],
