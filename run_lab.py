@@ -102,10 +102,12 @@ def cmd_collect(args):
     from lab.modules.prediction import load_verified_pairs
     store = LabStore(DB)
     run_id = args.run or f"collect-{time.strftime('%Y%m%dT%H%M%S')}"
+    from datetime import datetime, timezone
+    from lab.collect_check import last_valid_tick, window_action
     start = 0
     if args.resume and store.run_info(run_id):
-        start = store.max_tick(run_id) + 1
-        log.info("reanudando %s desde el tick %d", run_id, start)
+        start = last_valid_tick(store.db, run_id) + 1    # una captura ilegible se vuelve a tomar
+        log.info("reanudando %s desde el tick %d (última captura válida + 1)", run_id, start)
     else:
         store.start_run(run_id, now_iso(), "collect", args.seed,
                         args={**vars(args), "code_version": code_version()})
@@ -117,7 +119,20 @@ def cmd_collect(args):
     futures = FuturesSource() if "futures" in src else None
     ccl = CclSource() if "ccl" in src else None
     guard, markets = _guard(args), {}
+    day = datetime.strptime(args.date_art, "%Y-%m-%d").date() if args.date_art else None
+    stopped_by_guard = False
     for t in range(start, start + args.ticks):
+        if args.window_art:
+            action, wait = window_action(datetime.now(timezone.utc), args.window_art, day)
+            if action == "wait":
+                log.info("esperando la apertura de la ventana %s: %.0f s", args.window_art, wait)
+            while action == "wait":          # de a 60 s: si la notebook se suspende, se recalcula con el reloj
+                time.sleep(min(wait, 60.0))
+                action, wait = window_action(datetime.now(timezone.utc), args.window_art, day)
+            if action == "stop":
+                log.info("fin de la ventana %s (hora argentina): se detiene en el tick %d",
+                         args.window_art, t - 1)
+                break
         t0 = time.monotonic()
         snap = build_snapshot(t, crypto, pm, args.latency_ms, markets_cache=markets,
                               pairs=pairs, kalshi_client=kalshi, dex=dex, futures=futures,
@@ -130,10 +145,13 @@ def cmd_collect(args):
         if not ok:
             log.warning("guardia de recursos: %s. Checkpoint en tick %d; reanudar con "
                         "--resume --run %s", why, t, run_id)
+            stopped_by_guard = True
             break
         if t < start + args.ticks - 1:
             time.sleep(max(0.0, args.interval_sec - (time.monotonic() - t0)))
     print(run_id)
+    if stopped_by_guard:
+        sys.exit(3)                          # el supervisor reanuda con --resume
 
 
 def cmd_run(args):
@@ -306,6 +324,17 @@ def cmd_episodes(args):
     print(json.dumps(out["summary"], indent=1))
 
 
+def cmd_verify_collect(args):
+    """Integridad y continuidad de una corrida de recolección (solo lectura)."""
+    from lab.collect_check import verify_run
+    store = LabStore(DB)
+    src = args.sources.split(",")[0] if args.sources else "ccl"
+    out = verify_run(store.db, args.run, interval_sec=args.interval_sec, source=src)
+    print(json.dumps(out, indent=1, ensure_ascii=False))
+    if not out.get("ok"):
+        sys.exit(1)
+
+
 def cmd_consolidate(args):
     from lab.consolidated import write
     write()
@@ -319,9 +348,13 @@ def main(argv=None):
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("cmd", choices=["run", "collect", "evaluate", "replay", "report",
                                    "suggest-pairs", "research", "consolidate", "pm-gaps",
-                                   "episodes"])
+                                   "episodes", "verify-collect"])
     p.add_argument("--study", default="all",
                    choices=["stat_arb", "etf", "imbalance", "discovery", "carry", "ccl", "all"])
+    p.add_argument("--window-art", default=None,
+                   help="collect: recolectar solo dentro de HH:MM-HH:MM hora argentina (p. ej. 11:00-17:05)")
+    p.add_argument("--date-art", default=None,
+                   help="collect: día (AAAA-MM-DD, hora argentina) de la ventana; por defecto, hoy")
     p.add_argument("--resume", action="store_true", help="collect: continuar --run desde el último tick")
     p.add_argument("--fresh-ledger", action="store_true",
                    help="evaluate: ledger nuevo en cada tick (mide persistencia/episodios)")
@@ -342,7 +375,7 @@ def main(argv=None):
     args = p.parse_args(argv)
     logging.basicConfig(level=logging.INFO, datefmt="%H:%M:%S",
                         format="%(asctime)s %(levelname)s %(message)s")
-    {"episodes": cmd_episodes, "pm-gaps": cmd_pm_gaps, "consolidate": cmd_consolidate, "research": cmd_research, "run": cmd_run, "collect": cmd_collect, "evaluate": cmd_replay, "replay": cmd_replay,
+    {"verify-collect": cmd_verify_collect, "episodes": cmd_episodes, "pm-gaps": cmd_pm_gaps, "consolidate": cmd_consolidate, "research": cmd_research, "run": cmd_run, "collect": cmd_collect, "evaluate": cmd_replay, "replay": cmd_replay,
      "report": cmd_report,
      "suggest-pairs": cmd_suggest_pairs}[args.cmd](args)
 
