@@ -36,23 +36,57 @@ AR_METHODS = ["BankArgentina", "MercadoPagoNew", "UalaNew", "BancoBrubankNew", "
               "SantanderArgentina", "BancoGalicia", "LemonCash", "BBVAArgentina"]
 
 
-def p2p(trade_type, fiat="ARS", asset="USDT", pay_types=None):
+def p2p(trade_type, fiat="ARS", asset="USDT", pay_types=None, pages=1):
+    """Anuncios P2P (endpoint público no documentado de Binance). Con pages > 1
+    se leen varias páginas de 20; cada anuncio lleva su página y el userNo del
+    anunciante para cruzarlo con su perfil."""
     t0 = now()
-    r = S.post("https://p2p.binance.com/bapi/c2c/v2/friendly/c2c/adv/search", timeout=20,
-               json={"asset": asset, "fiat": fiat, "tradeType": trade_type, "page": 1, "rows": 20,
-                     "payTypes": pay_types or [], "publisherType": None})
-    r.raise_for_status()
     ads = []
-    for x in r.json().get("data") or []:
-        a, u = x["adv"], x.get("advertiser") or {}
-        ads.append({"price": float(a["price"]), "qty": float(a.get("tradableQuantity") or a.get("surplusAmount") or 0),
-                    "min_ars": float(a.get("minSingleTransAmount") or 0),
-                    "max_ars": float(a.get("maxSingleTransAmount") or 0),
-                    "methods": [m.get("identifier") for m in a.get("tradeMethods") or []],
-                    "pay_time_limit_min": a.get("payTimeLimit"),
-                    "user_type": u.get("userType"), "orders_month": u.get("monthOrderCount"),
-                    "finish_rate": u.get("monthFinishRate")})
+    for page in range(1, pages + 1):
+        r = S.post("https://p2p.binance.com/bapi/c2c/v2/friendly/c2c/adv/search", timeout=20,
+                   json={"asset": asset, "fiat": fiat, "tradeType": trade_type, "page": page, "rows": 20,
+                         "payTypes": pay_types or [], "publisherType": None})
+        r.raise_for_status()
+        rows = r.json().get("data") or []
+        for x in rows:
+            ads.append(_ad(x, page))
+        if len(rows) < 20:
+            break
     return {"fetched_at": t0, "data": ads}
+
+
+def _ad(x, page=1):
+    a, u = x["adv"], x.get("advertiser") or {}
+    return {"price": float(a["price"]), "qty": float(a.get("tradableQuantity") or a.get("surplusAmount") or 0),
+            "min_ars": float(a.get("minSingleTransAmount") or 0),
+            "max_ars": float(a.get("maxSingleTransAmount") or 0),
+            "methods": [m.get("identifier") for m in a.get("tradeMethods") or []],
+            "pay_time_limit_min": a.get("payTimeLimit"),
+            "user_type": u.get("userType"), "orders_month": u.get("monthOrderCount"),
+            "finish_rate": u.get("monthFinishRate"), "positive_rate": u.get("positiveRate"),
+            "user_no": u.get("userNo"), "nick": u.get("nickName"), "page": page,
+            "classify": a.get("classify"), "extra_kyc": a.get("takerAdditionalKycRequired")}
+
+
+PROFILE_FIELDS = ("registerDays", "avgReleaseTimeOfLatest30day", "avgPayTimeOfLatest30day",
+                  "finishRateLatest30day", "completedOrderNumOfLatest30day", "completedOrderNum", "counterpartyCount")
+_seen_profiles = set()
+
+
+def profiles(user_nos, max_new=15):
+    """Perfil público de anunciantes NO vistos en este proceso (una vez por día
+    de captura, como mucho `max_new` por captura para no saturar la API)."""
+    t0, out = now(), {}
+    new = [u for u in dict.fromkeys(user_nos) if u and u not in _seen_profiles]   # sin repetidos
+    for u in new[:max_new]:
+        r = S.get("https://p2p.binance.com/bapi/c2c/v2/friendly/c2c/user/profile-and-ads-list",
+                  params={"userNo": u}, timeout=20)
+        r.raise_for_status()
+        d = ((r.json().get("data") or {}).get("userDetailVo") or {})
+        st = d.get("userStatsRet") or {}
+        out[u] = {**{k: st.get(k) for k in PROFILE_FIELDS}, "kycStatus": d.get("kycStatus")}
+        _seen_profiles.add(u)
+    return {"fetched_at": t0, "data": out}
 
 
 SOURCES = {
@@ -63,7 +97,7 @@ SOURCES = {
     "bitso_usd_ars": lambda: get("https://api.bitso.com/v3/order_book/", params={"book": "usd_ars"}),
     "bitso_usdt_ars": lambda: get("https://api.bitso.com/v3/order_book/", params={"book": "usdt_ars"}),
     "bitso_usd_usdt": lambda: get("https://api.bitso.com/v3/order_book/", params={"book": "usd_usdt"}),
-    "p2p_usdt_ars_buy": lambda: p2p("BUY"),     # anuncios donde el usuario COMPRA USDT
+    "p2p_usdt_ars_buy": lambda: p2p("BUY", pages=3),     # anuncios donde el usuario COMPRA USDT (60)
     "p2p_usdt_ars_sell": lambda: p2p("SELL"),   # anuncios donde el usuario VENDE USDT
     "p2p_usdt_usd_buy_ar": lambda: p2p("BUY", fiat="USD", pay_types=AR_METHODS),    # comprar USDT pagando USD local
     "p2p_usdt_usd_sell_ar": lambda: p2p("SELL", fiat="USD", pay_types=AR_METHODS),  # vender USDT cobrando USD local
@@ -83,6 +117,11 @@ def capture(i):
             snap[k] = fn()
         except Exception as e:                       # se registra; nunca se rellena
             snap["errors"].append({"source": k, "error": f"{type(e).__name__}: {str(e)[:200]}"})
+    try:
+        buy = (snap.get("p2p_usdt_ars_buy") or {}).get("data") or []
+        snap["p2p_profiles"] = profiles([a.get("user_no") for a in buy])
+    except Exception as e:
+        snap["errors"].append({"source": "p2p_profiles", "error": f"{type(e).__name__}: {str(e)[:200]}"})
     return snap
 
 
