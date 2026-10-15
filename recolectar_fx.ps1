@@ -1,6 +1,6 @@
 ﻿# Captura de precios cambiarios ejecutables (solo lectura de APIs públicas; sin órdenes ni claves).
 #
-#   powershell -ExecutionPolicy Bypass -File recolectar_fx.ps1 [-Start 10:00] [-Until 17:05]
+#   powershell -ExecutionPolicy Bypass -File recolectar_fx.ps1 [-Start 10:00] [-Until 15:05]
 #
 # Escribe lab_data/fx_ar/fx-AAAAMMDD.jsonl (una captura por minuto). Si se relanza el mismo
 # día (reinicio de la notebook), sigue agregando al mismo archivo; los minutos sin captura
@@ -8,7 +8,7 @@
 # La tarea programada "PieAPie FX" lo lanza los días hábiles y al iniciar sesión.
 param(
     [string]$Start = "10:00",
-    [string]$Until = "17:05",
+    [string]$Until = "15:05",
     [int]$IntervalSec = 60
 )
 Set-Location $PSScriptRoot
