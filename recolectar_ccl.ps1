@@ -1,18 +1,23 @@
 ﻿# Recolección exclusiva de CCL durante la rueda (solo observación; sin órdenes ni claves).
 #
-#   powershell -ExecutionPolicy Bypass -File recolectar_ccl.ps1 -Run ccl-20261015 -Date 2026-10-15
+#   powershell -ExecutionPolicy Bypass -File recolectar_ccl.ps1 [-Run ccl-20261015] [-Date 2026-10-15]
 #
 # Solo la fuente ccl (BYMA demorado, Nasdaq, data912): sin Polymarket ni futuros.
 # Cada captura se guarda al tomarse (lab_data/ccl.sqlite). Si el proceso se corta,
 # se reanuda desde la última captura válida (--resume). Al cerrar la ventana, termina.
+# Sin -Run usa ccl-AAAAMMDD del día. Sábados y domingos no recolecta (no hay rueda).
+# La tarea programada "PieAPie CCL" lo lanza los días hábiles y al iniciar sesión.
 param(
-    [Parameter(Mandatory = $true)][string]$Run,
+    [string]$Run = "",
     [string]$Date = (Get-Date).ToString("yyyy-MM-dd"),
     [string]$Window = "11:00-17:05",
     [string]$Database = "lab_data/ccl.sqlite",
     [int]$MaxRestarts = 20
 )
 Set-Location $PSScriptRoot
+$day = [datetime]::ParseExact($Date, "yyyy-MM-dd", $null)
+if ($day.DayOfWeek -in @([DayOfWeek]::Saturday, [DayOfWeek]::Sunday)) { exit 0 }
+if (-not $Run) { $Run = "ccl-" + $day.ToString("yyyyMMdd") }
 $env:LAB_DB = $Database
 $log = "lab_data\$Run.log"
 for ($i = 0; $i -le $MaxRestarts; $i++) {
