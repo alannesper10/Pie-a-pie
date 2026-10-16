@@ -132,3 +132,28 @@ Clases:
 - **E3:** cierres diarios. La reversión intradiaria no se mide.
 
 **Lección:** los mecanismos de Chan probados en acciones y ETF de 2007–2012 (reversión entre activos, momentum entre activos, pares de commodities) no aparecen netos de costos en cripto 2024–2026 ni en AUD.CAD 2016–2026. Chan mismo advierte cambios de régimen (cap. 1) y el derrumbe del momentum de 2009 (Ej. 6.2).
+
+## P6. Sesgo favorito/longshot en Polymarket: especificación registrada antes de bajar precios
+
+Regla base en `AUDITORIA_ALCANCE_2026-10-16.md` §7, P6. Mecanismo conductual: los apostadores sobrepagan los resultados improbables, así que los favoritos quedan levemente baratos. Harris lo enmarca entre los "gamblers" (cap. 8).
+
+- **Universo:**
+  - mercados **binarios** de Polymarket resueltos (Gamma API, `closed=true`, `outcomePrices` en 0/1), con fecha de fin entre 01/2024 y 09/2026 y volumen ≥ US$100.000 (los más líquidos);
+  - se excluyen los mercados sin historial de precios o anulados (precios distintos de 0/1).
+- **Señal:** para cada token, el último precio del historial diario (CLOB `prices-history`, fidelity 1440) **al menos 7 días antes** de `endDate`. Se compra si 0,85 ≤ p ≤ 0,97.
+- **Ejecución y costos:**
+  - **precio:** p + 0,005 de medio spread (SUPUESTO; el historial no tiene puntas);
+  - **comisión:** acciones × tasa × p × (1 − p), si `feesEnabled`, con la tasa del `feeSchedule`. Si el dato falta, se usa 0,05.
+- **Pago:** 1 si ganó el resultado comprado y 0 si no.
+- **Tenencia:** hasta `closedTime`.
+- **Unidad estadística:** el **evento**. Varios mercados del mismo evento (negRisk) no son independientes: se promedia el retorno por evento.
+- **Estadística:**
+  - t sobre eventos;
+  - exceso sobre la letra por los días de tenencia;
+  - separación: resueltos antes de 2025-06-01 (muestra) y después (fuera);
+  - costos ×1,5;
+  - reporte de la peor racha.
+- **Aceptación:** los criterios comunes. Además, ninguna categoría o etiqueta del evento puede aportar más del 50% de la ganancia.
+- **Sesgos que se informan:**
+  - el historial es un precio de referencia, no puntas ejecutables;
+  - los mercados de mayor volumen tienden a resolverse sin sorpresas (sesgo de selección), y eso juega a favor de la estrategia.
