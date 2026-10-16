@@ -157,3 +157,10 @@ Regla base en `AUDITORIA_ALCANCE_2026-10-16.md` §7, P6. Mecanismo conductual: l
 - **Sesgos que se informan:**
   - el historial es un precio de referencia, no puntas ejecutables;
   - los mercados de mayor volumen tienden a resolverse sin sorpresas (sesgo de selección), y eso juega a favor de la estrategia.
+
+### P6. Muestreo (registrado antes de ver precios o resultados)
+
+- **Por qué:** la lista resuelta de Polymarket tiene 103.384 mercados con volumen ≥ US$100.000 entre 2024 y 2026. 40.196 existieron al menos 8 días, la condición que la regla necesita (un precio 7 días antes del fin). Son 22.232 eventos y ~80.000 historiales.
+- **Factibilidad:** se toma una **muestra aleatoria simple de 2.500 eventos** (semilla 7), con todos sus mercados. Es una decisión de factibilidad, sin resultados vistos.
+- **Lista:** `lab_data/p6/sample.json`.
+- **Sin cambios:** el resto de la regla queda igual.
