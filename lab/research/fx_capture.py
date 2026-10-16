@@ -68,6 +68,39 @@ def _ad(x, page=1):
             "classify": a.get("classify"), "extra_kyc": a.get("takerAdditionalKycRequired")}
 
 
+MEXC_USDT_COIN_ID = "128f589271cb4951b03e71e6323eb7be"
+
+
+def mexc_p2p(trade_type, pages=3):
+    """Anuncios P2P de MEXC en ARS (endpoint público no documentado).
+    trade_type="SELL": el anunciante VENDE USDT (el usuario compra; "Compra rápida").
+    trade_type="BUY": el anunciante COMPRA USDT (el usuario vende; "Venta rápida")."""
+    t0, ads = now(), []
+    for page in range(1, pages + 1):
+        r = S.get("https://p2p.mexc.com/api/market", timeout=20, params={
+            "allowTrade": "false", "amount": "", "blockTrade": "false", "coinId": MEXC_USDT_COIN_ID,
+            "countryCode": "", "currency": "ARS", "follow": "false", "haveTrade": "false", "page": page,
+            "payMethod": "", "tradeType": trade_type})
+        r.raise_for_status()
+        rows = r.json().get("data") or []
+        for a in rows:
+            m, st = a.get("merchant") or {}, a.get("merchantStatistics") or {}
+            ads.append({"id": a.get("id"), "price": a.get("price"), "qty": a.get("availableQuantity"),
+                        "min_ars": a.get("minTradeLimit"), "max_ars": a.get("maxTradeLimit"),
+                        "pay_methods": a.get("payMethod"), "country": a.get("countryCode"),
+                        "kyc_level": a.get("kycLevel"), "min_register_days": a.get("minRegisterDate"),
+                        "updated_ms": a.get("updateTime"), "terms": (a.get("tradeTerms") or "")[:300],
+                        "member_id": m.get("memberId"), "nick": m.get("nickName"),
+                        "merchant_type": m.get("merchantType"), "registry_ms": m.get("registry"),
+                        "sells_total": st.get("totalSellCount"), "buys_total": st.get("totalBuyCount"),
+                        "done_30d": st.get("doneLastMonthCount"),
+                        "complete_rate_30d": st.get("lastMonthCompleteRate"),
+                        "avg_handle_min": st.get("avgHandleTime"), "page": page})
+        if len(rows) < 10:
+            break
+    return {"fetched_at": t0, "data": ads}
+
+
 PROFILE_FIELDS = ("registerDays", "avgReleaseTimeOfLatest30day", "avgPayTimeOfLatest30day",
                   "finishRateLatest30day", "completedOrderNumOfLatest30day", "completedOrderNum", "counterpartyCount")
 _seen_profiles = set()
@@ -101,6 +134,8 @@ SOURCES = {
     "p2p_usdt_ars_sell": lambda: p2p("SELL"),   # anuncios donde el usuario VENDE USDT
     "p2p_usdt_usd_buy_ar": lambda: p2p("BUY", fiat="USD", pay_types=AR_METHODS),    # comprar USDT pagando USD local
     "p2p_usdt_usd_sell_ar": lambda: p2p("SELL", fiat="USD", pay_types=AR_METHODS),  # vender USDT cobrando USD local
+    "mexc_p2p_sell": lambda: mexc_p2p("SELL"),   # anunciantes que venden USDT (usuario compra)
+    "mexc_p2p_buy": lambda: mexc_p2p("BUY"),     # anunciantes que compran USDT (usuario vende)
     "criptoya_bancos": lambda: get("https://criptoya.com/api/bancostodos"),
     "criptoya_usdt_ars": lambda: get("https://criptoya.com/api/usdt/ars/1000"),
     "criptoya_usdc_ars": lambda: get("https://criptoya.com/api/usdc/ars/1000"),

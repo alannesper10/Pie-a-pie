@@ -51,3 +51,25 @@ def test_profiles_fetched_once_per_process(monkeypatch):
     b = fc.profiles(["x", "z"])["data"]
     assert got == ["x", "y", "z"] and set(a) == {"x", "y"} and set(b) == {"z"}
     assert a["x"]["avgReleaseTimeOfLatest30day"] == 80.0 and a["x"]["kycStatus"] == "PASS"
+
+
+def test_mexc_p2p_maps_fields_and_stops_on_short_page(monkeypatch):
+    pages = []
+
+    def get(url, timeout, params):
+        pages.append(params["page"])
+        n = 10 if params["page"] == 1 else 3
+        return Resp({"data": [{"id": f"a{params['page']}{i}", "price": 1480.0, "availableQuantity": 755.0,
+                               "minTradeLimit": 148000.0, "maxTradeLimit": 155400.0, "payMethod": "227,207",
+                               "countryCode": "AR", "kycLevel": 2, "minRegisterDate": 1, "updateTime": 1,
+                               "tradeTerms": "SOLO TITULARES",
+                               "merchant": {"memberId": "m1", "nickName": "x", "merchantType": "merchant",
+                                            "registry": 0},
+                               "merchantStatistics": {"totalSellCount": 225, "doneLastMonthCount": 47,
+                                                      "lastMonthCompleteRate": "1.0000"}} for i in range(n)]})
+
+    monkeypatch.setattr(fc.S, "get", get)
+    out = fc.mexc_p2p("SELL")["data"]
+    assert pages == [1, 2] and len(out) == 13
+    assert out[0]["price"] == 1480.0 and out[0]["max_ars"] == 155400.0 and out[0]["member_id"] == "m1"
+    assert out[0]["complete_rate_30d"] == "1.0000" and out[-1]["page"] == 2
