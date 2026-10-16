@@ -82,6 +82,27 @@ def boxes(summary, index_usd, now, tbill_pct, max_capital=1000.0):
     return out
 
 
+def bound_violations(summary, now):
+    """Cotas de Hull (EN 10.3) para opciones europeas inversas, en BTC por BTC:
+    call >= max(0, (U−K)/U), put >= max(0, (K−U)/U), con U = forward del vencimiento
+    (underlying_price de Deribit). Violación ejecutable si el ASK + comisión de
+    compra queda por debajo de la cota menos la comisión de cerrar con el futuro
+    (0,05%, SUPUESTO). -> lista de violaciones."""
+    out = []
+    for r in summary:
+        ask, U = r.get("ask_price"), r.get("underlying_price")
+        if not ask or not U:
+            continue
+        exp, k, cp = parse(r["instrument_name"])
+        if (expiry_dt(exp) - now).total_seconds() < 86400:
+            continue
+        intrinsic = max(0.0, (U - k) / U) if cp == "C" else max(0.0, (k - U) / U)
+        edge = intrinsic - ask - fee_btc(ask) / Q - 0.0005
+        if edge > 0:
+            out.append({"instrument": r["instrument_name"], "ask": ask, "intrinsic": intrinsic, "edge_btc": edge})
+    return out
+
+
 def capture(s):
     t = datetime.now(timezone.utc)
     opts = s.get("https://www.deribit.com/api/v2/public/get_book_summary_by_currency",
@@ -113,3 +134,32 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+def analyze_file(path, tbill_by_date):
+    """Recorre la captura completa: por captura, mejor box comprado y vendido y
+    violaciones de cotas; persistencia (≥ 2 capturas seguidas del mismo box o
+    instrumento con ventaja > 0) y condiciones de mercado."""
+    snaps = [json.loads(l) for l in open(path, encoding="utf-8") if l.strip()]
+    ok = [x for x in snaps if "options" in x]
+    rows, prev_pos, persist, errors = [], set(), [], len(snaps) - len(ok)
+    for sn in ok:
+        now = datetime.fromisoformat(sn["ts"])
+        tb = tbill_by_date(sn["ts"][:10])
+        b = boxes(sn["options"], sn["index"], now, tb)
+        v = bound_violations(sn["options"], now)
+        best_buy = max(b, key=lambda x: x["excess_vs_tbill_pct"]) if b else None
+        best_sell = max(b, key=lambda x: x["sell_edge_pct"]) if b else None
+        pos = {("B", x["expiry"], x["k1"], x["k2"]) for x in b if x["excess_vs_tbill_pct"] > 0}
+        pos |= {("S", x["expiry"], x["k1"], x["k2"]) for x in b if x["sell_edge_pct"] > 0}
+        pos |= {("V", x["instrument"]) for x in v}
+        persist += sorted(pos & prev_pos)
+        prev_pos = pos
+        spreads = [(r["ask_price"] - r["bid_price"]) / r["ask_price"] for r in sn["options"]
+                   if r.get("bid_price") and r.get("ask_price")]
+        rows.append({"ts": sn["ts"], "index": sn["index"], "n_boxes": len(b),
+                     "best_buy_excess_pct": best_buy["excess_vs_tbill_pct"] if best_buy else None,
+                     "best_sell_edge_pct": best_sell["sell_edge_pct"] if best_sell else None,
+                     "positive": len(pos), "violations": len(v),
+                     "median_rel_spread": sorted(spreads)[len(spreads) // 2] if spreads else None})
+    return {"snapshots": len(snaps), "errors": errors, "rows": rows, "persistent": persist}
