@@ -116,3 +116,19 @@ Clases:
 - **Rollover:** diferencial de tasas real AUD − CAD (OECD 3 meses, mes m−1) / 365.
 - **Costos:** 2 pb por unidad de rotación + 0,5% anual.
 - **Separación:** 2002–2015 dentro de muestra y 2016–2026 fuera. t sobre semanas.
+
+## Resultados E1–E4 (16/10/2026, con las reglas registradas en `ea6e551`, sin cambios)
+
+| Prueba | Muestra (antes de 2024; E4 2002–2015) | Fuera de muestra (2024–2026; E4 2016–2026) | Costos ×1,5 | Diagnóstico bruto | Decisión |
+|---|---|---|---|---|---|
+| **E1** momentum entre activos (20 perpetuos) | +27,1% anual, t 1,64, drawdown −29% | **−22,3% anual**, t −1,27, drawdown **−63%** | −23,4% | Sin costos ni funding, fuera de muestra: −20,3% (t −1,12). **El mecanismo no se sostuvo después de 2023** | **DESCARTAR** |
+| **E2** reversión lineal entre activos (Chan Ej. 4.3) | −49,4% anual, t −2,36 | **−47,5% anual**, t −3,19 | −56,1% | Bruto, fuera de muestra: −25,6%. **En cripto diario hay continuación, no reversión.** Con maker (informativo): −38,7% | **DESCARTAR** |
+| **E3** reversión de la base del trimestral (BTC/ETH) | 63/65 operaciones, −0,27%/−0,25% por operación, 3 ganadoras | **59/61 operaciones, −0,35%/−0,37% por operación**, t del exceso −4,9/−4,6, 2–5 ganadoras | Peor | La reversión bruta ≈ 0: las 4 comisiones (0,28%) explican casi toda la pérdida | **DESCARTAR** |
+| **E4** par AUD.CAD con rollover (Chan Ej. 5.2) | −2,68% anual, t −0,56, drawdown −52,6% | **+0,06% anual**, t 0,18, drawdown −28,9% | −0,63% anual | Solo precio, fuera de muestra: +1,48% (t 0,65), no significativo | **DESCARTAR** |
+
+**Limitaciones:**
+- **E1/E2:** sesgo de supervivencia (universo fijo de monedas que siguen listadas: favorece a E1, que igual pierde fuera de muestra).
+- **E4:** los tipos de cambio son cotizaciones de referencia de FRED, no bid/ask; las tasas son mensuales.
+- **E3:** cierres diarios. La reversión intradiaria no se mide.
+
+**Lección:** los mecanismos de Chan probados en acciones y ETF de 2007–2012 (reversión entre activos, momentum entre activos, pares de commodities) no aparecen netos de costos en cripto 2024–2026 ni en AUD.CAD 2016–2026. Chan mismo advierte cambios de régimen (cap. 1) y el derrumbe del momentum de 2009 (Ej. 6.2).
