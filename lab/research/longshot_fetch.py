@@ -40,6 +40,25 @@ def markets(s):
     return out
 
 
+def sample(ms, n_events=2500, seed=7):
+    """Muestra registrada: mercados que existieron >= 8 días; 2.500 eventos al azar (semilla 7)."""
+    import random
+    from datetime import datetime
+
+    def d(x):
+        try:
+            return datetime.fromisoformat(x.replace("Z", "+00:00"))
+        except Exception:
+            return None
+    ok = [m for m in ms if d(m.get("startDate") or m.get("createdAt") or "") and d(m.get("endDate") or "")
+          and (d(m["endDate"]) - d(m.get("startDate") or m.get("createdAt"))).days >= 8]
+    events = sorted({str(m.get("event_key")) for m in ok})
+    chosen = set(random.Random(seed).sample(events, min(n_events, len(events))))
+    out = [m for m in ok if str(m.get("event_key")) in chosen]
+    json.dump(sorted(chosen), open(os.path.join(DIR, "sample.json"), "w", encoding="utf-8"))
+    return out
+
+
 def history(s, tok):
     f = os.path.join(DIR, "hist", f"{tok}.json")
     if os.path.exists(f):
@@ -65,6 +84,8 @@ def main():
     ms = [m for m in ms if float(m.get("volumeNum") or 0) >= 100000
           and "2024-01-01" <= (m.get("endDate") or "")[:10] <= "2026-09-30"]
     print("mercados tras filtrar (volumen >= 100k, fin 2024-01..2026-09)", len(ms), flush=True)
+    ms = sample(ms)
+    print("mercados en la muestra", len(ms), flush=True)
     n = 0
     for m in ms:
         try:
