@@ -2,11 +2,11 @@
 
 | Métrica | kalshi_current | buy_all_no | strike_inconsistency | funding_basis |
 |---|---|---|---|---|
-| Ciclos (ok) | 557 (557) | 541 (541) | 541 (541) | 45 |
-| Oportunidades | 90503 | 80964 | 79733 | 0 |
+| Ciclos (ok) | 558 (558) | 542 (542) | 542 (542) | 45 |
+| Oportunidades | 90669 | 81114 | 79880 | 0 |
 | Net-positive | 2 | 0 | 1 | 0 |
 | Ejecutables | 2 | 0 | 0 | 0 |
-| Descartadas | 90501 | 7886270 | 534131658 | 2412 |
+| Descartadas | 90667 | 7901833 | 535198357 | 2412 |
 | Duración media (min) | 0 | n/d | n/d | n/d |
 | Capital por paquete (media) | 1.013 | 1.994 | 1.032 | 59.49 |
 | Fees por oportunidad (media) | 0.05551 | 0.04307 | 0.02123 | 0.004261 |
@@ -19,8 +19,8 @@
 | P&L realizado US$ | 0 | 0 | 0 | 0 |
 
 Motivos de descarte (top 5 por estrategia):
-- kalshi_current: NO_POSITIVE_MARGINAL_EDGE=90432, SUSPICIOUS_EDGE_CHECK_RULES=69
-- buy_all_no: NOT_MUTUALLY_EXCLUSIVE=4890294, LOW_VOLUME=2122663, PRELIM_GROSS_TOO_LOW=444727, OVER_CANDIDATE_CAP=269365, NO_POSITIVE_MARGINAL_EDGE=81114
-- strike_inconsistency: NO_QUOTE=394132564, LOW_VOLUME=115518646, PRELIM_GROSS_TOO_LOW=17244439, LEG_NOT_TRADABLE=6784922, OVER_CANDIDATE_CAP=192590
+- kalshi_current: NO_POSITIVE_MARGINAL_EDGE=90598, SUSPICIOUS_EDGE_CHECK_RULES=69
+- buy_all_no: NOT_MUTUALLY_EXCLUSIVE=4900110, LOW_VOLUME=2126759, PRELIM_GROSS_TOO_LOW=445580, OVER_CANDIDATE_CAP=269865, NO_POSITIVE_MARGINAL_EDGE=81264
+- strike_inconsistency: NO_QUOTE=394865194, LOW_VOLUME=115792381, PRELIM_GROSS_TOO_LOW=17294036, LEG_NOT_TRADABLE=6794460, OVER_CANDIDATE_CAP=193301
 - funding_basis: COSTO_IDA_Y_VUELTA_SUPERA_FUNDING_ESPERADO=2412, INFEASIBLE_MIN_SIZE_100USD_PAIRS=2
 - nota kalshi_current: los descartes del prefiltro de kalshi_current no se registran (no se modificó su código); solo se cuentan los evaluados
