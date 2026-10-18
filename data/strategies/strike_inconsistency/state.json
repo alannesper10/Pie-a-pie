@@ -1,8 +1,35 @@
 {
  "paper": {
-  "cash": 100.0,
-  "open": [],
+  "cash": 99.048,
+  "open": [
+   {
+    "event_ticker": "KXUST30YRRATE27-27DEC31",
+    "legs": [
+     "KXUST30YRRATE27-27DEC31-T2.49",
+     "KXUST30YRRATE27-27DEC31-T2.74"
+    ],
+    "contracts": 1,
+    "cost": 0.9299999999999999,
+    "fees": 0.02,
+    "slippage": 0.002,
+    "expected_net": 0.04800000000000004,
+    "opened_at": "2026-10-18T09:20:11+00:00",
+    "expected_close": "2027-12-31T20:30:00Z",
+    "closed_at": null,
+    "payout": null,
+    "sides": [
+     "yes",
+     "no"
+    ]
+   }
+  ],
   "closed": []
  },
- "streaks": {}
+ "streaks": {
+  "KXUST30YRRATE27-27DEC31-T2.49|KXUST30YRRATE27-27DEC31-T2.74": {
+   "first_seen": "2026-10-18T09:20:11+00:00",
+   "last_seen": "2026-10-18T09:20:11+00:00",
+   "cycles": 1
+  }
+ }
 }
