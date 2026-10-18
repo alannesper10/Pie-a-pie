@@ -2,14 +2,14 @@
 
 | Métrica | kalshi_current | buy_all_no | strike_inconsistency | funding_basis |
 |---|---|---|---|---|
-| Ciclos (ok) | 579 (579) | 563 (563) | 563 (563) | 45 |
-| Oportunidades | 94085 | 84257 | 82883 | 0 |
+| Ciclos (ok) | 580 (580) | 564 (564) | 564 (564) | 45 |
+| Oportunidades | 94266 | 84407 | 83032 | 0 |
 | Net-positive | 2 | 0 | 1 | 0 |
 | Ejecutables | 2 | 0 | 0 | 0 |
-| Descartadas | 94083 | 8214745 | 556794367 | 2412 |
+| Descartadas | 94264 | 8229010 | 557809288 | 2412 |
 | Duración media (min) | 0 | n/d | n/d | n/d |
-| Capital por paquete (media) | 1.013 | 1.995 | 1.032 | 59.49 |
-| Fees por oportunidad (media) | 0.05544 | 0.04307 | 0.0212 | 0.004261 |
+| Capital por paquete (media) | 1.013 | 1.994 | 1.032 | 59.49 |
+| Fees por oportunidad (media) | 0.05544 | 0.04307 | 0.02121 | 0.004261 |
 | Tamaño disponible (máx) | 58 | 0.1 | 1 | n/d |
 | Oport. por ciclo | 162.5 | 149.7 | 147.2 | n/d |
 | Caja paper US$ | 81.24 | 100 | 100 | 100 |
@@ -19,8 +19,8 @@
 | P&L realizado US$ | 0 | 0 | 0 | 0 |
 
 Motivos de descarte (top 5 por estrategia):
-- kalshi_current: NO_POSITIVE_MARGINAL_EDGE=94014, SUSPICIOUS_EDGE_CHECK_RULES=69
-- buy_all_no: NOT_MUTUALLY_EXCLUSIVE=5094995, LOW_VOLUME=2212041, PRELIM_GROSS_TOO_LOW=462352, OVER_CANDIDATE_CAP=279434, NO_POSITIVE_MARGINAL_EDGE=84414
-- strike_inconsistency: NO_QUOTE=410422483, LOW_VOLUME=120776006, PRELIM_GROSS_TOO_LOW=18111693, LEG_NOT_TRADABLE=7003592, OVER_CANDIDATE_CAP=211514
+- kalshi_current: NO_POSITIVE_MARGINAL_EDGE=94195, SUSPICIOUS_EDGE_CHECK_RULES=69
+- buy_all_no: NOT_MUTUALLY_EXCLUSIVE=5103763, LOW_VOLUME=2216021, PRELIM_GROSS_TOO_LOW=463142, OVER_CANDIDATE_CAP=279884, NO_POSITIVE_MARGINAL_EDGE=84564
+- strike_inconsistency: NO_QUOTE=411169548, LOW_VOLUME=121006549, PRELIM_GROSS_TOO_LOW=18138760, LEG_NOT_TRADABLE=7013204, OVER_CANDIDATE_CAP=211673
 - funding_basis: COSTO_IDA_Y_VUELTA_SUPERA_FUNDING_ESPERADO=2412, INFEASIBLE_MIN_SIZE_100USD_PAIRS=2
 - nota kalshi_current: los descartes del prefiltro de kalshi_current no se registran (no se modificó su código); solo se cuentan los evaluados
