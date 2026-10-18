@@ -1,0 +1,275 @@
+{
+ "timestamp": "2026-10-18T10:53:53+00:00",
+ "strategy": "strike_inconsistency",
+ "event_ticker": "KXUST10YRRATE27-27DEC31",
+ "key": "KXUST10YRRATE27-27DEC31-T1.99|KXUST10YRRATE27-27DEC31-T3.74",
+ "classification": "ARBITRAJE_GARANTIZADO",
+ "reason": "todos los escenarios cubiertos, ejecuci\u00f3n verificada, neto m\u00ednimo > 0 con estr\u00e9s",
+ "coverage": {
+  "proven": true,
+  "method": "SAME_VARIABLE_STRIKE_PAIR",
+  "reasons": [
+   "misma regla normalizada y misma ra\u00edz de ticker"
+  ]
+ },
+ "contracts": 10,
+ "sides": [
+  "yes",
+  "no"
+ ],
+ "limits": [
+  0.84,
+  0.11
+ ],
+ "t0_books": {
+  "KXUST10YRRATE27-27DEC31-T1.99": {
+   "fetched_at": "2026-10-18T10:54:32.633+00:00",
+   "raw": {
+    "orderbook_fp": {
+     "no_dollars": [
+      [
+       "0.0100",
+       "1.00"
+      ],
+      [
+       "0.1600",
+       "11.00"
+      ]
+     ],
+     "yes_dollars": [
+      [
+       "0.0100",
+       "195.00"
+      ],
+      [
+       "0.0200",
+       "20.00"
+      ],
+      [
+       "0.0300",
+       "15.00"
+      ],
+      [
+       "0.2200",
+       "22.00"
+      ],
+      [
+       "0.2700",
+       "15.00"
+      ],
+      [
+       "0.3000",
+       "11.00"
+      ]
+     ]
+    }
+   }
+  },
+  "KXUST10YRRATE27-27DEC31-T3.74": {
+   "fetched_at": "2026-10-18T10:54:32.693+00:00",
+   "raw": {
+    "orderbook_fp": {
+     "no_dollars": [
+      [
+       "0.0100",
+       "200.00"
+      ]
+     ],
+     "yes_dollars": [
+      [
+       "0.0100",
+       "224.00"
+      ],
+      [
+       "0.0200",
+       "20.00"
+      ],
+      [
+       "0.2200",
+       "22.00"
+      ],
+      [
+       "0.4000",
+       "15.00"
+      ],
+      [
+       "0.6100",
+       "32.00"
+      ],
+      [
+       "0.8800",
+       "125.91"
+      ],
+      [
+       "0.8900",
+       "10.51"
+      ]
+     ]
+    }
+   }
+  }
+ },
+ "t1_books": {
+  "KXUST10YRRATE27-27DEC31-T1.99": {
+   "fetched_at": "2026-10-18T10:54:35.006+00:00",
+   "raw": {
+    "orderbook_fp": {
+     "no_dollars": [
+      [
+       "0.0100",
+       "1.00"
+      ],
+      [
+       "0.1600",
+       "11.00"
+      ]
+     ],
+     "yes_dollars": [
+      [
+       "0.0200",
+       "20.00"
+      ],
+      [
+       "0.2200",
+       "22.00"
+      ],
+      [
+       "0.2300",
+       "15.00"
+      ],
+      [
+       "0.2400",
+       "64.00"
+      ],
+      [
+       "0.3000",
+       "11.00"
+      ]
+     ]
+    }
+   }
+  },
+  "KXUST10YRRATE27-27DEC31-T3.74": {
+   "fetched_at": "2026-10-18T10:54:35.107+00:00",
+   "raw": {
+    "orderbook_fp": {
+     "no_dollars": [
+      [
+       "0.0100",
+       "200.00"
+      ]
+     ],
+     "yes_dollars": [
+      [
+       "0.0100",
+       "224.00"
+      ],
+      [
+       "0.0200",
+       "20.00"
+      ],
+      [
+       "0.2200",
+       "22.00"
+      ],
+      [
+       "0.4000",
+       "15.00"
+      ],
+      [
+       "0.6100",
+       "32.00"
+      ],
+      [
+       "0.8800",
+       "125.91"
+      ],
+      [
+       "0.8900",
+       "10.51"
+      ]
+     ]
+    }
+   }
+  }
+ },
+ "execution": {
+  "skew_s": 0.101,
+  "legs": [
+   {
+    "ticker": "KXUST10YRRATE27-27DEC31-T1.99",
+    "side": "yes",
+    "filled": 10.0,
+    "cost": 8.4,
+    "fills": [
+     [
+      0.84,
+      10.0
+     ]
+    ]
+   },
+   {
+    "ticker": "KXUST10YRRATE27-27DEC31-T3.74",
+    "side": "no",
+    "filled": 10.0,
+    "cost": 1.1,
+    "fills": [
+     [
+      0.11,
+      10.0
+     ]
+    ]
+   }
+  ],
+  "cost": 9.5,
+  "fees": 0.17,
+  "qty": 10,
+  "status": "EJECUCION_VERIFICADA",
+  "reason": "volumen completo disponible en todas las patas"
+ },
+ "scenarios": {
+  "outlay": 9.69,
+  "scenarios": [
+   {
+    "scenario": "valor dentro del strike angosto",
+    "payout": 10.0,
+    "net": 0.3100000000000005
+   },
+   {
+    "scenario": "valor entre el amplio y el angosto",
+    "payout": 20.0,
+    "net": 10.31
+   },
+   {
+    "scenario": "valor fuera del strike amplio",
+    "payout": 10.0,
+    "net": 0.3100000000000005
+   },
+   {
+    "scenario": "CANCELACION_O_DATO_NO_PUBLICADO",
+    "payout": null,
+    "note": "liquidaci\u00f3n a precio justo",
+    "net": null
+   }
+  ],
+  "net_min": 0.3100000000000005,
+  "net_max": 10.31,
+  "max_loss": 0.0,
+  "undetermined": [
+   "CANCELACION_O_DATO_NO_PUBLICADO"
+  ],
+  "net_min_pct": 0.031991744066047524
+ },
+ "net_min_stressed": 0.2150000000000005,
+ "leg_fail_loss": 5.65,
+ "costs": {
+  "fees": {
+   "value": 0.17,
+   "status": "ASSUMED (coef 0.07; fee_type/multiplier verificados por API de series)"
+  },
+  "slippage": {
+   "value": 0.02,
+   "status": "ASSUMED"
+  }
+ }
+}
