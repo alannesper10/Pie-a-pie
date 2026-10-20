@@ -1,6 +1,6 @@
 {
  "paper": {
-  "cash": 89.358,
+  "cash": 80.458,
   "open": [
    {
     "event_ticker": "KXUST30YRRATE27-27DEC31",
@@ -41,9 +41,35 @@
      "yes",
      "no"
     ]
+   },
+   {
+    "event_ticker": "USCLIMATE",
+    "legs": [
+     "USCLIMATE-2025",
+     "USCLIMATE-2030"
+    ],
+    "contracts": 9,
+    "cost": 8.712,
+    "fees": 0.16999999999999998,
+    "slippage": 0.018000000000000002,
+    "expected_net": 0.09999999999999964,
+    "opened_at": "2026-10-20T21:31:57+00:00",
+    "expected_close": "2030-12-31T15:00:00Z",
+    "closed_at": null,
+    "payout": null,
+    "sides": [
+     "yes",
+     "no"
+    ]
    }
   ],
   "closed": []
  },
- "streaks": {}
+ "streaks": {
+  "USCLIMATE-2025|USCLIMATE-2030": {
+   "first_seen": "2026-10-20T21:31:57+00:00",
+   "last_seen": "2026-10-20T21:31:57+00:00",
+   "cycles": 1
+  }
+ }
 }
