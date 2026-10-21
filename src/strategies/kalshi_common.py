@@ -325,3 +325,135 @@ def top_yes_bid(m):
 def top_yes_ask(m):
     return _num(m.get("yes_ask_dollars"))
 
+
+
+# --------------------------------------- entradas repetidas (opt-in por estrategia) ---
+
+ENTRY_FIELDS = [
+    "timestamp", "entry_id", "strategy", "key", "event_ticker", "legs", "sides", "prices",
+    "contracts", "cost", "fees", "slippage", "outlay", "min_payout", "expected_net",
+    "expected_return_pct", "expected_close", "days_to_close", "annualized_return_pct",
+    "lock_cost_usd", "excess_vs_reference_usd", "entries_open_for_key", "key_outlay_after",
+    "cash_before", "cash_after",
+]
+DECISION_FIELDS = [
+    "timestamp", "strategy", "key", "event_ticker", "decision", "reason", "entry_id",
+    "contracts", "outlay", "expected_net", "entries_open_for_key", "key_outlay",
+    "available_contracts", "cash_after", "ledger_gap",
+]
+
+
+def entry_id_for(strategy, key, ts):
+    """Determinístico por (estrategia, par, ciclo): reprocesar el mismo ciclo da
+    el mismo id y el libro lo rechaza (DUPLICATE_ENTRY); un ciclo nuevo, con
+    libros nuevos, es una evaluación de mercado distinta."""
+    import hashlib
+    return hashlib.sha1(f"{strategy}|{key}|{ts}".encode()).hexdigest()[:16]
+
+
+def _days_to(expected_close, ts):
+    try:
+        a = datetime.fromisoformat(str(ts).replace("Z", "+00:00"))
+        b = datetime.fromisoformat(str(expected_close).replace("Z", "+00:00"))
+        return max((b - a).total_seconds() / 86400, 0.0)
+    except (TypeError, ValueError):
+        return None
+
+
+def time_adjusted(outlay, expected_net, expected_close, ts, reference_rate):
+    """Rendimiento esperado, plazo y costo de inmovilizar el capital (informativo:
+    no filtra). reference_rate: tasa anual de referencia (SUPUESTO)."""
+    days = _days_to(expected_close, ts)
+    ret = expected_net / outlay if outlay else 0.0
+    if not days:
+        return {"expected_return_pct": ret * 100, "days_to_close": days,
+                "annualized_return_pct": None, "lock_cost_usd": None, "excess_vs_reference_usd": None}
+    ann = ((1 + ret) ** (365 / days) - 1) * 100 if ret > -1 else None
+    lock = outlay * reference_rate * days / 365
+    return {"expected_return_pct": ret * 100, "days_to_close": round(days, 1),
+            "annualized_return_pct": ann, "lock_cost_usd": lock,
+            "excess_vs_reference_usd": expected_net - lock}
+
+
+def _scale(r: BundleResult, n: int) -> BundleResult:
+    """Reduce un paquete a n contratos. Proporcional al costo medio: conservador,
+    porque menos contratos barren niveles más baratos del libro."""
+    from dataclasses import replace
+    f = n / r.contracts
+    cost, fees, slip = r.cost * f, r.estimated_fees * f, r.estimated_slippage * f
+    payout = n * r.min_payout_per_bundle
+    net = payout - cost - fees - slip
+    return replace(r, contracts=n, cost=cost, estimated_fees=fees, estimated_slippage=slip,
+                   min_payout=payout, gross_profit=payout - cost, net_profit=net,
+                   net_profit_per_contract=net / n, net_return=net / cost if cost else 0.0)
+
+
+def open_paper_repeat(store, r: BundleResult, expected_close, ts, *, starting_cash,
+                      max_key_outlay, reference_rate):
+    """Nueva entrada independiente sobre un par aunque ya haya posiciones abiertas.
+
+    Controles, en orden:
+      1. ledger reconciliado (caja + bloqueado − realizado = capital inicial)
+      2. liquidez: se descuentan los contratos que nuestras entradas abiertas ya
+         tomaron mientras el mejor ask de cada pata siga igual (en paper, ese libro
+         "ya lo compramos"; las posiciones previas sin precios cuentan siempre)
+      3. tope de capital por par (max_key_outlay)
+      4. caja disponible y entrada no duplicada (PaperBook.try_open)
+    Registra cada decisión en decisions.csv y cada entrada en entries.csv y
+    paper_trades.csv (mismo formato de siempre)."""
+    import math
+    eid = entry_id_for(store.strategy, r.key, ts)
+    held = store.book.open_for_key(r.key, r.event_ticker)
+    key_outlay = sum(p.outlay for p in held)
+    prices = [round(p, 4) for _, p, _ in r.legs]
+    consumed = sum(p.contracts for p in held
+                   if p.entry_prices is None or [round(x, 4) for x in p.entry_prices] == prices)
+    available = math.floor(r.max_contracts_available - consumed + 1e-9)
+    gap = store.book.reconcile(starting_cash)
+    dec = {"timestamp": ts, "strategy": store.strategy, "key": r.key, "event_ticker": r.event_ticker,
+           "entry_id": "", "contracts": 0, "outlay": 0.0, "expected_net": 0.0,
+           "entries_open_for_key": len(held), "key_outlay": round(key_outlay, 4),
+           "available_contracts": available, "ledger_gap": round(gap, 6)}
+
+    def finish(decision, reason, pos=None):
+        dec.update(decision=decision, reason=reason, cash_after=round(store.book.cash, 4))
+        store.log("decisions.csv", DECISION_FIELDS, dec)
+        return pos, reason
+
+    if abs(gap) > 1e-6:
+        return finish("REJECTED", "LEDGER_MISMATCH")
+    per_contract = (r.cost + r.estimated_fees + r.estimated_slippage) / r.contracts
+    n = min(r.contracts, available,
+            math.floor((max_key_outlay - key_outlay) / per_contract + 1e-9) if per_contract > 0 else 0)
+    if n < 1:
+        reason = "LIQUIDITY_ALREADY_TAKEN" if available < 1 else "KEY_LIMIT"
+        return finish("REJECTED", reason)
+    rr = r if n == r.contracts else _scale(r, n)
+    cash_before = store.book.cash
+    pos, why = store.book.try_open(rr, expected_close, ts, allow_repeat=True, entry_id=eid,
+                                   key=r.key, entry_prices=prices)
+    if not pos:
+        return finish("REJECTED", why)
+    tm = time_adjusted(pos.outlay, pos.expected_net, expected_close, ts, reference_rate)
+    store.log("paper_trades.csv", PAPER_FIELDS, {
+        "timestamp": ts, "action": "OPEN", "strategy": store.strategy,
+        "event_ticker": pos.event_ticker, "legs": ";".join(pos.legs),
+        "sides": ";".join(pos.sides or []), "contracts": pos.contracts,
+        "cost": pos.cost, "fees": pos.fees, "slippage": pos.slippage,
+        "min_payout": rr.min_payout, "expected_net": pos.expected_net,
+        "cash_after": store.book.cash,
+    })
+    store.log("entries.csv", ENTRY_FIELDS, {
+        "timestamp": ts, "entry_id": eid, "strategy": store.strategy, "key": r.key,
+        "event_ticker": pos.event_ticker, "legs": ";".join(pos.legs), "sides": ";".join(pos.sides or []),
+        "prices": ";".join(f"{x:.4f}" for x in prices), "contracts": pos.contracts,
+        "cost": round(pos.cost, 4), "fees": round(pos.fees, 4), "slippage": round(pos.slippage, 4),
+        "outlay": round(pos.outlay, 4), "min_payout": round(rr.min_payout, 4),
+        "expected_net": round(pos.expected_net, 4), "expected_close": expected_close,
+        **{k: (round(v, 4) if isinstance(v, float) else v) for k, v in tm.items()},
+        "entries_open_for_key": len(held) + 1, "key_outlay_after": round(key_outlay + pos.outlay, 4),
+        "cash_before": round(cash_before, 4), "cash_after": round(store.book.cash, 4),
+    })
+    dec.update(entry_id=eid, contracts=pos.contracts, outlay=round(pos.outlay, 4),
+               expected_net=round(pos.expected_net, 4))
+    return finish("OPENED", "NEW_ENTRY" if held else "FIRST_ENTRY", pos)

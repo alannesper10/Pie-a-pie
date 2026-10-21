@@ -25,6 +25,11 @@ class PaperPosition:
     # Lado comprado por pata ("yes"/"no"). None = todas YES (kalshi_current);
     # así el state.json existente se sigue cargando igual.
     sides: Optional[List[str]] = None
+    # Entradas repetidas (solo estrategias que lo habilitan, p. ej. strike_inconsistency).
+    # None en las posiciones existentes: se cargan y se guardan igual que antes.
+    entry_id: Optional[str] = None          # identificador único de la entrada
+    key: Optional[str] = None               # par/oportunidad al que pertenece
+    entry_prices: Optional[List[float]] = None   # mejor ask por pata al entrar
 
     @property
     def outlay(self):
@@ -57,10 +62,14 @@ def leg_payout(market):
     return None
 
 
+_OPTIONAL_FIELDS = ("sides", "entry_id", "key", "entry_prices")
+
+
 def _pos_dict(pos):
     d = asdict(pos)
-    if d.get("sides") is None:
-        d.pop("sides", None)  # formato idéntico al de kalshi_current
+    for k in _OPTIONAL_FIELDS:
+        if d.get(k) is None:
+            d.pop(k, None)  # formato idéntico al de kalshi_current y de las posiciones previas
     return d
 
 
@@ -81,12 +90,38 @@ class PaperBook:
     def has_open(self, event_ticker):
         return any(p.event_ticker == event_ticker for p in self.open)
 
-    def try_open(self, opp, expected_close, now):
-        """Abre una posición paper. Devuelve (posición | None, motivo)."""
+    def has_entry(self, entry_id):
+        return any(p.entry_id == entry_id for p in self.open + self.closed)
+
+    def open_for_key(self, key, event_ticker=None):
+        """Entradas abiertas de un par. Las posiciones previas sin `key` se
+        asocian por event_ticker (p. ej. la de USCLIMATE abierta el 20/10)."""
+        return [p for p in self.open
+                if p.key == key or (p.key is None and event_ticker and p.event_ticker == event_ticker)]
+
+    def reconcile(self, starting_cash):
+        """Diferencia contable: caja + bloqueado − realizado − capital inicial.
+        Debe ser 0: el mismo capital no puede estar en dos lugares."""
+        return self.cash + self.locked - self.realized_net - starting_cash
+
+    def try_open(self, opp, expected_close, now, *, allow_repeat=False, entry_id=None,
+                 key=None, entry_prices=None):
+        """Abre una posición paper. Devuelve (posición | None, motivo).
+
+        Por defecto, una sola posición por evento (ALREADY_OPEN), como siempre.
+        Con allow_repeat=True cada entrada es una posición independiente con su
+        propio entry_id; la misma entry_id no se abre dos veces (DUPLICATE_ENTRY).
+        """
         if not opp.executable or opp.contracts < 1:
             return None, "NOT_EXECUTABLE"
-        if self.has_open(opp.event_ticker):
-            return None, "ALREADY_OPEN"
+        if not allow_repeat:
+            if self.has_open(opp.event_ticker):
+                return None, "ALREADY_OPEN"
+        else:
+            if not entry_id:
+                raise ValueError("allow_repeat requiere entry_id")
+            if self.has_entry(entry_id):
+                return None, "DUPLICATE_ENTRY"
         pos = PaperPosition(
             event_ticker=opp.event_ticker,
             legs=[t for t, _, _ in opp.legs],
@@ -98,6 +133,9 @@ class PaperBook:
             opened_at=now,
             expected_close=expected_close,
             sides=(list(opp.sides) if getattr(opp, "sides", None) else None),
+            entry_id=entry_id if allow_repeat else None,
+            key=key if allow_repeat else None,
+            entry_prices=entry_prices if allow_repeat else None,
         )
         if pos.outlay > self.cash:
             return None, "INSUFFICIENT_CASH"

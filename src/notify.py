@@ -119,11 +119,54 @@ STRATEGY_TAGS = {"buy_all_no": "BUY_ALL_NO",
                  "strike_inconsistency": "STRIKE_INCONSISTENCY"}
 
 
+def _decision_lines(d, since):
+    """Modo con decisiones registradas (estrategias con entradas repetidas).
+
+    Distingue: nueva entrada, posición existente sin nueva entrada y rechazo
+    (falta de capital, tope por par, liquidez ya tomada, ledger). Una señal
+    repetida que termina igual que en el ciclo anterior NO se vuelve a avisar.
+    """
+    all_dec = read_csv(d / "decisions.csv")
+    recent = rows_since(all_dec, since)
+    prev = {}
+    for r in all_dec:
+        t = _ts(r.get("timestamp"))
+        if t and t < since:
+            prev[r["key"]] = (r["decision"], r["reason"])
+    entries = {r["entry_id"]: r for r in read_csv(d / "entries.csv")}
+    lines = []
+    for r in recent:
+        k = r["key"][:60]
+        if r["decision"] == "OPENED":
+            e = entries.get(r["entry_id"], {})
+            extra = ""
+            if e.get("days_to_close"):
+                ann = e.get("annualized_return_pct")
+                extra = (f" | {float(e['expected_return_pct']):.2f}% en {float(e['days_to_close']):.0f} días"
+                         + (f" (anual {float(ann):.2f}%)" if ann not in (None, "") else "")
+                         + f", inmovilización {_money(e.get('lock_cost_usd'))}")
+            what = "Nueva entrada" if r["reason"] == "NEW_ENTRY" else "Entrada"
+            lines.append(f"{what}: {k}, {r['contracts']} contratos, neto esp. {_money(r['expected_net'])}"
+                         f"{extra} | entradas del par: {r['entries_open_for_key']}")
+        elif prev.get(r["key"]) != (r["decision"], r["reason"]):
+            label = {"INSUFFICIENT_CASH": "rechazada por falta de capital",
+                     "KEY_LIMIT": "posición existente al tope del par",
+                     "LIQUIDITY_ALREADY_TAKEN": "posición existente; la liquidez ya la tomamos",
+                     "DUPLICATE_ENTRY": "entrada duplicada descartada",
+                     "LEDGER_MISMATCH": "RECHAZADA: el ledger no concilia"}.get(r["reason"], r["reason"])
+            lines.append(f"Sin nueva entrada: {k} ({label}; entradas abiertas {r['entries_open_for_key']}, "
+                         f"US${float(r['key_outlay'] or 0):.2f})")
+        prev[r["key"]] = (r["decision"], r["reason"])
+    return lines
+
+
 def build_strategy_cycle_lines(strategy_dir, since, step_failed=False):
     """Líneas importantes de UNA estrategia en esta corrida, o [] si no hay nada.
 
     Importante = ejecutable, paper abierta/cerrada o error. Los casi-aciertos
     y los net-positive no ejecutables van al resumen diario, no acá.
+    Si la estrategia registra decisions.csv (entradas repetidas) se informan
+    las decisiones en lugar de cada señal ejecutable repetida.
     """
     d = Path(strategy_dir)
     cycles = rows_since(read_csv(d / "cycles.csv"), since)
@@ -135,12 +178,16 @@ def build_strategy_cycle_lines(strategy_dir, since, step_failed=False):
         lines.append(f"Error: {(errors[-1] or 'ciclo fallido')[:100]}")
     elif step_failed:
         lines.append("Error: falló el paso de estrategias")
-    for r in opps:
-        if r.get("executable") == "True":
-            lines.append(f"Ejecutable: {r['key'][:60]}, {r['contracts']} contratos, "
-                         f"neto {_money(r['net_profit'])}")
+    decisions_mode = (d / "decisions.csv").exists()
+    if decisions_mode:
+        lines += _decision_lines(d, since)
+    else:
+        for r in opps:
+            if r.get("executable") == "True":
+                lines.append(f"Ejecutable: {r['key'][:60]}, {r['contracts']} contratos, "
+                             f"neto {_money(r['net_profit'])}")
     for r in trades:
-        if r.get("action") == "OPEN":
+        if r.get("action") == "OPEN" and not decisions_mode:
             lines.append(f"Paper abierta: {r['event_ticker']}, neto esp. "
                          f"{_money(r['expected_net'])}")
         elif r.get("action") == "SETTLE":
@@ -191,6 +238,18 @@ def _strategy_daily_lines(strategy_dir, since, starting_cash):
     book = PaperBook.from_dict((load_json(d / "state.json", {}) or {}).get("paper"),
                                starting_cash)
     failed = sum(r.get("ok") == "0" for r in cycles)
+    if (d / "decisions.csv").exists():
+        decs = rows_since(read_csv(d / "decisions.csv"), since)
+        trades = rows_since(read_csv(d / "paper_trades.csv"), since)
+        signals = [r for r in opps if r.get("executable") == "True"]
+        pairs = {(p.key or p.event_ticker) for p in book.open}
+        return [f"Ciclos {len(cycles)} ({failed} fallidos) | señales ejecutables {len(signals)} "
+                f"({len({r['key'] for r in signals})} pares distintos)",
+                f"Entradas nuevas {sum(r['decision'] == 'OPENED' for r in decs)} | rechazos "
+                f"{sum(r['decision'] == 'REJECTED' for r in decs)} | posiciones abiertas {len(book.open)} "
+                f"en {len(pairs)} pares | cierres {sum(r.get('action') == 'SETTLE' for r in trades)}",
+                f"Caja US${book.cash:.2f} (bloq. US${book.locked:.2f}) | "
+                f"P&L realizado US${book.realized_net:+.2f}"]
     return [f"Ciclos {len(cycles)} ({failed} fallidos) | oport. {len(opps)} | "
             f"net+ {netpos} | ejec. {exe}",
             f"Caja US${book.cash:.2f} (bloq. US${book.locked:.2f}) | "

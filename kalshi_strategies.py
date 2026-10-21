@@ -21,7 +21,8 @@ from src.kalshi_public import KalshiPublicClient
 from src.strategies import buy_all_no, strike_inconsistency
 from src.strategies.kalshi_common import (
     DISCARD_FIELDS, OPPORTUNITY_FIELDS, STRATEGY_CYCLE_FIELDS, StrategyStore,
-    expected_close, fetch_books, is_net_positive, open_paper, opportunity_row, settle_open_positions,
+    expected_close, fetch_books, is_net_positive, open_paper, open_paper_repeat, opportunity_row,
+    settle_open_positions,
 )
 from src.tracking import DURATION_FIELDS
 
@@ -159,7 +160,13 @@ def run_strategy(strategy, client, events, args, bot, ts):
             continue
         exe += 1
         legs = c["legs"] if strategy == buy_all_no.STRATEGY else [c["broad"], c["narrow"]]
-        pos, why = open_paper(store, r, expected_close(legs), ts)
+        if strategy == strike_inconsistency.STRATEGY and strike_inconsistency.REPEAT_ENTRIES:
+            pos, why = open_paper_repeat(
+                store, r, expected_close(legs), ts, starting_cash=bot.starting_capital_usd,
+                max_key_outlay=bot.starting_capital_usd * strike_inconsistency.MAX_KEY_OUTLAY_FRACTION,
+                reference_rate=strike_inconsistency.REFERENCE_RATE)
+        else:
+            pos, why = open_paper(store, r, expected_close(legs), ts)
         opened += pos is not None
         log.info("    [%s] EJECUTABLE %s: %d contratos, neto US$%+.2f -> paper %s",
                  strategy, r.key, r.contracts, r.net_profit, why)
