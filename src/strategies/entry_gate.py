@@ -27,8 +27,15 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 # (hasta N días inclusive, % neto mínimo sobre el capital comprometido); None = sin tope
-MIN_RETURN_TABLE = ((7, 0.0), (14, 8.0), (21, 10.0), (28, 12.0), (35, 15.0), (None, 20.0))
+# Más de LONG_DAYS días solo se acepta una ganancia desorbitante (pedido del usuario 21/10):
+# inmovilizar capital por poco margen no sirve. El 50 % es la definición de "desorbitante".
+LONG_DAYS = 60
+MIN_RETURN_TABLE = ((7, 0.0), (14, 8.0), (21, 10.0), (28, 12.0), (35, 15.0), (LONG_DAYS, 20.0), (None, 50.0))
 EPS = 1e-9
+
+# Autorización solo para lo que está cerca de la regla: con menos de esta fracción del
+# mínimo exigido no se pide nada (se descarta y queda registrado, sin aviso).
+NEAR_MIN_FRACTION = 0.5
 
 # cambio material respecto de la solicitud vigente
 MATERIAL_PRICE = 0.01           # 1 centavo en cualquier pata (tick de Kalshi)
@@ -84,13 +91,26 @@ def recovery_period(markets, ts):
     return days, end.isoformat(timespec="seconds"), "fecha límite de resolución + liquidación"
 
 
+def is_near_minimum(return_pct, days):
+    """True si la rentabilidad llega al menos a NEAR_MIN_FRACTION del mínimo del tramo.
+    Pasados LONG_DAYS días no hay "cerca": lo que no llega al mínimo no se acepta ni se consulta."""
+    if days > LONG_DAYS + EPS:
+        return False
+    return return_pct >= NEAR_MIN_FRACTION * required_return_pct(days) - EPS
+
+
 def classify(return_pct, days):
-    """Caso A/B/D para una entrada ya ejecutable (C se decide antes)."""
+    """Caso A/B/C/D para una entrada ya ejecutable técnicamente.
+    A cumple; B está debajo pero cerca (pide autorización); C está muy lejos del mínimo
+    (se descarta sin pedir nada); D no tiene plazo verificable (pide autorización)."""
     if days is None:
         return "D", NOT_VERIFIABLE, None
     req = required_return_pct(days)
-    return ("A", "MEETS_MIN_RETURN", req) if meets_minimum(return_pct, days) \
-        else ("B", "BELOW_MIN_RETURN", req)
+    if meets_minimum(return_pct, days):
+        return "A", "MEETS_MIN_RETURN", req
+    if is_near_minimum(return_pct, days):
+        return "B", "BELOW_MIN_RETURN", req
+    return "C", "FAR_BELOW_MIN_RETURN", req
 
 
 def material_changes(old, new):

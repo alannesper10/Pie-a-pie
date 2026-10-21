@@ -465,6 +465,8 @@ def open_paper_repeat(store, r: BundleResult, expected_close, ts, *, starting_ca
                expected_return_pct=round(ret_pct, 4),
                recovery_days=round(days, 2) if days is not None else "",
                required_return_pct=req if req is not None else "")
+    if case == "C":                       # muy lejos del mínimo: no se pide autorización
+        return technical(reason)
     auth_id = ""
     if case in ("B", "D"):
         snap = {"case": case, "prices": prices, "return_pct": ret_pct, "days": days, "contracts": n}

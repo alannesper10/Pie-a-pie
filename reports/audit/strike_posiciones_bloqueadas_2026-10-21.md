@@ -36,8 +36,7 @@ Capital comprometido = costo + comisiones + slippage. P&L realizado: US$0,00 (no
 
 ### Referencia (no se aplica a estas posiciones)
 
-Con la tabla nueva las tres quedarían en el tramo de más de 35 días (mínimo 20 %).
-Las tres están por debajo (5,04 %, 3,20 % y 1,12 %), así que hoy serían **caso B** (pedirían autorización).
+Con la tabla vigente las tres quedan en el tramo de más de 60 días (mínimo 50 %) y muy por debajo (5,04 %, 3,20 % y 1,12 %), así que hoy se descartarían sin pedir autorización.
 Se mantienen tal como están.
 
 ## Regla para entradas nuevas
@@ -49,7 +48,8 @@ Se mantienen tal como están.
 | Más de 14 y hasta 21 | 10 % |
 | Más de 21 y hasta 28 | 12 % |
 | Más de 28 y hasta 35 | 15 % |
-| Más de 35 días | 20 % |
+| Más de 35 y hasta 60 días | 20 % |
+| Más de 60 días | 50 % ("desorbitante"; agregado el 21/10: no se aceptan plazos largos por poco margen) |
 
 **Plazo de recupero.** Por pata, se toma la fecha límite contractual de resolución (`latest_expiration_time`) más el tiempo de liquidación (`settlement_timer_seconds`). Después se usa el máximo entre las patas.
 - La salida anticipada no acorta el plazo, porque no hay evidencia de que se pueda ejecutar sin perder el neto.
@@ -57,8 +57,8 @@ Se mantienen tal como están.
 
 **Casos.**
 - **A.** Cumple el mínimo: se abre sola.
-- **B.** Está debajo del mínimo: se pide autorización.
-- **C.** No es ejecutable (caja, liquidez ya tomada, tope por par, ledger): se registra y se avisa una sola vez.
+- **B.** Hasta 60 días: está debajo del mínimo pero rinde al menos la mitad de lo exigido: se pide autorización. Pasados 60 días no hay autorización: solo se acepta el 50 % o más.
+- **C.** No es ejecutable (caja, liquidez ya tomada, tope por par, ledger): se registra y se avisa una sola vez. También cae acá lo que rinde menos de la mitad del mínimo (hasta 60 días) o menos del 50 % (más de 60 días): se descarta sin pedir nada ni avisar.
 - **D.** El plazo no es verificable: se pide autorización.
 
 **Autorizar.** Se agrega el id de la solicitud en `config/authorizations.json`.

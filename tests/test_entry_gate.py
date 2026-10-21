@@ -22,7 +22,7 @@ def ts(i):
     return (T0 + timedelta(minutes=40 * i)).isoformat(timespec="seconds")
 
 
-def bundle(contracts=8, avail=20.0, prices=(0.129, 0.839), ret=0.0111, fees=0.15, slip=0.016):
+def bundle(contracts=8, avail=20.0, prices=(0.129, 0.839), ret=0.15, fees=0.15, slip=0.016):
     """Paquete con neto esperado = ret × capital comprometido (costo + comisiones + slippage)."""
     outlay_per = 1.0 / (1 + ret)
     net_per = 1.0 - outlay_per
@@ -70,7 +70,7 @@ def requests(tmp_path):
 
 @pytest.mark.parametrize("days,req", [
     (0.5, 0.0), (7, 0.0), (7.0001, 8.0), (14, 8.0), (14.0001, 10.0), (21, 10.0),
-    (21.0001, 12.0), (28, 12.0), (28.0001, 15.0), (35, 15.0), (35.0001, 20.0), (3000, 20.0)])
+    (21.0001, 12.0), (28, 12.0), (28.0001, 15.0), (35, 15.0), (35.0001, 20.0), (60, 20.0), (60.0001, 50.0), (3000, 50.0)])
 def test_required_return_table_has_no_overlaps(days, req):
     assert eg.required_return_pct(days) == req
 
@@ -89,7 +89,10 @@ def test_boundaries_are_inclusive_and_minimum_is_exact(days, req):
     (7.5, 0.0791, "B"),       # pasó los 7 días: 7,91 % < 8 %
     (14, 0.0799, "B"), (14, 0.0801, "A"), (21, 0.0999, "B"), (21, 0.1001, "A"),
     (28, 0.1199, "B"), (28, 0.1201, "A"), (35, 0.1499, "B"), (35, 0.1501, "A"),
-    (36, 0.1999, "B"), (36, 0.2001, "A")])
+    (36, 0.1999, "B"), (36, 0.2001, "A"),
+    (60, 0.1999, "B"), (60, 0.2001, "A"),                              # hasta 60 días sigue el 20 %
+    (60.5, 0.4999, "C"), (60.5, 0.5001, "A"),                          # más de 60: solo desorbitante
+    (3000, 0.25, "C"), (3000, 0.5001, "A")])                           # y no se consulta lo que no llega
 def test_entries_at_each_boundary(tmp_path, days, ret, case):
     s = store(tmp_path)
     pos, why = go(s, bundle(ret=ret), 0, legs_in(days))
@@ -102,12 +105,12 @@ def test_entries_at_each_boundary(tmp_path, days, ret, case):
 
 def test_positive_but_below_minimum_requests_authorization_and_does_not_open(tmp_path):
     s = store(tmp_path)
-    pos, why = go(s, bundle(), 0, legs_in(3358))                # USCLIMATE: ~1,1 % a 9 años
+    pos, why = go(s, bundle(), 0, legs_in(50))                # 15 % a 50 días: cerca del 20 % exigido
     assert pos is None and why == "BELOW_MIN_RETURN" and s.book.cash == 100.0
     q = requests(tmp_path)[-1]
     assert q["case"] == "B" and float(q["required_return_pct"]) == 20.0
     assert float(q["shortfall_pp"]) == pytest.approx(20.0 - float(q["expected_return_pct"]), abs=1e-3)
-    assert int(q["contracts"]) == 8 and float(q["outlay"]) == pytest.approx(8 * 0.989, abs=1e-3)
+    assert int(q["contracts"]) == 8 and float(q["outlay"]) == pytest.approx(8 / 1.15, abs=1e-3)
 
 
 # ------------------------------------------------------------ plazo de recupero ---
@@ -145,7 +148,7 @@ def test_persistent_signal_keeps_one_request_and_notifies_once(tmp_path):
     s = store(tmp_path)
     d = tmp_path / "strike_inconsistency"
     for i in range(4):
-        go(s, bundle(), i, legs_in(3358, i))
+        go(s, bundle(), i, legs_in(50, i))
     assert len(requests(tmp_path)) == 1
     assert len({r["request_id"] for r in decisions(tmp_path)}) == 1
     first = build_strategy_cycle_lines(d, datetime.fromisoformat(ts(0)))
@@ -154,14 +157,14 @@ def test_persistent_signal_keeps_one_request_and_notifies_once(tmp_path):
 
 
 @pytest.mark.parametrize("change,kwargs,legs_days", [
-    ("precio", {"prices": (0.139, 0.829)}, 3358),
-    ("rentabilidad", {"ret": 0.0211}, 3358),
-    ("liquidez", {"contracts": 4}, 3358),
-    ("plazo", {}, 30),                                         # cambia el tramo de la tabla
+    ("precio", {"prices": (0.139, 0.829)}, 50),
+    ("rentabilidad", {"ret": 0.16}, 50),
+    ("liquidez", {"contracts": 4}, 50),
+    ("plazo", {"ret": 0.12}, 30),                              # cambia el tramo de la tabla (20 % -> 15 %)
 ])
 def test_material_change_replaces_request_and_invalidates_approval(tmp_path, change, kwargs, legs_days):
     s = store(tmp_path)
-    go(s, bundle(), 0, legs_in(3358))
+    go(s, bundle(), 0, legs_in(50))
     old = requests(tmp_path)[-1]["request_id"]
     approvals = {old: {"approved_at": "2026-10-21"}}
     pos, _ = go(s, bundle(**kwargs), 1, legs_in(legs_days, 1), approvals)
@@ -174,21 +177,21 @@ def test_material_change_replaces_request_and_invalidates_approval(tmp_path, cha
 
 def test_small_book_noise_is_not_material(tmp_path):
     s = store(tmp_path)
-    go(s, bundle(), 0, legs_in(3358))
-    go(s, bundle(contracts=7), 1, legs_in(3358, 1))            # −12,5 % de contratos, mismo precio
+    go(s, bundle(), 0, legs_in(50))
+    go(s, bundle(contracts=7), 1, legs_in(50, 1))            # −12,5 % de contratos, mismo precio
     assert len(requests(tmp_path)) == 1
 
 
 def test_approved_request_opens_one_entry_once(tmp_path):
     s = store(tmp_path)
-    go(s, bundle(contracts=8, avail=100.0), 0, legs_in(3358))
+    go(s, bundle(contracts=8, avail=100.0), 0, legs_in(50))
     rid = requests(tmp_path)[-1]["request_id"]
     approvals = {rid: {"approved_at": "2026-10-21"}}
-    pos, why = go(s, bundle(contracts=8, avail=100.0, prices=(0.129, 0.8391)), 1, legs_in(3358, 1), approvals)
+    pos, why = go(s, bundle(contracts=8, avail=100.0, prices=(0.129, 0.8391)), 1, legs_in(50, 1), approvals)
     assert why == "AUTHORIZED" and pos.contracts == 8
     e = read_csv(tmp_path / "strike_inconsistency" / "entries.csv")[-1]
     assert e["authorization_id"] == rid and e["case"] == "B"
-    pos2, why2 = go(s, bundle(contracts=8, avail=100.0, prices=(0.128, 0.8391)), 2, legs_in(3358, 2), approvals)
+    pos2, why2 = go(s, bundle(contracts=8, avail=100.0, prices=(0.128, 0.8391)), 2, legs_in(50, 2), approvals)
     assert pos2 is None and why2 == "BELOW_MIN_RETURN"         # otra entrada = otra solicitud
     assert requests(tmp_path)[-1]["request_id"] != rid
     assert s.book.reconcile(100.0) == pytest.approx(0.0)
@@ -198,9 +201,9 @@ def test_approved_request_opens_one_entry_once(tmp_path):
 
 def test_authorization_never_exceeds_authorized_contracts(tmp_path):
     s = store(tmp_path)
-    go(s, bundle(contracts=8, avail=100.0), 0, legs_in(3358))
+    go(s, bundle(contracts=8, avail=100.0), 0, legs_in(50))
     rid = requests(tmp_path)[-1]["request_id"]
-    pos, _ = go(s, bundle(contracts=9, avail=100.0, prices=(0.128, 0.839)), 1, legs_in(3358, 1),
+    pos, _ = go(s, bundle(contracts=9, avail=100.0, prices=(0.128, 0.839)), 1, legs_in(50, 1),
                 {rid: {}})
     assert pos.contracts == 8
 
@@ -224,7 +227,7 @@ def test_insufficient_cash_is_case_c_without_authorization_request(tmp_path):
     s = store(tmp_path, cash=3.0, open_=[other])
     d = tmp_path / "strike_inconsistency"
     for i in range(3):
-        pos, why = go(s, bundle(), i, legs_in(3358, i))
+        pos, why = go(s, bundle(), i, legs_in(50, i))
         assert pos is None and why == "INSUFFICIENT_CASH"
     assert not (d / "authorization_requests.csv").exists()
     assert {r["case"] for r in decisions(tmp_path)} == {"C"}
@@ -234,22 +237,22 @@ def test_insufficient_cash_is_case_c_without_authorization_request(tmp_path):
 
 def test_case_c_clears_a_pending_request_and_return_to_b_asks_again(tmp_path):
     s = store(tmp_path)
-    go(s, bundle(contracts=8, avail=8.0), 0, legs_in(3358))
+    go(s, bundle(contracts=8, avail=8.0), 0, legs_in(50))
     first = requests(tmp_path)[-1]["request_id"]
     s.book.open.append(PaperPosition("USCLIMATE", ["USCLIMATE-2025", "USCLIMATE-2030"], 8, 7.7, 0.1, 0.1,
                                      0.1, ts(1), None, sides=["yes", "no"]))
     s.book.cash -= 7.9                                          # liquidez tomada por otra vía (simulado)
-    _, why = go(s, bundle(contracts=8, avail=8.0), 1, legs_in(3358, 1))
+    _, why = go(s, bundle(contracts=8, avail=8.0), 1, legs_in(50, 1))
     assert why == "LIQUIDITY_ALREADY_TAKEN"
     s.book.open.pop(); s.book.cash += 7.9
-    go(s, bundle(contracts=8, avail=8.0), 2, legs_in(3358, 2))
+    go(s, bundle(contracts=8, avail=8.0), 2, legs_in(50, 2))
     assert requests(tmp_path)[-1]["request_id"] != first
 
 
 def test_technical_retry_does_not_create_requests_or_notifications(tmp_path):
     s = store(tmp_path)
-    go(s, bundle(), 0, legs_in(3358))
-    go(s, bundle(), 0, legs_in(3358))                          # reproceso del mismo ciclo
+    go(s, bundle(), 0, legs_in(50))
+    go(s, bundle(), 0, legs_in(50))                          # reproceso del mismo ciclo
     assert len(requests(tmp_path)) == 1
     pos, why = go(s, bundle(), 1, legs_in(3), None)            # caso A
     _, why2 = go(s, bundle(), 1, legs_in(3), None)             # reproceso
@@ -265,11 +268,11 @@ def test_signal_entry_position_close_realized_are_counted_separately(tmp_path):
     d = tmp_path / "strike_inconsistency"
     seq = [(bundle(avail=8.0), legs_in(3)),                            # A: entrada
            (bundle(avail=8.0), legs_in(3)),                            # liquidez propia → C
-           (bundle(prices=(0.119, 0.849)), legs_in(3358)),             # B: solicitud
-           (bundle(prices=(0.119, 0.849)), legs_in(3358))]             # misma solicitud, sin repetir
+           (bundle(prices=(0.119, 0.849)), legs_in(50)),             # B: solicitud
+           (bundle(prices=(0.119, 0.849)), legs_in(50))]             # misma solicitud, sin repetir
     for i, (r, legs) in enumerate(seq):
         s.log("opportunities.csv", OPPORTUNITY_FIELDS, opportunity_row(ts(i), r))
-        go(s, r, i, legs if i < 2 else legs_in(3358, i))
+        go(s, r, i, legs if i < 2 else legs_in(50, i))
     pos = s.book.open[0]
     markets = {"USCLIMATE-2025": {"status": "finalized", "result": "yes"},
                "USCLIMATE-2030": {"status": "finalized", "result": "no"}}
@@ -290,7 +293,7 @@ def test_expected_profit_is_never_presented_as_realized(tmp_path):
     s = store(tmp_path)
     d = tmp_path / "strike_inconsistency"
     go(s, bundle(), 0, legs_in(3))
-    go(s, bundle(prices=(0.119, 0.849)), 1, legs_in(3358, 1))
+    go(s, bundle(prices=(0.119, 0.849)), 1, legs_in(50, 1))
     text = "\n".join(build_strategy_cycle_lines(d, T0))
     assert "neto esperado" in text.lower() and "realizado" not in text.replace("no realizado", "")
     s.save()
@@ -310,7 +313,7 @@ def test_existing_positions_and_history_are_preserved(tmp_path):
     trades = tmp_path / "strike_inconsistency" / "paper_trades.csv"
     trades.parent.mkdir(parents=True)
     trades.write_text("timestamp,action\n2026-10-20T21:31:57+00:00,OPEN\n", encoding="utf-8")
-    go(s, bundle(), 0, legs_in(3358))                          # B
+    go(s, bundle(), 0, legs_in(50))                          # B
     go(s, bundle(prices=(0.119, 0.849)), 1, legs_in(3))        # A
     assert [asdict(p) for p in s.book.open[:2]] == before    # sin cerrar ni modificar
     assert trades.read_text(encoding="utf-8").startswith("timestamp,action\n2026-10-20T21:31:57+00:00,OPEN\n")
@@ -338,3 +341,38 @@ def test_runner_routes_only_strike_through_the_gate():
     assert "markets=legs, approvals=approvals" in src
     from src.config import BotConfig
     assert BotConfig().paper_only is True
+
+
+# ------------------------------------------------------------ muy lejos del mínimo ---
+
+def test_far_below_minimum_is_discarded_without_asking_or_notifying(tmp_path):
+    s = store(tmp_path)
+    d = tmp_path / "strike_inconsistency"
+    for i in range(3):                                           # USCLIMATE: 1,1 % a ~3.000 días (mínimo 50 %)
+        pos, why = go(s, bundle(ret=0.0111), i, legs_in(3358, i))
+        assert pos is None and why == "FAR_BELOW_MIN_RETURN" and s.book.cash == 100.0
+    assert not (d / "authorization_requests.csv").exists()
+    assert {r["case"] for r in decisions(tmp_path)} == {"C"}
+    assert build_strategy_cycle_lines(d, T0) == []               # ni pedido ni aviso
+    s.save()
+    daily = _strategy_daily_lines(d, T0 - timedelta(hours=1), 100.0)
+    assert "Solicitudes de autorización 0" in daily[1] and "entradas nuevas 0" in daily[1]
+    assert "debajo del mínimo (sin pedir autorización): 3" in daily[1] and "rechazos 0" in daily[1]
+
+
+def test_far_below_minimum_clears_a_pending_request(tmp_path):
+    s = store(tmp_path)
+    go(s, bundle(), 0, legs_in(50))                            # 30 %: cerca, pide
+    go(s, bundle(ret=0.0111), 1, legs_in(50, 1))               # cae muy abajo
+    from src.strategies.entry_gate import PendingRequests
+    assert PendingRequests(tmp_path / "strike_inconsistency" / "authorization_requests.json").pending == {}
+
+
+def test_over_60_days_only_exorbitant_returns_and_never_asks(tmp_path):
+    s = store(tmp_path)
+    for i, (days, ret) in enumerate([(61, 0.30), (365, 0.49), (3358, 0.30)]):    # 30 % ya no alcanza pasados 60 días
+        pos, why = go(s, bundle(ret=ret), i, legs_in(days, i))
+        assert pos is None and why == "FAR_BELOW_MIN_RETURN"
+    assert not (tmp_path / "strike_inconsistency" / "authorization_requests.csv").exists()
+    pos, why = go(s, bundle(ret=0.60, prices=(0.14, 0.82)), 3, legs_in(3358, 3))  # desorbitante: se abre sola
+    assert pos is not None and decisions(tmp_path)[-1]["case"] == "A"

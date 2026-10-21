@@ -208,7 +208,7 @@ def _decision_lines(d, since, with_requests=True):
     lines = []
     for r in recent:
         k = r["key"][:60]
-        if r.get("reason") == "DUPLICATE_ENTRY" or r["decision"] == "REJECTED_BY_USER":
+        if r.get("reason") in ("DUPLICATE_ENTRY", "FAR_BELOW_MIN_RETURN") or r["decision"] == "REJECTED_BY_USER":
             continue
         if r["decision"] == "OPENED":
             e = entries.get(r["entry_id"], {})
@@ -320,7 +320,8 @@ def _strategy_daily_lines(strategy_dir, since, starting_cash):
         trades = rows_since(read_csv(d / "paper_trades.csv"), since)
         signals = [r for r in opps if r.get("executable") == "True"]
         pairs = {(p.key or p.event_ticker) for p in book.open}
-        real = [r for r in decs if r.get("reason") != "DUPLICATE_ENTRY"]
+        far = sum(r.get("reason") == "FAR_BELOW_MIN_RETURN" for r in decs)       # descartadas, sin aviso
+        real = [r for r in decs if r.get("reason") not in ("DUPLICATE_ENTRY", "FAR_BELOW_MIN_RETURN")]
         pending = (load_json(d / "authorization_requests.json", {}) or {}).get("pending", {})
         expected = sum(p.expected_net for p in book.open)
         events = rows_since(read_csv(d / "authorization_events.csv"), since)
@@ -337,7 +338,8 @@ def _strategy_daily_lines(strategy_dir, since, starting_cash):
                 f"Solicitudes de autorización {sum(r.get('new_request') == '1' for r in real)} "
                 f"(vigentes {len(pending)}) | entradas nuevas {sum(r['decision'] == 'OPENED' for r in real)} "
                 f"| rechazos {rejections} | decididas desde el celular: autorizadas {ev('ACCEPTED')}, "
-                f"rechazadas {ev('REJECTED')}, vencidas {ev('EXPIRED')}",
+                f"rechazadas {ev('REJECTED')}, vencidas {ev('EXPIRED')} | descartadas por quedar muy "
+                f"debajo del mínimo (sin pedir autorización): {far}",
                 f"Posiciones abiertas {len(book.open)} en {len(pairs)} pares | cierres "
                 f"{sum(r.get('action') == 'SETTLE' for r in trades)}",
                 f"Caja US${book.cash:.2f} | capital bloqueado US${book.locked:.2f} | "

@@ -27,7 +27,7 @@ def store(tmp_path):
 def go(s, i, markets=None, approvals=None, **kw):
     return open_paper_repeat(s, bundle(**kw), "2030-12-31T15:00:00Z", ts(i), starting_cash=100.0,
                              max_key_outlay=25.0, reference_rate=0.04,
-                             markets=markets or legs_in(3358, i), approvals=approvals)
+                             markets=markets or legs_in(50, i), approvals=approvals)
 
 
 def request_id(s):
@@ -287,7 +287,7 @@ def test_authorization_does_not_carry_over_to_other_pairs(tmp_path):
     other = bundle()
     object.__setattr__(other, "key", "OTRO-A|OTRO-B")
     pos, _ = open_paper_repeat(s, other, None, ts(1), starting_cash=100.0, max_key_outlay=25.0,
-                               reference_rate=0.04, markets=legs_in(3358, 1))
+                               reference_rate=0.04, markets=legs_in(50, 1))
     assert pos is None                                                          # su propia solicitud, no la tuya
 
 
