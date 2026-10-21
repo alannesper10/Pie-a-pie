@@ -33,8 +33,10 @@ STRATEGY = "strike_inconsistency"
 
 # Entradas repetidas sobre el mismo par (paper): cada ciclo con libro nuevo y
 # ejecutable puede abrir una entrada independiente mientras haya caja, liquidez
-# no tomada por nuestras propias entradas y espacio bajo el tope por par.
-REPEAT_ENTRIES = False  # freno temporal (21/10 15:02 UTC): sin regla de rentabilidad mínima por plazo todavía
+# no tomada por nuestras propias entradas y espacio bajo el tope por par, y si
+# cumple la rentabilidad mínima por plazo de recupero (entry_gate); si no, pide
+# autorización.
+REPEAT_ENTRIES = True
 MAX_KEY_OUTLAY_FRACTION = 0.25   # tope por par: 25% del capital inicial
 REFERENCE_RATE = 0.04            # SUPUESTO: tasa anual de referencia (letra de EE.UU.) para el
                                  # costo de inmovilizar capital; solo informativo, no filtra

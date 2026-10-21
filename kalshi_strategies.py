@@ -24,6 +24,7 @@ from src.strategies.kalshi_common import (
     expected_close, fetch_books, is_net_positive, open_paper, open_paper_repeat, opportunity_row,
     settle_open_positions,
 )
+from src.strategies.entry_gate import load_approvals
 from src.tracking import DURATION_FIELDS
 
 log = logging.getLogger("kalshi_strategies")
@@ -146,6 +147,7 @@ def run_strategy(strategy, client, events, args, bot, ts):
                t_books_s=round(time.perf_counter() - t_books, 2))
 
     opps = net_pos = exe = opened = 0
+    approvals = load_approvals(strategy)      # config/authorizations.json: solo lo escribe el usuario
     for c, r in results:
         if r.reason != "NET_EDGE_OK":
             reasons[r.reason] += 1
@@ -164,7 +166,8 @@ def run_strategy(strategy, client, events, args, bot, ts):
             pos, why = open_paper_repeat(
                 store, r, expected_close(legs), ts, starting_cash=bot.starting_capital_usd,
                 max_key_outlay=bot.starting_capital_usd * strike_inconsistency.MAX_KEY_OUTLAY_FRACTION,
-                reference_rate=strike_inconsistency.REFERENCE_RATE)
+                reference_rate=strike_inconsistency.REFERENCE_RATE,
+                markets=legs, approvals=approvals)
         else:
             pos, why = open_paper(store, r, expected_close(legs), ts)
         opened += pos is not None

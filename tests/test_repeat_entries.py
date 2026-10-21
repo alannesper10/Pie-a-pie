@@ -36,9 +36,16 @@ def ts(i):
     return (datetime(2026, 10, 21, 12, tzinfo=timezone.utc) + timedelta(minutes=40 * i)).isoformat(timespec="seconds")
 
 
-def go(s, r, i, limit=25.0):
-    return open_paper_repeat(s, r, "2030-12-31T15:00:00Z", ts(i), starting_cash=100.0,
-                             max_key_outlay=limit, reference_rate=0.04)
+def legs(latest="2026-10-25T12:00:00Z", timer=3600, status="active"):
+    return [{"ticker": t, "status": status, "latest_expiration_time": latest,
+             "settlement_timer_seconds": timer} for t in ("USCLIMATE-2025", "USCLIMATE-2030")]
+
+
+def go(s, r, i, limit=25.0, markets=None, approvals=None):
+    # por defecto plazo de recupero < 7 días: con neto > 0 es caso A
+    return open_paper_repeat(s, r, "2026-10-25T12:00:00Z", ts(i), starting_cash=100.0,
+                             max_key_outlay=limit, reference_rate=0.04,
+                             markets=legs() if markets is None else markets, approvals=approvals)
 
 
 def test_successive_valid_entries_reserve_capital_per_entry(tmp_path):
@@ -137,7 +144,8 @@ def test_notifications_distinguish_and_do_not_repeat(tmp_path):
     d = tmp_path / "strike_inconsistency"
     go(s, bundle(contracts=8, avail=10.0), 0)
     lines = build_strategy_cycle_lines(d, datetime.fromisoformat(ts(0)))
-    assert any(l.startswith("Entrada: ") and "anual" in l for l in lines)
+    assert any(l.startswith("Nueva entrada efectuada (cumple el mínimo)") and "primera entrada" in l
+               for l in lines)
     go(s, bundle(contracts=8, avail=10.0), 1)
     go(s, bundle(contracts=8, avail=10.0), 2)                      # liquidez tomada
     l2 = build_strategy_cycle_lines(d, datetime.fromisoformat(ts(2)))
@@ -147,5 +155,5 @@ def test_notifications_distinguish_and_do_not_repeat(tmp_path):
     assert not any("Sin nueva entrada" in l for l in l3)           # no se repite el aviso
     s.save()                                                       # el resumen lee state.json
     daily = _strategy_daily_lines(d, datetime.fromisoformat(ts(0)) - timedelta(hours=1), 100.0)
-    assert "Entradas nuevas 2" in daily[1] and "rechazos 2" in daily[1]
-    assert "P&L realizado US$+0.00" in daily[2]
+    assert "entradas nuevas 2" in daily[1] and "rechazos 1" in daily[1]   # un rechazo que persiste = 1
+    assert "P&L realizado US$+0.00" in daily[3] and "(no realizado)" in daily[3]

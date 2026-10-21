@@ -334,12 +334,20 @@ ENTRY_FIELDS = [
     "contracts", "cost", "fees", "slippage", "outlay", "min_payout", "expected_net",
     "expected_return_pct", "expected_close", "days_to_close", "annualized_return_pct",
     "lock_cost_usd", "excess_vs_reference_usd", "entries_open_for_key", "key_outlay_after",
-    "cash_before", "cash_after",
+    "cash_before", "cash_after", "case", "recovery_days", "recovery_at",
+    "required_return_pct", "authorization_id",
 ]
 DECISION_FIELDS = [
-    "timestamp", "strategy", "key", "event_ticker", "decision", "reason", "entry_id",
-    "contracts", "outlay", "expected_net", "entries_open_for_key", "key_outlay",
-    "available_contracts", "cash_after", "ledger_gap",
+    "timestamp", "strategy", "key", "event_ticker", "decision", "reason", "case", "entry_id",
+    "contracts", "outlay", "expected_net", "expected_return_pct", "recovery_days",
+    "required_return_pct", "request_id", "new_request", "material_change",
+    "entries_open_for_key", "key_outlay", "available_contracts", "cash_after", "ledger_gap",
+]
+AUTH_REQUEST_FIELDS = [
+    "timestamp", "request_id", "replaces", "material_change", "strategy", "key", "event_ticker",
+    "case", "reason", "legs", "sides", "prices", "contracts", "cost", "fees", "slippage", "outlay",
+    "expected_net", "expected_return_pct", "recovery_days", "recovery_at", "recovery_basis",
+    "required_return_pct", "shortfall_pp",
 ]
 
 
@@ -389,19 +397,24 @@ def _scale(r: BundleResult, n: int) -> BundleResult:
 
 
 def open_paper_repeat(store, r: BundleResult, expected_close, ts, *, starting_cash,
-                      max_key_outlay, reference_rate):
+                      max_key_outlay, reference_rate, markets=None, approvals=None):
     """Nueva entrada independiente sobre un par aunque ya haya posiciones abiertas.
 
-    Controles, en orden:
-      1. ledger reconciliado (caja + bloqueado − realizado = capital inicial)
-      2. liquidez: se descuentan los contratos que nuestras entradas abiertas ya
+    Controles técnicos (caso C si fallan), en orden:
+      1. entrada no duplicada (reproceso del mismo ciclo)
+      2. ledger reconciliado (caja + bloqueado − realizado = capital inicial)
+      3. liquidez: se descuentan los contratos que nuestras entradas abiertas ya
          tomaron mientras el mejor ask de cada pata siga igual (en paper, ese libro
          "ya lo compramos"; las posiciones previas sin precios cuentan siempre)
-      3. tope de capital por par (max_key_outlay)
-      4. caja disponible y entrada no duplicada (PaperBook.try_open)
-    Registra cada decisión en decisions.csv y cada entrada en entries.csv y
-    paper_trades.csv (mismo formato de siempre)."""
+      4. tope de capital por par (max_key_outlay)
+      5. caja disponible
+    Después, rentabilidad mínima por plazo de recupero (entry_gate): A abre,
+    B y D piden autorización (approvals: las que escribió el usuario).
+    Registra cada decisión en decisions.csv, cada entrada en entries.csv y
+    paper_trades.csv (mismo formato de siempre) y cada solicitud nueva en
+    authorization_requests.csv."""
     import math
+    from . import entry_gate as eg
     eid = entry_id_for(store.strategy, r.key, ts)
     held = store.book.open_for_key(r.key, r.event_ticker)
     key_outlay = sum(p.outlay for p in held)
@@ -410,30 +423,89 @@ def open_paper_repeat(store, r: BundleResult, expected_close, ts, *, starting_ca
                    if p.entry_prices is None or [round(x, 4) for x in p.entry_prices] == prices)
     available = math.floor(r.max_contracts_available - consumed + 1e-9)
     gap = store.book.reconcile(starting_cash)
+    reqs = eg.PendingRequests(store.dir / "authorization_requests.json")
     dec = {"timestamp": ts, "strategy": store.strategy, "key": r.key, "event_ticker": r.event_ticker,
-           "entry_id": "", "contracts": 0, "outlay": 0.0, "expected_net": 0.0,
+           "entry_id": "", "contracts": 0, "outlay": 0.0, "expected_net": 0.0, "new_request": 0,
            "entries_open_for_key": len(held), "key_outlay": round(key_outlay, 4),
            "available_contracts": available, "ledger_gap": round(gap, 6)}
 
-    def finish(decision, reason, pos=None):
-        dec.update(decision=decision, reason=reason, cash_after=round(store.book.cash, 4))
+    def finish(decision, reason, case, pos=None):
+        dec.update(decision=decision, reason=reason, case=case, cash_after=round(store.book.cash, 4))
         store.log("decisions.csv", DECISION_FIELDS, dec)
         return pos, reason
 
+    def technical(reason):
+        # caso C: cambió el estado de la oportunidad, la solicitud vigente deja de valer
+        if reqs.pending.pop(r.key, None) is not None:
+            reqs.save()
+        return finish("REJECTED", reason, "C")
+
+    if store.book.has_entry(eid):
+        return finish("REJECTED", "DUPLICATE_ENTRY", "C")       # reproceso: no toca solicitudes
     if abs(gap) > 1e-6:
-        return finish("REJECTED", "LEDGER_MISMATCH")
+        return technical("LEDGER_MISMATCH")
     per_contract = (r.cost + r.estimated_fees + r.estimated_slippage) / r.contracts
     n = min(r.contracts, available,
             math.floor((max_key_outlay - key_outlay) / per_contract + 1e-9) if per_contract > 0 else 0)
     if n < 1:
-        reason = "LIQUIDITY_ALREADY_TAKEN" if available < 1 else "KEY_LIMIT"
-        return finish("REJECTED", reason)
+        return technical("LIQUIDITY_ALREADY_TAKEN" if available < 1 else "KEY_LIMIT")
     rr = r if n == r.contracts else _scale(r, n)
+    outlay = rr.cost + rr.estimated_fees + rr.estimated_slippage
+    if outlay > store.book.cash + 1e-9:
+        return technical("INSUFFICIENT_CASH")
+
+    ret_pct = rr.net_profit / outlay * 100 if outlay else 0.0
+    days, recovery_at, basis = eg.recovery_period(markets, ts)
+    case, reason, req = eg.classify(ret_pct, days)
+    dec.update(contracts=n, outlay=round(outlay, 4), expected_net=round(rr.net_profit, 4),
+               expected_return_pct=round(ret_pct, 4),
+               recovery_days=round(days, 2) if days is not None else "",
+               required_return_pct=req if req is not None else "")
+    auth_id = ""
+    if case in ("B", "D"):
+        snap = {"case": case, "prices": prices, "return_pct": ret_pct, "days": days, "contracts": n}
+        cur = reqs.pending.get(r.key)
+        changes = eg.material_changes(cur["snapshot"], snap) if cur else []
+        if cur is None or changes:
+            rid = eg.request_id_for(store.strategy, r.key, ts)
+            reqs.pending[r.key] = {"request_id": rid, "since": ts, "snapshot": snap}
+            reqs.save()
+            dec.update(request_id=rid, new_request=1, material_change=";".join(changes))
+            store.log("authorization_requests.csv", AUTH_REQUEST_FIELDS, {
+                "timestamp": ts, "request_id": rid, "replaces": cur["request_id"] if cur else "",
+                "material_change": ";".join(changes), "strategy": store.strategy, "key": r.key,
+                "event_ticker": r.event_ticker, "case": case, "reason": reason,
+                "legs": ";".join(t for t, _, _ in r.legs), "sides": ";".join(r.sides),
+                "prices": ";".join(f"{x:.4f}" for x in prices), "contracts": n,
+                "cost": round(rr.cost, 4), "fees": round(rr.estimated_fees, 4),
+                "slippage": round(rr.estimated_slippage, 4), "outlay": round(outlay, 4),
+                "expected_net": round(rr.net_profit, 4), "expected_return_pct": round(ret_pct, 4),
+                "recovery_days": round(days, 2) if days is not None else "",
+                "recovery_at": recovery_at or "", "recovery_basis": basis,
+                "required_return_pct": req if req is not None else "",
+                "shortfall_pp": round(req - ret_pct, 4) if req is not None else "",
+            })
+            return finish("AUTHORIZATION_REQUIRED", reason, case)
+        rid = cur["request_id"]
+        dec["request_id"] = rid
+        if rid not in (approvals or {}) or rid in reqs.used:
+            return finish("AUTHORIZATION_REQUIRED", reason, case)
+        auth_id = rid
+        n = min(n, cur["snapshot"]["contracts"])                 # nunca más de lo autorizado
+        if n != rr.contracts:
+            rr = _scale(rr, n)
+    elif reqs.pending.pop(r.key, None) is not None:
+        reqs.save()                                               # pasó a cumplir: la solicitud caduca
+
     cash_before = store.book.cash
     pos, why = store.book.try_open(rr, expected_close, ts, allow_repeat=True, entry_id=eid,
                                    key=r.key, entry_prices=prices)
     if not pos:
-        return finish("REJECTED", why)
+        return finish("REJECTED", why, "C")
+    if auth_id:
+        reqs.used.append(auth_id)
+        reqs.pending.pop(r.key, None)
+        reqs.save()
     tm = time_adjusted(pos.outlay, pos.expected_net, expected_close, ts, reference_rate)
     store.log("paper_trades.csv", PAPER_FIELDS, {
         "timestamp": ts, "action": "OPEN", "strategy": store.strategy,
@@ -453,7 +525,13 @@ def open_paper_repeat(store, r: BundleResult, expected_close, ts, *, starting_ca
         **{k: (round(v, 4) if isinstance(v, float) else v) for k, v in tm.items()},
         "entries_open_for_key": len(held) + 1, "key_outlay_after": round(key_outlay + pos.outlay, 4),
         "cash_before": round(cash_before, 4), "cash_after": round(store.book.cash, 4),
+        "case": case, "recovery_days": round(days, 2) if days is not None else "",
+        "recovery_at": recovery_at or "", "required_return_pct": req if req is not None else "",
+        "authorization_id": auth_id,
     })
     dec.update(entry_id=eid, contracts=pos.contracts, outlay=round(pos.outlay, 4),
-               expected_net=round(pos.expected_net, 4))
-    return finish("OPENED", "NEW_ENTRY" if held else "FIRST_ENTRY", pos)
+               expected_net=round(pos.expected_net, 4),
+               expected_return_pct=round(pos.expected_net / pos.outlay * 100, 4))
+    if auth_id:
+        return finish("OPENED", "AUTHORIZED", case, pos)
+    return finish("OPENED", "NEW_ENTRY" if held else "FIRST_ENTRY", case, pos)

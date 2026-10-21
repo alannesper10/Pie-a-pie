@@ -119,41 +119,91 @@ STRATEGY_TAGS = {"buy_all_no": "BUY_ALL_NO",
                  "strike_inconsistency": "STRIKE_INCONSISTENCY"}
 
 
+REJECT_LABELS = {"INSUFFICIENT_CASH": "rechazada por falta de capital",
+                 "KEY_LIMIT": "posición existente al tope del par",
+                 "LIQUIDITY_ALREADY_TAKEN": "posición existente; la liquidez ya la tomamos",
+                 "LEDGER_MISMATCH": "RECHAZADA: el ledger no concilia"}
+CASE_LABELS = {"B": "caso B: rentabilidad debajo del mínimo por plazo",
+               "D": "caso D: plazo de recupero no verificable"}
+
+
+def _pct(value):
+    try:
+        return f"{float(value):.2f}%"
+    except (TypeError, ValueError):
+        return "s/d"
+
+
+def _auth_request_lines(q, dec):
+    """Solicitud de autorización: todo lo necesario para decidir, en un aviso."""
+    days = f"{float(q['recovery_days']):.0f} días (hasta {q['recovery_at'][:10]})" \
+        if q.get("recovery_days") else f"NO VERIFICABLE ({q.get('recovery_basis', '')})"
+    req = (f"requerido {_pct(q['required_return_pct'])}, diferencia "
+           f"{-float(q['shortfall_pp']):+.2f} pp") if q.get("required_return_pct") not in (None, "") \
+        else "requerido: no aplicable sin plazo verificable"
+    risks = ("capital inmovilizado hasta la liquidación de ambas patas; el piso de pago depende "
+             "de las reglas de resolución; salida anticipada no verificada")
+    lines = [f"Autorización requerida [{q['request_id']}] ({CASE_LABELS.get(q['case'], q['case'])})",
+             f"  Posible NUEVA entrada: {q['key'][:60]} | {q['contracts']} contratos | capital "
+             f"US${float(q['outlay']):.2f}",
+             f"  Neto esperado (no realizado): {_money(q['expected_net'])} = {_pct(q['expected_return_pct'])}"
+             f" | plazo de recupero {days}",
+             f"  {req}",
+             f"  Costos: comisiones US${float(q['fees']):.2f}, slippage US${float(q['slippage']):.2f}"
+             f" | riesgos: {risks}",
+             f"  Para autorizar ESTA entrada: agregar \"{q['request_id']}\" en config/authorizations.json"]
+    held = int(dec.get("entries_open_for_key") or 0)
+    if held:
+        lines.insert(2, f"  Posición existente del par (no se toca): {held} entrada(s), "
+                        f"US${float(dec.get('key_outlay') or 0):.2f}")
+    if q.get("replaces"):
+        lines.insert(1, f"  Cambio material ({q['material_change'].replace(';', ', ')}): reemplaza "
+                        f"[{q['replaces']}], que queda invalidada")
+    return lines
+
+
 def _decision_lines(d, since):
     """Modo con decisiones registradas (estrategias con entradas repetidas).
 
-    Distingue: nueva entrada, posición existente sin nueva entrada y rechazo
-    (falta de capital, tope por par, liquidez ya tomada, ledger). Una señal
-    repetida que termina igual que en el ciclo anterior NO se vuelve a avisar.
+    Distingue: nueva entrada efectuada, solicitud de autorización (B/D), posición
+    existente sin nueva entrada y rechazo técnico (C). Una señal que termina
+    igual que en el ciclo anterior NO se vuelve a avisar; un cambio material de
+    una solicitud sí. Los reprocesos (DUPLICATE_ENTRY) no se avisan.
     """
     all_dec = read_csv(d / "decisions.csv")
     recent = rows_since(all_dec, since)
     prev = {}
     for r in all_dec:
         t = _ts(r.get("timestamp"))
-        if t and t < since:
+        if t and t < since and r.get("reason") != "DUPLICATE_ENTRY":
             prev[r["key"]] = (r["decision"], r["reason"])
     entries = {r["entry_id"]: r for r in read_csv(d / "entries.csv")}
+    requests_ = {r["request_id"]: r for r in read_csv(d / "authorization_requests.csv")}
     lines = []
     for r in recent:
         k = r["key"][:60]
+        if r.get("reason") == "DUPLICATE_ENTRY":
+            continue
         if r["decision"] == "OPENED":
             e = entries.get(r["entry_id"], {})
-            extra = ""
-            if e.get("days_to_close"):
-                ann = e.get("annualized_return_pct")
-                extra = (f" | {float(e['expected_return_pct']):.2f}% en {float(e['days_to_close']):.0f} días"
-                         + (f" (anual {float(ann):.2f}%)" if ann not in (None, "") else "")
-                         + f", inmovilización {_money(e.get('lock_cost_usd'))}")
-            what = "Nueva entrada" if r["reason"] == "NEW_ENTRY" else "Entrada"
-            lines.append(f"{what}: {k}, {r['contracts']} contratos, neto esp. {_money(r['expected_net'])}"
-                         f"{extra} | entradas del par: {r['entries_open_for_key']}")
+            how = (f"autorizada [{e.get('authorization_id')}]" if r["reason"] == "AUTHORIZED"
+                   else "cumple el mínimo")
+            req = e.get("required_return_pct")
+            plazo = (f"plazo de recupero {float(e['recovery_days']):.0f} días, mínimo "
+                     + ("> 0%" if req not in (None, "") and float(req) == 0 else _pct(req))
+                     if e.get("recovery_days")
+                     else "plazo no verificable")
+            prior = int(r["entries_open_for_key"] or 0)
+            lines.append(f"Nueva entrada efectuada ({how}): {k}, {r['contracts']} contratos, capital "
+                         f"US${float(r['outlay']):.2f}, neto esperado {_money(r['expected_net'])} "
+                         f"({_pct(e.get('expected_return_pct'))}) | {plazo} | "
+                         + (f"se suma a {prior} entrada(s) existente(s) del par" if prior
+                            else "primera entrada del par"))
+        elif r["decision"] == "AUTHORIZATION_REQUIRED":
+            if r.get("new_request") == "1" and r.get("request_id") in requests_:
+                lines += _auth_request_lines(requests_[r["request_id"]], r)
         elif prev.get(r["key"]) != (r["decision"], r["reason"]):
-            label = {"INSUFFICIENT_CASH": "rechazada por falta de capital",
-                     "KEY_LIMIT": "posición existente al tope del par",
-                     "LIQUIDITY_ALREADY_TAKEN": "posición existente; la liquidez ya la tomamos",
-                     "DUPLICATE_ENTRY": "entrada duplicada descartada",
-                     "LEDGER_MISMATCH": "RECHAZADA: el ledger no concilia"}.get(r["reason"], r["reason"])
+            label = REJECT_LABELS.get(r["reason"], r["reason"])
             lines.append(f"Sin nueva entrada: {k} ({label}; entradas abiertas {r['entries_open_for_key']}, "
                          f"US${float(r['key_outlay'] or 0):.2f})")
         prev[r["key"]] = (r["decision"], r["reason"])
@@ -243,13 +293,24 @@ def _strategy_daily_lines(strategy_dir, since, starting_cash):
         trades = rows_since(read_csv(d / "paper_trades.csv"), since)
         signals = [r for r in opps if r.get("executable") == "True"]
         pairs = {(p.key or p.event_ticker) for p in book.open}
+        real = [r for r in decs if r.get("reason") != "DUPLICATE_ENTRY"]
+        pending = (load_json(d / "authorization_requests.json", {}) or {}).get("pending", {})
+        expected = sum(p.expected_net for p in book.open)
+        rejections, last = 0, {}                  # episodios, no filas: un rechazo que persiste cuenta 1
+        for r in real:
+            state = (r["decision"], r["reason"])
+            rejections += r["decision"] == "REJECTED" and last.get(r["key"]) != state
+            last[r["key"]] = state
         return [f"Ciclos {len(cycles)} ({failed} fallidos) | señales ejecutables {len(signals)} "
                 f"({len({r['key'] for r in signals})} pares distintos)",
-                f"Entradas nuevas {sum(r['decision'] == 'OPENED' for r in decs)} | rechazos "
-                f"{sum(r['decision'] == 'REJECTED' for r in decs)} | posiciones abiertas {len(book.open)} "
-                f"en {len(pairs)} pares | cierres {sum(r.get('action') == 'SETTLE' for r in trades)}",
-                f"Caja US${book.cash:.2f} (bloq. US${book.locked:.2f}) | "
-                f"P&L realizado US${book.realized_net:+.2f}"]
+                f"Solicitudes de autorización {sum(r.get('new_request') == '1' for r in real)} "
+                f"(vigentes {len(pending)}) | entradas nuevas {sum(r['decision'] == 'OPENED' for r in real)} "
+                f"| rechazos {rejections}",
+                f"Posiciones abiertas {len(book.open)} en {len(pairs)} pares | cierres "
+                f"{sum(r.get('action') == 'SETTLE' for r in trades)}",
+                f"Caja US${book.cash:.2f} | capital bloqueado US${book.locked:.2f} | "
+                f"P&L realizado US${book.realized_net:+.2f} | neto esperado abierto (no realizado) "
+                f"US${expected:+.2f}"]
     return [f"Ciclos {len(cycles)} ({failed} fallidos) | oport. {len(opps)} | "
             f"net+ {netpos} | ejec. {exe}",
             f"Caja US${book.cash:.2f} (bloq. US${book.locked:.2f}) | "
