@@ -126,9 +126,24 @@ def load_approvals(strategy, path=DEFAULT_AUTH_FILE):
     return got if isinstance(got, dict) else {}
 
 
+AUTHZ_TTL_H = 24                # vida de una solicitud y de sus botones
+EVENT_FIELDS = ["timestamp", "request_id", "event", "key", "detail"]
+
+
+def event_row(ts, rid, event, key, detail=""):
+    return {"timestamp": ts, "request_id": rid, "event": event, "key": key, "detail": detail}
+
+
 class PendingRequests:
-    """Solicitudes vigentes por par y autorizaciones ya usadas (en el directorio
-    de la estrategia; las escribe el bot)."""
+    """Solicitudes vigentes por par, decisiones tomadas desde el celular y rechazos
+    (en el directorio de la estrategia; las escribe el bot, nunca el usuario a mano).
+
+    pending[key]   solicitud vigente (request_id, since, snapshot)
+    decisions[rid] primera decisión sobre esa solicitud (A autorizar / R rechazar) y su estado
+    rejected[key]  condición rechazada: no se vuelve a pedir salvo cambio material
+    used           ids de autorización ya consumidos por una entrada
+    cursor         último mensaje del buzón de ntfy ya procesado
+    """
 
     def __init__(self, path):
         self.path = Path(path)
@@ -138,8 +153,40 @@ class PendingRequests:
             d = {}
         self.pending = d.get("pending", {})
         self.used = list(d.get("used", []))
+        self.rejected = d.get("rejected", {})
+        self.decisions = d.get("decisions", {})
+        self.cursor = d.get("cursor")
 
     def save(self):
         self.path.parent.mkdir(parents=True, exist_ok=True)
-        self.path.write_text(json.dumps({"pending": self.pending, "used": self.used},
-                                        ensure_ascii=False, indent=1), encoding="utf-8")
+        data = {"pending": self.pending, "used": self.used}
+        for name in ("rejected", "decisions"):
+            if getattr(self, name):
+                data[name] = getattr(self, name)
+        if self.cursor:
+            data["cursor"] = self.cursor
+        self.path.write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
+
+    def approved(self):
+        """Autorizaciones tomadas desde el celular que todavía esperan su entrada."""
+        return {rid: i for rid, i in self.decisions.items()
+                if i.get("decision") == "A" and i.get("status") == "APPROVED" and rid not in self.used}
+
+    def find(self, rid):
+        for key, cur in self.pending.items():
+            if cur.get("request_id") == rid:
+                return key, cur
+        return None, None
+
+
+def drop_pending(reqs, key, log, ts, why):
+    """Quita la solicitud vigente del par; si ya estaba autorizada y sin usar, deja
+    constancia de que las condiciones cambiaron. Devuelve True si había una."""
+    cur = reqs.pending.pop(key, None)
+    if cur is None:
+        return False
+    info = reqs.decisions.get(cur["request_id"])
+    if info and info.get("status") == "APPROVED":
+        info["status"] = "SUPERSEDED"
+        log(event_row(ts, cur["request_id"], "CONDITIONS_CHANGED", key, why))
+    return True

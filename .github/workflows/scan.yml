@@ -44,6 +44,16 @@ jobs:
         id: scan
         run: python scanner.py --max-events 250 --interval-min 25
 
+      # Decisiones tomadas con los botones de ntfy (buzón <topic>-authz). Solo lee y registra;
+      # la entrada la abre el gate de la estrategia con cotizaciones frescas.
+      - name: Procesar autorizaciones desde el celular
+        if: (success() || failure()) && steps.tests.outcome == 'success'
+        continue-on-error: true
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          PIEAPIE_AUTHZ_HMAC_KEY: ${{ secrets.PIEAPIE_AUTHZ_HMAC_KEY }}
+        run: python -m src.authz poll
+
       # Estrategias experimentales: aisladas. Si fallan, kalshi_current igual se
       # commitea y el job no se marca como fallido (se avisa por ntfy).
       - name: Estrategias experimentales (buy_all_no, strike_inconsistency)
@@ -80,6 +90,7 @@ jobs:
         if: always()
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          PIEAPIE_AUTHZ_HMAC_KEY: ${{ secrets.PIEAPIE_AUTHZ_HMAC_KEY }}
           JOB_STATUS: ${{ job.status }}
           STEP_OUTCOMES: >-
             tests=${{ steps.tests.outcome }}

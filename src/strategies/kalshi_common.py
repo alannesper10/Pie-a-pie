@@ -424,6 +424,10 @@ def open_paper_repeat(store, r: BundleResult, expected_close, ts, *, starting_ca
     available = math.floor(r.max_contracts_available - consumed + 1e-9)
     gap = store.book.reconcile(starting_cash)
     reqs = eg.PendingRequests(store.dir / "authorization_requests.json")
+    approvals = {**reqs.approved(), **(approvals or {})}   # celular + config/authorizations.json
+
+    def log(row):
+        store.log("authorization_events.csv", eg.EVENT_FIELDS, row)
     dec = {"timestamp": ts, "strategy": store.strategy, "key": r.key, "event_ticker": r.event_ticker,
            "entry_id": "", "contracts": 0, "outlay": 0.0, "expected_net": 0.0, "new_request": 0,
            "entries_open_for_key": len(held), "key_outlay": round(key_outlay, 4),
@@ -436,7 +440,7 @@ def open_paper_repeat(store, r: BundleResult, expected_close, ts, *, starting_ca
 
     def technical(reason):
         # caso C: cambió el estado de la oportunidad, la solicitud vigente deja de valer
-        if reqs.pending.pop(r.key, None) is not None:
+        if eg.drop_pending(reqs, r.key, log, ts, reason):
             reqs.save()
         return finish("REJECTED", reason, "C")
 
@@ -466,13 +470,28 @@ def open_paper_repeat(store, r: BundleResult, expected_close, ts, *, starting_ca
         snap = {"case": case, "prices": prices, "return_pct": ret_pct, "days": days, "contracts": n}
         cur = reqs.pending.get(r.key)
         changes = eg.material_changes(cur["snapshot"], snap) if cur else []
-        if cur is None or changes:
+        prev = cur
+        rej = reqs.rejected.get(r.key)
+        if cur is None and rej:
+            changes = eg.material_changes(rej["snapshot"], snap)
+            if not changes:                     # misma condición que el usuario rechazó
+                dec["request_id"] = rej["request_id"]
+                return finish("REJECTED_BY_USER", reason, case)
+            reqs.rejected.pop(r.key)            # oportunidad materialmente distinta: se vuelve a pedir
+            prev = {"request_id": rej["request_id"]}
+        if prev is None or changes:
             rid = eg.request_id_for(store.strategy, r.key, ts)
+            if cur is not None:
+                info = reqs.decisions.get(cur["request_id"])
+                if info and info.get("status") == "APPROVED":
+                    info["status"] = "SUPERSEDED"
+                    log(eg.event_row(ts, cur["request_id"], "CONDITIONS_CHANGED", r.key,
+                                     f"{';'.join(changes)} -> nueva solicitud {rid}"))
             reqs.pending[r.key] = {"request_id": rid, "since": ts, "snapshot": snap}
             reqs.save()
             dec.update(request_id=rid, new_request=1, material_change=";".join(changes))
             store.log("authorization_requests.csv", AUTH_REQUEST_FIELDS, {
-                "timestamp": ts, "request_id": rid, "replaces": cur["request_id"] if cur else "",
+                "timestamp": ts, "request_id": rid, "replaces": prev["request_id"] if prev else "",
                 "material_change": ";".join(changes), "strategy": store.strategy, "key": r.key,
                 "event_ticker": r.event_ticker, "case": case, "reason": reason,
                 "legs": ";".join(t for t, _, _ in r.legs), "sides": ";".join(r.sides),
@@ -494,8 +513,10 @@ def open_paper_repeat(store, r: BundleResult, expected_close, ts, *, starting_ca
         n = min(n, cur["snapshot"]["contracts"])                 # nunca más de lo autorizado
         if n != rr.contracts:
             rr = _scale(rr, n)
-    elif reqs.pending.pop(r.key, None) is not None:
-        reqs.save()                                               # pasó a cumplir: la solicitud caduca
+    else:                                                         # pasó a cumplir: la solicitud caduca
+        changed = eg.drop_pending(reqs, r.key, log, ts, "ya cumple el mínimo")
+        if reqs.rejected.pop(r.key, None) is not None or changed:
+            reqs.save()
 
     cash_before = store.book.cash
     pos, why = store.book.try_open(rr, expected_close, ts, allow_repeat=True, entry_id=eid,
@@ -505,6 +526,9 @@ def open_paper_repeat(store, r: BundleResult, expected_close, ts, *, starting_ca
     if auth_id:
         reqs.used.append(auth_id)
         reqs.pending.pop(r.key, None)
+        if auth_id in reqs.decisions:
+            reqs.decisions[auth_id]["status"] = "EXECUTED"
+            log(eg.event_row(ts, auth_id, "EXECUTED", r.key, eid))
         reqs.save()
     tm = time_adjusted(pos.outlay, pos.expected_net, expected_close, ts, reference_rate)
     store.log("paper_trades.csv", PAPER_FIELDS, {

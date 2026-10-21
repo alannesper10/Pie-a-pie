@@ -1,0 +1,25 @@
+# Prueba de extremo a extremo de los botones Autorizar / Rechazar: envía una notificación
+# con botones que no autoriza ni rechaza nada real (solo paper, id de prueba).
+name: authz-test
+
+on:
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Enviar notificación de prueba con botones
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          PIEAPIE_AUTHZ_HMAC_KEY: ${{ secrets.PIEAPIE_AUTHZ_HMAC_KEY }}
+        run: python -m src.authz test

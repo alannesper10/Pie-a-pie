@@ -134,7 +134,7 @@ def _pct(value):
         return "s/d"
 
 
-def _auth_request_lines(q, dec):
+def _auth_request_lines(q, dec, buttons=False):
     """Solicitud de autorización: todo lo necesario para decidir, en un aviso."""
     days = f"{float(q['recovery_days']):.0f} días (hasta {q['recovery_at'][:10]})" \
         if q.get("recovery_days") else f"NO VERIFICABLE ({q.get('recovery_basis', '')})"
@@ -151,7 +151,9 @@ def _auth_request_lines(q, dec):
              f"  {req}",
              f"  Costos: comisiones US${float(q['fees']):.2f}, slippage US${float(q['slippage']):.2f}"
              f" | riesgos: {risks}",
-             f"  Para autorizar ESTA entrada: agregar \"{q['request_id']}\" en config/authorizations.json"]
+             (f"  Tocá Autorizar o Rechazar (vence en 24 h; se aplica en el próximo ciclo, unos 30 min)"
+              if buttons else
+              f"  Para autorizar ESTA entrada: agregar \"{q['request_id']}\" en config/authorizations.json")]
     held = int(dec.get("entries_open_for_key") or 0)
     if held:
         lines.insert(2, f"  Posición existente del par (no se toca): {held} entrada(s), "
@@ -162,7 +164,31 @@ def _auth_request_lines(q, dec):
     return lines
 
 
-def _decision_lines(d, since):
+EVENT_TEXT = {
+    "ACCEPTED": "Autorización aceptada [{id}]: la entrada de papel se abre solo si las cotizaciones "
+                "siguen sin cambio material, con caja, liquidez y ledger en regla",
+    "REJECTED": "Rechazo registrado [{id}]: no se vuelve a pedir esta condición salvo una "
+                "oportunidad materialmente distinta",
+    "EXPIRED": "Solicitud vencida [{id}] ({detail}): si la oportunidad sigue, se pide de nuevo con botones nuevos",
+    "STALE": "Solicitud [{id}] sin vigencia ({detail}): tu toque no tuvo efecto",
+    "CONFLICT": "Solicitud [{id}] ya estaba {detail}: el toque contradictorio se ignoró",
+    "CONDITIONS_CHANGED": "Autorización [{id}] sin usar, condiciones modificadas ({detail}): no se abrió ninguna entrada",
+    "TEST_OK": "Prueba de botones recibida [{id}]: firma válida, el camino funciona (no se autorizó ni rechazó nada)",
+}
+
+
+def _authz_event_lines(d, since):
+    """Confirmaciones de lo decidido desde el celular. EXECUTED no se avisa acá: lo cuenta
+    la línea de la entrada efectuada."""
+    lines = []
+    for e in rows_since(read_csv(d / "authorization_events.csv"), since):
+        text = EVENT_TEXT.get(e["event"])
+        if text:
+            lines.append(text.format(id=e["request_id"], detail=e.get("detail", "")))
+    return lines
+
+
+def _decision_lines(d, since, with_requests=True):
     """Modo con decisiones registradas (estrategias con entradas repetidas).
 
     Distingue: nueva entrada efectuada, solicitud de autorización (B/D), posición
@@ -182,7 +208,7 @@ def _decision_lines(d, since):
     lines = []
     for r in recent:
         k = r["key"][:60]
-        if r.get("reason") == "DUPLICATE_ENTRY":
+        if r.get("reason") == "DUPLICATE_ENTRY" or r["decision"] == "REJECTED_BY_USER":
             continue
         if r["decision"] == "OPENED":
             e = entries.get(r["entry_id"], {})
@@ -200,7 +226,7 @@ def _decision_lines(d, since):
                          + (f"se suma a {prior} entrada(s) existente(s) del par" if prior
                             else "primera entrada del par"))
         elif r["decision"] == "AUTHORIZATION_REQUIRED":
-            if r.get("new_request") == "1" and r.get("request_id") in requests_:
+            if with_requests and r.get("new_request") == "1" and r.get("request_id") in requests_:
                 lines += _auth_request_lines(requests_[r["request_id"]], r)
         elif prev.get(r["key"]) != (r["decision"], r["reason"]):
             label = REJECT_LABELS.get(r["reason"], r["reason"])
@@ -210,7 +236,7 @@ def _decision_lines(d, since):
     return lines
 
 
-def build_strategy_cycle_lines(strategy_dir, since, step_failed=False):
+def build_strategy_cycle_lines(strategy_dir, since, step_failed=False, authz_separate=False):
     """Líneas importantes de UNA estrategia en esta corrida, o [] si no hay nada.
 
     Importante = ejecutable, paper abierta/cerrada o error. Los casi-aciertos
@@ -230,7 +256,8 @@ def build_strategy_cycle_lines(strategy_dir, since, step_failed=False):
         lines.append("Error: falló el paso de estrategias")
     decisions_mode = (d / "decisions.csv").exists()
     if decisions_mode:
-        lines += _decision_lines(d, since)
+        lines += _authz_event_lines(d, since)
+        lines += _decision_lines(d, since, with_requests=not authz_separate)
     else:
         for r in opps:
             if r.get("executable") == "True":
@@ -248,7 +275,7 @@ def build_strategy_cycle_lines(strategy_dir, since, step_failed=False):
     return lines
 
 
-def compose_cycle_message(data_dir, since, job_status="success", outcomes=""):
+def compose_cycle_message(data_dir, since, job_status="success", outcomes="", authz_separate=False):
     """Una sola notificación por corrida con una sección por estrategia."""
     sections, priority = [], 0
     cur = build_cycle_message(data_dir, since, job_status, outcomes)
@@ -258,7 +285,7 @@ def compose_cycle_message(data_dir, since, job_status="success", outcomes=""):
     step_failed = "strategies" in failed_steps(outcomes)
     for name, tag in STRATEGY_TAGS.items():
         lines = build_strategy_cycle_lines(Path(data_dir) / "strategies" / name,
-                                           since, step_failed)
+                                           since, step_failed, authz_separate)
         if lines:
             label = "error" if lines[0].startswith("Error") else "novedad"
             sections.append((tag, label, "\n".join(lines)))
@@ -296,6 +323,10 @@ def _strategy_daily_lines(strategy_dir, since, starting_cash):
         real = [r for r in decs if r.get("reason") != "DUPLICATE_ENTRY"]
         pending = (load_json(d / "authorization_requests.json", {}) or {}).get("pending", {})
         expected = sum(p.expected_net for p in book.open)
+        events = rows_since(read_csv(d / "authorization_events.csv"), since)
+
+        def ev(kind):
+            return sum(e["event"] == kind for e in events)
         rejections, last = 0, {}                  # episodios, no filas: un rechazo que persiste cuenta 1
         for r in real:
             state = (r["decision"], r["reason"])
@@ -305,7 +336,8 @@ def _strategy_daily_lines(strategy_dir, since, starting_cash):
                 f"({len({r['key'] for r in signals})} pares distintos)",
                 f"Solicitudes de autorización {sum(r.get('new_request') == '1' for r in real)} "
                 f"(vigentes {len(pending)}) | entradas nuevas {sum(r['decision'] == 'OPENED' for r in real)} "
-                f"| rechazos {rejections}",
+                f"| rechazos {rejections} | decididas desde el celular: autorizadas {ev('ACCEPTED')}, "
+                f"rechazadas {ev('REJECTED')}, vencidas {ev('EXPIRED')}",
                 f"Posiciones abiertas {len(book.open)} en {len(pairs)} pares | cierres "
                 f"{sum(r.get('action') == 'SETTLE' for r in trades)}",
                 f"Caja US${book.cash:.2f} | capital bloqueado US${book.locked:.2f} | "
@@ -370,7 +402,25 @@ def _lab_daily_lines(path):
     return lines
 
 
-def send(topic, title, body, priority=3, tags=(), click=None, timeout=10):
+def authz_notifications(data_dir, since, env=os.environ):
+    """Una notificación por solicitud nueva, con sus botones Autorizar / Rechazar si hay
+    clave de firma. Sin clave sale igual, con la instrucción manual."""
+    from . import authz
+    key, topic = env.get(authz.KEY_ENV, "").strip(), authz.reply_topic(env)
+    out = []
+    for name, tag in STRATEGY_TAGS.items():
+        d = Path(data_dir) / "strategies" / name
+        decs = {r["request_id"]: r for r in read_csv(d / "decisions.csv") if r.get("new_request") == "1"}
+        for q in rows_since(read_csv(d / "authorization_requests.csv"), since):
+            buttons = bool(key and topic)
+            actions = (authz.action_buttons(key, name, q["request_id"], q["timestamp"], topic)
+                       if buttons else None)
+            body = "\n".join(_auth_request_lines(q, decs.get(q["request_id"], {}), buttons))
+            out.append((f"[{tag}] Autorización requerida", body, 4, ["raised_hand"], actions))
+    return out
+
+
+def send(topic, title, body, priority=3, tags=(), click=None, timeout=10, actions=None):
     """Publica en ntfy. Nunca levanta excepción: devuelve True/False."""
     if not topic:
         print("NTFY_TOPIC no definido: no se notifica.")
@@ -379,6 +429,8 @@ def send(topic, title, body, priority=3, tags=(), click=None, timeout=10):
                "priority": priority, "tags": list(tags)}
     if click:
         payload["click"] = click
+    if actions:
+        payload["actions"] = actions
     try:
         r = requests.post(NTFY_URL, json=payload, timeout=timeout)
         r.raise_for_status()
@@ -399,26 +451,30 @@ def main(argv=None):
     p.add_argument("--dry-run", action="store_true")
     args = p.parse_args(argv)
 
+    extra = []
     if args.kind == "cycle":
         since = _ts(args.since or "") or datetime.now(timezone.utc) - timedelta(minutes=20)
         msg = compose_cycle_message(args.data, since,
                                     os.environ.get("JOB_STATUS", "success"),
-                                    os.environ.get("STEP_OUTCOMES", ""))
+                                    os.environ.get("STEP_OUTCOMES", ""), authz_separate=True)
+        extra = authz_notifications(args.data, since)
     elif args.kind == "daily":
         msg = compose_daily_message(args.data)
     else:
         msg = ("Pie a pie: prueba", "Si ves esto, las notificaciones andan.",
                3, ["white_check_mark"])
 
-    if msg is None:
+    topic = os.environ.get("NTFY_TOPIC", "").strip()
+    msgs = ([(*msg, None)] if msg else []) + extra
+    if not msgs:
         print("Nada que notificar.")
         return 0
-    title, body, priority, tags = msg
-    if args.dry_run:
-        print(f"[{title}]\n{body}")
-        return 0
-    send(os.environ.get("NTFY_TOPIC", "").strip(), title, body, priority, tags,
-         click=os.environ.get("RUN_URL") or None)
+    for title, body, priority, tags, actions in msgs:
+        if args.dry_run:
+            print(f"[{title}]\n{body}" + (f"\n(acciones: {[a['label'] for a in actions]})" if actions else ""))
+        else:
+            send(topic, title, body, priority, tags, click=os.environ.get("RUN_URL") or None,
+                 actions=actions)
     return 0
 
 
