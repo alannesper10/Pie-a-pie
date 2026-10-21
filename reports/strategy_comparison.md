@@ -2,16 +2,16 @@
 
 | Métrica | kalshi_current | buy_all_no | strike_inconsistency | funding_basis |
 |---|---|---|---|---|
-| Ciclos (ok) | 701 (701) | 685 (685) | 685 (685) | 45 |
-| Oportunidades | 109686 | 102521 | 100778 | 0 |
-| Net-positive | 2 | 0 | 19 | 0 |
-| Ejecutables | 2 | 0 | 18 | 0 |
-| Descartadas | 109684 | 9876910 | 678397524 | 2412 |
-| Duración media (min) | 0 | n/d | 27.5 | n/d |
+| Ciclos (ok) | 702 (702) | 686 (686) | 686 (686) | 45 |
+| Oportunidades | 109810 | 102671 | 100928 | 0 |
+| Net-positive | 2 | 0 | 20 | 0 |
+| Ejecutables | 2 | 0 | 19 | 0 |
+| Descartadas | 109808 | 9891679 | 679471149 | 2412 |
+| Duración media (min) | 0 | n/d | 31.8 | n/d |
 | Capital por paquete (media) | 1.014 | 1.984 | 1.032 | 59.49 |
-| Fees por oportunidad (media) | 0.05522 | 0.04288 | 0.02118 | 0.004261 |
+| Fees por oportunidad (media) | 0.05522 | 0.04287 | 0.02118 | 0.004261 |
 | Tamaño disponible (máx) | 58 | 0.1 | 28.28 | n/d |
-| Oport. por ciclo | 156.5 | 149.7 | 147.1 | n/d |
+| Oport. por ciclo | 156.4 | 149.7 | 147.1 | n/d |
 | Caja paper US$ | 81.24 | 100 | 80.46 | 100 |
 | Capital bloqueado US$ | 18.76 | 0 | 19.54 | 0 |
 | Fees paper US$ | 1.18 | 0 | 0.36 | 0 |
@@ -19,8 +19,8 @@
 | P&L realizado US$ | 0 | 0 | 0 | 0 |
 
 Motivos de descarte (top 5 por estrategia):
-- kalshi_current: NO_POSITIVE_MARGINAL_EDGE=109615, SUSPICIOUS_EDGE_CHECK_RULES=69
-- buy_all_no: NOT_MUTUALLY_EXCLUSIVE=6105619, LOW_VOLUME=2679366, PRELIM_GROSS_TOO_LOW=555924, OVER_CANDIDATE_CAP=335947, NO_POSITIVE_MARGINAL_EDGE=102709
-- strike_inconsistency: NO_QUOTE=499193326, LOW_VOLUME=148108683, PRELIM_GROSS_TOO_LOW=21862498, LEG_NOT_TRADABLE=8648041, OVER_CANDIDATE_CAP=258472
+- kalshi_current: NO_POSITIVE_MARGINAL_EDGE=109739, SUSPICIOUS_EDGE_CHECK_RULES=69
+- buy_all_no: NOT_MUTUALLY_EXCLUSIVE=6114293, LOW_VOLUME=2683815, PRELIM_GROSS_TOO_LOW=556779, OVER_CANDIDATE_CAP=336493, NO_POSITIVE_MARGINAL_EDGE=102859
+- strike_inconsistency: NO_QUOTE=499977340, LOW_VOLUME=148349919, PRELIM_GROSS_TOO_LOW=21897705, LEG_NOT_TRADABLE=8660378, OVER_CANDIDATE_CAP=258842
 - funding_basis: COSTO_IDA_Y_VUELTA_SUPERA_FUNDING_ESPERADO=2412, INFEASIBLE_MIN_SIZE_100USD_PAIRS=2
 - nota kalshi_current: los descartes del prefiltro de kalshi_current no se registran (no se modificó su código); solo se cuentan los evaluados
