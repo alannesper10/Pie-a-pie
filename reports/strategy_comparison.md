@@ -2,14 +2,14 @@
 
 | Métrica | kalshi_current | buy_all_no | strike_inconsistency | funding_basis |
 |---|---|---|---|---|
-| Ciclos (ok) | 746 (746) | 730 (729) | 730 (729) | 45 |
-| Oportunidades | 115281 | 109105 | 107343 | 0 |
+| Ciclos (ok) | 747 (747) | 731 (730) | 731 (730) | 45 |
+| Oportunidades | 115424 | 109255 | 107492 | 0 |
 | Net-positive | 2 | 0 | 42 | 0 |
 | Ejecutables | 2 | 0 | 41 | 0 |
-| Descartadas | 115279 | 10541701 | 722935492 | 2412 |
+| Descartadas | 115422 | 10557057 | 724045515 | 2412 |
 | Duración media (min) | 0 | n/d | 20.65 | n/d |
 | Capital por paquete (media) | 1.014 | 1.967 | 1.031 | 59.49 |
-| Fees por oportunidad (media) | 0.05519 | 0.0426 | 0.02116 | 0.004261 |
+| Fees por oportunidad (media) | 0.05519 | 0.0426 | 0.02115 | 0.004261 |
 | Tamaño disponible (máx) | 58 | 0.1 | 28.28 | n/d |
 | Oport. por ciclo | 154.5 | 149.7 | 147.2 | n/d |
 | Caja paper US$ | 81.24 | 100 | 80.46 | 100 |
@@ -19,8 +19,8 @@
 | P&L realizado US$ | 0 | 0 | 0 | 0 |
 
 Motivos de descarte (top 5 por estrategia):
-- kalshi_current: NO_POSITIVE_MARGINAL_EDGE=115210, SUSPICIOUS_EDGE_CHECK_RULES=69
-- buy_all_no: NOT_MUTUALLY_EXCLUSIVE=6503382, LOW_VOLUME=2870638, PRELIM_GROSS_TOO_LOW=595985, OVER_CANDIDATE_CAP=359645, NO_POSITIVE_MARGINAL_EDGE=109308
-- strike_inconsistency: NO_QUOTE=530770693, LOW_VOLUME=158760215, PRELIM_GROSS_TOO_LOW=23565705, LEG_NOT_TRADABLE=9208748, OVER_CANDIDATE_CAP=282984
+- kalshi_current: NO_POSITIVE_MARGINAL_EDGE=115353, SUSPICIOUS_EDGE_CHECK_RULES=69
+- buy_all_no: NOT_MUTUALLY_EXCLUSIVE=6512576, LOW_VOLUME=2875012, PRELIM_GROSS_TOO_LOW=596945, OVER_CANDIDATE_CAP=360202, NO_POSITIVE_MARGINAL_EDGE=109458
+- strike_inconsistency: NO_QUOTE=531607998, LOW_VOLUME=158984367, PRELIM_GROSS_TOO_LOW=23600323, LEG_NOT_TRADABLE=9221490, OVER_CANDIDATE_CAP=283720
 - funding_basis: COSTO_IDA_Y_VUELTA_SUPERA_FUNDING_ESPERADO=2412, INFEASIBLE_MIN_SIZE_100USD_PAIRS=2
 - nota kalshi_current: los descartes del prefiltro de kalshi_current no se registran (no se modificó su código); solo se cuentan los evaluados
