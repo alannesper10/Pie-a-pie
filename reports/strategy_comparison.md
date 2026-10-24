@@ -2,16 +2,16 @@
 
 | Métrica | kalshi_current | buy_all_no | strike_inconsistency | funding_basis |
 |---|---|---|---|---|
-| Ciclos (ok) | 823 (823) | 807 (806) | 807 (806) | 45 |
-| Oportunidades | 128330 | 120631 | 118707 | 0 |
+| Ciclos (ok) | 824 (824) | 808 (807) | 808 (807) | 45 |
+| Oportunidades | 128551 | 120781 | 118856 | 0 |
 | Net-positive | 2 | 0 | 43 | 0 |
 | Ejecutables | 2 | 0 | 41 | 0 |
-| Descartadas | 128328 | 11812237 | 802389350 | 2412 |
+| Descartadas | 128549 | 11829150 | 803474013 | 2412 |
 | Duración media (min) | 0 | n/d | 20.65 | n/d |
 | Capital por paquete (media) | 1.014 | 1.959 | 1.031 | 59.49 |
-| Fees por oportunidad (media) | 0.05519 | 0.04255 | 0.0211 | 0.004261 |
+| Fees por oportunidad (media) | 0.05519 | 0.04254 | 0.0211 | 0.004261 |
 | Tamaño disponible (máx) | 58 | 0.1 | 28.28 | n/d |
-| Oport. por ciclo | 155.9 | 149.7 | 147.3 | n/d |
+| Oport. por ciclo | 156 | 149.7 | 147.3 | n/d |
 | Caja paper US$ | 81.24 | 100 | 80.46 | 100 |
 | Capital bloqueado US$ | 18.76 | 0 | 19.54 | 0 |
 | Fees paper US$ | 1.18 | 0 | 0.36 | 0 |
@@ -19,8 +19,8 @@
 | P&L realizado US$ | 0 | 0 | 0 | 0 |
 
 Motivos de descarte (top 5 por estrategia):
-- kalshi_current: NO_POSITIVE_MARGINAL_EDGE=128259, SUSPICIOUS_EDGE_CHECK_RULES=69
-- buy_all_no: NOT_MUTUALLY_EXCLUSIVE=7284660, LOW_VOLUME=3214961, PRELIM_GROSS_TOO_LOW=670808, OVER_CANDIDATE_CAP=407337, NO_POSITIVE_MARGINAL_EDGE=120853
-- strike_inconsistency: NO_QUOTE=583069475, LOW_VOLUME=181598149, PRELIM_GROSS_TOO_LOW=26693008, LEG_NOT_TRADABLE=10322075, OVER_CANDIDATE_CAP=323156
+- kalshi_current: NO_POSITIVE_MARGINAL_EDGE=128480, SUSPICIOUS_EDGE_CHECK_RULES=69
+- buy_all_no: NOT_MUTUALLY_EXCLUSIVE=7295148, LOW_VOLUME=3219413, PRELIM_GROSS_TOO_LOW=671797, OVER_CANDIDATE_CAP=408043, NO_POSITIVE_MARGINAL_EDGE=121003
+- strike_inconsistency: NO_QUOTE=583751296, LOW_VOLUME=181945162, PRELIM_GROSS_TOO_LOW=26733074, LEG_NOT_TRADABLE=10336917, OVER_CANDIDATE_CAP=323605
 - funding_basis: COSTO_IDA_Y_VUELTA_SUPERA_FUNDING_ESPERADO=2412, INFEASIBLE_MIN_SIZE_100USD_PAIRS=2
 - nota kalshi_current: los descartes del prefiltro de kalshi_current no se registran (no se modificó su código); solo se cuentan los evaluados
