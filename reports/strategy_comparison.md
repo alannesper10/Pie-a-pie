@@ -2,14 +2,14 @@
 
 | Métrica | kalshi_current | buy_all_no | strike_inconsistency | funding_basis |
 |---|---|---|---|---|
-| Ciclos (ok) | 919 (919) | 903 (902) | 903 (902) | 45 |
-| Oportunidades | 144186 | 134993 | 132860 | 0 |
+| Ciclos (ok) | 920 (920) | 904 (903) | 904 (903) | 45 |
+| Oportunidades | 144320 | 135143 | 133010 | 0 |
 | Net-positive | 2 | 0 | 52 | 0 |
 | Ejecutables | 2 | 0 | 48 | 0 |
-| Descartadas | 144184 | 13565298 | 952341242 | 2412 |
+| Descartadas | 144318 | 13586909 | 958215654 | 2412 |
 | Duración media (min) | 0 | n/d | 16.13 | n/d |
 | Capital por paquete (media) | 1.014 | 1.929 | 1.031 | 59.49 |
-| Fees por oportunidad (media) | 0.055 | 0.04216 | 0.02105 | 0.004261 |
+| Fees por oportunidad (media) | 0.05499 | 0.04216 | 0.02105 | 0.004261 |
 | Tamaño disponible (máx) | 58 | 0.1 | 819.5 | n/d |
 | Oport. por ciclo | 156.9 | 149.7 | 147.3 | n/d |
 | Caja paper US$ | 81.24 | 100 | 80.46 | 100 |
@@ -19,8 +19,8 @@
 | P&L realizado US$ | 0 | 0 | 0 | 0 |
 
 Motivos de descarte (top 5 por estrategia):
-- kalshi_current: NO_POSITIVE_MARGINAL_EDGE=144115, SUSPICIOUS_EDGE_CHECK_RULES=69
-- buy_all_no: NOT_MUTUALLY_EXCLUSIVE=8182056, LOW_VOLUME=3896932, PRELIM_GROSS_TOO_LOW=759368, OVER_CANDIDATE_CAP=457460, NO_POSITIVE_MARGINAL_EDGE=135247
-- strike_inconsistency: NO_QUOTE=700315140, LOW_VOLUME=208351790, PRELIM_GROSS_TOO_LOW=30245736, LEG_NOT_TRADABLE=12599107, OVER_CANDIDATE_CAP=398203
+- kalshi_current: NO_POSITIVE_MARGINAL_EDGE=144249, SUSPICIOUS_EDGE_CHECK_RULES=69
+- buy_all_no: NOT_MUTUALLY_EXCLUSIVE=8191839, LOW_VOLUME=3907120, PRELIM_GROSS_TOO_LOW=760282, OVER_CANDIDATE_CAP=457827, NO_POSITIVE_MARGINAL_EDGE=135397
+- strike_inconsistency: NO_QUOTE=705806380, LOW_VOLUME=208688074, PRELIM_GROSS_TOO_LOW=30278508, LEG_NOT_TRADABLE=12612225, OVER_CANDIDATE_CAP=398667
 - funding_basis: COSTO_IDA_Y_VUELTA_SUPERA_FUNDING_ESPERADO=2412, INFEASIBLE_MIN_SIZE_100USD_PAIRS=2
 - nota kalshi_current: los descartes del prefiltro de kalshi_current no se registran (no se modificó su código); solo se cuentan los evaluados
